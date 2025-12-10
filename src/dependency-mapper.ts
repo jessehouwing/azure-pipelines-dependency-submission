@@ -100,9 +100,7 @@ export class DependencyMapper {
     // Using generic type for Azure DevOps tasks
     const packageUrl = `pkg:azuredevops/${encodeURIComponent(installedTask.fullIdentifier)}@${version}`
 
-    core.debug(
-      `Mapped task ${task.taskIdentifier} to ${packageUrl}`
-    )
+    core.debug(`Mapped task ${task.taskIdentifier} to ${packageUrl}`)
 
     return {
       package_url: packageUrl,

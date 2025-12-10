@@ -1,6 +1,10 @@
 import * as core from '@actions/core'
 import * as fs from 'fs'
-import { PipelineParser, ParsedPipeline, ParsedTask } from './pipeline-parser.js'
+import {
+  PipelineParser,
+  ParsedPipeline,
+  ParsedTask
+} from './pipeline-parser.js'
 import { PipelineFileDiscovery } from './pipeline-file-discovery.js'
 
 export interface ResolvedDependencies {
@@ -25,7 +29,9 @@ export class TemplateResolver {
   /**
    * Resolve a pipeline file and all its templates, collecting all tasks
    */
-  async resolvePipeline(pipelineFilePath: string): Promise<ResolvedDependencies> {
+  async resolvePipeline(
+    pipelineFilePath: string
+  ): Promise<ResolvedDependencies> {
     const processedFiles = new Set<string>()
     const allTasks: ParsedTask[] = []
 

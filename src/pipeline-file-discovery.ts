@@ -22,7 +22,9 @@ export class PipelineFileDiscovery {
     const patterns = this.parsePatterns(customPatterns)
     const allFiles = new Set<string>()
 
-    core.info(`Searching for pipeline files with patterns: ${patterns.join(', ')}`)
+    core.info(
+      `Searching for pipeline files with patterns: ${patterns.join(', ')}`
+    )
 
     for (const pattern of patterns) {
       try {
@@ -58,8 +60,8 @@ export class PipelineFileDiscovery {
       // Split by comma or newline and trim each pattern
       return customPatterns
         .split(/[,\n]/)
-        .map(p => p.trim())
-        .filter(p => p.length > 0)
+        .map((p) => p.trim())
+        .filter((p) => p.length > 0)
     }
 
     // Default patterns for Azure Pipelines files

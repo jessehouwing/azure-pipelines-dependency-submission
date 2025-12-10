@@ -47,7 +47,9 @@ export class PipelineParser {
       // Parse stages, jobs, and steps
       this.extractTasks(pipelineData, tasks, templates)
 
-      core.debug(`Found ${tasks.length} tasks and ${templates.length} template references`)
+      core.debug(
+        `Found ${tasks.length} tasks and ${templates.length} template references`
+      )
 
       return {
         tasks,
@@ -56,7 +58,9 @@ export class PipelineParser {
       }
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(`Failed to parse pipeline file ${filePath}: ${error.message}`)
+        throw new Error(
+          `Failed to parse pipeline file ${filePath}: ${error.message}`
+        )
       }
       throw error
     }
@@ -100,10 +104,14 @@ export class PipelineParser {
         'strategy',
         'matrix',
         'deployment',
+        'deploy',
         'preDeploymentHook',
         'postDeploymentHook',
+        'on',
         'onSuccess',
         'onFailure',
+        'success',
+        'failure',
         'finally'
       ]
 
@@ -180,7 +188,7 @@ export class PipelineParser {
         'parameters'
       ]
 
-      return pipelineKeys.some(key => key in data)
+      return pipelineKeys.some((key) => key in data)
     } catch {
       return false
     }

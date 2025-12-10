@@ -47,7 +47,8 @@ export class AzureDevOpsClient {
     core.debug(`Fetching tasks from: ${this.baseUrl}`)
 
     try {
-      const taskAgentApi: ITaskAgentApi = await this.connection.getTaskAgentApi()
+      const taskAgentApi: ITaskAgentApi =
+        await this.connection.getTaskAgentApi()
 
       // Get all tasks (latest version only)
       const tasks = await taskAgentApi.getTaskDefinitions()
@@ -58,7 +59,9 @@ export class AzureDevOpsClient {
 
       for (const task of tasks) {
         if (!task.id || !task.name || !task.version) {
-          core.warning(`Skipping task with missing required fields: ${JSON.stringify(task)}`)
+          core.warning(
+            `Skipping task with missing required fields: ${JSON.stringify(task)}`
+          )
           continue
         }
 
@@ -76,13 +79,17 @@ export class AzureDevOpsClient {
         taskMap.set(task.id.toLowerCase(), installedTask)
         taskMap.set(task.name.toLowerCase(), installedTask)
 
-        core.debug(`Registered task: ${task.name} (${task.id}) -> ${fullIdentifier}@${version}`)
+        core.debug(
+          `Registered task: ${task.name} (${task.id}) -> ${fullIdentifier}@${version}`
+        )
       }
 
       return taskMap
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(`Failed to fetch tasks from Azure DevOps: ${error.message}`)
+        throw new Error(
+          `Failed to fetch tasks from Azure DevOps: ${error.message}`
+        )
       }
       throw error
     }

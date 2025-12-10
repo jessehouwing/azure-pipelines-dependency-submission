@@ -37,12 +37,10 @@ inputs:
     required: true
   azure-devops-token:
     description: >
-      Azure DevOps Personal Access Token (PAT) with the following permissions:
-      - Agent Pools: Read
-      - Build: Read
-      This token is used to query the installed task definitions from the Azure
-      DevOps organization. To create a PAT, go to User Settings > Personal
-      Access Tokens in Azure DevOps.
+      Azure DevOps Personal Access Token (PAT) with the following permissions: -
+      Agent Pools: Read - Build: Read This token is used to query the installed
+      task definitions from the Azure DevOps organization. To create a PAT, go
+      to User Settings > Personal Access Tokens in Azure DevOps.
     required: true
   pipeline-paths:
     description: >
@@ -54,9 +52,9 @@ inputs:
     default: ''
   resolve-templates:
     description: >
-      Whether to resolve and include dependencies from pipeline templates.
-      When true (default), template files are parsed and their tasks are
-      included as dependencies.
+      Whether to resolve and include dependencies from pipeline templates. When
+      true (default), template files are parsed and their tasks are included as
+      dependencies.
     required: false
     default: 'true'
 

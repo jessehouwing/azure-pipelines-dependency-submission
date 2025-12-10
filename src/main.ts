@@ -27,13 +27,38 @@ export async function run(): Promise<void> {
     const pipelinePaths = core.getInput('pipeline-paths')
     const resolveTemplates = core.getBooleanInput('resolve-templates')
 
-    // Get git context
-    const sha = process.env.GITHUB_SHA || ''
-    const ref = process.env.GITHUB_REF || ''
+    // Determine the correct SHA and ref to use
+    // For pull_request events, github.context.sha is the merge commit SHA (refs/pull/<pr>/merge),
+    // but the dependency snapshot should be for the PR head SHA.
+    // See: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
+    const isPullRequest =
+      github.context.eventName === 'pull_request' ||
+      github.context.eventName === 'pull_request_target'
+
+    const pullRequest = github.context.payload.pull_request as
+      | { head?: { sha?: string; ref?: string } }
+      | undefined
+
+    const sha =
+      isPullRequest && pullRequest?.head?.sha
+        ? pullRequest.head.sha
+        : process.env.GITHUB_SHA || github.context.sha || ''
+
+    const ref =
+      isPullRequest && pullRequest?.head?.ref
+        ? `refs/heads/${pullRequest.head.ref}`
+        : process.env.GITHUB_REF || github.context.ref || ''
+
+    if (isPullRequest) {
+      core.info(`Pull request detected, using head SHA: ${sha}`)
+      core.info(`Pull request detected, using head ref: ${ref}`)
+    }
     const workspace = process.env.GITHUB_WORKSPACE || process.cwd()
 
     if (!sha || !ref) {
-      throw new Error('GITHUB_SHA and GITHUB_REF environment variables are required')
+      throw new Error(
+        'GITHUB_SHA and GITHUB_REF environment variables are required'
+      )
     }
 
     core.info('🚀 Azure Pipelines Dependency Submission')

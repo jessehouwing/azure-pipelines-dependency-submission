@@ -37,8 +37,8 @@ export class DependencySubmitter {
     )
 
     try {
-      const response = await this.octokit.rest.dependencyGraph.createRepositorySnapshot(
-        {
+      const response =
+        await this.octokit.rest.dependencyGraph.createRepositorySnapshot({
           owner: this.owner,
           repo: this.repo,
           version: snapshot.version,
@@ -51,8 +51,7 @@ export class DependencySubmitter {
           detector: snapshot.detector,
           scanned: snapshot.scanned,
           manifests: snapshot.manifests as any
-        }
-      )
+        })
 
       if (response.status === 201) {
         core.info('✓ Dependency snapshot submitted successfully')
@@ -62,7 +61,9 @@ export class DependencySubmitter {
       }
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(`Failed to submit dependency snapshot: ${error.message}`)
+        throw new Error(
+          `Failed to submit dependency snapshot: ${error.message}`
+        )
       }
       throw error
     }
