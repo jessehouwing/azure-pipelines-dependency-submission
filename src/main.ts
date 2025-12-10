@@ -28,6 +28,15 @@ export async function run(): Promise<void> {
     const parseTemplatesBy = core.getInput('parse-templates-by') || 'action'
     const azureDevOpsProject = core.getInput('azure-devops-project')
 
+    core.debug(`Repository: ${repository}`)
+    core.debug(`Azure DevOps URL: ${azureDevOpsUrl}`)
+    core.debug(`Pipeline paths: ${pipelinePaths || '(using defaults)'}`)
+    core.debug(`Resolve templates: ${resolveTemplates}`)
+    core.debug(`Parse templates by: ${parseTemplatesBy}`)
+    core.debug(
+      `Azure DevOps project: ${azureDevOpsProject || '(all projects)'}`
+    )
+
     // Validate parse-templates-by input
     if (parseTemplatesBy !== 'action' && parseTemplatesBy !== 'server') {
       throw new Error(
@@ -45,6 +54,9 @@ export async function run(): Promise<void> {
       github.context.eventName === 'pull_request' ||
       github.context.eventName === 'pull_request_target'
 
+    core.debug(`Event name: ${github.context.eventName}`)
+    core.debug(`Is pull request: ${isPullRequest}`)
+
     const pullRequest = github.context.payload.pull_request as
       | { head?: { sha?: string; ref?: string } }
       | undefined
@@ -59,11 +71,15 @@ export async function run(): Promise<void> {
         ? `refs/heads/${pullRequest.head.ref}`
         : process.env.GITHUB_REF || github.context.ref || ''
 
+    core.debug(`Using SHA: ${sha}`)
+    core.debug(`Using ref: ${ref}`)
+
     if (isPullRequest) {
       core.info(`Pull request detected, using head SHA: ${sha}`)
       core.info(`Pull request detected, using head ref: ${ref}`)
     }
     const workspace = process.env.GITHUB_WORKSPACE || process.cwd()
+    core.debug(`Workspace: ${workspace}`)
 
     if (!sha || !ref) {
       throw new Error(
@@ -73,6 +89,8 @@ export async function run(): Promise<void> {
 
     core.info('🚀 Azure Pipelines Dependency Submission')
     core.info(`Repository: ${repository}`)
+    core.info(`SHA: ${sha}`)
+    core.info(`Ref: ${ref}`)
     core.info(`SHA: ${sha}`)
     core.info(`Ref: ${ref}`)
     core.info(`Azure DevOps URL: ${azureDevOpsUrl}`)

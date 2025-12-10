@@ -50,13 +50,16 @@ export class AzureDevOpsClient {
     core.debug(`Fetching tasks from: ${this.baseUrl}`)
 
     try {
+      core.debug('Establishing connection to Azure DevOps Task Agent API')
       const taskAgentApi: ITaskAgentApi =
         await this.connection.getTaskAgentApi()
 
       // Get all tasks (latest version only)
+      core.debug('Requesting task definitions from API')
       const tasks = await taskAgentApi.getTaskDefinitions()
 
       core.info(`Found ${tasks.length} installed tasks`)
+      core.debug(`Processing ${tasks.length} task definitions`)
 
       const taskMap = new Map<string, InstalledTask>()
 
@@ -105,6 +108,7 @@ export class AzureDevOpsClient {
    * Determine if a task is a built-in Microsoft task
    * Built-in tasks are pre-installed in every Azure DevOps organization
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private isBuiltInTask(task: any): boolean {
     // Tasks marked as serverOwned are built-in
     if (task.serverOwned === true) {
@@ -139,6 +143,7 @@ export class AzureDevOpsClient {
    *   (e.g., "Microsoft.BuiltIn.PowerShell")
    * - Fallback: Use task name or ID if no other identifier is available
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private buildFullIdentifier(task: any, isBuiltIn: boolean): string {
     // Priority 1: Use contributionIdentifier for marketplace/extension tasks
     // This is the authoritative identifier from the Azure DevOps Marketplace

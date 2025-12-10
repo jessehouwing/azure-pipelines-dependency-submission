@@ -209,6 +209,7 @@ export class TemplateResolver {
 
       if (repoRef.includes('/')) {
         ;[owner, repo] = repoRef.split('/')
+        core.debug(`Parsed external repository: owner=${owner}, repo=${repo}`)
       } else {
         // If it's just an alias, we can't resolve it without more context
         core.warning(
@@ -218,6 +219,7 @@ export class TemplateResolver {
       }
 
       const ref = template.ref || 'refs/heads/main' // Use provided ref or default as per Azure Pipelines spec
+      core.debug(`Using ref: ${ref} for external template`)
 
       // Track this external template as a transitive dependency
       externalTemplates.push({
@@ -226,12 +228,16 @@ export class TemplateResolver {
         path: template.path,
         ref
       })
+      core.debug(
+        `Tracked external template as transitive dependency: ${owner}/${repo}/${template.path}@${ref}`
+      )
 
       // Download the template file content from GitHub
       // Extract branch name from ref (refs/heads/main -> main)
       const branchName = ref.startsWith('refs/heads/')
         ? ref.substring('refs/heads/'.length)
         : ref
+      core.debug(`Downloading template from branch: ${branchName}`)
 
       const { data } = await this.octokit.rest.repos.getContent({
         owner,
@@ -239,6 +245,8 @@ export class TemplateResolver {
         path: template.path,
         ref: branchName
       })
+
+      core.debug(`Successfully downloaded template: ${template.path}`)
 
       if ('content' in data && data.type === 'file') {
         // Decode the base64 content

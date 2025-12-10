@@ -117,6 +117,7 @@ export class PreviewApiResolver {
     // Check if the definition has a YAML path that matches
     if (definition.process?.type === 2) {
       // Type 2 = YAML process
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const yamlProcess = definition.process as any
       if (yamlProcess.yamlFilename) {
         const normalizedDefPath = yamlProcess.yamlFilename.replace(/\\/g, '/')
@@ -160,6 +161,7 @@ export class PreviewApiResolver {
         throw new Error(`Preview API returned status ${response.statusCode}`)
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const previewResult = response.result as any
 
       // Extract tasks from the preview result
@@ -181,6 +183,7 @@ export class PreviewApiResolver {
   /**
    * Extract tasks from a preview run result
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private extractTasksFromPreview(previewResult: any): ParsedTask[] {
     const tasks: ParsedTask[] = []
 
@@ -210,6 +213,7 @@ export class PreviewApiResolver {
   /**
    * Extract tasks from stages in preview result
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private extractTasksFromStages(stages: any[], tasks: ParsedTask[]): void {
     for (const stage of stages) {
       if (stage.jobs) {
@@ -221,6 +225,7 @@ export class PreviewApiResolver {
   /**
    * Extract tasks from jobs in preview result
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private extractTasksFromJobs(jobs: any[], tasks: ParsedTask[]): void {
     for (const job of jobs) {
       if (job.steps) {
@@ -239,6 +244,7 @@ export class PreviewApiResolver {
   /**
    * Parse a task from a step in the preview result
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private parseTaskFromStep(step: any): ParsedTask | null {
     try {
       const taskId = step.task.id || step.task.name

@@ -6,6 +6,7 @@ export interface ParsedTask {
   taskIdentifier: string // task name or GUID
   taskVersion?: string
   displayName?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   inputs?: Record<string, any>
 }
 
@@ -71,6 +72,7 @@ export class PipelineParser {
    * Recursively extract tasks and templates from pipeline structure
    */
   private extractTasks(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     obj: any,
     tasks: ParsedTask[],
     templates: ParsedTemplate[]
@@ -127,6 +129,7 @@ export class PipelineParser {
   /**
    * Parse a task step
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private parseTask(taskStep: any): ParsedTask {
     const taskString = taskStep.task as string
     let taskIdentifier: string
@@ -152,6 +155,7 @@ export class PipelineParser {
   /**
    * Parse a template reference
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private parseTemplateReference(templateRef: any): ParsedTemplate {
     if (typeof templateRef === 'string') {
       return { path: templateRef }

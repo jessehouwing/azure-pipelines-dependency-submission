@@ -6,12 +6,13 @@ describe('DependencySubmitter', () => {
     const submitter = new DependencySubmitter('fake-token', 'owner/repo')
 
     // Access private properties via any to test internal behavior
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((submitter as any).owner).toBe('owner')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((submitter as any).repo).toBe('repo')
   })
 
   it('Creates correct snapshot structure', () => {
-    const submitter = new DependencySubmitter('fake-token', 'owner/repo')
     const snapshot: DependencySnapshot = {
       version: 0,
       detector: {

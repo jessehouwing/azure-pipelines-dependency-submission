@@ -50,6 +50,7 @@ export class DependencySubmitter {
           ref,
           detector: snapshot.detector,
           scanned: snapshot.scanned,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           manifests: snapshot.manifests as any
         })
 
