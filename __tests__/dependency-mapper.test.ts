@@ -17,6 +17,7 @@ describe('DependencyMapper', () => {
           id: 'task-guid-1',
           name: 'NodeTool',
           version: '0.220.0',
+          major: 0,
           fullIdentifier: 'Microsoft.BuiltIn.NodeTool',
           isBuiltIn: true,
           author: 'Microsoft Corporation'
@@ -28,6 +29,19 @@ describe('DependencyMapper', () => {
           id: 'task-guid-1',
           name: 'NodeTool',
           version: '0.220.0',
+          major: 0,
+          fullIdentifier: 'Microsoft.BuiltIn.NodeTool',
+          isBuiltIn: true,
+          author: 'Microsoft Corporation'
+        }
+      ],
+      [
+        'nodetool@0',
+        {
+          id: 'task-guid-1',
+          name: 'NodeTool',
+          version: '0.220.0',
+          major: 0,
           fullIdentifier: 'Microsoft.BuiltIn.NodeTool',
           isBuiltIn: true,
           author: 'Microsoft Corporation'
@@ -39,6 +53,7 @@ describe('DependencyMapper', () => {
           id: 'task-guid-2',
           name: 'Npm',
           version: '1.230.0',
+          major: 1,
           fullIdentifier: 'Microsoft.BuiltIn.Npm',
           isBuiltIn: true,
           author: 'Microsoft Corporation'
@@ -50,6 +65,19 @@ describe('DependencyMapper', () => {
           id: 'task-guid-2',
           name: 'Npm',
           version: '1.230.0',
+          major: 1,
+          fullIdentifier: 'Microsoft.BuiltIn.Npm',
+          isBuiltIn: true,
+          author: 'Microsoft Corporation'
+        }
+      ],
+      [
+        'npm@1',
+        {
+          id: 'task-guid-2',
+          name: 'Npm',
+          version: '1.230.0',
+          major: 1,
           fullIdentifier: 'Microsoft.BuiltIn.Npm',
           isBuiltIn: true,
           author: 'Microsoft Corporation'
@@ -213,6 +241,7 @@ describe('DependencyMapper', () => {
       id: 'task-guid-1',
       name: 'NodeTool',
       version: '0.220.0',
+      major: 0,
       fullIdentifier: 'Microsoft.BuiltIn.NodeTool',
       isBuiltIn: true,
       author: 'Microsoft Corporation'
@@ -238,6 +267,18 @@ describe('DependencyMapper', () => {
   })
 
   it('Normalizes major-only version to wildcard format', () => {
+    // Add version-specific lookup key for major version 5
+    taskMap.set('nodetool@5', {
+      id: 'task-guid-1',
+      name: 'NodeTool',
+      version: '5.10.0',
+      major: 5,
+      fullIdentifier: 'Microsoft.BuiltIn.NodeTool',
+      isBuiltIn: true,
+      author: 'Microsoft Corporation'
+    })
+
+    const mapper = new DependencyMapper(taskMap)
     const tasks: ParsedTask[] = [
       { taskIdentifier: 'NodeTool', taskVersion: '5' }
     ]
@@ -257,8 +298,8 @@ describe('DependencyMapper', () => {
     const wildcardUrl = packageUrls.find((url) => url.includes('@5.*.*'))
     expect(wildcardUrl).toBeDefined()
 
-    // Should have actual version as transitive dependency
-    const actualUrl = packageUrls.find((url) => url.includes('@0.220.0'))
+    // Should have actual v5 version as transitive dependency (not the default v0)
+    const actualUrl = packageUrls.find((url) => url.includes('@5.10.0'))
     expect(actualUrl).toBeDefined()
     expect(resolved[actualUrl!].relationship).toBe('indirect')
 
@@ -267,6 +308,18 @@ describe('DependencyMapper', () => {
   })
 
   it('Normalizes major.minor version to wildcard format', () => {
+    // Add version-specific lookup key for major version 5
+    taskMap.set('nodetool@5', {
+      id: 'task-guid-1',
+      name: 'NodeTool',
+      version: '5.1.5',
+      major: 5,
+      fullIdentifier: 'Microsoft.BuiltIn.NodeTool',
+      isBuiltIn: true,
+      author: 'Microsoft Corporation'
+    })
+
+    const mapper = new DependencyMapper(taskMap)
     const tasks: ParsedTask[] = [
       { taskIdentifier: 'NodeTool', taskVersion: '5.1' }
     ]
@@ -286,8 +339,8 @@ describe('DependencyMapper', () => {
     const wildcardUrl = packageUrls.find((url) => url.includes('@5.1.*'))
     expect(wildcardUrl).toBeDefined()
 
-    // Should have actual version as transitive dependency
-    const actualUrl = packageUrls.find((url) => url.includes('@0.220.0'))
+    // Should have actual v5 version as transitive dependency (not the default v0)
+    const actualUrl = packageUrls.find((url) => url.includes('@5.1.5'))
     expect(actualUrl).toBeDefined()
     expect(resolved[actualUrl!].relationship).toBe('indirect')
   })

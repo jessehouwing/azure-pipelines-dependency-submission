@@ -160,7 +160,16 @@ export class DependencyMapper {
     // If using a wildcard version, add the actual resolved version as a transitive dependency
     const dependencies: string[] = []
     if (hasWildcard) {
-      const actualVersion = installedTask.version
+      // Extract the major version from the normalized version (e.g., "2.*.*" -> 2)
+      const majorVersion = parseInt(normalizedVersion.split('.')[0], 10)
+
+      // Resolve the task by major version to get the highest installed version for that major
+      const versionSpecificTask = this.resolveTaskByMajor(
+        task.taskIdentifier,
+        majorVersion
+      )
+      const actualVersion =
+        versionSpecificTask?.version || installedTask.version
       const actualPackageUrl = `pkg:generic/azure-pipelines/${encodeURIComponent(installedTask.fullIdentifier)}@${actualVersion}`
 
       // Add the actual version as an indirect dependency if not already present
@@ -183,6 +192,49 @@ export class DependencyMapper {
       scope: 'runtime',
       ...(dependencies.length > 0 && { dependencies })
     }
+  }
+
+  /**
+   * Resolve a task identifier (name or GUID) to an installed task for a specific major version
+   */
+  private resolveTaskByMajor(
+    identifier: string,
+    majorVersion: number
+  ): InstalledTask | null {
+    const normalizedId = identifier.toLowerCase()
+
+    // Try direct lookup by ID@major or name@major
+    const versionKey = `${normalizedId}@${majorVersion}`
+    const task = this.taskMap.get(versionKey)
+    if (task) {
+      return task
+    }
+
+    // If the identifier contains dots, try to extract the task name
+    if (identifier.includes('.')) {
+      const parts = identifier.split('.')
+      const taskName = parts[parts.length - 1]
+      const taskByName = this.taskMap.get(
+        `${taskName.toLowerCase()}@${majorVersion}`
+      )
+      if (taskByName) {
+        return taskByName
+      }
+
+      // If it ends with a GUID pattern, try that
+      const lastPart = parts[parts.length - 1]
+      if (this.isGuid(lastPart)) {
+        const taskByGuid = this.taskMap.get(
+          `${lastPart.toLowerCase()}@${majorVersion}`
+        )
+        if (taskByGuid) {
+          return taskByGuid
+        }
+      }
+    }
+
+    // Fall back to non-version-specific lookup
+    return this.resolveTask(identifier)
   }
 
   /**

@@ -45,9 +45,13 @@ describe('AzureDevOpsClient', () => {
     expect(taskMap.size).toBeGreaterThan(0)
     expect(taskMap.has('task-guid-1')).toBe(true)
     expect(taskMap.has('taskname1')).toBe(true)
+    // Version-specific keys should also be available
+    expect(taskMap.has('taskname1@1')).toBe(true)
+    expect(taskMap.has('taskname2@2')).toBe(true)
 
     const task1 = taskMap.get('task-guid-1')
     expect(task1?.version).toBe('1.2.3')
+    expect(task1?.major).toBe(1)
     expect(task1?.fullIdentifier).toBe('Microsoft.BuiltIn.TaskName1')
     expect(task1?.isBuiltIn).toBe(true)
 
@@ -111,10 +115,10 @@ describe('AzureDevOpsClient', () => {
 
     const taskMap = await client.getInstalledTasks()
 
-    // Should only have the valid task (mapped by id and name)
-    expect(taskMap.size).toBe(2) // task-guid-1 and validtask
+    // Should only have the valid task (mapped by id, name, id@major, name@major)
     expect(taskMap.has('task-guid-1')).toBe(true)
     expect(taskMap.has('validtask')).toBe(true)
+    expect(taskMap.has('validtask@1')).toBe(true)
     expect(taskMap.has('task-guid-2')).toBe(false)
     expect(taskMap.has('invalidtask')).toBe(false)
   })
@@ -143,5 +147,56 @@ describe('AzureDevOpsClient', () => {
     )
     expect(task?.isBuiltIn).toBe(false)
     expect(task?.author).toBe('Jesse Houwing')
+  })
+
+  it('Tracks highest version per major version for tasks with multiple versions', async () => {
+    const mockTasks = [
+      {
+        id: 'powershell-guid',
+        name: 'PowerShell',
+        version: { major: 1, minor: 2, patch: 3 },
+        serverOwned: true
+      },
+      {
+        id: 'powershell-guid',
+        name: 'PowerShell',
+        version: { major: 1, minor: 5, patch: 0 },
+        serverOwned: true
+      },
+      {
+        id: 'powershell-guid',
+        name: 'PowerShell',
+        version: { major: 2, minor: 1, patch: 0 },
+        serverOwned: true
+      },
+      {
+        id: 'powershell-guid',
+        name: 'PowerShell',
+        version: { major: 2, minor: 3, patch: 5 },
+        serverOwned: true
+      }
+    ]
+
+    azdev.mockTaskAgentApi.getTaskDefinitions.mockResolvedValue(mockTasks)
+
+    const taskMap = await client.getInstalledTasks()
+
+    // Should have version-specific keys
+    expect(taskMap.has('powershell@1')).toBe(true)
+    expect(taskMap.has('powershell@2')).toBe(true)
+
+    // powershell@1 should have the highest v1 version (1.5.0)
+    const taskV1 = taskMap.get('powershell@1')
+    expect(taskV1?.version).toBe('1.5.0')
+    expect(taskV1?.major).toBe(1)
+
+    // powershell@2 should have the highest v2 version (2.3.5)
+    const taskV2 = taskMap.get('powershell@2')
+    expect(taskV2?.version).toBe('2.3.5')
+    expect(taskV2?.major).toBe(2)
+
+    // Default lookup (without @major) should return the highest overall version
+    const taskDefault = taskMap.get('powershell')
+    expect(taskDefault?.version).toBe('2.3.5')
   })
 })

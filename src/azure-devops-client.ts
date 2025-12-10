@@ -28,6 +28,7 @@ export interface InstalledTask {
   id: string
   name: string
   version: string
+  major: number
   fullIdentifier: string
   isBuiltIn: boolean
   author?: string
@@ -45,6 +46,7 @@ export class AzureDevOpsClient {
 
   /**
    * Fetch all installed tasks from the Azure DevOps organization
+   * Returns a map keyed by task name/ID and also by name@major for version-specific lookups
    */
   async getInstalledTasks(): Promise<Map<string, InstalledTask>> {
     core.debug(`Fetching tasks from: ${this.baseUrl}`)
@@ -54,7 +56,8 @@ export class AzureDevOpsClient {
       const taskAgentApi: ITaskAgentApi =
         await this.connection.getTaskAgentApi()
 
-      // Get all tasks (latest version only)
+      // Get all tasks - the API returns separate entries for each major version line
+      // (e.g., PowerShell@1 and PowerShell@2 are returned as separate entries)
       core.debug('Requesting task definitions from API')
       const tasks = await taskAgentApi.getTaskDefinitions()
 
@@ -63,15 +66,25 @@ export class AzureDevOpsClient {
 
       const taskMap = new Map<string, InstalledTask>()
 
+      // Track highest version per task name and per task name@major
+      const highestByName = new Map<string, InstalledTask>()
+      const highestByNameMajor = new Map<string, InstalledTask>()
+
       for (const task of tasks) {
-        if (!task.id || !task.name || !task.version) {
+        if (
+          !task.id ||
+          !task.name ||
+          !task.version ||
+          task.version.major === undefined
+        ) {
           core.warning(
             `Skipping task with missing required fields: ${JSON.stringify(task)}`
           )
           continue
         }
 
-        const version = `${task.version.major}.${task.version.minor}.${task.version.patch}`
+        const major = task.version.major
+        const version = `${major}.${task.version.minor}.${task.version.patch}`
         const isBuiltIn = this.isBuiltInTask(task)
         const fullIdentifier = this.buildFullIdentifier(task, isBuiltIn)
 
@@ -79,18 +92,49 @@ export class AzureDevOpsClient {
           id: task.id,
           name: task.name,
           version,
+          major,
           fullIdentifier,
           isBuiltIn,
           author: task.author
         }
 
-        // Map by both task ID and task name for lookup flexibility
-        taskMap.set(task.id.toLowerCase(), installedTask)
-        taskMap.set(task.name.toLowerCase(), installedTask)
+        const nameKey = task.name.toLowerCase()
+        const idKey = task.id.toLowerCase()
+        const nameMajorKey = `${nameKey}@${major}`
+        const idMajorKey = `${idKey}@${major}`
+
+        // Track highest version for each task name (for default resolution)
+        const existingByName = highestByName.get(nameKey)
+        if (
+          !existingByName ||
+          this.compareVersions(version, existingByName.version) > 0
+        ) {
+          highestByName.set(nameKey, installedTask)
+          highestByName.set(idKey, installedTask)
+        }
+
+        // Track highest version for each task name@major combination
+        const existingByNameMajor = highestByNameMajor.get(nameMajorKey)
+        if (
+          !existingByNameMajor ||
+          this.compareVersions(version, existingByNameMajor.version) > 0
+        ) {
+          highestByNameMajor.set(nameMajorKey, installedTask)
+          highestByNameMajor.set(idMajorKey, installedTask)
+        }
 
         core.debug(
           `Registered task: ${task.name} (${task.id}) -> ${fullIdentifier}@${version} [${isBuiltIn ? 'built-in' : 'extension'}]`
         )
+      }
+
+      // Merge both maps - name@major takes precedence for version-specific lookups
+      // but we also need plain name/id lookups for backward compatibility
+      for (const [key, task] of highestByName) {
+        taskMap.set(key, task)
+      }
+      for (const [key, task] of highestByNameMajor) {
+        taskMap.set(key, task)
       }
 
       return taskMap
@@ -102,6 +146,24 @@ export class AzureDevOpsClient {
       }
       throw error
     }
+  }
+
+  /**
+   * Compare two version strings
+   * Returns positive if v1 > v2, negative if v1 < v2, 0 if equal
+   */
+  private compareVersions(v1: string, v2: string): number {
+    const parts1 = v1.split('.').map(Number)
+    const parts2 = v2.split('.').map(Number)
+
+    for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
+      const p1 = parts1[i] || 0
+      const p2 = parts2[i] || 0
+      if (p1 !== p2) {
+        return p1 - p2
+      }
+    }
+    return 0
   }
 
   /**
