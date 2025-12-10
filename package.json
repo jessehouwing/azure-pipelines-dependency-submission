@@ -1,20 +1,26 @@
 {
-  "name": "typescript-action",
-  "description": "GitHub Actions TypeScript template",
-  "version": "0.0.0",
-  "author": "",
+  "name": "azure-pipelines-dependency-submission",
+  "description": "Submit Azure Pipelines dependencies to GitHub Dependency Graph for vulnerability scanning",
+  "version": "1.0.0",
+  "author": "Jesse Houwing",
   "type": "module",
   "private": true,
-  "homepage": "https://github.com/actions/typescript-action",
+  "homepage": "https://github.com/jessehouwing/azure-pipelines-dependency-submission",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/jessehouwing/azure-pipelines-dependency-submission.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/typescript-action/issues"
+    "url": "https://github.com/jessehouwing/azure-pipelines-dependency-submission/issues"
   },
   "keywords": [
-    "actions"
+    "actions",
+    "azure-pipelines",
+    "azure-devops",
+    "dependency-graph",
+    "dependabot",
+    "security",
+    "vulnerability-scanning"
   ],
   "exports": {
     ".": "./dist/index.js"

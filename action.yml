@@ -57,6 +57,23 @@ inputs:
       dependencies.
     required: false
     default: 'true'
+  parse-templates-by:
+    description: >
+      How to parse and resolve pipeline templates. Options: 'action' (default)
+      or 'server'. When set to 'server', uses the Azure DevOps Preview Run API
+      to expand templates and apply decorators on the server side, providing
+      more accurate results. This is slower than 'action' mode but captures
+      decorator-injected tasks and fully resolved templates. Requires Build Read
+      permissions on the Azure DevOps token.
+    required: false
+    default: 'action'
+  azure-devops-project:
+    description: >
+      Azure DevOps project name to query for build definitions when using
+      'server' mode for parse-templates-by. If not specified, the action will
+      attempt to query all accessible projects.
+    required: false
+    default: ''
 
 # Define your outputs here.
 outputs:

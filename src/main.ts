@@ -3,6 +3,7 @@ import * as github from '@actions/github'
 import { AzureDevOpsClient } from './azure-devops-client.js'
 import { PipelineFileDiscovery } from './pipeline-file-discovery.js'
 import { TemplateResolver } from './template-resolver.js'
+import { PreviewApiResolver } from './preview-api-resolver.js'
 import { DependencyMapper } from './dependency-mapper.js'
 import { DependencySubmitter } from './dependency-submitter.js'
 
@@ -26,6 +27,17 @@ export async function run(): Promise<void> {
     })
     const pipelinePaths = core.getInput('pipeline-paths')
     const resolveTemplates = core.getBooleanInput('resolve-templates')
+    const parseTemplatesBy = core.getInput('parse-templates-by') || 'action'
+    const azureDevOpsProject = core.getInput('azure-devops-project')
+
+    // Validate parse-templates-by input
+    if (parseTemplatesBy !== 'action' && parseTemplatesBy !== 'server') {
+      throw new Error(
+        `Invalid value for parse-templates-by: '${parseTemplatesBy}'. Must be 'action' or 'server'.`
+      )
+    }
+
+    const useServerParsing = parseTemplatesBy === 'server'
 
     // Determine the correct SHA and ref to use
     // For pull_request events, github.context.sha is the merge commit SHA (refs/pull/<pr>/merge),
@@ -95,15 +107,71 @@ export async function run(): Promise<void> {
 
     // Step 3: Parse pipelines and resolve templates
     core.startGroup('📝 Parsing pipelines and resolving templates')
-    const templateResolver = new TemplateResolver(workspace, resolveTemplates)
     const allTasks = []
 
-    for (const pipelineFile of pipelineFiles) {
-      core.info(`Processing: ${pipelineFile}`)
-      const resolved = await templateResolver.resolvePipeline(pipelineFile)
-      core.info(`  Found ${resolved.tasks.length} task(s)`)
-      core.info(`  Processed ${resolved.processedFiles.size} file(s)`)
-      allTasks.push(...resolved.tasks)
+    if (useServerParsing) {
+      core.info(
+        '🔬 Using server-side parsing (Azure DevOps Preview API) for advanced dependency resolution'
+      )
+      core.info('⚠️  This mode is slower but more accurate')
+
+      const previewResolver = new PreviewApiResolver(
+        azureDevOpsUrl,
+        azureDevOpsToken,
+        azureDevOpsProject || undefined
+      )
+
+      for (const pipelineFile of pipelineFiles) {
+        core.info(`Processing: ${pipelineFile}`)
+
+        // Find build definitions that reference this file
+        const definitions = await previewResolver.findBuildDefinitionsForFile(
+          pipelineFile,
+          workspace
+        )
+
+        if (definitions.length === 0) {
+          core.warning(
+            `No build definitions found for ${pipelineFile}. Falling back to action-side parsing.`
+          )
+
+          // Fallback to action-side parsing
+          const templateResolver = new TemplateResolver(
+            workspace,
+            resolveTemplates
+          )
+          const resolved = await templateResolver.resolvePipeline(pipelineFile)
+          core.info(
+            `  Found ${resolved.tasks.length} task(s) (action-side parsing)`
+          )
+          allTasks.push(...resolved.tasks)
+        } else {
+          // Use server-side parsing for each definition
+          for (const def of definitions) {
+            const tasks = await previewResolver.previewPipeline(
+              def.project,
+              def.definitionId
+            )
+            core.info(
+              `  Found ${tasks.length} task(s) from definition "${def.name}" (server-side)`
+            )
+            allTasks.push(...tasks)
+          }
+        }
+      }
+    } else {
+      // Use action-side template resolution
+      core.info('📄 Using action-side parsing for dependency resolution')
+
+      const templateResolver = new TemplateResolver(workspace, resolveTemplates)
+
+      for (const pipelineFile of pipelineFiles) {
+        core.info(`Processing: ${pipelineFile}`)
+        const resolved = await templateResolver.resolvePipeline(pipelineFile)
+        core.info(`  Found ${resolved.tasks.length} task(s)`)
+        core.info(`  Processed ${resolved.processedFiles.size} file(s)`)
+        allTasks.push(...resolved.tasks)
+      }
     }
 
     core.info(`Total tasks found: ${allTasks.length}`)
