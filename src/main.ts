@@ -16,8 +16,6 @@ export async function run(): Promise<void> {
   try {
     // Get inputs
     const token = core.getInput('token', { required: true })
-    // Reserved for future use: accessing private repos for template resolution
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const githubToken = core.getInput('github-token') || token
     const repository =
       core.getInput('repository') || process.env.GITHUB_REPOSITORY || ''
@@ -138,7 +136,8 @@ export async function run(): Promise<void> {
           // Fallback to action-side parsing
           const templateResolver = new TemplateResolver(
             workspace,
-            resolveTemplates
+            resolveTemplates,
+            githubToken
           )
           const resolved = await templateResolver.resolvePipeline(pipelineFile)
           core.info(
@@ -163,7 +162,11 @@ export async function run(): Promise<void> {
       // Use action-side template resolution
       core.info('📄 Using action-side parsing for dependency resolution')
 
-      const templateResolver = new TemplateResolver(workspace, resolveTemplates)
+      const templateResolver = new TemplateResolver(
+        workspace,
+        resolveTemplates,
+        githubToken
+      )
 
       for (const pipelineFile of pipelineFiles) {
         core.info(`Processing: ${pipelineFile}`)

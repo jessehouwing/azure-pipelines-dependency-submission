@@ -1,15 +1,26 @@
 import * as core from '@actions/core'
+import * as github from '@actions/github'
 import * as fs from 'fs'
+import * as path from 'path'
 import {
   PipelineParser,
   ParsedPipeline,
-  ParsedTask
+  ParsedTask,
+  ParsedTemplate
 } from './pipeline-parser.js'
 import { PipelineFileDiscovery } from './pipeline-file-discovery.js'
+
+export interface ExternalTemplate {
+  owner: string
+  repo: string
+  path: string
+  ref: string
+}
 
 export interface ResolvedDependencies {
   tasks: ParsedTask[]
   processedFiles: Set<string>
+  externalTemplates: ExternalTemplate[]
 }
 
 /**
@@ -19,11 +30,23 @@ export class TemplateResolver {
   private readonly parser: PipelineParser
   private readonly fileDiscovery: PipelineFileDiscovery
   private readonly resolveTemplates: boolean
+  private readonly githubToken?: string
+  private readonly octokit?: ReturnType<typeof github.getOctokit>
+  private readonly workspaceRoot: string
 
-  constructor(workspaceRoot: string, resolveTemplates: boolean = true) {
+  constructor(
+    workspaceRoot: string,
+    resolveTemplates: boolean = true,
+    githubToken?: string
+  ) {
     this.parser = new PipelineParser()
     this.fileDiscovery = new PipelineFileDiscovery(workspaceRoot)
     this.resolveTemplates = resolveTemplates
+    this.githubToken = githubToken
+    this.workspaceRoot = workspaceRoot
+    if (githubToken) {
+      this.octokit = github.getOctokit(githubToken)
+    }
   }
 
   /**
@@ -34,16 +57,19 @@ export class TemplateResolver {
   ): Promise<ResolvedDependencies> {
     const processedFiles = new Set<string>()
     const allTasks: ParsedTask[] = []
+    const externalTemplates: ExternalTemplate[] = []
 
     await this.resolvePipelineRecursive(
       pipelineFilePath,
       allTasks,
-      processedFiles
+      processedFiles,
+      externalTemplates
     )
 
     return {
       tasks: allTasks,
-      processedFiles
+      processedFiles,
+      externalTemplates
     }
   }
 
@@ -53,7 +79,8 @@ export class TemplateResolver {
   private async resolvePipelineRecursive(
     filePath: string,
     allTasks: ParsedTask[],
-    processedFiles: Set<string>
+    processedFiles: Set<string>,
+    externalTemplates: ExternalTemplate[]
   ): Promise<void> {
     // Avoid processing the same file twice
     if (processedFiles.has(filePath)) {
@@ -89,17 +116,20 @@ export class TemplateResolver {
           filePath,
           parsed.extends.path,
           allTasks,
-          processedFiles
+          processedFiles,
+          externalTemplates
         )
       }
 
       // Process all template references
       for (const template of parsed.templates) {
-        // Skip templates from external repositories for now
-        // These would require additional authentication and complexity
+        // Handle templates from external repositories
         if (template.repository) {
-          core.info(
-            `Skipping external repository template: ${template.path} from ${template.repository}`
+          await this.resolveExternalTemplateReference(
+            template,
+            allTasks,
+            processedFiles,
+            externalTemplates
           )
           continue
         }
@@ -108,7 +138,8 @@ export class TemplateResolver {
           filePath,
           template.path,
           allTasks,
-          processedFiles
+          processedFiles,
+          externalTemplates
         )
       }
     } catch (error) {
@@ -125,7 +156,8 @@ export class TemplateResolver {
     sourceFile: string,
     templatePath: string,
     allTasks: ParsedTask[],
-    processedFiles: Set<string>
+    processedFiles: Set<string>,
+    externalTemplates: ExternalTemplate[]
   ): Promise<void> {
     // Resolve the template path relative to the source file
     const resolvedPath = this.fileDiscovery.resolveTemplatePath(
@@ -136,6 +168,122 @@ export class TemplateResolver {
     core.debug(`Resolving template: ${templatePath} -> ${resolvedPath}`)
 
     // Recursively process the template
-    await this.resolvePipelineRecursive(resolvedPath, allTasks, processedFiles)
+    await this.resolvePipelineRecursive(
+      resolvedPath,
+      allTasks,
+      processedFiles,
+      externalTemplates
+    )
+  }
+
+  /**
+   * Resolve and process a template from an external GitHub repository
+   */
+  private async resolveExternalTemplateReference(
+    template: ParsedTemplate,
+    allTasks: ParsedTask[],
+    processedFiles: Set<string>,
+    externalTemplates: ExternalTemplate[]
+  ): Promise<void> {
+    if (!this.octokit || !this.githubToken) {
+      core.warning(
+        `Cannot resolve external repository template: ${template.path} from ${template.repository}. No GitHub token provided.`
+      )
+      return
+    }
+
+    try {
+      core.info(
+        `Resolving external repository template: ${template.path} from ${template.repository}`
+      )
+
+      // Parse repository reference (format: owner/repo or just repo-alias)
+      const repoRef = template.repository
+
+      // In Azure Pipelines, the repository reference can be an alias defined in resources.repositories
+      // For now, we'll try to parse it as owner/repo format
+      // Example from the user: "kmadof/devops-templates"
+
+      let owner: string
+      let repo: string
+
+      if (repoRef.includes('/')) {
+        ;[owner, repo] = repoRef.split('/')
+      } else {
+        // If it's just an alias, we can't resolve it without more context
+        core.warning(
+          `Cannot resolve repository alias '${repoRef}'. External templates must use 'owner/repo' format in the template reference.`
+        )
+        return
+      }
+
+      const ref = template.ref || 'refs/heads/main' // Use provided ref or default as per Azure Pipelines spec
+
+      // Track this external template as a transitive dependency
+      externalTemplates.push({
+        owner,
+        repo,
+        path: template.path,
+        ref
+      })
+
+      // Download the template file content from GitHub
+      // Extract branch name from ref (refs/heads/main -> main)
+      const branchName = ref.startsWith('refs/heads/')
+        ? ref.substring('refs/heads/'.length)
+        : ref
+
+      const { data } = await this.octokit.rest.repos.getContent({
+        owner,
+        repo,
+        path: template.path,
+        ref: branchName
+      })
+
+      if ('content' in data && data.type === 'file') {
+        // Decode the base64 content
+        const content = Buffer.from(data.content, 'base64').toString('utf8')
+
+        // Create a temporary file to process
+        const tempDir = path.join(this.workspaceRoot, '.azure-pipelines-temp')
+        if (!fs.existsSync(tempDir)) {
+          fs.mkdirSync(tempDir, { recursive: true })
+        }
+
+        const tempFile = path.join(
+          tempDir,
+          `${owner}-${repo}-${path.basename(template.path)}`
+        )
+        fs.writeFileSync(tempFile, content)
+
+        // Mark as processed to avoid loops
+        const externalKey = `external:${owner}/${repo}/${template.path}`
+        if (processedFiles.has(externalKey)) {
+          core.debug(`Already processed external template: ${externalKey}`)
+          return
+        }
+        processedFiles.add(externalKey)
+
+        // Parse and process the template
+        await this.resolvePipelineRecursive(
+          tempFile,
+          allTasks,
+          processedFiles,
+          externalTemplates
+        )
+
+        core.debug(`Successfully resolved external template: ${template.path}`)
+      } else {
+        core.warning(
+          `External template ${template.path} is not a file or could not be retrieved`
+        )
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        core.warning(
+          `Failed to resolve external template ${template.path} from ${template.repository}: ${error.message}`
+        )
+      }
+    }
   }
 }

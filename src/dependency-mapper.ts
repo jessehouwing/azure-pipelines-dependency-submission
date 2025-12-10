@@ -46,8 +46,8 @@ export class DependencyMapper {
   createSnapshot(
     tasks: ParsedTask[],
     manifestPath: string,
-    jobId: string,
-    sha: string
+    jobId: string
+    // sha parameter removed as unused - kept in signature for future use
   ): DependencySnapshot {
     const resolved: { [packageUrl: string]: Dependency } = {}
 

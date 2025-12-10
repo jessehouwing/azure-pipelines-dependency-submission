@@ -12,6 +12,7 @@ export interface ParsedTask {
 export interface ParsedTemplate {
   path: string
   repository?: string
+  ref?: string // ref name to checkout; defaults to 'refs/heads/main'
 }
 
 export interface ParsedPipeline {
