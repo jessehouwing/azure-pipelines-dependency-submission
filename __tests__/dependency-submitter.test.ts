@@ -28,10 +28,10 @@ describe('DependencySubmitter', () => {
             source_location: 'azure-pipelines.yml'
           },
           resolved: {
-            'pkg:generic/azure-pipelines-task/Microsoft.BuiltIn.PowerShell@2.259.0':
+            'pkg:generic/azure-pipelines/Microsoft.BuiltIn.PowerShell@2.259.0':
               {
                 package_url:
-                  'pkg:generic/azure-pipelines-task/Microsoft.BuiltIn.PowerShell@2.259.0',
+                  'pkg:generic/azure-pipelines/Microsoft.BuiltIn.PowerShell@2.259.0',
                 relationship: 'direct',
                 scope: 'runtime'
               }
@@ -92,8 +92,8 @@ describe('DependencySubmitter', () => {
             source_location: 'test.yml'
           },
           resolved: {
-            'pkg:generic/test@1.0.0': {
-              package_url: 'pkg:generic/test@1.0.0',
+            'pkg:generic/azure-pipelines/test@1.0.0': {
+              package_url: 'pkg:generic/azure-pipelines/test@1.0.0',
               relationship: 'direct',
               scope: 'runtime'
             }
@@ -103,7 +103,7 @@ describe('DependencySubmitter', () => {
     }
 
     const resolved = snapshot.manifests['test'].resolved
-    const dep = resolved['pkg:generic/test@1.0.0']
+    const dep = resolved['pkg:generic/azure-pipelines/test@1.0.0']
     expect(dep.scope).toBe('runtime')
     expect(dep.relationship).toBe('direct')
   })

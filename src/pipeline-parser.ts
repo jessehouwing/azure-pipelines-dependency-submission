@@ -6,6 +6,7 @@ export interface ParsedTask {
   taskIdentifier: string // task name or GUID
   taskVersion?: string
   displayName?: string
+  sourceFile?: string // the pipeline file this task was found in
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   inputs?: Record<string, any>
 }

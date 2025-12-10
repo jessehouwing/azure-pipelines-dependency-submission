@@ -42,6 +42,11 @@ export class DependencyMapper {
 
   /**
    * Create a dependency snapshot from parsed tasks
+   *
+   * Tasks are deduplicated based on:
+   * - The source file that referenced them
+   * - The resolved task identifier (fullIdentifier)
+   * - The task version
    */
   createSnapshot(
     tasks: ParsedTask[],
@@ -49,16 +54,62 @@ export class DependencyMapper {
     jobId: string
     // sha parameter removed as unused - kept in signature for future use
   ): DependencySnapshot {
-    const resolved: { [packageUrl: string]: Dependency } = {}
+    // Group tasks by source file for proper deduplication
+    const tasksByFile = new Map<string, ParsedTask[]>()
 
     for (const task of tasks) {
-      const dependency = this.mapTaskToDependency(task)
-      if (dependency) {
-        resolved[dependency.package_url] = dependency
+      const sourceFile = task.sourceFile || manifestPath
+      if (!tasksByFile.has(sourceFile)) {
+        tasksByFile.set(sourceFile, [])
       }
+      tasksByFile.get(sourceFile)!.push(task)
     }
 
-    const manifestName = `${manifestPath}:${jobId}`
+    const manifests: DependencySnapshot['manifests'] = {}
+
+    // Process each source file separately
+    for (const [sourceFile, fileTasks] of tasksByFile) {
+      const resolved: { [packageUrl: string]: Dependency } = {}
+      const seen = new Set<string>()
+
+      for (const task of fileTasks) {
+        // Resolve task to get the full identifier for deduplication
+        const installedTask = this.resolveTask(task.taskIdentifier)
+        if (!installedTask) {
+          core.warning(
+            `Could not resolve task: ${task.taskIdentifier}. It may not be installed in the Azure DevOps organization.`
+          )
+          continue
+        }
+
+        // Create deduplication key: fullIdentifier + version
+        const version = this.normalizeVersion(
+          task.taskVersion || installedTask.version
+        )
+        const dedupeKey = `${installedTask.fullIdentifier}@${version}`
+
+        // Skip if we've already processed this task+version combination for this file
+        if (seen.has(dedupeKey)) {
+          core.debug(`Skipping duplicate task in ${sourceFile}: ${dedupeKey}`)
+          continue
+        }
+        seen.add(dedupeKey)
+
+        const dependency = this.mapTaskToDependency(task, resolved)
+        if (dependency) {
+          resolved[dependency.package_url] = dependency
+        }
+      }
+
+      const manifestName = `${sourceFile}:${jobId}`
+      manifests[manifestName] = {
+        name: manifestName,
+        file: {
+          source_location: sourceFile
+        },
+        resolved
+      }
+    }
 
     return {
       version: 0,
@@ -68,15 +119,7 @@ export class DependencyMapper {
         url: 'https://github.com/jessehouwing/azure-pipelines-dependency-submission'
       },
       scanned: new Date().toISOString(),
-      manifests: {
-        [manifestName]: {
-          name: manifestName,
-          file: {
-            source_location: manifestPath
-          },
-          resolved
-        }
-      }
+      manifests
     }
   }
 
@@ -86,7 +129,10 @@ export class DependencyMapper {
    * Note: Always uses task version from the task definition, NOT the contributionVersion
    * The task version is what gets executed; contributionVersion is the extension version
    */
-  private mapTaskToDependency(task: ParsedTask): Dependency | null {
+  private mapTaskToDependency(
+    task: ParsedTask,
+    resolved: { [packageUrl: string]: Dependency }
+  ): Dependency | null {
     const installedTask = this.resolveTask(task.taskIdentifier)
 
     if (!installedTask) {
@@ -96,22 +142,46 @@ export class DependencyMapper {
       return null
     }
 
-    // Use the version from the pipeline if specified, otherwise use the installed task version
-    // This is the task version, NOT the contribution/extension version
-    const version = task.taskVersion || installedTask.version
+    // Normalize the version from the pipeline (adds wildcards for partial versions)
+    const normalizedVersion = this.normalizeVersion(
+      task.taskVersion || installedTask.version
+    )
+
+    // Check if the version contains wildcards
+    const hasWildcard = normalizedVersion.includes('*')
 
     // Create package URL in purl format
     // Using 'generic' type as Azure DevOps tasks are not a standard purl type
-    // Format: pkg:generic/azure-pipelines-task/{fullIdentifier}@{version}
-    const namespace = 'azure-pipelines-task'
-    const packageUrl = `pkg:generic/${namespace}/${encodeURIComponent(installedTask.fullIdentifier)}@${version}`
+    // Format: pkg:generic/azure-pipelines/{fullIdentifier}@{version}
+    const packageUrl = `pkg:generic/azure-pipelines/${encodeURIComponent(installedTask.fullIdentifier)}@${normalizedVersion}`
 
     core.debug(`Mapped task ${task.taskIdentifier} to ${packageUrl}`)
+
+    // If using a wildcard version, add the actual resolved version as a transitive dependency
+    const dependencies: string[] = []
+    if (hasWildcard) {
+      const actualVersion = installedTask.version
+      const actualPackageUrl = `pkg:generic/azure-pipelines/${encodeURIComponent(installedTask.fullIdentifier)}@${actualVersion}`
+
+      // Add the actual version as an indirect dependency if not already present
+      if (!resolved[actualPackageUrl]) {
+        resolved[actualPackageUrl] = {
+          package_url: actualPackageUrl,
+          relationship: 'indirect',
+          scope: 'runtime'
+        }
+        core.debug(
+          `Added transitive dependency for resolved version: ${actualPackageUrl}`
+        )
+      }
+      dependencies.push(actualPackageUrl)
+    }
 
     return {
       package_url: packageUrl,
       relationship: 'direct',
-      scope: 'runtime'
+      scope: 'runtime',
+      ...(dependencies.length > 0 && { dependencies })
     }
   }
 
@@ -161,6 +231,28 @@ export class DependencyMapper {
     }
 
     return null
+  }
+
+  /**
+   * Normalize a version string to include wildcards for partial versions
+   *
+   * Examples:
+   * - "5" -> "5.*.*"
+   * - "5.1" -> "5.1.*"
+   * - "5.1.2" -> "5.1.2"
+   * - "0.220.0" -> "0.220.0"
+   */
+  private normalizeVersion(version: string): string {
+    const parts = version.split('.')
+    if (parts.length === 1) {
+      // Major only: 5 -> 5.*.*
+      return `${parts[0]}.*.*`
+    } else if (parts.length === 2) {
+      // Major.Minor: 5.1 -> 5.1.*
+      return `${parts[0]}.${parts[1]}.*`
+    }
+    // Full version: 5.1.2 -> 5.1.2
+    return version
   }
 
   /**

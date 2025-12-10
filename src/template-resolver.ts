@@ -101,8 +101,13 @@ export class TemplateResolver {
       const parsed: ParsedPipeline =
         await this.parser.parsePipelineFile(filePath)
 
-      // Add all tasks from this file
-      allTasks.push(...parsed.tasks)
+      // Add all tasks from this file, tagging them with the source file
+      for (const task of parsed.tasks) {
+        allTasks.push({
+          ...task,
+          sourceFile: filePath
+        })
+      }
 
       // If template resolution is disabled, skip template processing
       if (!this.resolveTemplates) {
@@ -208,9 +213,7 @@ export class TemplateResolver {
       let repo: string
 
       if (!repoRef) {
-        core.warning(
-          `Cannot resolve template without repository reference.`
-        )
+        core.warning(`Cannot resolve template without repository reference.`)
         return
       }
 
