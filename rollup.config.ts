@@ -11,7 +11,14 @@ const config = {
     file: 'dist/index.js',
     format: 'es',
     sourcemap: true,
-    exports: 'named'
+    exports: 'named',
+    // Shim __dirname and __filename for CommonJS modules that use them (e.g., azure-devops-node-api)
+    intro: `
+import { fileURLToPath as __internal_fileURLToPath } from 'node:url';
+import { dirname as __internal_dirname } from 'node:path';
+const __filename = __internal_fileURLToPath(import.meta.url);
+const __dirname = __internal_dirname(__filename);
+`
   },
   plugins: [
     typescript(),

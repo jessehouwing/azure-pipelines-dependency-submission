@@ -212,8 +212,7 @@ export async function run(): Promise<void> {
     const snapshot = dependencyMapper.createSnapshot(
       allTasks,
       'azure-pipelines',
-      github.context.job || 'dependency-submission',
-      sha
+      github.context.job || 'dependency-submission'
     )
 
     const dependencyCount = DependencySubmitter.countDependencies(snapshot)

@@ -207,6 +207,13 @@ export class TemplateResolver {
       let owner: string
       let repo: string
 
+      if (!repoRef) {
+        core.warning(
+          `Cannot resolve template without repository reference.`
+        )
+        return
+      }
+
       if (repoRef.includes('/')) {
         ;[owner, repo] = repoRef.split('/')
         core.debug(`Parsed external repository: owner=${owner}, repo=${repo}`)
