@@ -97,8 +97,10 @@ export class DependencyMapper {
     const version = task.taskVersion || installedTask.version
 
     // Create package URL in purl format
-    // Using generic type for Azure DevOps tasks
-    const packageUrl = `pkg:azuredevops/${encodeURIComponent(installedTask.fullIdentifier)}@${version}`
+    // Using 'generic' type as Azure DevOps tasks are not a standard purl type
+    // Format: pkg:generic/azure-pipelines-task/{fullIdentifier}@{version}
+    const namespace = 'azure-pipelines-task'
+    const packageUrl = `pkg:generic/${namespace}/${encodeURIComponent(installedTask.fullIdentifier)}@${version}`
 
     core.debug(`Mapped task ${task.taskIdentifier} to ${packageUrl}`)
 

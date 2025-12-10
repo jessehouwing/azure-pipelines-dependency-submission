@@ -17,7 +17,9 @@ describe('DependencyMapper', () => {
           id: 'task-guid-1',
           name: 'NodeTool',
           version: '0.220.0',
-          fullIdentifier: 'Microsoft.VisualStudio.Services.Cloud.NodeTool'
+          fullIdentifier: 'Microsoft.BuiltIn.NodeTool',
+          isBuiltIn: true,
+          author: 'Microsoft Corporation'
         }
       ],
       [
@@ -26,7 +28,9 @@ describe('DependencyMapper', () => {
           id: 'task-guid-1',
           name: 'NodeTool',
           version: '0.220.0',
-          fullIdentifier: 'Microsoft.VisualStudio.Services.Cloud.NodeTool'
+          fullIdentifier: 'Microsoft.BuiltIn.NodeTool',
+          isBuiltIn: true,
+          author: 'Microsoft Corporation'
         }
       ],
       [
@@ -35,7 +39,9 @@ describe('DependencyMapper', () => {
           id: 'task-guid-2',
           name: 'Npm',
           version: '1.230.0',
-          fullIdentifier: 'Microsoft.VisualStudio.Services.Cloud.Npm'
+          fullIdentifier: 'Microsoft.BuiltIn.Npm',
+          isBuiltIn: true,
+          author: 'Microsoft Corporation'
         }
       ],
       [
@@ -44,7 +50,9 @@ describe('DependencyMapper', () => {
           id: 'task-guid-2',
           name: 'Npm',
           version: '1.230.0',
-          fullIdentifier: 'Microsoft.VisualStudio.Services.Cloud.Npm'
+          fullIdentifier: 'Microsoft.BuiltIn.Npm',
+          isBuiltIn: true,
+          author: 'Microsoft Corporation'
         }
       ]
     ])
@@ -93,7 +101,9 @@ describe('DependencyMapper', () => {
     const packageUrls = Object.keys(resolved)
 
     expect(packageUrls).toHaveLength(1)
-    expect(packageUrls[0]).toMatch(/pkg:azuredevops\/.*NodeTool@0$/)
+    expect(packageUrls[0]).toMatch(
+      /pkg:generic\/azure-pipelines-task\/Microsoft\.BuiltIn\.NodeTool@0$/
+    )
 
     const dependency = resolved[packageUrls[0]]
     expect(dependency.relationship).toBe('direct')

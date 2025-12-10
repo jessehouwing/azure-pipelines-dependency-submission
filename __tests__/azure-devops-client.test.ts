@@ -25,14 +25,16 @@ describe('AzureDevOpsClient', () => {
         name: 'TaskName1',
         friendlyName: 'Task Name 1',
         version: { major: 1, minor: 2, patch: 3 },
-        serverOwned: true
+        serverOwned: true,
+        author: 'Microsoft Corporation'
       },
       {
         id: 'task-guid-2',
         name: 'TaskName2',
         friendlyName: 'Task Name 2',
         version: { major: 2, minor: 0, patch: 0 },
-        author: 'CustomPublisher'
+        author: 'CustomPublisher',
+        contributionIdentifier: 'CustomPublisher.Extension.TaskName2'
       }
     ]
 
@@ -46,7 +48,12 @@ describe('AzureDevOpsClient', () => {
 
     const task1 = taskMap.get('task-guid-1')
     expect(task1?.version).toBe('1.2.3')
-    expect(task1?.fullIdentifier).toContain('TaskName1')
+    expect(task1?.fullIdentifier).toBe('Microsoft.BuiltIn.TaskName1')
+    expect(task1?.isBuiltIn).toBe(true)
+
+    const task2 = taskMap.get('task-guid-2')
+    expect(task2?.fullIdentifier).toBe('CustomPublisher.Extension.TaskName2')
+    expect(task2?.isBuiltIn).toBe(false)
   })
 
   it('Handles API errors gracefully', async () => {

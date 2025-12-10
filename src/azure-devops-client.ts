@@ -20,6 +20,7 @@ export interface TaskMetadata {
   contributionVersion?: string
   deprecated?: boolean
   serverOwned?: boolean
+  definitionType?: string
   visibility?: string[]
 }
 
@@ -28,6 +29,8 @@ export interface InstalledTask {
   name: string
   version: string
   fullIdentifier: string
+  isBuiltIn: boolean
+  author?: string
 }
 
 export class AzureDevOpsClient {
@@ -66,13 +69,16 @@ export class AzureDevOpsClient {
         }
 
         const version = `${task.version.major}.${task.version.minor}.${task.version.patch}`
-        const fullIdentifier = this.buildFullIdentifier(task)
+        const isBuiltIn = this.isBuiltInTask(task)
+        const fullIdentifier = this.buildFullIdentifier(task, isBuiltIn)
 
         const installedTask: InstalledTask = {
           id: task.id,
           name: task.name,
           version,
-          fullIdentifier
+          fullIdentifier,
+          isBuiltIn,
+          author: task.author
         }
 
         // Map by both task ID and task name for lookup flexibility
@@ -80,7 +86,7 @@ export class AzureDevOpsClient {
         taskMap.set(task.name.toLowerCase(), installedTask)
 
         core.debug(
-          `Registered task: ${task.name} (${task.id}) -> ${fullIdentifier}@${version}`
+          `Registered task: ${task.name} (${task.id}) -> ${fullIdentifier}@${version} [${isBuiltIn ? 'built-in' : 'extension'}]`
         )
       }
 
@@ -96,24 +102,57 @@ export class AzureDevOpsClient {
   }
 
   /**
+   * Determine if a task is a built-in Microsoft task
+   * Built-in tasks are pre-installed in every Azure DevOps organization
+   */
+  private isBuiltInTask(task: any): boolean {
+    // Tasks marked as serverOwned are built-in
+    if (task.serverOwned === true) {
+      return true
+    }
+
+    // Tasks with definitionType 'metaTask' are built-in
+    if (task.definitionType === 'metaTask') {
+      return true
+    }
+
+    // Tasks authored by Microsoft without a contributionIdentifier are built-in
+    if (
+      !task.contributionIdentifier &&
+      (task.author === 'Microsoft Corporation' ||
+        task.author === 'Microsoft' ||
+        !task.author)
+    ) {
+      return true
+    }
+
+    return false
+  }
+
+  /**
    * Build the full identifier for a task in the format:
    * publisherid.extensionid.contribution.taskname
+   *
+   * For built-in Microsoft tasks, we use a standard format:
+   * Microsoft.BuiltIn.{taskname}
    */
-  private buildFullIdentifier(task: any): string {
-    // If contributionIdentifier is available, use it
+  private buildFullIdentifier(task: any, isBuiltIn: boolean): string {
+    // If contributionIdentifier is available (extension tasks), use it
     if (task.contributionIdentifier) {
       return task.contributionIdentifier
     }
 
-    // For built-in tasks, construct a standard identifier
-    // Built-in tasks typically have a consistent naming pattern
-    if (task.serverOwned || !task.author) {
-      return `Microsoft.VisualStudio.Services.Cloud.${task.name}`
+    // For built-in Microsoft tasks
+    // These tasks are pre-installed in every Azure DevOps organization
+    if (isBuiltIn) {
+      // Use a consistent format for built-in tasks
+      // Format: Microsoft.BuiltIn.{TaskName}
+      return `Microsoft.BuiltIn.${task.name}`
     }
 
-    // For extension tasks, try to construct from available metadata
-    // This is a best-effort approach
+    // For extension tasks without contributionIdentifier, construct from author
+    // This is a best-effort approach for third-party extensions
     const author = task.author?.replace(/\s+/g, '') || 'Unknown'
-    return `${author}.${task.name}`
+    return `${author}.Extension.${task.name}`
   }
 }
