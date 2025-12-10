@@ -82,6 +82,9 @@ export class DependencyMapper {
 
   /**
    * Map a parsed task to a dependency
+   *
+   * Note: Always uses task version from the task definition, NOT the contributionVersion
+   * The task version is what gets executed; contributionVersion is the extension version
    */
   private mapTaskToDependency(task: ParsedTask): Dependency | null {
     const installedTask = this.resolveTask(task.taskIdentifier)
@@ -93,7 +96,8 @@ export class DependencyMapper {
       return null
     }
 
-    // Use the version from the pipeline if specified, otherwise use the installed version
+    // Use the version from the pipeline if specified, otherwise use the installed task version
+    // This is the task version, NOT the contribution/extension version
     const version = task.taskVersion || installedTask.version
 
     // Create package URL in purl format
@@ -113,26 +117,58 @@ export class DependencyMapper {
 
   /**
    * Resolve a task identifier (name or GUID) to an installed task
+   *
+   * Supports multiple identifier formats:
+   * - taskname (e.g., "PowerShell")
+   * - publisher.extension.contribution.taskname (e.g., "jessehouwing.nuget-deprecated.NuGetPublisher-deprecated")
+   * - taskId (GUID)
+   * - publisher.extension.contribution.taskId
    */
   private resolveTask(identifier: string): InstalledTask | null {
     const normalizedId = identifier.toLowerCase()
 
-    // Try to find by ID or name
+    // Try direct lookup by ID or name
     const task = this.taskMap.get(normalizedId)
     if (task) {
       return task
     }
 
-    // If the identifier looks like a full qualified name, try extracting just the task name
+    // If the identifier contains dots, it might be a full qualified name
     if (identifier.includes('.')) {
+      // Try to extract the task name from the end
       const parts = identifier.split('.')
       const taskName = parts[parts.length - 1]
       const taskByName = this.taskMap.get(taskName.toLowerCase())
       if (taskByName) {
         return taskByName
       }
+
+      // If it ends with a GUID pattern, try that
+      const lastPart = parts[parts.length - 1]
+      if (this.isGuid(lastPart)) {
+        const taskByGuid = this.taskMap.get(lastPart.toLowerCase())
+        if (taskByGuid) {
+          return taskByGuid
+        }
+      }
+
+      // Try the full identifier as a contributionIdentifier lookup
+      for (const task of this.taskMap.values()) {
+        if (task.fullIdentifier.toLowerCase() === normalizedId) {
+          return task
+        }
+      }
     }
 
     return null
+  }
+
+  /**
+   * Check if a string is a GUID format
+   */
+  private isGuid(str: string): boolean {
+    const guidPattern =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+    return guidPattern.test(str)
   }
 }

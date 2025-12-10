@@ -182,4 +182,50 @@ describe('DependencyMapper', () => {
 
     expect(Object.keys(resolved)).toHaveLength(2)
   })
+
+  it('Resolves fully qualified task names', () => {
+    const tasks: ParsedTask[] = [
+      { taskIdentifier: 'Microsoft.BuiltIn.NodeTool', taskVersion: '0' }
+    ]
+
+    const snapshot = mapper.createSnapshot(
+      tasks,
+      'azure-pipelines.yml',
+      'test-job',
+      'abc123'
+    )
+
+    const manifestKey = 'azure-pipelines.yml:test-job'
+    const resolved = snapshot.manifests[manifestKey].resolved
+
+    expect(Object.keys(resolved)).toHaveLength(1)
+  })
+
+  it('Resolves task by GUID at end of qualified name', () => {
+    taskMap.set('task-guid-1', {
+      id: 'task-guid-1',
+      name: 'NodeTool',
+      version: '0.220.0',
+      fullIdentifier: 'Microsoft.BuiltIn.NodeTool',
+      isBuiltIn: true,
+      author: 'Microsoft Corporation'
+    })
+
+    const mapper = new DependencyMapper(taskMap)
+    const tasks: ParsedTask[] = [
+      { taskIdentifier: 'some.publisher.task-guid-1', taskVersion: '0' }
+    ]
+
+    const snapshot = mapper.createSnapshot(
+      tasks,
+      'azure-pipelines.yml',
+      'test-job',
+      'abc123'
+    )
+
+    const manifestKey = 'azure-pipelines.yml:test-job'
+    const resolved = snapshot.manifests[manifestKey].resolved
+
+    expect(Object.keys(resolved)).toHaveLength(1)
+  })
 })
