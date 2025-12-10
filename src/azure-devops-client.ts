@@ -130,29 +130,41 @@ export class AzureDevOpsClient {
   }
 
   /**
-   * Build the full identifier for a task in the format:
-   * publisherid.extensionid.contribution.taskname
+   * Build the full identifier for a task
    *
-   * For built-in Microsoft tasks, we use a standard format:
-   * Microsoft.BuiltIn.{taskname}
+   * Identifier formats:
+   * - Marketplace/Extension tasks: Use contributionIdentifier directly
+   *   (e.g., "jessehouwing.nuget-deprecated.NuGetPublisher-deprecated")
+   * - Built-in Microsoft tasks: Microsoft.BuiltIn.{TaskName}
+   *   (e.g., "Microsoft.BuiltIn.PowerShell")
+   * - Fallback: Use task name or ID if no other identifier is available
    */
   private buildFullIdentifier(task: any, isBuiltIn: boolean): string {
-    // If contributionIdentifier is available (extension tasks), use it
+    // Priority 1: Use contributionIdentifier for marketplace/extension tasks
+    // This is the authoritative identifier from the Azure DevOps Marketplace
     if (task.contributionIdentifier) {
+      core.debug(
+        `Using contributionIdentifier for ${task.name}: ${task.contributionIdentifier}`
+      )
       return task.contributionIdentifier
     }
 
-    // For built-in Microsoft tasks
+    // Priority 2: Built-in Microsoft tasks
     // These tasks are pre-installed in every Azure DevOps organization
     if (isBuiltIn) {
       // Use a consistent format for built-in tasks
       // Format: Microsoft.BuiltIn.{TaskName}
-      return `Microsoft.BuiltIn.${task.name}`
+      const identifier = `Microsoft.BuiltIn.${task.name}`
+      core.debug(`Built-in task ${task.name}: ${identifier}`)
+      return identifier
     }
 
-    // For extension tasks without contributionIdentifier, construct from author
-    // This is a best-effort approach for third-party extensions
-    const author = task.author?.replace(/\s+/g, '') || 'Unknown'
-    return `${author}.Extension.${task.name}`
+    // Priority 3: Fallback - use task name or ID
+    // This handles edge cases where the task doesn't fit standard patterns
+    const identifier = task.name || task.id
+    core.warning(
+      `Task ${task.name || task.id} could not be fully resolved, using: ${identifier}`
+    )
+    return identifier
   }
 }

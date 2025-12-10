@@ -56,6 +56,28 @@ describe('AzureDevOpsClient', () => {
     expect(task2?.isBuiltIn).toBe(false)
   })
 
+  it('Falls back to task name when no identifier available', async () => {
+    const mockTasks = [
+      {
+        id: 'unknown-task-guid',
+        name: 'UnknownTask',
+        friendlyName: 'Unknown Task',
+        version: { major: 1, minor: 0, patch: 0 },
+        author: 'SomeAuthor',
+        serverOwned: false
+        // No contributionIdentifier
+      }
+    ]
+
+    azdev.mockTaskAgentApi.getTaskDefinitions.mockResolvedValue(mockTasks)
+
+    const taskMap = await client.getInstalledTasks()
+
+    const task = taskMap.get('unknown-task-guid')
+    expect(task?.fullIdentifier).toBe('UnknownTask')
+    expect(task?.isBuiltIn).toBe(false)
+  })
+
   it('Handles API errors gracefully', async () => {
     azdev.mockTaskAgentApi.getTaskDefinitions.mockRejectedValue(
       new Error('API Error')
@@ -95,5 +117,31 @@ describe('AzureDevOpsClient', () => {
     expect(taskMap.has('validtask')).toBe(true)
     expect(taskMap.has('task-guid-2')).toBe(false)
     expect(taskMap.has('invalidtask')).toBe(false)
+  })
+
+  it('Uses contributionIdentifier for marketplace tasks', async () => {
+    const mockTasks = [
+      {
+        id: '753a133d-cb1a-54dd-8470-0380b9038d12',
+        name: 'NuGetPublisher-deprecated',
+        friendlyName: 'NuGet publisher (Deprecated)',
+        version: { major: 0, minor: 246, patch: 1 },
+        author: 'Jesse Houwing',
+        contributionIdentifier:
+          'jessehouwing.nuget-deprecated.NuGetPublisher-deprecated',
+        serverOwned: false
+      }
+    ]
+
+    azdev.mockTaskAgentApi.getTaskDefinitions.mockResolvedValue(mockTasks)
+
+    const taskMap = await client.getInstalledTasks()
+
+    const task = taskMap.get('753a133d-cb1a-54dd-8470-0380b9038d12')
+    expect(task?.fullIdentifier).toBe(
+      'jessehouwing.nuget-deprecated.NuGetPublisher-deprecated'
+    )
+    expect(task?.isBuiltIn).toBe(false)
+    expect(task?.author).toBe('Jesse Houwing')
   })
 })
