@@ -1,23 +1,69 @@
-name: The name of your action here
-description: Provide a description here
-author: Your name or organization here
+name: Azure Pipelines Dependency Submission
+description:
+  Submit Azure Pipelines dependencies to GitHub Dependency Graph for
+  vulnerability scanning
+author: Jesse Houwing
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
-  icon: heart
-  color: red
+  icon: package
+  color: blue
 
 # Define your inputs here.
 inputs:
-  milliseconds:
-    description: Your input description here
+  token:
+    description: >
+      GitHub token with contents:write permission for dependency submission.
+      This token is used to submit dependencies to the GitHub Dependency Graph
+      API. Defaults to the repository's GITHUB_TOKEN.
+    required: false
+    default: ${{ github.token }}
+  github-token:
+    description: >
+      GitHub token with contents:read permission for accessing private
+      repositories when resolving pipeline templates. This allows the action to
+      read template files from private repositories referenced in your
+      pipelines. If not provided, falls back to the 'token' input. Only needed
+      if your pipelines reference templates from private repositories.
+    required: false
+    default: ''
+  repository:
+    description: Repository to submit dependencies for (owner/repo format)
+    required: false
+    default: ${{ github.repository }}
+  azure-devops-url:
+    description: >
+      Azure DevOps organization URL (e.g., https://dev.azure.com/myorg)
     required: true
-    default: '1000'
+  azure-devops-token:
+    description: >
+      Azure DevOps Personal Access Token (PAT) with the following permissions:
+      - Agent Pools: Read
+      - Build: Read
+      This token is used to query the installed task definitions from the Azure
+      DevOps organization. To create a PAT, go to User Settings > Personal
+      Access Tokens in Azure DevOps.
+    required: true
+  pipeline-paths:
+    description: >
+      Comma-separated or newline-separated list of glob patterns to scan for
+      Azure Pipelines files. Supports wildcards like *.yml, **/*.yaml, etc.
+      Defaults to azure-pipelines.yml, azure-pipelines.yaml, and
+      .azure-pipelines/*.yml if not specified.
+    required: false
+    default: ''
+  resolve-templates:
+    description: >
+      Whether to resolve and include dependencies from pipeline templates.
+      When true (default), template files are parsed and their tasks are
+      included as dependencies.
+    required: false
+    default: 'true'
 
 # Define your outputs here.
 outputs:
-  time:
-    description: Your output description here
+  dependency-count:
+    description: Number of dependencies submitted
 
 runs:
   using: node24
