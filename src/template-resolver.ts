@@ -101,11 +101,16 @@ export class TemplateResolver {
       const parsed: ParsedPipeline =
         await this.parser.parsePipelineFile(filePath)
 
-      // Add all tasks from this file, tagging them with the source file
+      // Compute relative path from workspace root for the source file reference
+      const relativePath = path
+        .relative(this.workspaceRoot, filePath)
+        .replace(/\\/g, '/')
+
+      // Add all tasks from this file, tagging them with the source file (relative path)
       for (const task of parsed.tasks) {
         allTasks.push({
           ...task,
-          sourceFile: filePath
+          sourceFile: relativePath
         })
       }
 

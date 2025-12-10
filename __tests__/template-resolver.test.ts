@@ -38,6 +38,8 @@ steps:
     expect(result.tasks.length).toBe(1)
     expect(result.tasks[0].taskIdentifier).toBe('PowerShell')
     expect(result.tasks[0].taskVersion).toBe('2')
+    // Verify sourceFile is a relative path from workspace root
+    expect(result.tasks[0].sourceFile).toBe('azure-pipelines.yml')
   })
 
   it('Resolves local templates', async () => {
@@ -63,6 +65,8 @@ steps:
 
     expect(result.tasks.length).toBe(1)
     expect(result.tasks[0].taskIdentifier).toBe('NodeTool')
+    // Verify sourceFile contains the relative path including subdirectory
+    expect(result.tasks[0].sourceFile).toBe('templates/steps.yml')
   })
 
   it('Resolves extends templates', async () => {
