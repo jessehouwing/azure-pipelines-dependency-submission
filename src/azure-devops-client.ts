@@ -46,6 +46,12 @@ export interface ExtensionMetadata {
   repositoryUrl?: string
 }
 
+const MARKETPLACE_REPOSITORY_LINK_KEYS = [
+  'Microsoft.VisualStudio.Services.Links.Source',
+  'Microsoft.VisualStudio.Services.Links.Repository',
+  'Microsoft.VisualStudio.Services.Links.GitHub'
+]
+
 export class AzureDevOpsClient {
   private readonly connection: azdev.WebApi
   private readonly marketplaceConnection: azdev.WebApi
@@ -304,13 +310,20 @@ export class AzureDevOpsClient {
         // Get the latest version's properties
         const latestVersion = extension.versions[0]
         if (latestVersion.properties) {
-          // Look for the source/repository link
-          const sourceLink = latestVersion.properties.find(
-            (p: { key?: string; value?: string }) =>
-              p.key === 'Microsoft.VisualStudio.Services.Links.Source'
-          )
-          if (sourceLink?.value) {
-            metadata.repositoryUrl = sourceLink.value
+          let repositoryUrl: string | undefined
+
+          for (const key of MARKETPLACE_REPOSITORY_LINK_KEYS) {
+            const link = latestVersion.properties.find(
+              (p: { key?: string; value?: string }) => p.key === key
+            )
+            if (link?.value) {
+              repositoryUrl = link.value
+              break
+            }
+          }
+
+          if (repositoryUrl) {
+            metadata.repositoryUrl = repositoryUrl
             core.debug(
               `Found repository URL for ${cacheKey}: ${metadata.repositoryUrl}`
             )
