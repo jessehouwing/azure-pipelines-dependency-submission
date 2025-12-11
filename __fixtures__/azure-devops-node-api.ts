@@ -7,11 +7,20 @@ export const mockTaskAgentApi = {
   getTaskDefinitions
 }
 
+// Mock gallery API
+export const getExtension = jest.fn()
+
+export const mockGalleryApi = {
+  getExtension
+}
+
 // Mock WebApi
 export const getTaskAgentApi = jest.fn(() => Promise.resolve(mockTaskAgentApi))
+export const getGalleryApi = jest.fn(() => Promise.resolve(mockGalleryApi))
 
 export const mockWebApi = {
-  getTaskAgentApi
+  getTaskAgentApi,
+  getGalleryApi
 }
 
 // Mock the azure-devops-node-api module

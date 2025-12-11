@@ -3,6 +3,7 @@
  */
 import { jest } from '@jest/globals'
 import * as azdev from '../__fixtures__/azure-devops-node-api.js'
+import { ExtensionQueryFlags } from 'azure-devops-node-api/interfaces/GalleryInterfaces'
 
 // Mock the azure-devops-node-api module
 jest.unstable_mockModule('azure-devops-node-api', () => azdev)
@@ -198,5 +199,34 @@ describe('AzureDevOpsClient', () => {
     // Default lookup (without @major) should return the highest overall version
     const taskDefault = taskMap.get('powershell')
     expect(taskDefault?.version).toBe('2.3.5')
+  })
+
+  it('Fetches repository metadata for marketplace extensions', async () => {
+    const repositoryUrl = 'https://github.com/contoso/task'
+
+    azdev.mockGalleryApi.getExtension.mockResolvedValue({
+      versions: [
+        {
+          properties: [
+            {
+              key: 'Microsoft.VisualStudio.Services.Links.Source',
+              value: repositoryUrl
+            }
+          ]
+        }
+      ]
+    })
+
+    const metadata = await client.getExtensionMetadata('contoso', 'extension')
+
+    expect(azdev.mockGalleryApi.getExtension).toHaveBeenCalledWith(
+      null,
+      'contoso',
+      'extension',
+      undefined,
+      ExtensionQueryFlags.IncludeVersions |
+        ExtensionQueryFlags.IncludeVersionProperties
+    )
+    expect(metadata.repositoryUrl).toBe(repositoryUrl)
   })
 })

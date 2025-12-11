@@ -296,7 +296,8 @@ export class AzureDevOpsClient {
         publisherId,
         extensionId,
         undefined, // version (latest)
-        ExtensionQueryFlags.IncludeVersionProperties
+        ExtensionQueryFlags.IncludeVersions |
+          ExtensionQueryFlags.IncludeVersionProperties
       )
 
       if (extension?.versions && extension.versions.length > 0) {
@@ -305,7 +306,8 @@ export class AzureDevOpsClient {
         if (latestVersion.properties) {
           // Look for the source/repository link
           const sourceLink = latestVersion.properties.find(
-            (p) => p.key === 'Microsoft.VisualStudio.Services.Links.Source'
+            (p: { key?: string; value?: string }) =>
+              p.key === 'Microsoft.VisualStudio.Services.Links.Source'
           )
           if (sourceLink?.value) {
             metadata.repositoryUrl = sourceLink.value
