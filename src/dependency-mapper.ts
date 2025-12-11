@@ -50,6 +50,30 @@ export class DependencyMapper {
   }
 
   /**
+   * Determine which marketplace extensions are referenced by the provided tasks
+   */
+  getMarketplaceExtensionKeys(tasks: ParsedTask[]): Set<string> {
+    const extensionKeys = new Set<string>()
+
+    for (const task of tasks) {
+      const installedTask = this.resolveTask(task.taskIdentifier)
+      if (!installedTask || installedTask.isBuiltIn) {
+        continue
+      }
+
+      const extensionKey = this.extractMarketplaceExtensionKey(
+        installedTask.fullIdentifier
+      )
+
+      if (extensionKey) {
+        extensionKeys.add(extensionKey)
+      }
+    }
+
+    return extensionKeys
+  }
+
+  /**
    * Create a dependency snapshot from parsed tasks
    *
    * Tasks are deduplicated based on:
@@ -360,17 +384,10 @@ export class DependencyMapper {
       return { vcs_url: 'https://github.com/microsoft/azure-pipelines-tasks/' }
     }
 
-    // Full contribution IDs have format: publisher.extension.contribution
-    // We need at least 3 parts to extract publisher and extension
-    const parts = fullIdentifier.split('.')
-    if (parts.length < 3) {
+    const extensionKey = this.extractMarketplaceExtensionKey(fullIdentifier)
+    if (!extensionKey) {
       return null
     }
-
-    // Extract publisher and extension (everything except the last part which is the contribution)
-    const publisher = parts[0]
-    const extension = parts.slice(1, -1).join('.')
-    const extensionKey = `${publisher}.${extension}`
 
     const metadata: { download_url?: string; vcs_url?: string } = {
       download_url: `https://marketplace.visualstudio.com/items?itemName=${extensionKey}`
@@ -383,5 +400,30 @@ export class DependencyMapper {
     }
 
     return metadata
+  }
+
+  /**
+   * Extract the publisher.extension key from a full task identifier
+   */
+  private extractMarketplaceExtensionKey(
+    fullIdentifier: string
+  ): string | null {
+    if (fullIdentifier.startsWith('Microsoft.BuiltIn.')) {
+      return null
+    }
+
+    const parts = fullIdentifier.split('.')
+    if (parts.length < 3) {
+      return null
+    }
+
+    const publisher = parts[0]
+    const extension = parts.slice(1, -1).join('.')
+
+    if (!publisher || !extension) {
+      return null
+    }
+
+    return `${publisher}.${extension}`
   }
 }

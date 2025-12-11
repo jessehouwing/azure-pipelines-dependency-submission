@@ -327,41 +327,35 @@ export class AzureDevOpsClient {
   }
 
   /**
-   * Fetch extension metadata for all unique marketplace extensions
+   * Fetch extension metadata for the provided marketplace extensions
    *
-   * This method collects all unique publisher.extension pairs from the task map
-   * and fetches their metadata from the marketplace in parallel.
-   *
-   * @param taskMap The map of installed tasks
-   * @returns A map of "publisher.extension" to ExtensionMetadata
+   * @param extensionKeys Iterable set of "publisher.extension" identifiers
    */
-  async fetchAllExtensionMetadata(
-    taskMap: Map<string, InstalledTask>
+  async fetchExtensionMetadata(
+    extensionKeys: Iterable<string>
   ): Promise<Map<string, ExtensionMetadata>> {
-    const extensions = new Set<string>()
+    const extensions = new Set(extensionKeys)
 
-    // Collect unique publisher.extension pairs from marketplace tasks
-    for (const task of taskMap.values()) {
-      if (!task.isBuiltIn && task.fullIdentifier.includes('.')) {
-        const parts = task.fullIdentifier.split('.')
-        if (parts.length >= 3) {
-          // Format: publisher.extension.contribution
-          const publisher = parts[0]
-          const extension = parts.slice(1, -1).join('.')
-          extensions.add(`${publisher}.${extension}`)
-        }
-      }
+    if (extensions.size === 0) {
+      core.debug(
+        'No marketplace extensions referenced; skipping metadata fetch'
+      )
+      return this.extensionMetadataCache
     }
 
     core.debug(
-      `Fetching metadata for ${extensions.size} unique marketplace extensions`
+      `Fetching metadata for ${extensions.size} referenced marketplace extensions`
     )
 
-    // Fetch all extension metadata in parallel
     const fetchPromises: Promise<void>[] = []
     for (const extKey of extensions) {
       const [publisher, ...extensionParts] = extKey.split('.')
       const extension = extensionParts.join('.')
+
+      if (!publisher || !extension) {
+        continue
+      }
+
       fetchPromises.push(
         this.getExtensionMetadata(publisher, extension).then(() => {})
       )
