@@ -37,22 +37,30 @@ export class DependencySubmitter {
     )
 
     try {
+      const requestPayload = {
+        owner: this.owner,
+        repo: this.repo,
+        version: snapshot.version,
+        job: {
+          correlator: `${snapshot.detector.name}-${sha}`,
+          id: sha
+        },
+        sha,
+        ref,
+        detector: snapshot.detector,
+        scanned: snapshot.scanned,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        manifests: snapshot.manifests as any
+      }
+
+      core.debug(
+        `Dependency snapshot payload: ${JSON.stringify(requestPayload, null, 2)}`
+      )
+
       const response =
-        await this.octokit.rest.dependencyGraph.createRepositorySnapshot({
-          owner: this.owner,
-          repo: this.repo,
-          version: snapshot.version,
-          job: {
-            correlator: `${snapshot.detector.name}-${sha}`,
-            id: sha
-          },
-          sha,
-          ref,
-          detector: snapshot.detector,
-          scanned: snapshot.scanned,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          manifests: snapshot.manifests as any
-        })
+        await this.octokit.rest.dependencyGraph.createRepositorySnapshot(
+          requestPayload
+        )
 
       if (response.status === 201) {
         core.info('✓ Dependency snapshot submitted successfully')
