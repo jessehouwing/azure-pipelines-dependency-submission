@@ -3,7 +3,10 @@
  */
 import { DependencyMapper } from '../src/dependency-mapper.js'
 import type { ParsedTask } from '../src/pipeline-parser.js'
-import type { InstalledTask } from '../src/azure-devops-client.js'
+import type {
+  InstalledTask,
+  ExtensionMetadata
+} from '../src/azure-devops-client.js'
 
 describe('DependencyMapper', () => {
   let taskMap: Map<string, InstalledTask>
@@ -584,6 +587,162 @@ describe('DependencyMapper', () => {
     // Should extract publisher and full extension path (excluding the last part which is the contribution)
     expect(dependency.metadata?.download_url).toBe(
       'https://marketplace.visualstudio.com/items?itemName=publisher.extension.name.with.dots'
+    )
+  })
+
+  it('Adds vcs_url metadata for marketplace extensions with repository URL', () => {
+    // Add a marketplace extension task
+    taskMap.set('repoextensiontask', {
+      id: 'repo-ext-guid',
+      name: 'RepoExtensionTask',
+      version: '1.0.0',
+      major: 1,
+      fullIdentifier: 'myPublisher.my-extension.RepoTask',
+      isBuiltIn: false,
+      author: 'Extension Author'
+    })
+
+    // Create extension metadata with a repository URL
+    const extensionMetadata = new Map([
+      [
+        'myPublisher.my-extension',
+        {
+          publisherId: 'myPublisher',
+          extensionId: 'my-extension',
+          repositoryUrl: 'https://github.com/myPublisher/my-extension'
+        }
+      ]
+    ])
+
+    const mapper = new DependencyMapper(taskMap, extensionMetadata)
+    const tasks: ParsedTask[] = [
+      { taskIdentifier: 'RepoExtensionTask', taskVersion: '1.0.0' }
+    ]
+
+    const snapshot = mapper.createSnapshot(
+      tasks,
+      'azure-pipelines.yml',
+      'test-job',
+      'abc123'
+    )
+
+    const manifestKey = 'azure-pipelines.yml:test-job'
+    const resolved = snapshot.manifests[manifestKey].resolved
+    const dependency = Object.values(resolved)[0]
+
+    // Should have both download_url and vcs_url
+    expect(dependency.metadata?.download_url).toBe(
+      'https://marketplace.visualstudio.com/items?itemName=myPublisher.my-extension'
+    )
+    expect(dependency.metadata?.vcs_url).toBe(
+      'https://github.com/myPublisher/my-extension'
+    )
+  })
+
+  it('Does not add vcs_url for marketplace extensions without repository URL', () => {
+    // Add a marketplace extension task
+    taskMap.set('norepoextensiontask', {
+      id: 'no-repo-ext-guid',
+      name: 'NoRepoExtensionTask',
+      version: '1.0.0',
+      major: 1,
+      fullIdentifier: 'anotherPublisher.another-extension.NoRepoTask',
+      isBuiltIn: false,
+      author: 'Extension Author'
+    })
+
+    // Create extension metadata without a repository URL
+    const extensionMetadata = new Map([
+      [
+        'anotherPublisher.another-extension',
+        {
+          publisherId: 'anotherPublisher',
+          extensionId: 'another-extension',
+          repositoryUrl: undefined
+        }
+      ]
+    ])
+
+    const mapper = new DependencyMapper(taskMap, extensionMetadata)
+    const tasks: ParsedTask[] = [
+      { taskIdentifier: 'NoRepoExtensionTask', taskVersion: '1.0.0' }
+    ]
+
+    const snapshot = mapper.createSnapshot(
+      tasks,
+      'azure-pipelines.yml',
+      'test-job',
+      'abc123'
+    )
+
+    const manifestKey = 'azure-pipelines.yml:test-job'
+    const resolved = snapshot.manifests[manifestKey].resolved
+    const dependency = Object.values(resolved)[0]
+
+    // Should have download_url but not vcs_url
+    expect(dependency.metadata?.download_url).toBe(
+      'https://marketplace.visualstudio.com/items?itemName=anotherPublisher.another-extension'
+    )
+    expect(dependency.metadata?.vcs_url).toBeUndefined()
+  })
+
+  it('Adds vcs_url from marketplace metadata to indirect dependencies', () => {
+    // Add a marketplace extension task with major version lookup
+    taskMap.set('transitivetask', {
+      id: 'transitive-guid',
+      name: 'TransitiveTask',
+      version: '3.2.0',
+      major: 3,
+      fullIdentifier: 'transitivePublisher.transitive-ext.TransTask',
+      isBuiltIn: false,
+      author: 'Some Author'
+    })
+    taskMap.set('transitivetask@3', {
+      id: 'transitive-guid',
+      name: 'TransitiveTask',
+      version: '3.2.0',
+      major: 3,
+      fullIdentifier: 'transitivePublisher.transitive-ext.TransTask',
+      isBuiltIn: false,
+      author: 'Some Author'
+    })
+
+    // Create extension metadata with a repository URL
+    const extensionMetadata = new Map([
+      [
+        'transitivePublisher.transitive-ext',
+        {
+          publisherId: 'transitivePublisher',
+          extensionId: 'transitive-ext',
+          repositoryUrl: 'https://github.com/transitivePublisher/transitive-ext'
+        }
+      ]
+    ])
+
+    const mapper = new DependencyMapper(taskMap, extensionMetadata)
+    const tasks: ParsedTask[] = [
+      { taskIdentifier: 'TransitiveTask', taskVersion: '3' } // Wildcard version
+    ]
+
+    const snapshot = mapper.createSnapshot(
+      tasks,
+      'azure-pipelines.yml',
+      'test-job',
+      'abc123'
+    )
+
+    const manifestKey = 'azure-pipelines.yml:test-job'
+    const resolved = snapshot.manifests[manifestKey].resolved
+    const indirectDep = Object.values(resolved).find(
+      (d) => d.relationship === 'indirect'
+    )
+
+    // Indirect dependency should also have vcs_url from marketplace metadata
+    expect(indirectDep?.metadata?.download_url).toBe(
+      'https://marketplace.visualstudio.com/items?itemName=transitivePublisher.transitive-ext'
+    )
+    expect(indirectDep?.metadata?.vcs_url).toBe(
+      'https://github.com/transitivePublisher/transitive-ext'
     )
   })
 })

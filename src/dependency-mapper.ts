@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import { ParsedTask } from './pipeline-parser.js'
-import { InstalledTask } from './azure-devops-client.js'
+import { InstalledTask, ExtensionMetadata } from './azure-devops-client.js'
 
 export interface Dependency {
   package_url: string
@@ -39,9 +39,14 @@ export interface DependencySnapshot {
  */
 export class DependencyMapper {
   private readonly taskMap: Map<string, InstalledTask>
+  private readonly extensionMetadataMap: Map<string, ExtensionMetadata>
 
-  constructor(taskMap: Map<string, InstalledTask>) {
+  constructor(
+    taskMap: Map<string, InstalledTask>,
+    extensionMetadataMap?: Map<string, ExtensionMetadata>
+  ) {
     this.taskMap = taskMap
+    this.extensionMetadataMap = extensionMetadataMap || new Map()
   }
 
   /**
@@ -339,12 +344,13 @@ export class DependencyMapper {
    *
    * For marketplace extension tasks (publisher.extension.contribution),
    * returns download_url: https://marketplace.visualstudio.com/items?itemName=publisher.extension
+   * and optionally vcs_url if the extension has a repository URL in the marketplace
    *
    * For built-in Microsoft tasks (Microsoft.BuiltIn.*),
    * returns vcs_url: https://github.com/microsoft/azure-pipelines-tasks/
    *
    * @param fullIdentifier The full task identifier
-   * @returns Metadata object with download_url or vcs_url, or null if neither applies
+   * @returns Metadata object with download_url and/or vcs_url, or null if neither applies
    */
   private buildMetadata(
     fullIdentifier: string
@@ -364,9 +370,18 @@ export class DependencyMapper {
     // Extract publisher and extension (everything except the last part which is the contribution)
     const publisher = parts[0]
     const extension = parts.slice(1, -1).join('.')
+    const extensionKey = `${publisher}.${extension}`
 
-    return {
-      download_url: `https://marketplace.visualstudio.com/items?itemName=${publisher}.${extension}`
+    const metadata: { download_url?: string; vcs_url?: string } = {
+      download_url: `https://marketplace.visualstudio.com/items?itemName=${extensionKey}`
     }
+
+    // Check if we have marketplace metadata with a repository URL
+    const extensionMetadata = this.extensionMetadataMap.get(extensionKey)
+    if (extensionMetadata?.repositoryUrl) {
+      metadata.vcs_url = extensionMetadata.repositoryUrl
+    }
+
+    return metadata
   }
 }

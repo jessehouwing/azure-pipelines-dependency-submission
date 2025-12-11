@@ -206,7 +206,16 @@ export async function run(): Promise<void> {
 
     // Step 4: Map tasks to dependencies
     core.startGroup('🗺️  Mapping tasks to dependencies')
-    const dependencyMapper = new DependencyMapper(taskMap)
+
+    // Fetch extension metadata from the marketplace for vcs_url enrichment
+    core.info('Fetching extension metadata from Azure DevOps Marketplace...')
+    const extensionMetadata =
+      await azureDevOpsClient.fetchAllExtensionMetadata(taskMap)
+    core.info(
+      `Retrieved metadata for ${extensionMetadata.size} marketplace extensions`
+    )
+
+    const dependencyMapper = new DependencyMapper(taskMap, extensionMetadata)
 
     // Create a single snapshot with all dependencies
     const snapshot = dependencyMapper.createSnapshot(

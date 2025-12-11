@@ -75,7 +75,7 @@ jobs:
 | `github-token`         | No       | `''`                       | GitHub token with `contents:read` permission for accessing private repositories when resolving templates. Falls back to `token` if not provided                        |
 | `repository`           | No       | `${{ github.repository }}` | Repository to submit dependencies for (owner/repo format)                                                                                                              |
 | `azure-devops-url`     | Yes      | -                          | Azure DevOps organization URL (e.g., `https://dev.azure.com/myorg`)                                                                                                    |
-| `azure-devops-token`   | Yes      | -                          | Azure DevOps Personal Access Token with **Agent Pools: Read** and **Build: Read** permissions                                                                          |
+| `azure-devops-token`   | Yes      | -                          | Azure DevOps Personal Access Token with **Agent Pools: Read**, **Build: Read**, and **Marketplace: Read** permissions                                                  |
 | `pipeline-paths`       | No       | `''`                       | Comma-separated or newline-separated list of glob patterns for pipeline files. Defaults to `azure-pipelines.yml`, `azure-pipelines.yaml`, and `.azure-pipelines/*.yml` |
 | `resolve-templates`    | No       | `true`                     | Whether to resolve and include dependencies from pipeline templates                                                                                                    |
 | `parse-templates-by`   | No       | `action`                   | How to parse templates: `action` (local parsing) or `server` (Azure DevOps API). Server mode is slower but more accurate                                               |
@@ -94,9 +94,8 @@ DevOps with the following permissions:
 
 1. Go to Azure DevOps → User Settings → Personal Access Tokens
 2. Click "New Token"
-3. Select the following scopes:
-   - **Agent Pools**: Read
-   - **Build**: Read
+3. Select the following scopes: **Agent Pools** (Read), **Build** (Read), and
+   **Marketplace** (Read; required to query Azure DevOps Marketplace metadata)
 4. Copy the token and add it as a repository secret in GitHub
 
 ## Permissions

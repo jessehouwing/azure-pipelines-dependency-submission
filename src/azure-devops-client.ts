@@ -1,6 +1,8 @@
 import * as core from '@actions/core'
 import * as azdev from 'azure-devops-node-api'
 import type { ITaskAgentApi } from 'azure-devops-node-api/TaskAgentApi'
+import type { IGalleryApi } from 'azure-devops-node-api/GalleryApi'
+import { ExtensionQueryFlags } from 'azure-devops-node-api/interfaces/GalleryInterfaces'
 
 export interface TaskVersion {
   major: number
@@ -32,16 +34,34 @@ export interface InstalledTask {
   fullIdentifier: string
   isBuiltIn: boolean
   author?: string
+  repositoryUrl?: string
+}
+
+/**
+ * Cached extension metadata from the Azure DevOps Marketplace
+ */
+export interface ExtensionMetadata {
+  publisherId: string
+  extensionId: string
+  repositoryUrl?: string
 }
 
 export class AzureDevOpsClient {
   private readonly connection: azdev.WebApi
+  private readonly marketplaceConnection: azdev.WebApi
   private readonly baseUrl: string
+  private readonly extensionMetadataCache: Map<string, ExtensionMetadata> =
+    new Map()
 
   constructor(organizationUrl: string, token: string) {
     this.baseUrl = organizationUrl.replace(/\/$/, '')
     const authHandler = azdev.getPersonalAccessTokenHandler(token)
     this.connection = new azdev.WebApi(this.baseUrl, authHandler)
+    // The marketplace API is at a fixed public URL
+    this.marketplaceConnection = new azdev.WebApi(
+      'https://marketplace.visualstudio.com',
+      authHandler
+    )
   }
 
   /**
@@ -233,5 +253,121 @@ export class AzureDevOpsClient {
       `Task ${task.name || task.id} could not be fully resolved, using: ${identifier}`
     )
     return identifier
+  }
+
+  /**
+   * Fetch extension metadata from the Azure DevOps Marketplace
+   *
+   * The repository URL is stored in the extension version's properties array
+   * with the key "Microsoft.VisualStudio.Services.Links.Source"
+   *
+   * @param publisherId The publisher ID (e.g., "jessehouwing")
+   * @param extensionId The extension ID (e.g., "nuget-deprecated")
+   * @returns ExtensionMetadata with repositoryUrl if available
+   */
+  async getExtensionMetadata(
+    publisherId: string,
+    extensionId: string
+  ): Promise<ExtensionMetadata> {
+    const cacheKey = `${publisherId}.${extensionId}`
+
+    // Check cache first
+    const cached = this.extensionMetadataCache.get(cacheKey)
+    if (cached) {
+      return cached
+    }
+
+    const metadata: ExtensionMetadata = {
+      publisherId,
+      extensionId
+    }
+
+    try {
+      core.debug(
+        `Fetching marketplace metadata for extension: ${publisherId}.${extensionId}`
+      )
+
+      const galleryApi: IGalleryApi =
+        await this.marketplaceConnection.getGalleryApi()
+
+      // Fetch extension with version properties to get the repository URL
+      const extension = await galleryApi.getExtension(
+        null, // customHeaders
+        publisherId,
+        extensionId,
+        undefined, // version (latest)
+        ExtensionQueryFlags.IncludeVersionProperties
+      )
+
+      if (extension?.versions && extension.versions.length > 0) {
+        // Get the latest version's properties
+        const latestVersion = extension.versions[0]
+        if (latestVersion.properties) {
+          // Look for the source/repository link
+          const sourceLink = latestVersion.properties.find(
+            (p) => p.key === 'Microsoft.VisualStudio.Services.Links.Source'
+          )
+          if (sourceLink?.value) {
+            metadata.repositoryUrl = sourceLink.value
+            core.debug(
+              `Found repository URL for ${cacheKey}: ${metadata.repositoryUrl}`
+            )
+          }
+        }
+      }
+    } catch (error) {
+      // Log but don't fail - the repository URL is optional metadata
+      core.debug(
+        `Could not fetch marketplace metadata for ${cacheKey}: ${error instanceof Error ? error.message : String(error)}`
+      )
+    }
+
+    this.extensionMetadataCache.set(cacheKey, metadata)
+    return metadata
+  }
+
+  /**
+   * Fetch extension metadata for all unique marketplace extensions
+   *
+   * This method collects all unique publisher.extension pairs from the task map
+   * and fetches their metadata from the marketplace in parallel.
+   *
+   * @param taskMap The map of installed tasks
+   * @returns A map of "publisher.extension" to ExtensionMetadata
+   */
+  async fetchAllExtensionMetadata(
+    taskMap: Map<string, InstalledTask>
+  ): Promise<Map<string, ExtensionMetadata>> {
+    const extensions = new Set<string>()
+
+    // Collect unique publisher.extension pairs from marketplace tasks
+    for (const task of taskMap.values()) {
+      if (!task.isBuiltIn && task.fullIdentifier.includes('.')) {
+        const parts = task.fullIdentifier.split('.')
+        if (parts.length >= 3) {
+          // Format: publisher.extension.contribution
+          const publisher = parts[0]
+          const extension = parts.slice(1, -1).join('.')
+          extensions.add(`${publisher}.${extension}`)
+        }
+      }
+    }
+
+    core.debug(
+      `Fetching metadata for ${extensions.size} unique marketplace extensions`
+    )
+
+    // Fetch all extension metadata in parallel
+    const fetchPromises: Promise<void>[] = []
+    for (const extKey of extensions) {
+      const [publisher, ...extensionParts] = extKey.split('.')
+      const extension = extensionParts.join('.')
+      fetchPromises.push(
+        this.getExtensionMetadata(publisher, extension).then(() => {})
+      )
+    }
+
+    await Promise.all(fetchPromises)
+    return this.extensionMetadataCache
   }
 }
