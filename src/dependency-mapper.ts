@@ -183,10 +183,15 @@ export class DependencyMapper {
     // Check if the version contains wildcards
     const hasWildcard = normalizedVersion.includes('*')
 
-    // Create package URL in purl format
-    // Using 'generic' type as Azure DevOps tasks are not a standard purl type
-    // Format: pkg:generic/azure-pipelines/{fullIdentifier}@{version}
-    const packageUrl = `pkg:generic/azure-pipelines/${encodeURIComponent(installedTask.fullIdentifier)}@${normalizedVersion}`
+    // Build metadata for marketplace/built-in tasks and embed in the package URL
+    const metadata = this.buildMetadata(installedTask.fullIdentifier)
+
+    // Create package URL in purl format and append metadata query parameters when available
+    const packageUrl = this.buildPackageUrl(
+      installedTask.fullIdentifier,
+      normalizedVersion,
+      metadata
+    )
 
     core.debug(`Mapped task ${task.taskIdentifier} to ${packageUrl}`)
 
@@ -203,7 +208,17 @@ export class DependencyMapper {
       )
       const actualVersion =
         versionSpecificTask?.version || installedTask.version
-      const actualPackageUrl = `pkg:generic/azure-pipelines/${encodeURIComponent(installedTask.fullIdentifier)}@${actualVersion}`
+      const actualFullIdentifier =
+        versionSpecificTask?.fullIdentifier || installedTask.fullIdentifier
+      const actualMetadata =
+        actualFullIdentifier === installedTask.fullIdentifier
+          ? metadata
+          : this.buildMetadata(actualFullIdentifier)
+      const actualPackageUrl = this.buildPackageUrl(
+        actualFullIdentifier,
+        actualVersion,
+        actualMetadata
+      )
 
       // Add the actual version as an indirect dependency if not already present
       if (!resolved[actualPackageUrl]) {
@@ -213,9 +228,8 @@ export class DependencyMapper {
           scope: 'runtime'
         }
         // Add metadata for marketplace tasks (download_url) or built-in tasks (vcs_url)
-        const metadata = this.buildMetadata(installedTask.fullIdentifier)
-        if (metadata) {
-          indirectDep.metadata = metadata
+        if (actualMetadata) {
+          indirectDep.metadata = actualMetadata
         }
         resolved[actualPackageUrl] = indirectDep
         core.debug(
@@ -232,8 +246,6 @@ export class DependencyMapper {
       ...(dependencies.length > 0 && { dependencies })
     }
 
-    // Add metadata for marketplace tasks (download_url) or built-in tasks (vcs_url)
-    const metadata = this.buildMetadata(installedTask.fullIdentifier)
     if (metadata) {
       dependency.metadata = metadata
     }
@@ -425,5 +437,38 @@ export class DependencyMapper {
     }
 
     return `${publisher}.${extension}`
+  }
+
+  /**
+   * Build a package URL and append metadata query parameters when available
+   */
+  private buildPackageUrl(
+    fullIdentifier: string,
+    version: string,
+    metadata?: { download_url?: string; vcs_url?: string } | null
+  ): string {
+    const base = `pkg:generic/azure-pipelines/${encodeURIComponent(fullIdentifier)}@${version}`
+
+    if (!metadata) {
+      return base
+    }
+
+    const queryParts: string[] = []
+
+    if (metadata.download_url) {
+      queryParts.push(
+        `download_url=${encodeURIComponent(metadata.download_url)}`
+      )
+    }
+
+    if (metadata.vcs_url) {
+      queryParts.push(`vcs_url=${encodeURIComponent(metadata.vcs_url)}`)
+    }
+
+    if (queryParts.length === 0) {
+      return base
+    }
+
+    return `${base}?${queryParts.join('&')}`
   }
 }

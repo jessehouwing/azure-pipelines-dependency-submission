@@ -136,8 +136,9 @@ describe('DependencyMapper', () => {
     expect(packageUrls).toHaveLength(2)
 
     const directUrl = packageUrls.find((url) => url.includes('@0.*.*'))
+    expect(directUrl).toBeDefined()
     expect(directUrl).toMatch(
-      /pkg:generic\/azure-pipelines\/Microsoft\.BuiltIn\.NodeTool@0\.\*\.\*$/
+      /pkg:generic\/azure-pipelines\/Microsoft\.BuiltIn\.NodeTool@0\.\*\.\*\?vcs_url=.+/
     )
 
     const dependency = resolved[directUrl!]
@@ -368,6 +369,60 @@ describe('DependencyMapper', () => {
     expect(packageUrls).toHaveLength(1)
     expect(packageUrls[0]).toContain('@5.1.2')
     expect(resolved[packageUrls[0]].dependencies).toBeUndefined()
+  })
+
+  it('Appends metadata query parameters to package URLs for marketplace tasks', () => {
+    const marketplaceTask: InstalledTask = {
+      id: 'task-guid-3',
+      name: 'ContosoTask',
+      version: '1.2.3',
+      major: 1,
+      fullIdentifier: 'contoso.extension.ContosoTask',
+      isBuiltIn: false,
+      author: 'Contoso'
+    }
+
+    taskMap.set('contosotask', marketplaceTask)
+    taskMap.set('contosotask@1', marketplaceTask)
+
+    const extensionMetadata = new Map<string, ExtensionMetadata>([
+      [
+        'contoso.extension',
+        {
+          publisherId: 'contoso',
+          extensionId: 'extension',
+          repositoryUrl: 'https://github.com/contoso/task'
+        }
+      ]
+    ])
+
+    const mapperWithExtension = new DependencyMapper(taskMap, extensionMetadata)
+
+    const tasks: ParsedTask[] = [
+      { taskIdentifier: 'contosotask', taskVersion: '1' }
+    ]
+
+    const snapshot = mapperWithExtension.createSnapshot(
+      tasks,
+      'azure-pipelines.yml',
+      'test-job',
+      'abc123'
+    )
+
+    const manifestKey = 'azure-pipelines.yml:test-job'
+    const resolved = snapshot.manifests[manifestKey].resolved
+    const packageUrls = Object.keys(resolved)
+    const extensionUrl = packageUrls.find((url) =>
+      url.includes('contoso.extension.ContosoTask@1.*.*')
+    )
+
+    expect(extensionUrl).toBeDefined()
+    expect(extensionUrl).toContain(
+      'download_url=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Dcontoso.extension'
+    )
+    expect(extensionUrl).toContain(
+      'vcs_url=https%3A%2F%2Fgithub.com%2Fcontoso%2Ftask'
+    )
   })
 
   it('Deduplicates tasks by source file, identifier, and version', () => {
