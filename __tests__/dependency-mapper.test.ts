@@ -435,4 +435,155 @@ describe('DependencyMapper', () => {
       snapshot.manifests['pipeline-b.yml:test-job'].file.source_location
     ).toBe('pipeline-b.yml')
   })
+
+  it('Adds download_url metadata for marketplace extension tasks', () => {
+    // Add a marketplace extension task
+    taskMap.set('extensiontask', {
+      id: 'ext-task-guid',
+      name: 'ExtensionTask',
+      version: '1.0.0',
+      major: 1,
+      fullIdentifier: 'jessehouwing.jessehouwing-vsts-tfvc-tasks.TfvcTask',
+      isBuiltIn: false,
+      author: 'Jesse Houwing'
+    })
+
+    const mapper = new DependencyMapper(taskMap)
+    const tasks: ParsedTask[] = [
+      { taskIdentifier: 'ExtensionTask', taskVersion: '1.0.0' }
+    ]
+
+    const snapshot = mapper.createSnapshot(
+      tasks,
+      'azure-pipelines.yml',
+      'test-job',
+      'abc123'
+    )
+
+    const manifestKey = 'azure-pipelines.yml:test-job'
+    const resolved = snapshot.manifests[manifestKey].resolved
+    const packageUrls = Object.keys(resolved)
+
+    expect(packageUrls).toHaveLength(1)
+    const dependency = resolved[packageUrls[0]]
+    expect(dependency.metadata).toBeDefined()
+    expect(dependency.metadata?.download_url).toBe(
+      'https://marketplace.visualstudio.com/items?itemName=jessehouwing.jessehouwing-vsts-tfvc-tasks'
+    )
+  })
+
+  it('Adds vcs_url metadata for built-in Microsoft tasks', () => {
+    const tasks: ParsedTask[] = [
+      { taskIdentifier: 'NodeTool', taskVersion: '0.220.0' }
+    ]
+
+    const snapshot = mapper.createSnapshot(
+      tasks,
+      'azure-pipelines.yml',
+      'test-job',
+      'abc123'
+    )
+
+    const manifestKey = 'azure-pipelines.yml:test-job'
+    const resolved = snapshot.manifests[manifestKey].resolved
+    const packageUrls = Object.keys(resolved)
+
+    expect(packageUrls).toHaveLength(1)
+    const dependency = resolved[packageUrls[0]]
+    expect(dependency.metadata).toBeDefined()
+    expect(dependency.metadata?.vcs_url).toBe(
+      'https://github.com/microsoft/azure-pipelines-tasks/'
+    )
+    expect(dependency.metadata?.download_url).toBeUndefined()
+  })
+
+  it('Adds download_url metadata for wildcard version and its resolved transitive dependency', () => {
+    // Add a marketplace extension task with major version lookup
+    taskMap.set('extensiontask', {
+      id: 'ext-task-guid',
+      name: 'ExtensionTask',
+      version: '2.5.0',
+      major: 2,
+      fullIdentifier: 'publisher.my-extension.SomeTask',
+      isBuiltIn: false,
+      author: 'Some Author'
+    })
+    taskMap.set('extensiontask@2', {
+      id: 'ext-task-guid',
+      name: 'ExtensionTask',
+      version: '2.5.0',
+      major: 2,
+      fullIdentifier: 'publisher.my-extension.SomeTask',
+      isBuiltIn: false,
+      author: 'Some Author'
+    })
+
+    const mapper = new DependencyMapper(taskMap)
+    const tasks: ParsedTask[] = [
+      { taskIdentifier: 'ExtensionTask', taskVersion: '2' }
+    ]
+
+    const snapshot = mapper.createSnapshot(
+      tasks,
+      'azure-pipelines.yml',
+      'test-job',
+      'abc123'
+    )
+
+    const manifestKey = 'azure-pipelines.yml:test-job'
+    const resolved = snapshot.manifests[manifestKey].resolved
+    const packageUrls = Object.keys(resolved)
+
+    // Should have 2 dependencies: wildcard direct + actual version transitive
+    expect(packageUrls).toHaveLength(2)
+
+    const directDep = Object.values(resolved).find(
+      (d) => d.relationship === 'direct'
+    )
+    const indirectDep = Object.values(resolved).find(
+      (d) => d.relationship === 'indirect'
+    )
+
+    // Both should have the download_url metadata
+    expect(directDep?.metadata?.download_url).toBe(
+      'https://marketplace.visualstudio.com/items?itemName=publisher.my-extension'
+    )
+    expect(indirectDep?.metadata?.download_url).toBe(
+      'https://marketplace.visualstudio.com/items?itemName=publisher.my-extension'
+    )
+  })
+
+  it('Handles extension identifiers with multiple dots in extension name', () => {
+    // Extension name can have multiple dots: publisher.part1.part2.contribution
+    taskMap.set('multidottask', {
+      id: 'multi-dot-guid',
+      name: 'MultiDotTask',
+      version: '1.0.0',
+      major: 1,
+      fullIdentifier: 'publisher.extension.name.with.dots.TaskName',
+      isBuiltIn: false,
+      author: 'Some Author'
+    })
+
+    const mapper = new DependencyMapper(taskMap)
+    const tasks: ParsedTask[] = [
+      { taskIdentifier: 'MultiDotTask', taskVersion: '1.0.0' }
+    ]
+
+    const snapshot = mapper.createSnapshot(
+      tasks,
+      'azure-pipelines.yml',
+      'test-job',
+      'abc123'
+    )
+
+    const manifestKey = 'azure-pipelines.yml:test-job'
+    const resolved = snapshot.manifests[manifestKey].resolved
+    const dependency = Object.values(resolved)[0]
+
+    // Should extract publisher and full extension path (excluding the last part which is the contribution)
+    expect(dependency.metadata?.download_url).toBe(
+      'https://marketplace.visualstudio.com/items?itemName=publisher.extension.name.with.dots'
+    )
+  })
 })

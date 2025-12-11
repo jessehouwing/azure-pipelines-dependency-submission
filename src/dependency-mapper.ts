@@ -7,6 +7,10 @@ export interface Dependency {
   relationship: 'direct' | 'indirect'
   scope?: 'runtime' | 'development'
   dependencies?: string[]
+  metadata?: {
+    download_url?: string
+    vcs_url?: string
+  }
 }
 
 export interface DependencySnapshot {
@@ -174,11 +178,17 @@ export class DependencyMapper {
 
       // Add the actual version as an indirect dependency if not already present
       if (!resolved[actualPackageUrl]) {
-        resolved[actualPackageUrl] = {
+        const indirectDep: Dependency = {
           package_url: actualPackageUrl,
           relationship: 'indirect',
           scope: 'runtime'
         }
+        // Add metadata for marketplace tasks (download_url) or built-in tasks (vcs_url)
+        const metadata = this.buildMetadata(installedTask.fullIdentifier)
+        if (metadata) {
+          indirectDep.metadata = metadata
+        }
+        resolved[actualPackageUrl] = indirectDep
         core.debug(
           `Added transitive dependency for resolved version: ${actualPackageUrl}`
         )
@@ -186,12 +196,20 @@ export class DependencyMapper {
       dependencies.push(actualPackageUrl)
     }
 
-    return {
+    const dependency: Dependency = {
       package_url: packageUrl,
       relationship: 'direct',
       scope: 'runtime',
       ...(dependencies.length > 0 && { dependencies })
     }
+
+    // Add metadata for marketplace tasks (download_url) or built-in tasks (vcs_url)
+    const metadata = this.buildMetadata(installedTask.fullIdentifier)
+    if (metadata) {
+      dependency.metadata = metadata
+    }
+
+    return dependency
   }
 
   /**
@@ -314,5 +332,41 @@ export class DependencyMapper {
     const guidPattern =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
     return guidPattern.test(str)
+  }
+
+  /**
+   * Build metadata for a task based on its type
+   *
+   * For marketplace extension tasks (publisher.extension.contribution),
+   * returns download_url: https://marketplace.visualstudio.com/items?itemName=publisher.extension
+   *
+   * For built-in Microsoft tasks (Microsoft.BuiltIn.*),
+   * returns vcs_url: https://github.com/microsoft/azure-pipelines-tasks/
+   *
+   * @param fullIdentifier The full task identifier
+   * @returns Metadata object with download_url or vcs_url, or null if neither applies
+   */
+  private buildMetadata(
+    fullIdentifier: string
+  ): { download_url?: string; vcs_url?: string } | null {
+    // Built-in tasks have a vcs_url pointing to the azure-pipelines-tasks repo
+    if (fullIdentifier.startsWith('Microsoft.BuiltIn.')) {
+      return { vcs_url: 'https://github.com/microsoft/azure-pipelines-tasks/' }
+    }
+
+    // Full contribution IDs have format: publisher.extension.contribution
+    // We need at least 3 parts to extract publisher and extension
+    const parts = fullIdentifier.split('.')
+    if (parts.length < 3) {
+      return null
+    }
+
+    // Extract publisher and extension (everything except the last part which is the contribution)
+    const publisher = parts[0]
+    const extension = parts.slice(1, -1).join('.')
+
+    return {
+      download_url: `https://marketplace.visualstudio.com/items?itemName=${publisher}.${extension}`
+    }
   }
 }
