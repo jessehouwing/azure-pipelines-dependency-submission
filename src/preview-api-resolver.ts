@@ -211,8 +211,8 @@ export class PreviewApiResolver {
     return tasks
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private collectTasksFromExpandedPipeline(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     obj: any,
     tasks: ParsedTask[]
   ): void {
