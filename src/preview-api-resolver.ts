@@ -4,6 +4,7 @@ import type { IBuildApi } from 'azure-devops-node-api/BuildApi'
 import type { BuildDefinition } from 'azure-devops-node-api/interfaces/BuildInterfaces'
 import { ParsedTask } from './pipeline-parser.js'
 import * as path from 'path'
+import * as yaml from 'yaml'
 
 export interface PreviewRunTask {
   id: string
@@ -190,9 +191,9 @@ export class PreviewApiResolver {
     try {
       // The preview result contains a finalYaml property with the expanded pipeline
       if (previewResult.finalYaml) {
-        // Parse the YAML to extract tasks
-        // This would use the pipeline parser, but on the expanded YAML
         core.debug('Preview result contains finalYaml')
+        const pipelineData = yaml.parse(previewResult.finalYaml)
+        this.collectTasksFromExpandedPipeline(pipelineData, tasks)
       }
 
       // Also check for jobs/stages in the preview result
@@ -208,6 +209,56 @@ export class PreviewApiResolver {
     }
 
     return tasks
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private collectTasksFromExpandedPipeline(
+    obj: any,
+    tasks: ParsedTask[]
+  ): void {
+    if (!obj || typeof obj !== 'object') {
+      return
+    }
+
+    if (Array.isArray(obj)) {
+      for (const item of obj) {
+        this.collectTasksFromExpandedPipeline(item, tasks)
+      }
+      return
+    }
+
+    if (obj.task) {
+      const parsedTask = this.parseTaskFromExpandedStep(obj)
+      if (parsedTask) {
+        tasks.push(parsedTask)
+      }
+      return
+    }
+
+    const keysToProcess = [
+      'stages',
+      'jobs',
+      'steps',
+      'pool',
+      'strategy',
+      'matrix',
+      'deployment',
+      'deploy',
+      'preDeploymentHook',
+      'postDeploymentHook',
+      'on',
+      'onSuccess',
+      'onFailure',
+      'success',
+      'failure',
+      'finally'
+    ]
+
+    for (const key of keysToProcess) {
+      if (obj[key]) {
+        this.collectTasksFromExpandedPipeline(obj[key], tasks)
+      }
+    }
   }
 
   /**
@@ -258,6 +309,29 @@ export class PreviewApiResolver {
         displayName: step.displayName || step.name,
         inputs: step.inputs
       }
+    } catch {
+      return null
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private parseTaskFromExpandedStep(step: any): ParsedTask | null {
+    try {
+      if (typeof step.task === 'string') {
+        const [identifier, version] = step.task.split('@')
+        if (!identifier) {
+          return null
+        }
+
+        return {
+          taskIdentifier: identifier,
+          taskVersion: version,
+          displayName: step.displayName || step.name,
+          inputs: step.inputs
+        }
+      }
+
+      return this.parseTaskFromStep(step)
     } catch {
       return null
     }

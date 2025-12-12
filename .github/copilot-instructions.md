@@ -48,6 +48,8 @@ npm install
 
 ## Testing
 
+Where possible rely in the #runTests tool to execute tests.
+
 Ensure all unit tests pass by running:
 
 ```bash
@@ -56,6 +58,13 @@ npm run test
 
 Unit tests should exist in the `__tests__` directory. They are powered by
 `jest`. Fixtures should be placed in the `__fixtures__` directory.
+
+When running tests in powershell, use the correct syntax (not the bash syntax)
+to set the environment variables:
+
+```powershell
+$env:NODE_OPTIONS='--experimental-vm-modules'; $env:NODE_NO_WARNINGS='1'; npx ...
+```
 
 ## Bundling
 

@@ -124,6 +124,18 @@ export async function run(): Promise<void> {
     // Step 3: Parse pipelines and resolve templates
     core.startGroup('📝 Parsing pipelines and resolving templates')
     const allTasks = []
+    let templateResolverInstance: TemplateResolver | undefined
+
+    const getTemplateResolver = (): TemplateResolver => {
+      if (!templateResolverInstance) {
+        templateResolverInstance = new TemplateResolver(
+          workspace,
+          resolveTemplates,
+          githubToken
+        )
+      }
+      return templateResolverInstance
+    }
 
     if (useServerParsing) {
       core.info(
@@ -151,44 +163,60 @@ export async function run(): Promise<void> {
             `No build definitions found for ${pipelineFile}. Falling back to action-side parsing.`
           )
 
-          // Fallback to action-side parsing
-          const templateResolver = new TemplateResolver(
-            workspace,
-            resolveTemplates,
-            githubToken
-          )
-          const resolved = await templateResolver.resolvePipeline(pipelineFile)
+          const resolved =
+            await getTemplateResolver().resolvePipeline(pipelineFile)
           core.info(
             `  Found ${resolved.tasks.length} task(s) (action-side parsing)`
           )
           allTasks.push(...resolved.tasks)
-        } else {
-          // Use server-side parsing for each definition
-          for (const def of definitions) {
-            const tasks = await previewResolver.previewPipeline(
-              def.project,
-              def.definitionId
+          continue
+        }
+
+        const serverTasks = []
+
+        for (const def of definitions) {
+          const tasks = await previewResolver.previewPipeline(
+            def.project,
+            def.definitionId
+          )
+
+          if (tasks.length === 0) {
+            core.warning(
+              `Preview API returned 0 task(s) for definition "${def.name}" (${def.definitionId}).`
             )
+          } else {
             core.info(
               `  Found ${tasks.length} task(s) from definition "${def.name}" (server-side)`
             )
-            allTasks.push(...tasks)
           }
+
+          serverTasks.push(...tasks)
         }
+
+        if (serverTasks.length === 0) {
+          core.warning(
+            `Server-side parsing returned no tasks for ${pipelineFile}. Falling back to action-side parsing.`
+          )
+
+          const resolved =
+            await getTemplateResolver().resolvePipeline(pipelineFile)
+          core.info(
+            `  Found ${resolved.tasks.length} task(s) (action-side parsing)`
+          )
+          allTasks.push(...resolved.tasks)
+          continue
+        }
+
+        allTasks.push(...serverTasks)
       }
     } else {
       // Use action-side template resolution
       core.info('📄 Using action-side parsing for dependency resolution')
 
-      const templateResolver = new TemplateResolver(
-        workspace,
-        resolveTemplates,
-        githubToken
-      )
-
       for (const pipelineFile of pipelineFiles) {
         core.info(`Processing: ${pipelineFile}`)
-        const resolved = await templateResolver.resolvePipeline(pipelineFile)
+        const resolved =
+          await getTemplateResolver().resolvePipeline(pipelineFile)
         core.info(`  Found ${resolved.tasks.length} task(s)`)
         core.info(`  Processed ${resolved.processedFiles.size} file(s)`)
         allTasks.push(...resolved.tasks)
