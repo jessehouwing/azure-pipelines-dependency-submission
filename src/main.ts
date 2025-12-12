@@ -15,8 +15,8 @@ import { DependencySubmitter } from './dependency-submitter.js'
 export async function run(): Promise<void> {
   try {
     // Get inputs
-    const token = core.getInput('token', { required: true })
-    const githubToken = core.getInput('github-token') || token
+    const token = core.getInput('github-token', { required: true })
+    const githubReadonlyToken = core.getInput('github-readonly-token') || token
     const repository =
       core.getInput('repository') || process.env.GITHUB_REPOSITORY || ''
     const azureDevOpsUrl = core.getInput('azure-devops-url', { required: true })
@@ -131,7 +131,7 @@ export async function run(): Promise<void> {
         templateResolverInstance = new TemplateResolver(
           workspace,
           resolveTemplates,
-          githubToken
+          githubReadonlyToken
         )
       }
       return templateResolverInstance

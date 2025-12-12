@@ -94,8 +94,8 @@ describe('main.ts', () => {
     process.env.GITHUB_WORKSPACE = '/test/workspace'
 
     inputs = {
-      token: 'fake-github-token',
-      'github-token': '',
+      'github-token': 'fake-github-token',
+      'github-readonly-token': '',
       repository: 'owner/repo',
       'azure-devops-url': 'https://dev.azure.com/myorg',
       'azure-devops-token': 'fake-azure-token',
