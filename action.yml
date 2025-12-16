@@ -1,5 +1,7 @@
 name: Azure Pipelines Dependency Submission
-description: Submit Azure Pipelines dependencies to GitHub Dependency Graph for vulnerability scanning
+description:
+  Submit Azure Pipelines dependencies to GitHub Dependency Graph for
+  vulnerability scanning
 author: Jesse Houwing
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
@@ -11,12 +13,18 @@ branding:
 inputs:
   github-token:
     description: >
-      GitHub token with contents:write permission for dependency submission. This token is used to submit dependencies to the GitHub Dependency Graph API. Defaults to the repository's GITHUB_TOKEN.
+      GitHub token with contents:write permission for dependency submission.
+      This token is used to submit dependencies to the GitHub Dependency Graph
+      API. Defaults to the repository's GITHUB_TOKEN.
     required: false
     default: ${{ github.token }}
   github-readonly-token:
     description: >
-      GitHub token with contents:read permission for accessing private repositories when resolving pipeline templates. This allows the action to read template files from private repositories referenced in your pipelines. If not provided, falls back to the 'github-token' input. Only needed if your pipelines reference templates from private repositories.
+      GitHub token with contents:read permission for accessing private
+      repositories when resolving pipeline templates. This allows the action to
+      read template files from private repositories referenced in your
+      pipelines. If not provided, falls back to the 'github-token' input. Only
+      needed if your pipelines reference templates from private repositories.
     required: false
     default: ''
   repository:
@@ -29,26 +37,42 @@ inputs:
     required: true
   azure-devops-token:
     description: >
-      Azure DevOps Personal Access Token (PAT) with the following permissions: - Agent Pools: Read - Build: Read - Marketplace: Read. This token is used to query the installed task definitions from the Azure DevOps organization and enrich dependencies with Azure DevOps Marketplace metadata. To create a PAT, go to User Settings > Personal Access Tokens in Azure DevOps.
+      Azure DevOps Personal Access Token (PAT) with the following permissions: -
+      Agent Pools: Read - Build: Read - Marketplace: Read. This token is used to
+      query the installed task definitions from the Azure DevOps organization
+      and enrich dependencies with Azure DevOps Marketplace metadata. To create
+      a PAT, go to User Settings > Personal Access Tokens in Azure DevOps.
     required: true
   pipeline-paths:
     description: >
-      Comma-separated or newline-separated list of glob patterns to scan for Azure Pipelines files. Supports wildcards like *.yml, **/*.yaml, etc. Defaults to azure-pipelines.yml, azure-pipelines.yaml, and .azure-pipelines/*.yml if not specified.
+      Comma-separated or newline-separated list of glob patterns to scan for
+      Azure Pipelines files. Supports wildcards like *.yml, **/*.yaml, etc.
+      Defaults to azure-pipelines.yml, azure-pipelines.yaml, and
+      .azure-pipelines/*.yml if not specified.
     required: false
     default: ''
   resolve-templates:
     description: >
-      Whether to resolve and include dependencies from pipeline templates. When true (default), template files are parsed and their tasks are included as dependencies.
+      Whether to resolve and include dependencies from pipeline templates. When
+      true (default), template files are parsed and their tasks are included as
+      dependencies.
     required: false
     default: 'true'
   parse-templates-by:
     description: >
-      How to parse and resolve pipeline templates. Options: 'action' (default) or 'server'. When set to 'server', uses the Azure DevOps Preview Run API to expand templates and apply decorators on the server side, providing more accurate results. This is slower than 'action' mode but captures decorator-injected tasks and fully resolved templates. Requires Build Read permissions on the Azure DevOps token.
+      How to parse and resolve pipeline templates. Options: 'action' (default)
+      or 'server'. When set to 'server', uses the Azure DevOps Preview Run API
+      to expand templates and apply decorators on the server side, providing
+      more accurate results. This is slower than 'action' mode but captures
+      decorator-injected tasks and fully resolved templates. Requires Build Read
+      permissions on the Azure DevOps token.
     required: false
     default: 'action'
   azure-devops-project:
     description: >
-      Azure DevOps project name to query for build definitions when using 'server' mode for parse-templates-by. If not specified, the action will attempt to query all accessible projects.
+      Azure DevOps project name to query for build definitions when using
+      'server' mode for parse-templates-by. If not specified, the action will
+      attempt to query all accessible projects.
     required: false
     default: ''
 
