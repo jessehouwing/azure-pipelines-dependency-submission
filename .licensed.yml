@@ -11,6 +11,7 @@ allowed:
   - mit
   - cc0-1.0
   - other
+  - blueoak-1.0.0
 
 ignored:
   npm:
