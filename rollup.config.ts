@@ -24,9 +24,11 @@ const __dirname = __internal_dirname(__filename);
     typescript(),
     nodeResolve({ preferBuiltins: true }),
     commonjs({
-      strictRequires: true
+      strictRequires: true,
+      ignoreTryCatch: false
     })
-  ]
+  ],
+  context: 'this'
 }
 
 export default config
