@@ -37,6 +37,12 @@ jobs:
           node-version-file: .node-version
           cache: npm
 
+      - name: Setup Ruby
+        id: setup-ruby
+        uses: ruby/setup-ruby@67c1ea01f59d0f34ff0e5b37e68813fb38aeb427 #v1.203.0
+        with:
+          bundler-cache: true
+
       - name: Remove dist/ Directory
         id: remove-dist
         run: npx rimraf ./dist
