@@ -41,6 +41,6 @@
     "ghcr.io/devcontainers/features/ruby:1": {
       "version": "latest"
     },
-    "ghcr.io/devcontainers/features/cmake:1": {}
+    "ghcr.io/devcontainers-extra/features/cmake:1": {}
   }
 }
