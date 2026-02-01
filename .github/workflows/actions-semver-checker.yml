@@ -7,14 +7,15 @@ on:
       - '*'
   workflow_dispatch:
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   check-semver:
     concurrency:
       group: '${{ github.workflow }}'
       cancel-in-progress: true
+    permissions:
+      contents: write
 
     runs-on: ubuntu-latest
 
