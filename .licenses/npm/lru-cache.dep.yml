@@ -1,6 +1,6 @@
 ---
 name: lru-cache
-version: 11.2.4
+version: 11.2.5
 type: npm
 summary: A cache object that deletes the least-recently-used items.
 homepage:
