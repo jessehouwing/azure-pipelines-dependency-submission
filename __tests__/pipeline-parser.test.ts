@@ -2,18 +2,23 @@
  * Unit tests for the pipeline parser
  */
 import { jest } from '@jest/globals'
+import fs from 'fs'
 
 // Create a mock readFileSync function
 const mockReadFileSync = jest.fn()
 const mockExistsSync = jest.fn(() => true)
 
-// Mock the fs module
+// Mock the fs module with all needed exports
 jest.unstable_mockModule('fs', () => ({
   readFileSync: mockReadFileSync,
   existsSync: mockExistsSync,
+  constants: fs.constants,
+  promises: fs.promises,
   default: {
     readFileSync: mockReadFileSync,
-    existsSync: mockExistsSync
+    existsSync: mockExistsSync,
+    constants: fs.constants,
+    promises: fs.promises
   }
 }))
 
