@@ -46,7 +46,7 @@
   "dependencies": {
     "@actions/core": "^3.0.0",
     "@actions/github": "^9.0.0",
-    "@actions/http-client": "^3.0.1",
+    "@actions/http-client": "^4.0.0",
     "azure-devops-node-api": "^15.1.2",
     "glob": "^13.0.1",
     "yaml": "^2.8.2"
