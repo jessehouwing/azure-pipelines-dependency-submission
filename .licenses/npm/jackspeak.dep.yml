@@ -1,8 +1,8 @@
 ---
-name: minimatch
-version: 10.2.0
+name: jackspeak
+version: 4.2.3
 type: npm
-summary: a glob matcher in javascript
+summary: A very strict and proper argument parser.
 homepage:
 license: blueoak-1.0.0
 licenses:

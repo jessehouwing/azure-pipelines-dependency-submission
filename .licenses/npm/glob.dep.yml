@@ -1,6 +1,6 @@
 ---
 name: glob
-version: 13.0.1
+version: 13.0.3
 type: npm
 summary: the most correct and second fastest glob implementation in JavaScript
 homepage:
