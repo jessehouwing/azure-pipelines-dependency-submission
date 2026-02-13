@@ -1,13 +1,21 @@
 ---
-name: minimatch
-version: 10.2.0
+name: "@isaacs/cliui"
+version: 9.0.0
 type: npm
-summary: a glob matcher in javascript
+summary: easily create complex multi-column command-line-interfaces
 homepage:
-license: blueoak-1.0.0
+license: other
 licenses:
 - sources: LICENSE.md
   text: |
+    Several modules are vendored under `./src`, which are used and
+    distributed according to their respective licenses, each provided
+    in the same directory as the code.
+
+    Everything else is released under the following license.
+
+    ----
+
     # Blue Oak Model License
 
     Version 1.0.0

@@ -1,6 +1,6 @@
 ---
-name: "@isaacs/balanced-match"
-version: 4.0.1
+name: balanced-match
+version: 4.0.2
 type: npm
 summary: Match balanced character pairs, like "{" and "}"
 homepage:
