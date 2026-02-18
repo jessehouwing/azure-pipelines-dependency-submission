@@ -34,7 +34,7 @@ jobs:
 
       - name: Initialize CodeQL
         id: initialize
-        uses: github/codeql-action/init@45cbd0c69e560cd9e7cd7f8c32362050c9b7ded2 #v4.32.2
+        uses: github/codeql-action/init@9e907b5e64f6b83e7804b09294d44122997950d6 #v4.32.3
         with:
           config-file: .github/codeql/codeql-config.yml
           languages: ${{ matrix.language }}
@@ -42,8 +42,8 @@ jobs:
 
       - name: Autobuild
         id: autobuild
-        uses: github/codeql-action/autobuild@45cbd0c69e560cd9e7cd7f8c32362050c9b7ded2 #v4.32.2
+        uses: github/codeql-action/autobuild@9e907b5e64f6b83e7804b09294d44122997950d6 #v4.32.3
 
       - name: Perform CodeQL Analysis
         id: analyze
-        uses: github/codeql-action/analyze@45cbd0c69e560cd9e7cd7f8c32362050c9b7ded2 #v4.32.2
+        uses: github/codeql-action/analyze@9e907b5e64f6b83e7804b09294d44122997950d6 #v4.32.3
