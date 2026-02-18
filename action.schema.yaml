@@ -1,0 +1,74 @@
+# Schema file for actions-example-checker validation
+# This file provides advanced validation for action inputs and outputs
+# See: https://github.com/jessehouwing/actions-example-checker
+
+# Define reusable custom types
+types:
+  # Azure DevOps URL pattern
+  azure-devops-url:
+    type: string
+    match: '^https://dev\.azure\.com/[^/]+/?$|^https://[^/]+\.visualstudio\.com/?$'
+  
+  # Repository name in owner/repo format
+  repository-name:
+    type: string
+    match: '^[^/]+/[^/]+$'
+  
+  # Parse templates mode choice
+  parse-mode:
+    type: choice
+    options:
+      - value: action
+        description: Parse templates locally in the action
+      - value: server
+        description: Use Azure DevOps Preview Run API to expand templates server-side
+
+# Validate inputs with explicit types
+inputs:
+  # GitHub token - string input (no pattern needed for secrets)
+  github-token:
+    type: string
+  
+  # GitHub readonly token - string input (no pattern needed for secrets)
+  github-readonly-token:
+    type: string
+  
+  # Repository in owner/repo format
+  repository:
+    type: repository-name
+  
+  # Azure DevOps organization URL
+  azure-devops-url:
+    type: azure-devops-url
+  
+  # Azure DevOps Personal Access Token
+  azure-devops-token:
+    type: string
+  
+  # Pipeline paths - supports both comma-separated and newline-separated formats
+  # Comma-separated: '*.yml,**/*.yaml'
+  # Newline-separated: |
+  #   azure-pipelines.yml
+  #   .azure-pipelines/*.yml
+  pipeline-paths:
+    type: string
+    separators: ['newline', ',']
+    items:
+      type: string
+  
+  # Boolean input for whether to resolve templates
+  resolve-templates:
+    type: boolean
+  
+  # Parse templates by mode - choice between 'action' and 'server'
+  parse-templates-by:
+    type: parse-mode
+  
+  # Azure DevOps project name
+  azure-devops-project:
+    type: string
+
+# Validate outputs with explicit types
+outputs:
+  dependency-count:
+    type: number
