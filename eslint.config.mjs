@@ -20,8 +20,8 @@ export default [
   {
     ignores: ['**/coverage', '**/dist', '**/linter', '**/node_modules']
   },
+  js.configs.recommended,
   ...compat.extends(
-    'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:jest/recommended',
