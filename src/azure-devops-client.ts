@@ -167,7 +167,8 @@ export class AzureDevOpsClient {
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(
-          `Failed to fetch tasks from Azure DevOps: ${error.message}`
+          `Failed to fetch tasks from Azure DevOps: ${error.message}`,
+          { cause: error }
         )
       }
       throw error

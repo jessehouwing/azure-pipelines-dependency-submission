@@ -71,7 +71,8 @@ export class DependencySubmitter {
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(
-          `Failed to submit dependency snapshot: ${error.message}`
+          `Failed to submit dependency snapshot: ${error.message}`,
+          { cause: error }
         )
       }
       throw error

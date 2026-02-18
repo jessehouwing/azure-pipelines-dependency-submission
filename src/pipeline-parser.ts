@@ -62,7 +62,8 @@ export class PipelineParser {
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(
-          `Failed to parse pipeline file ${filePath}: ${error.message}`
+          `Failed to parse pipeline file ${filePath}: ${error.message}`,
+          { cause: error }
         )
       }
       throw error
