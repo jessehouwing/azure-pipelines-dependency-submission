@@ -1,6 +1,6 @@
 ---
 name: balanced-match
-version: 4.0.2
+version: 4.0.4
 type: npm
 summary: Match balanced character pairs, like "{" and "}"
 homepage:
