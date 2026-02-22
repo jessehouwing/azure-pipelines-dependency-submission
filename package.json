@@ -48,7 +48,7 @@
     "@actions/github": "^9.0.0",
     "@actions/http-client": "^4.0.0",
     "azure-devops-node-api": "^15.1.2",
-    "glob": "^13.0.5",
+    "glob": "^13.0.6",
     "yaml": "^2.8.2"
   },
   "devDependencies": {
