@@ -22,7 +22,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           detect-docker: true
-      - uses: actions/dependency-review-action@05fe4576374b728f0c523d6a13d64c25081e0803 # 4.8.3
+      - uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # 4.9.0
         if: github.event_name == 'pull_request'
         with:
           retry-on-snapshot-warnings: true
