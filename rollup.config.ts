@@ -28,6 +28,19 @@ const __dirname = __internal_dirname(__filename);
       ignoreTryCatch: false
     })
   ],
+  onwarn: (warning, warn) => {
+    // Suppress known circular dependency in external @actions/core package.
+    if (
+      warning.code === 'CIRCULAR_DEPENDENCY' &&
+      typeof warning.message === 'string' &&
+      (warning.message.includes('@actions/core/lib/core.js') ||
+        warning.message.includes('@actions/core\\lib\\core.js'))
+    ) {
+      return
+    }
+
+    warn(warning)
+  },
   context: 'this'
 }
 

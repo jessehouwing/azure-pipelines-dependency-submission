@@ -3,7 +3,8 @@ import { AzureDevOpsClient } from '../src/azure-devops-client.js'
 
 const orgUrl = process.env.INPUT_AZURE_DEVOPS_URL
 const token = process.env.INPUT_AZURE_DEVOPS_TOKEN
-const hasIntegrationCreds = Boolean(orgUrl && token)
+const runIntegrationTests = process.env.RUN_INTEGRATION_TESTS === 'true'
+const hasIntegrationCreds = Boolean(runIntegrationTests && orgUrl && token)
 
 const integrationDescribe = hasIntegrationCreds ? describe : describe.skip
 
