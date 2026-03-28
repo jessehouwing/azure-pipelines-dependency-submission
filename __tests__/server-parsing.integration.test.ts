@@ -4,13 +4,14 @@ import { PreviewApiResolver } from '../src/preview-api-resolver.js'
 
 const orgUrl = process.env.INPUT_AZURE_DEVOPS_URL
 const token = process.env.INPUT_AZURE_DEVOPS_TOKEN
+const runIntegrationTests = process.env.RUN_INTEGRATION_TESTS === 'true'
 const project =
   process.env.INPUT_AZURE_DEVOPS_PROJECT || 'vsts-extension-tasks-test'
 const knownDefinitionId = Number(
   process.env.INPUT_AZURE_DEVOPS_DEFINITION_ID || '48'
 )
 
-const hasIntegrationCreds = Boolean(orgUrl && token)
+const hasIntegrationCreds = Boolean(runIntegrationTests && orgUrl && token)
 const integrationDescribe = hasIntegrationCreds ? describe : describe.skip
 
 integrationDescribe('Server-side template parsing (integration)', () => {
