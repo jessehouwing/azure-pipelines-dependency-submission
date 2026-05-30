@@ -3646,9 +3646,9 @@ var hasRequiredConstants$3;
 function requireConstants$3 () {
 	if (hasRequiredConstants$3) return constants$3;
 	hasRequiredConstants$3 = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.SPECIAL_HEADERS = exports$1.HEADER_STATE = exports$1.MINOR = exports$1.MAJOR = exports$1.CONNECTION_TOKEN_CHARS = exports$1.HEADER_CHARS = exports$1.TOKEN = exports$1.STRICT_TOKEN = exports$1.HEX = exports$1.URL_CHAR = exports$1.STRICT_URL_CHAR = exports$1.USERINFO_CHARS = exports$1.MARK = exports$1.ALPHANUM = exports$1.NUM = exports$1.HEX_MAP = exports$1.NUM_MAP = exports$1.ALPHA = exports$1.FINISH = exports$1.H_METHOD_MAP = exports$1.METHOD_MAP = exports$1.METHODS_RTSP = exports$1.METHODS_ICE = exports$1.METHODS_HTTP = exports$1.METHODS = exports$1.LENIENT_FLAGS = exports$1.FLAGS = exports$1.TYPE = exports$1.ERROR = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.SPECIAL_HEADERS = exports.HEADER_STATE = exports.MINOR = exports.MAJOR = exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS = exports.TOKEN = exports.STRICT_TOKEN = exports.HEX = exports.URL_CHAR = exports.STRICT_URL_CHAR = exports.USERINFO_CHARS = exports.MARK = exports.ALPHANUM = exports.NUM = exports.HEX_MAP = exports.NUM_MAP = exports.ALPHA = exports.FINISH = exports.H_METHOD_MAP = exports.METHOD_MAP = exports.METHODS_RTSP = exports.METHODS_ICE = exports.METHODS_HTTP = exports.METHODS = exports.LENIENT_FLAGS = exports.FLAGS = exports.TYPE = exports.ERROR = void 0;
 		const utils_1 = requireUtils$2();
 		(function (ERROR) {
 		    ERROR[ERROR["OK"] = 0] = "OK";
@@ -3676,12 +3676,12 @@ function requireConstants$3 () {
 		    ERROR[ERROR["PAUSED_UPGRADE"] = 22] = "PAUSED_UPGRADE";
 		    ERROR[ERROR["PAUSED_H2_UPGRADE"] = 23] = "PAUSED_H2_UPGRADE";
 		    ERROR[ERROR["USER"] = 24] = "USER";
-		})(exports$1.ERROR || (exports$1.ERROR = {}));
+		})(exports.ERROR || (exports.ERROR = {}));
 		(function (TYPE) {
 		    TYPE[TYPE["BOTH"] = 0] = "BOTH";
 		    TYPE[TYPE["REQUEST"] = 1] = "REQUEST";
 		    TYPE[TYPE["RESPONSE"] = 2] = "RESPONSE";
-		})(exports$1.TYPE || (exports$1.TYPE = {}));
+		})(exports.TYPE || (exports.TYPE = {}));
 		(function (FLAGS) {
 		    FLAGS[FLAGS["CONNECTION_KEEP_ALIVE"] = 1] = "CONNECTION_KEEP_ALIVE";
 		    FLAGS[FLAGS["CONNECTION_CLOSE"] = 2] = "CONNECTION_CLOSE";
@@ -3693,12 +3693,12 @@ function requireConstants$3 () {
 		    FLAGS[FLAGS["TRAILING"] = 128] = "TRAILING";
 		    // 1 << 8 is unused
 		    FLAGS[FLAGS["TRANSFER_ENCODING"] = 512] = "TRANSFER_ENCODING";
-		})(exports$1.FLAGS || (exports$1.FLAGS = {}));
+		})(exports.FLAGS || (exports.FLAGS = {}));
 		(function (LENIENT_FLAGS) {
 		    LENIENT_FLAGS[LENIENT_FLAGS["HEADERS"] = 1] = "HEADERS";
 		    LENIENT_FLAGS[LENIENT_FLAGS["CHUNKED_LENGTH"] = 2] = "CHUNKED_LENGTH";
 		    LENIENT_FLAGS[LENIENT_FLAGS["KEEP_ALIVE"] = 4] = "KEEP_ALIVE";
-		})(exports$1.LENIENT_FLAGS || (exports$1.LENIENT_FLAGS = {}));
+		})(exports.LENIENT_FLAGS || (exports.LENIENT_FLAGS = {}));
 		var METHODS;
 		(function (METHODS) {
 		    METHODS[METHODS["DELETE"] = 0] = "DELETE";
@@ -3758,8 +3758,8 @@ function requireConstants$3 () {
 		    METHODS[METHODS["RECORD"] = 44] = "RECORD";
 		    /* RAOP */
 		    METHODS[METHODS["FLUSH"] = 45] = "FLUSH";
-		})(METHODS = exports$1.METHODS || (exports$1.METHODS = {}));
-		exports$1.METHODS_HTTP = [
+		})(METHODS = exports.METHODS || (exports.METHODS = {}));
+		exports.METHODS_HTTP = [
 		    METHODS.DELETE,
 		    METHODS.GET,
 		    METHODS.HEAD,
@@ -3797,10 +3797,10 @@ function requireConstants$3 () {
 		    // TODO(indutny): should we allow it with HTTP?
 		    METHODS.SOURCE,
 		];
-		exports$1.METHODS_ICE = [
+		exports.METHODS_ICE = [
 		    METHODS.SOURCE,
 		];
-		exports$1.METHODS_RTSP = [
+		exports.METHODS_RTSP = [
 		    METHODS.OPTIONS,
 		    METHODS.DESCRIBE,
 		    METHODS.ANNOUNCE,
@@ -3817,59 +3817,59 @@ function requireConstants$3 () {
 		    METHODS.GET,
 		    METHODS.POST,
 		];
-		exports$1.METHOD_MAP = utils_1.enumToMap(METHODS);
-		exports$1.H_METHOD_MAP = {};
-		Object.keys(exports$1.METHOD_MAP).forEach((key) => {
+		exports.METHOD_MAP = utils_1.enumToMap(METHODS);
+		exports.H_METHOD_MAP = {};
+		Object.keys(exports.METHOD_MAP).forEach((key) => {
 		    if (/^H/.test(key)) {
-		        exports$1.H_METHOD_MAP[key] = exports$1.METHOD_MAP[key];
+		        exports.H_METHOD_MAP[key] = exports.METHOD_MAP[key];
 		    }
 		});
 		(function (FINISH) {
 		    FINISH[FINISH["SAFE"] = 0] = "SAFE";
 		    FINISH[FINISH["SAFE_WITH_CB"] = 1] = "SAFE_WITH_CB";
 		    FINISH[FINISH["UNSAFE"] = 2] = "UNSAFE";
-		})(exports$1.FINISH || (exports$1.FINISH = {}));
-		exports$1.ALPHA = [];
+		})(exports.FINISH || (exports.FINISH = {}));
+		exports.ALPHA = [];
 		for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {
 		    // Upper case
-		    exports$1.ALPHA.push(String.fromCharCode(i));
+		    exports.ALPHA.push(String.fromCharCode(i));
 		    // Lower case
-		    exports$1.ALPHA.push(String.fromCharCode(i + 0x20));
+		    exports.ALPHA.push(String.fromCharCode(i + 0x20));
 		}
-		exports$1.NUM_MAP = {
+		exports.NUM_MAP = {
 		    0: 0, 1: 1, 2: 2, 3: 3, 4: 4,
 		    5: 5, 6: 6, 7: 7, 8: 8, 9: 9,
 		};
-		exports$1.HEX_MAP = {
+		exports.HEX_MAP = {
 		    0: 0, 1: 1, 2: 2, 3: 3, 4: 4,
 		    5: 5, 6: 6, 7: 7, 8: 8, 9: 9,
 		    A: 0XA, B: 0XB, C: 0XC, D: 0XD, E: 0XE, F: 0XF,
 		    a: 0xa, b: 0xb, c: 0xc, d: 0xd, e: 0xe, f: 0xf,
 		};
-		exports$1.NUM = [
+		exports.NUM = [
 		    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 		];
-		exports$1.ALPHANUM = exports$1.ALPHA.concat(exports$1.NUM);
-		exports$1.MARK = ['-', '_', '.', '!', '~', '*', '\'', '(', ')'];
-		exports$1.USERINFO_CHARS = exports$1.ALPHANUM
-		    .concat(exports$1.MARK)
+		exports.ALPHANUM = exports.ALPHA.concat(exports.NUM);
+		exports.MARK = ['-', '_', '.', '!', '~', '*', '\'', '(', ')'];
+		exports.USERINFO_CHARS = exports.ALPHANUM
+		    .concat(exports.MARK)
 		    .concat(['%', ';', ':', '&', '=', '+', '$', ',']);
 		// TODO(indutny): use RFC
-		exports$1.STRICT_URL_CHAR = [
+		exports.STRICT_URL_CHAR = [
 		    '!', '"', '$', '%', '&', '\'',
 		    '(', ')', '*', '+', ',', '-', '.', '/',
 		    ':', ';', '<', '=', '>',
 		    '@', '[', '\\', ']', '^', '_',
 		    '`',
 		    '{', '|', '}', '~',
-		].concat(exports$1.ALPHANUM);
-		exports$1.URL_CHAR = exports$1.STRICT_URL_CHAR
+		].concat(exports.ALPHANUM);
+		exports.URL_CHAR = exports.STRICT_URL_CHAR
 		    .concat(['\t', '\f']);
 		// All characters with 0x80 bit set to 1
 		for (let i = 0x80; i <= 0xff; i++) {
-		    exports$1.URL_CHAR.push(i);
+		    exports.URL_CHAR.push(i);
 		}
-		exports$1.HEX = exports$1.NUM.concat(['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']);
+		exports.HEX = exports.NUM.concat(['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']);
 		/* Tokens as defined by rfc 2616. Also lowercases them.
 		 *        token       = 1*<any CHAR except CTLs or separators>
 		 *     separators     = "(" | ")" | "<" | ">" | "@"
@@ -3877,27 +3877,27 @@ function requireConstants$3 () {
 		 *                    | "/" | "[" | "]" | "?" | "="
 		 *                    | "{" | "}" | SP | HT
 		 */
-		exports$1.STRICT_TOKEN = [
+		exports.STRICT_TOKEN = [
 		    '!', '#', '$', '%', '&', '\'',
 		    '*', '+', '-', '.',
 		    '^', '_', '`',
 		    '|', '~',
-		].concat(exports$1.ALPHANUM);
-		exports$1.TOKEN = exports$1.STRICT_TOKEN.concat([' ']);
+		].concat(exports.ALPHANUM);
+		exports.TOKEN = exports.STRICT_TOKEN.concat([' ']);
 		/*
 		 * Verify that a char is a valid visible (printable) US-ASCII
 		 * character or %x80-FF
 		 */
-		exports$1.HEADER_CHARS = ['\t'];
+		exports.HEADER_CHARS = ['\t'];
 		for (let i = 32; i <= 255; i++) {
 		    if (i !== 127) {
-		        exports$1.HEADER_CHARS.push(i);
+		        exports.HEADER_CHARS.push(i);
 		    }
 		}
 		// ',' = \x44
-		exports$1.CONNECTION_TOKEN_CHARS = exports$1.HEADER_CHARS.filter((c) => c !== 44);
-		exports$1.MAJOR = exports$1.NUM_MAP;
-		exports$1.MINOR = exports$1.MAJOR;
+		exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS.filter((c) => c !== 44);
+		exports.MAJOR = exports.NUM_MAP;
+		exports.MINOR = exports.MAJOR;
 		var HEADER_STATE;
 		(function (HEADER_STATE) {
 		    HEADER_STATE[HEADER_STATE["GENERAL"] = 0] = "GENERAL";
@@ -3909,8 +3909,8 @@ function requireConstants$3 () {
 		    HEADER_STATE[HEADER_STATE["CONNECTION_CLOSE"] = 6] = "CONNECTION_CLOSE";
 		    HEADER_STATE[HEADER_STATE["CONNECTION_UPGRADE"] = 7] = "CONNECTION_UPGRADE";
 		    HEADER_STATE[HEADER_STATE["TRANSFER_ENCODING_CHUNKED"] = 8] = "TRANSFER_ENCODING_CHUNKED";
-		})(HEADER_STATE = exports$1.HEADER_STATE || (exports$1.HEADER_STATE = {}));
-		exports$1.SPECIAL_HEADERS = {
+		})(HEADER_STATE = exports.HEADER_STATE || (exports.HEADER_STATE = {}));
+		exports.SPECIAL_HEADERS = {
 		    'connection': HEADER_STATE.CONNECTION,
 		    'content-length': HEADER_STATE.CONTENT_LENGTH,
 		    'proxy-connection': HEADER_STATE.CONNECTION,
@@ -8801,10 +8801,10 @@ function requireClientH1 () {
 	const TIMEOUT_KEEP_ALIVE = 8 | USE_NATIVE_TIMER;
 
 	class Parser {
-	  constructor (client, socket, { exports: exports$1 }) {
+	  constructor (client, socket, { exports }) {
 	    assert(Number.isFinite(client[kMaxHeadersSize]) && client[kMaxHeadersSize] > 0);
 
-	    this.llhttp = exports$1;
+	    this.llhttp = exports;
 	    this.ptr = this.llhttp.llhttp_alloc(constants.TYPE.RESPONSE);
 	    this.client = client;
 	    this.socket = socket;
@@ -33232,9 +33232,9 @@ var hasRequiredSerialization;
 function requireSerialization () {
 	if (hasRequiredSerialization) return Serialization;
 	hasRequiredSerialization = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.ContractSerializer = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.ContractSerializer = void 0;
 		(function (ContractSerializer) {
 		    var _legacyDateRegExp;
 		    /**
@@ -33480,7 +33480,7 @@ function requireSerialization () {
 		            return null;
 		        }
 		    }
-		})(exports$1.ContractSerializer || (exports$1.ContractSerializer = {})); 
+		})(exports.ContractSerializer || (exports.ContractSerializer = {})); 
 	} (Serialization));
 	return Serialization;
 }
@@ -35560,6 +35560,8 @@ function requireUtils$1 () {
 	                var newIndex = getMaxIndex(target) + 1;
 	                target[newIndex] = source;
 	                setMaxIndex(target, newIndex);
+	            } else if (options && options.strictMerge) {
+	                return [target, source];
 	            } else if (
 	                (options && (options.plainObjects || options.allowPrototypes))
 	                || !has.call(Object.prototype, source)
@@ -35941,7 +35943,7 @@ function requireStringify () {
 
 	    if (obj === null) {
 	        if (strictNullHandling) {
-	            return encoder && !encodeValuesOnly ? encoder(prefix, defaults.encoder, charset, 'key', format) : prefix;
+	            return formatter(encoder && !encodeValuesOnly ? encoder(prefix, defaults.encoder, charset, 'key', format) : prefix);
 	        }
 
 	        obj = '';
@@ -35965,7 +35967,9 @@ function requireStringify () {
 	    if (generateArrayPrefix === 'comma' && isArray(obj)) {
 	        // we need to join elements in
 	        if (encodeValuesOnly && encoder) {
-	            obj = utils.maybeMap(obj, encoder);
+	            obj = utils.maybeMap(obj, function (v) {
+	                return v == null ? v : encoder(v);
+	            });
 	        }
 	        objKeys = [{ value: obj.length > 0 ? obj.join(',') || null : void undefined }];
 	    } else if (isArray(filter)) {
@@ -36135,6 +36139,11 @@ function requireStringify () {
 	    var sideChannel = getSideChannel();
 	    for (var i = 0; i < objKeys.length; ++i) {
 	        var key = objKeys[i];
+
+	        if (typeof key === 'undefined' || key === null) {
+	            continue;
+	        }
+
 	        var value = obj[key];
 
 	        if (options.skipNulls && value === null) {
@@ -36168,10 +36177,10 @@ function requireStringify () {
 	    if (options.charsetSentinel) {
 	        if (options.charset === 'iso-8859-1') {
 	            // encodeURIComponent('&#10003;'), the "numeric entity" representation of a checkmark
-	            prefix += 'utf8=%26%2310003%3B&';
+	            prefix += 'utf8=%26%2310003%3B' + options.delimiter;
 	        } else {
 	            // encodeURIComponent('✓')
-	            prefix += 'utf8=%E2%9C%93&';
+	            prefix += 'utf8=%E2%9C%93' + options.delimiter;
 	        }
 	    }
 
@@ -36212,6 +36221,7 @@ function requireParse () {
 	    parseArrays: true,
 	    plainObjects: false,
 	    strictDepth: false,
+	    strictMerge: true,
 	    strictNullHandling: false,
 	    throwOnLimitExceeded: false
 	};
@@ -36253,10 +36263,10 @@ function requireParse () {
 	    var limit = options.parameterLimit === Infinity ? void undefined : options.parameterLimit;
 	    var parts = cleanStr.split(
 	        options.delimiter,
-	        options.throwOnLimitExceeded ? limit + 1 : limit
+	        options.throwOnLimitExceeded && typeof limit !== 'undefined' ? limit + 1 : limit
 	    );
 
-	    if (options.throwOnLimitExceeded && parts.length > limit) {
+	    if (options.throwOnLimitExceeded && typeof limit !== 'undefined' && parts.length > limit) {
 	        throw new RangeError('Parameter limit exceeded. Only ' + limit + ' parameter' + (limit === 1 ? '' : 's') + ' allowed.');
 	    }
 
@@ -36326,7 +36336,7 @@ function requireParse () {
 
 	        if (key !== null) {
 	            var existing = has.call(obj, key);
-	            if (existing && options.duplicates === 'combine') {
+	            if (existing && (options.duplicates === 'combine' || part.indexOf('[]=') > -1)) {
 	                obj[key] = utils.combine(
 	                    obj[key],
 	                    val,
@@ -36400,9 +36410,12 @@ function requireParse () {
 	    return leaf;
 	};
 
-	var splitKeyIntoSegments = function splitKeyIntoSegments(givenKey, options) {
-	    var key = options.allowDots ? givenKey.replace(/\.([^.[]+)/g, '[$1]') : givenKey;
+	// Split a key like "a[b][c[]]" into ['a', '[b]', '[c[]]'] while preserving
+	// qs parse semantics for depth/prototype guards.
+	var splitKeyIntoSegments = function splitKeyIntoSegments(originalKey, options) {
+	    var key = options.allowDots ? originalKey.replace(/\.([^.[]+)/g, '[$1]') : originalKey;
 
+	    // depth <= 0 keeps the whole key as one segment
 	    if (options.depth <= 0) {
 	        if (!options.plainObjects && has.call(Object.prototype, key)) {
 	            if (!options.allowPrototypes) {
@@ -36413,14 +36426,11 @@ function requireParse () {
 	        return [key];
 	    }
 
-	    var brackets = /(\[[^[\]]*])/;
-	    var child = /(\[[^[\]]*])/g;
+	    var segments = [];
 
-	    var segment = brackets.exec(key);
-	    var parent = segment ? key.slice(0, segment.index) : key;
-
-	    var keys = [];
-
+	    // parent before the first '[' (may be empty if key starts with '[')
+	    var first = key.indexOf('[');
+	    var parent = first >= 0 ? key.slice(0, first) : key;
 	    if (parent) {
 	        if (!options.plainObjects && has.call(Object.prototype, parent)) {
 	            if (!options.allowPrototypes) {
@@ -36428,32 +36438,62 @@ function requireParse () {
 	            }
 	        }
 
-	        keys[keys.length] = parent;
+	        segments[segments.length] = parent;
 	    }
 
-	    var i = 0;
-	    while ((segment = child.exec(key)) !== null && i < options.depth) {
-	        i += 1;
+	    var n = key.length;
+	    var open = first;
+	    var collected = 0;
 
-	        var segmentContent = segment[1].slice(1, -1);
-	        if (!options.plainObjects && has.call(Object.prototype, segmentContent)) {
-	            if (!options.allowPrototypes) {
-	                return;
+	    while (open >= 0 && collected < options.depth) {
+	        var level = 1;
+	        var i = open + 1;
+	        var close = -1;
+
+	        // balance nested '[' and ']' inside this bracket group using a nesting level counter
+	        while (i < n && close < 0) {
+	            var cu = key.charCodeAt(i);
+	            if (cu === 0x5B) { // '['
+	                level += 1;
+	            } else if (cu === 0x5D) { // ']'
+	                level -= 1;
+	                if (level === 0) {
+	                    close = i; // found matching close; loop will exit by condition
+	                }
 	            }
+	            i += 1;
 	        }
 
-	        keys[keys.length] = segment[1];
+	        if (close < 0) {
+	            // Unterminated group: wrap the raw remainder in one bracket pair so it stays
+	            // a single literal segment (e.g. "[[]b" -> "[[]b]"); we do not infer missing ']'.
+	            segments[segments.length] = '[' + key.slice(open) + ']';
+	            return segments;
+	        }
+
+	        var seg = key.slice(open, close + 1);
+	        // prototype guard for the content of this group
+	        var content = seg.slice(1, -1);
+	        if (!options.plainObjects && has.call(Object.prototype, content) && !options.allowPrototypes) {
+	            return;
+	        }
+
+	        segments[segments.length] = seg;
+	        collected += 1;
+
+	        // find the next '[' after this balanced group
+	        open = key.indexOf('[', close + 1);
 	    }
 
-	    if (segment) {
+	    if (open >= 0) {
 	        if (options.strictDepth === true) {
 	            throw new RangeError('Input depth exceeded depth option of ' + options.depth + ' and strictDepth is true');
 	        }
 
-	        keys[keys.length] = '[' + key.slice(segment.index) + ']';
+	        segments[segments.length] = '[' + key.slice(open) + ']';
 	    }
 
-	    return keys;
+	    return segments;
 	};
 
 	var parseKeys = function parseQueryStringKeys(givenKey, val, options, valuesParsed) {
@@ -36526,6 +36566,7 @@ function requireParse () {
 	        parseArrays: opts.parseArrays !== false,
 	        plainObjects: typeof opts.plainObjects === 'boolean' ? opts.plainObjects : defaults.plainObjects,
 	        strictDepth: typeof opts.strictDepth === 'boolean' ? !!opts.strictDepth : defaults.strictDepth,
+	        strictMerge: typeof opts.strictMerge === 'boolean' ? !!opts.strictMerge : defaults.strictMerge,
 	        strictNullHandling: typeof opts.strictNullHandling === 'boolean' ? opts.strictNullHandling : defaults.strictNullHandling,
 	        throwOnLimitExceeded: typeof opts.throwOnLimitExceeded === 'boolean' ? opts.throwOnLimitExceeded : false
 	    };
@@ -37567,9 +37608,9 @@ var hasRequiredAlertInterfaces;
 function requireAlertInterfaces () {
 	if (hasRequiredAlertInterfaces) return AlertInterfaces;
 	hasRequiredAlertInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.ValidationResult = exports$1.State = exports$1.Severity = exports$1.SarifJobStatus = exports$1.ResultType = exports$1.MetadataOperation = exports$1.MetadataChangeType = exports$1.LicenseState = exports$1.ExpandOption = exports$1.DismissalType = exports$1.DependencyKind = exports$1.Confidence = exports$1.ComponentType = exports$1.AnalysisConfigurationType = exports$1.AlertValidityStatus = exports$1.AlertValidationRequestStatus = exports$1.AlertType = exports$1.AlertListExpandOption = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.ValidationResult = exports.State = exports.Severity = exports.SarifJobStatus = exports.ResultType = exports.MetadataOperation = exports.MetadataChangeType = exports.LicenseState = exports.ExpandOption = exports.DismissalType = exports.DependencyKind = exports.Confidence = exports.ComponentType = exports.AnalysisConfigurationType = exports.AlertValidityStatus = exports.AlertValidationRequestStatus = exports.AlertType = exports.AlertListExpandOption = void 0;
 		(function (AlertListExpandOption) {
 		    /**
 		     * No Expands.
@@ -37579,7 +37620,7 @@ function requireAlertInterfaces () {
 		     * Return a minimal representation of an alert.
 		     */
 		    AlertListExpandOption[AlertListExpandOption["Minimal"] = 1] = "Minimal";
-		})(exports$1.AlertListExpandOption || (exports$1.AlertListExpandOption = {}));
+		})(exports.AlertListExpandOption || (exports.AlertListExpandOption = {}));
 		(function (AlertType) {
 		    /**
 		     * The code has an unspecified vulnerability type
@@ -37601,7 +37642,7 @@ function requireAlertInterfaces () {
 		     * The code uses a dependency with potential license incompliance.
 		     */
 		    AlertType[AlertType["License"] = 4] = "License";
-		})(exports$1.AlertType || (exports$1.AlertType = {}));
+		})(exports.AlertType || (exports.AlertType = {}));
 		(function (AlertValidationRequestStatus) {
 		    /**
 		     * Default, when the request status is not set/applicable.
@@ -37623,7 +37664,7 @@ function requireAlertInterfaces () {
 		     * This status is set only when there is an exception in the ValidationService.
 		     */
 		    AlertValidationRequestStatus[AlertValidationRequestStatus["Failed"] = 4] = "Failed";
-		})(exports$1.AlertValidationRequestStatus || (exports$1.AlertValidationRequestStatus = {}));
+		})(exports.AlertValidationRequestStatus || (exports.AlertValidationRequestStatus = {}));
 		(function (AlertValidityStatus) {
 		    /**
 		     * When there are no validation fingerprints attached to the alert.
@@ -37641,7 +37682,7 @@ function requireAlertInterfaces () {
 		     * When all validation fingerprints associated to the alert are not exploitable.
 		     */
 		    AlertValidityStatus[AlertValidityStatus["Inactive"] = 3] = "Inactive";
-		})(exports$1.AlertValidityStatus || (exports$1.AlertValidityStatus = {}));
+		})(exports.AlertValidityStatus || (exports.AlertValidityStatus = {}));
 		(function (AnalysisConfigurationType) {
 		    /**
 		     * Default analysis configuration that is not attached to any other configuration data
@@ -37651,7 +37692,7 @@ function requireAlertInterfaces () {
 		     * Ado Pipeline, contains branch, pipeline, phase, and ADOPipelineId
 		     */
 		    AnalysisConfigurationType[AnalysisConfigurationType["AdoPipeline"] = 1] = "AdoPipeline";
-		})(exports$1.AnalysisConfigurationType || (exports$1.AnalysisConfigurationType = {}));
+		})(exports.AnalysisConfigurationType || (exports.AnalysisConfigurationType = {}));
 		(function (ComponentType) {
 		    ComponentType[ComponentType["Unknown"] = 0] = "Unknown";
 		    ComponentType[ComponentType["NuGet"] = 1] = "NuGet";
@@ -37715,7 +37756,7 @@ function requireAlertInterfaces () {
 		     * Indicates the component is a Vcpkg Package.
 		     */
 		    ComponentType[ComponentType["Vcpkg"] = 16] = "Vcpkg";
-		})(exports$1.ComponentType || (exports$1.ComponentType = {}));
+		})(exports.ComponentType || (exports.ComponentType = {}));
 		(function (Confidence) {
 		    /**
 		     * High confidence level for alert
@@ -37725,7 +37766,7 @@ function requireAlertInterfaces () {
 		     * Other confidence level for alert
 		     */
 		    Confidence[Confidence["Other"] = 1] = "Other";
-		})(exports$1.Confidence || (exports$1.Confidence = {}));
+		})(exports.Confidence || (exports.Confidence = {}));
 		(function (DependencyKind) {
 		    DependencyKind[DependencyKind["Unknown"] = 0] = "Unknown";
 		    /**
@@ -37740,7 +37781,7 @@ function requireAlertInterfaces () {
 		     * Vulnerable Dependency. Deprecating this value. Use Component instead.
 		     */
 		    DependencyKind[DependencyKind["VulnerableDependency"] = 3] = "VulnerableDependency";
-		})(exports$1.DependencyKind || (exports$1.DependencyKind = {}));
+		})(exports.DependencyKind || (exports.DependencyKind = {}));
 		(function (DismissalType) {
 		    /**
 		     * Dismissal type unknown
@@ -37766,7 +37807,7 @@ function requireAlertInterfaces () {
 		     * Dismissal indicating backend detection tool was upgraded and the alert is not detected by the new version of tool.
 		     */
 		    DismissalType[DismissalType["ToolUpgrade"] = 5] = "ToolUpgrade";
-		})(exports$1.DismissalType || (exports$1.DismissalType = {}));
+		})(exports.DismissalType || (exports.DismissalType = {}));
 		(function (ExpandOption) {
 		    /**
 		     * No Expands.
@@ -37776,7 +37817,7 @@ function requireAlertInterfaces () {
 		     * Return validationFingerprints in Alert.
 		     */
 		    ExpandOption[ExpandOption["ValidationFingerprint"] = 1] = "ValidationFingerprint";
-		})(exports$1.ExpandOption || (exports$1.ExpandOption = {}));
+		})(exports.ExpandOption || (exports.ExpandOption = {}));
 		(function (LicenseState) {
 		    /**
 		     * Information of the license has not been harvested by ClearlyDefined
@@ -37790,13 +37831,13 @@ function requireAlertInterfaces () {
 		     * Information of the license has been harvested by ClearlyDefined
 		     */
 		    LicenseState[LicenseState["Harvested"] = 2] = "Harvested";
-		})(exports$1.LicenseState || (exports$1.LicenseState = {}));
+		})(exports.LicenseState || (exports.LicenseState = {}));
 		(function (MetadataChangeType) {
 		    MetadataChangeType[MetadataChangeType["None"] = 0] = "None";
 		    MetadataChangeType[MetadataChangeType["Created"] = 1] = "Created";
 		    MetadataChangeType[MetadataChangeType["Updated"] = 2] = "Updated";
 		    MetadataChangeType[MetadataChangeType["Deleted"] = 3] = "Deleted";
-		})(exports$1.MetadataChangeType || (exports$1.MetadataChangeType = {}));
+		})(exports.MetadataChangeType || (exports.MetadataChangeType = {}));
 		(function (MetadataOperation) {
 		    /**
 		     * Represents the defualt value if the operation is not specified or not supported.
@@ -37810,7 +37851,7 @@ function requireAlertInterfaces () {
 		     * Represents the removal of the metadata.
 		     */
 		    MetadataOperation[MetadataOperation["Remove"] = 2] = "Remove";
-		})(exports$1.MetadataOperation || (exports$1.MetadataOperation = {}));
+		})(exports.MetadataOperation || (exports.MetadataOperation = {}));
 		(function (ResultType) {
 		    /**
 		     * The result was found from an unspecified analysis type
@@ -37824,7 +37865,7 @@ function requireAlertInterfaces () {
 		     * The result was found from static code analysis
 		     */
 		    ResultType[ResultType["VersionControl"] = 2] = "VersionControl";
-		})(exports$1.ResultType || (exports$1.ResultType = {}));
+		})(exports.ResultType || (exports.ResultType = {}));
 		(function (SarifJobStatus) {
 		    /**
 		     * The job type when it is new
@@ -37846,7 +37887,7 @@ function requireAlertInterfaces () {
 		     * The job type when it is queued on exception
 		     */
 		    SarifJobStatus[SarifJobStatus["Requeued"] = 4] = "Requeued";
-		})(exports$1.SarifJobStatus || (exports$1.SarifJobStatus = {}));
+		})(exports.SarifJobStatus || (exports.SarifJobStatus = {}));
 		(function (Severity) {
 		    Severity[Severity["Low"] = 0] = "Low";
 		    Severity[Severity["Medium"] = 1] = "Medium";
@@ -37856,7 +37897,7 @@ function requireAlertInterfaces () {
 		    Severity[Severity["Warning"] = 5] = "Warning";
 		    Severity[Severity["Error"] = 6] = "Error";
 		    Severity[Severity["Undefined"] = 7] = "Undefined";
-		})(exports$1.Severity || (exports$1.Severity = {}));
+		})(exports.Severity || (exports.Severity = {}));
 		(function (State) {
 		    /**
 		     * Alert is in an indeterminate state
@@ -37878,7 +37919,7 @@ function requireAlertInterfaces () {
 		     * The tool has determined that the issue is no longer a risk
 		     */
 		    State[State["AutoDismissed"] = 8] = "AutoDismissed";
-		})(exports$1.State || (exports$1.State = {}));
+		})(exports.State || (exports.State = {}));
 		(function (ValidationResult) {
 		    /**
 		     * Default value, no information about the secret can be inferred from this.
@@ -37896,8 +37937,8 @@ function requireAlertInterfaces () {
 		     * Represents a secret where no determination can be made about its exploitability.
 		     */
 		    ValidationResult[ValidationResult["Inconclusive"] = 3] = "Inconclusive";
-		})(exports$1.ValidationResult || (exports$1.ValidationResult = {}));
-		exports$1.TypeInfo = {
+		})(exports.ValidationResult || (exports.ValidationResult = {}));
+		exports.TypeInfo = {
 		    Alert: {},
 		    AlertAnalysisInstance: {},
 		    AlertListExpandOption: {
@@ -38078,15 +38119,15 @@ function requireAlertInterfaces () {
 		        }
 		    },
 		};
-		exports$1.TypeInfo.Alert.fields = {
+		exports.TypeInfo.Alert.fields = {
 		    alertType: {
-		        enumType: exports$1.TypeInfo.AlertType
+		        enumType: exports.TypeInfo.AlertType
 		    },
 		    confidence: {
-		        enumType: exports$1.TypeInfo.Confidence
+		        enumType: exports.TypeInfo.Confidence
 		    },
 		    dismissal: {
-		        typeInfo: exports$1.TypeInfo.Dismissal
+		        typeInfo: exports.TypeInfo.Dismissal
 		    },
 		    firstSeenDate: {
 		        isDate: true,
@@ -38102,169 +38143,169 @@ function requireAlertInterfaces () {
 		    },
 		    logicalLocations: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.LogicalLocation
+		        typeInfo: exports.TypeInfo.LogicalLocation
 		    },
 		    severity: {
-		        enumType: exports$1.TypeInfo.Severity
+		        enumType: exports.TypeInfo.Severity
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.State
+		        enumType: exports.TypeInfo.State
 		    },
 		    validationFingerprints: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ValidationFingerprint
+		        typeInfo: exports.TypeInfo.ValidationFingerprint
 		    },
 		    validityDetails: {
-		        typeInfo: exports$1.TypeInfo.AlertValidityInfo
+		        typeInfo: exports.TypeInfo.AlertValidityInfo
 		    }
 		};
-		exports$1.TypeInfo.AlertAnalysisInstance.fields = {
+		exports.TypeInfo.AlertAnalysisInstance.fields = {
 		    analysisConfiguration: {
-		        typeInfo: exports$1.TypeInfo.AnalysisConfiguration
+		        typeInfo: exports.TypeInfo.AnalysisConfiguration
 		    },
 		    firstSeen: {
-		        typeInfo: exports$1.TypeInfo.AnalysisInstance
+		        typeInfo: exports.TypeInfo.AnalysisInstance
 		    },
 		    fixedIn: {
-		        typeInfo: exports$1.TypeInfo.AnalysisInstance
+		        typeInfo: exports.TypeInfo.AnalysisInstance
 		    },
 		    lastSeen: {
-		        typeInfo: exports$1.TypeInfo.AnalysisInstance
+		        typeInfo: exports.TypeInfo.AnalysisInstance
 		    },
 		    recentAnalysisInstance: {
-		        typeInfo: exports$1.TypeInfo.AnalysisInstance
+		        typeInfo: exports.TypeInfo.AnalysisInstance
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.State
+		        enumType: exports.TypeInfo.State
 		    }
 		};
-		exports$1.TypeInfo.AlertMetadata.fields = {
+		exports.TypeInfo.AlertMetadata.fields = {
 		    metadata: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Metadata
+		        typeInfo: exports.TypeInfo.Metadata
 		    }
 		};
-		exports$1.TypeInfo.AlertMetadataChange.fields = {
+		exports.TypeInfo.AlertMetadataChange.fields = {
 		    metadataChange: {
-		        typeInfo: exports$1.TypeInfo.MetadataChange
+		        typeInfo: exports.TypeInfo.MetadataChange
 		    }
 		};
-		exports$1.TypeInfo.AlertStateUpdate.fields = {
+		exports.TypeInfo.AlertStateUpdate.fields = {
 		    dismissedReason: {
-		        enumType: exports$1.TypeInfo.DismissalType
+		        enumType: exports.TypeInfo.DismissalType
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.State
+		        enumType: exports.TypeInfo.State
 		    }
 		};
-		exports$1.TypeInfo.AlertValidityInfo.fields = {
+		exports.TypeInfo.AlertValidityInfo.fields = {
 		    validityLastCheckedDate: {
 		        isDate: true,
 		    },
 		    validityStatus: {
-		        enumType: exports$1.TypeInfo.AlertValidityStatus
+		        enumType: exports.TypeInfo.AlertValidityStatus
 		    }
 		};
-		exports$1.TypeInfo.AnalysisConfiguration.fields = {
+		exports.TypeInfo.AnalysisConfiguration.fields = {
 		    alertType: {
-		        enumType: exports$1.TypeInfo.AlertType
+		        enumType: exports.TypeInfo.AlertType
 		    },
 		    analysisConfigurationType: {
-		        enumType: exports$1.TypeInfo.AnalysisConfigurationType
+		        enumType: exports.TypeInfo.AnalysisConfigurationType
 		    }
 		};
-		exports$1.TypeInfo.AnalysisInstance.fields = {
+		exports.TypeInfo.AnalysisInstance.fields = {
 		    configuration: {
-		        typeInfo: exports$1.TypeInfo.AnalysisConfiguration
+		        typeInfo: exports.TypeInfo.AnalysisConfiguration
 		    },
 		    createdDate: {
 		        isDate: true,
 		    },
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.AnalysisResult
+		        typeInfo: exports.TypeInfo.AnalysisResult
 		    }
 		};
-		exports$1.TypeInfo.AnalysisResult.fields = {
+		exports.TypeInfo.AnalysisResult.fields = {
 		    result: {
-		        typeInfo: exports$1.TypeInfo.Result
+		        typeInfo: exports.TypeInfo.Result
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.State
+		        enumType: exports.TypeInfo.State
 		    }
 		};
-		exports$1.TypeInfo.Branch.fields = {
+		exports.TypeInfo.Branch.fields = {
 		    deletedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.Dependency.fields = {
+		exports.TypeInfo.Dependency.fields = {
 		    componentType: {
-		        enumType: exports$1.TypeInfo.ComponentType
+		        enumType: exports.TypeInfo.ComponentType
 		    },
 		    license: {
-		        typeInfo: exports$1.TypeInfo.License
+		        typeInfo: exports.TypeInfo.License
 		    }
 		};
-		exports$1.TypeInfo.DependencyResult.fields = {
+		exports.TypeInfo.DependencyResult.fields = {
 		    dependency: {
-		        typeInfo: exports$1.TypeInfo.Dependency
+		        typeInfo: exports.TypeInfo.Dependency
 		    }
 		};
-		exports$1.TypeInfo.Dismissal.fields = {
+		exports.TypeInfo.Dismissal.fields = {
 		    dismissalType: {
-		        enumType: exports$1.TypeInfo.DismissalType
+		        enumType: exports.TypeInfo.DismissalType
 		    },
 		    requestedOn: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.License.fields = {
+		exports.TypeInfo.License.fields = {
 		    state: {
-		        enumType: exports$1.TypeInfo.LicenseState
+		        enumType: exports.TypeInfo.LicenseState
 		    }
 		};
-		exports$1.TypeInfo.LogicalLocation.fields = {
+		exports.TypeInfo.LogicalLocation.fields = {
 		    kind: {
-		        enumType: exports$1.TypeInfo.DependencyKind
+		        enumType: exports.TypeInfo.DependencyKind
 		    },
 		    license: {
-		        typeInfo: exports$1.TypeInfo.License
+		        typeInfo: exports.TypeInfo.License
 		    }
 		};
-		exports$1.TypeInfo.Metadata.fields = {
+		exports.TypeInfo.Metadata.fields = {
 		    op: {
-		        enumType: exports$1.TypeInfo.MetadataOperation
+		        enumType: exports.TypeInfo.MetadataOperation
 		    }
 		};
-		exports$1.TypeInfo.MetadataChange.fields = {
+		exports.TypeInfo.MetadataChange.fields = {
 		    changeType: {
-		        enumType: exports$1.TypeInfo.MetadataChangeType
+		        enumType: exports.TypeInfo.MetadataChangeType
 		    }
 		};
-		exports$1.TypeInfo.Result.fields = {
+		exports.TypeInfo.Result.fields = {
 		    dependencyResult: {
-		        typeInfo: exports$1.TypeInfo.DependencyResult
+		        typeInfo: exports.TypeInfo.DependencyResult
 		    },
 		    resultType: {
-		        enumType: exports$1.TypeInfo.ResultType
+		        enumType: exports.TypeInfo.ResultType
 		    },
 		    severity: {
-		        enumType: exports$1.TypeInfo.Severity
+		        enumType: exports.TypeInfo.Severity
 		    }
 		};
-		exports$1.TypeInfo.SarifUploadStatus.fields = {
+		exports.TypeInfo.SarifUploadStatus.fields = {
 		    processingStatus: {
-		        enumType: exports$1.TypeInfo.SarifJobStatus
+		        enumType: exports.TypeInfo.SarifJobStatus
 		    }
 		};
-		exports$1.TypeInfo.SearchCriteria.fields = {
+		exports.TypeInfo.SearchCriteria.fields = {
 		    alertType: {
-		        enumType: exports$1.TypeInfo.AlertType
+		        enumType: exports.TypeInfo.AlertType
 		    },
 		    confidenceLevels: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.Confidence
+		        enumType: exports.TypeInfo.Confidence
 		    },
 		    fromDate: {
 		        isDate: true,
@@ -38274,67 +38315,67 @@ function requireAlertInterfaces () {
 		    },
 		    severities: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.Severity
+		        enumType: exports.TypeInfo.Severity
 		    },
 		    states: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.State
+		        enumType: exports.TypeInfo.State
 		    },
 		    toDate: {
 		        isDate: true,
 		    },
 		    validity: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.AlertValidityStatus
+		        enumType: exports.TypeInfo.AlertValidityStatus
 		    }
 		};
-		exports$1.TypeInfo.UxFilters.fields = {
+		exports.TypeInfo.UxFilters.fields = {
 		    branches: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Branch
+		        typeInfo: exports.TypeInfo.Branch
 		    },
 		    confidenceLevels: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.Confidence
+		        enumType: exports.TypeInfo.Confidence
 		    },
 		    licenses: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.License
+		        typeInfo: exports.TypeInfo.License
 		    },
 		    packages: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Dependency
+		        typeInfo: exports.TypeInfo.Dependency
 		    },
 		    severities: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.Severity
+		        enumType: exports.TypeInfo.Severity
 		    },
 		    states: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.State
+		        enumType: exports.TypeInfo.State
 		    },
 		    validity: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.AlertValidityStatus
+		        enumType: exports.TypeInfo.AlertValidityStatus
 		    }
 		};
-		exports$1.TypeInfo.ValidationFingerprint.fields = {
+		exports.TypeInfo.ValidationFingerprint.fields = {
 		    validityLastUpdatedDate: {
 		        isDate: true,
 		    },
 		    validityResult: {
-		        enumType: exports$1.TypeInfo.ValidationResult
+		        enumType: exports.TypeInfo.ValidationResult
 		    }
 		};
-		exports$1.TypeInfo.ValidationRequestInfo.fields = {
+		exports.TypeInfo.ValidationRequestInfo.fields = {
 		    alertValidationRequestStatus: {
-		        enumType: exports$1.TypeInfo.AlertValidationRequestStatus
+		        enumType: exports.TypeInfo.AlertValidationRequestStatus
 		    },
 		    validityLastCheckedDate: {
 		        isDate: true,
 		    },
 		    validityStatus: {
-		        enumType: exports$1.TypeInfo.AlertValidityStatus
+		        enumType: exports.TypeInfo.AlertValidityStatus
 		    }
 		}; 
 	} (AlertInterfaces));
@@ -38831,12 +38872,12 @@ var hasRequiredSystemDataInterfaces;
 function requireSystemDataInterfaces () {
 	if (hasRequiredSystemDataInterfaces) return SystemDataInterfaces;
 	hasRequiredSystemDataInterfaces = 1;
-	(function (exports$1) {
+	(function (exports) {
 		//----------------------------------------------------------
 		// Copyright (C) Microsoft Corporation. All rights reserved.
 		//----------------------------------------------------------
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.SqlDbType = void 0;
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.SqlDbType = void 0;
 		(function (SqlDbType) {
 		    /**
 		     * A 64-bit signed integer.
@@ -38962,8 +39003,8 @@ function requireSystemDataInterfaces () {
 		     * Date and time data with time zone awareness. Date value range is from January 1,1 AD through December 31, 9999 AD. Time value range is 00:00:00 through 23:59:59.9999999 with an accuracy of 100 nanoseconds. Time zone value range is -14:00 through +14:00.
 		     */
 		    SqlDbType[SqlDbType["DateTimeOffset"] = 34] = "DateTimeOffset";
-		})(exports$1.SqlDbType || (exports$1.SqlDbType = {}));
-		exports$1.TypeInfo = {
+		})(exports.SqlDbType || (exports.SqlDbType = {}));
+		exports.TypeInfo = {
 		    SqlDbType: {
 		        enumValues: {
 		            "BigInt": 0,
@@ -39021,9 +39062,9 @@ var hasRequiredCoreInterfaces;
 function requireCoreInterfaces () {
 	if (hasRequiredCoreInterfaces) return CoreInterfaces;
 	hasRequiredCoreInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.SourceControlTypes = exports$1.ProjectVisibility = exports$1.ProjectChangeType = exports$1.ProcessType = exports$1.ProcessCustomizationType = exports$1.ConnectedServiceKind = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.SourceControlTypes = exports.ProjectVisibility = exports.ProjectChangeType = exports.ProcessType = exports.ProcessCustomizationType = exports.ConnectedServiceKind = void 0;
 		(function (ConnectedServiceKind) {
 		    /**
 		     * Custom or unknown service
@@ -39041,7 +39082,7 @@ function requireCoreInterfaces () {
 		     * Generic Connection
 		     */
 		    ConnectedServiceKind[ConnectedServiceKind["Generic"] = 3] = "Generic";
-		})(exports$1.ConnectedServiceKind || (exports$1.ConnectedServiceKind = {}));
+		})(exports.ConnectedServiceKind || (exports.ConnectedServiceKind = {}));
 		(function (ProcessCustomizationType) {
 		    /**
 		     * Process customization can't be computed.
@@ -39055,17 +39096,17 @@ function requireCoreInterfaces () {
 		     * Customization based on process inheritance
 		     */
 		    ProcessCustomizationType[ProcessCustomizationType["Inherited"] = 1] = "Inherited";
-		})(exports$1.ProcessCustomizationType || (exports$1.ProcessCustomizationType = {}));
+		})(exports.ProcessCustomizationType || (exports.ProcessCustomizationType = {}));
 		(function (ProcessType) {
 		    ProcessType[ProcessType["System"] = 0] = "System";
 		    ProcessType[ProcessType["Custom"] = 1] = "Custom";
 		    ProcessType[ProcessType["Inherited"] = 2] = "Inherited";
-		})(exports$1.ProcessType || (exports$1.ProcessType = {}));
+		})(exports.ProcessType || (exports.ProcessType = {}));
 		(function (ProjectChangeType) {
 		    ProjectChangeType[ProjectChangeType["Modified"] = 0] = "Modified";
 		    ProjectChangeType[ProjectChangeType["Deleted"] = 1] = "Deleted";
 		    ProjectChangeType[ProjectChangeType["Added"] = 2] = "Added";
-		})(exports$1.ProjectChangeType || (exports$1.ProjectChangeType = {}));
+		})(exports.ProjectChangeType || (exports.ProjectChangeType = {}));
 		(function (ProjectVisibility) {
 		    ProjectVisibility[ProjectVisibility["Unchanged"] = -1] = "Unchanged";
 		    /**
@@ -39081,12 +39122,12 @@ function requireCoreInterfaces () {
 		     */
 		    ProjectVisibility[ProjectVisibility["Public"] = 2] = "Public";
 		    ProjectVisibility[ProjectVisibility["SystemPrivate"] = 3] = "SystemPrivate";
-		})(exports$1.ProjectVisibility || (exports$1.ProjectVisibility = {}));
+		})(exports.ProjectVisibility || (exports.ProjectVisibility = {}));
 		(function (SourceControlTypes) {
 		    SourceControlTypes[SourceControlTypes["Tfvc"] = 1] = "Tfvc";
 		    SourceControlTypes[SourceControlTypes["Git"] = 2] = "Git";
-		})(exports$1.SourceControlTypes || (exports$1.SourceControlTypes = {}));
-		exports$1.TypeInfo = {
+		})(exports.SourceControlTypes || (exports.SourceControlTypes = {}));
+		exports.TypeInfo = {
 		    ConnectedServiceKind: {
 		        enumValues: {
 		            "custom": 0,
@@ -39140,69 +39181,69 @@ function requireCoreInterfaces () {
 		    WebApiConnectedServiceDetails: {},
 		    WebApiProject: {},
 		};
-		exports$1.TypeInfo.Process.fields = {
+		exports.TypeInfo.Process.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.ProcessType
+		        enumType: exports.TypeInfo.ProcessType
 		    }
 		};
-		exports$1.TypeInfo.ProjectInfo.fields = {
+		exports.TypeInfo.ProjectInfo.fields = {
 		    lastUpdateTime: {
 		        isDate: true,
 		    },
 		    visibility: {
-		        enumType: exports$1.TypeInfo.ProjectVisibility
+		        enumType: exports.TypeInfo.ProjectVisibility
 		    }
 		};
-		exports$1.TypeInfo.ProjectMessage.fields = {
+		exports.TypeInfo.ProjectMessage.fields = {
 		    project: {
-		        typeInfo: exports$1.TypeInfo.ProjectInfo
+		        typeInfo: exports.TypeInfo.ProjectInfo
 		    },
 		    projectChangeType: {
-		        enumType: exports$1.TypeInfo.ProjectChangeType
+		        enumType: exports.TypeInfo.ProjectChangeType
 		    }
 		};
-		exports$1.TypeInfo.TeamProject.fields = {
+		exports.TypeInfo.TeamProject.fields = {
 		    lastUpdateTime: {
 		        isDate: true,
 		    },
 		    visibility: {
-		        enumType: exports$1.TypeInfo.ProjectVisibility
+		        enumType: exports.TypeInfo.ProjectVisibility
 		    }
 		};
-		exports$1.TypeInfo.TeamProjectCollection.fields = {
+		exports.TypeInfo.TeamProjectCollection.fields = {
 		    processCustomizationType: {
-		        enumType: exports$1.TypeInfo.ProcessCustomizationType
+		        enumType: exports.TypeInfo.ProcessCustomizationType
 		    }
 		};
-		exports$1.TypeInfo.TeamProjectReference.fields = {
+		exports.TypeInfo.TeamProjectReference.fields = {
 		    lastUpdateTime: {
 		        isDate: true,
 		    },
 		    visibility: {
-		        enumType: exports$1.TypeInfo.ProjectVisibility
+		        enumType: exports.TypeInfo.ProjectVisibility
 		    }
 		};
-		exports$1.TypeInfo.TemporaryDataCreatedDTO.fields = {
+		exports.TypeInfo.TemporaryDataCreatedDTO.fields = {
 		    expirationDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.WebApiConnectedService.fields = {
+		exports.TypeInfo.WebApiConnectedService.fields = {
 		    project: {
-		        typeInfo: exports$1.TypeInfo.TeamProjectReference
+		        typeInfo: exports.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.WebApiConnectedServiceDetails.fields = {
+		exports.TypeInfo.WebApiConnectedServiceDetails.fields = {
 		    connectedServiceMetaData: {
-		        typeInfo: exports$1.TypeInfo.WebApiConnectedService
+		        typeInfo: exports.TypeInfo.WebApiConnectedService
 		    }
 		};
-		exports$1.TypeInfo.WebApiProject.fields = {
+		exports.TypeInfo.WebApiProject.fields = {
 		    lastUpdateTime: {
 		        isDate: true,
 		    },
 		    visibility: {
-		        enumType: exports$1.TypeInfo.ProjectVisibility
+		        enumType: exports.TypeInfo.ProjectVisibility
 		    }
 		}; 
 	} (CoreInterfaces));
@@ -39224,9 +39265,9 @@ var hasRequiredTestInterfaces;
 function requireTestInterfaces () {
 	if (hasRequiredTestInterfaces) return TestInterfaces;
 	hasRequiredTestInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.TestSessionState = exports$1.TestSessionSource = exports$1.TestRunSubstate = exports$1.TestRunState = exports$1.TestRunPublishContext = exports$1.TestRunOutcome = exports$1.TestResultsSettingsType = exports$1.TestResultsSessionState = exports$1.TestResultsContextType = exports$1.TestResultGroupBy = exports$1.TestPointState = exports$1.TestOutcome = exports$1.TestLogType = exports$1.TestLogStoreOperationType = exports$1.TestLogStoreEndpointType = exports$1.TestLogStatusCode = exports$1.TestLogScope = exports$1.TestConfigurationState = exports$1.TCMServiceDataMigrationStatus = exports$1.SuiteExpand = exports$1.SessionResult = exports$1.Service = exports$1.RunType = exports$1.ResultObjectType = exports$1.ResultMetaDataDetails = exports$1.ResultMetadata = exports$1.ResultGroupType = exports$1.ResultDetails = exports$1.OperationType = exports$1.Metrics = exports$1.FlakyDetectionType = exports$1.CustomTestFieldType = exports$1.CustomTestFieldScope = exports$1.CoverageSummaryStatus = exports$1.CoverageStatus = exports$1.CoverageQueryFlags = exports$1.CoverageDetailedSummaryStatus = exports$1.CloneOperationState = exports$1.AttachmentType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.TestSessionState = exports.TestSessionSource = exports.TestRunSubstate = exports.TestRunState = exports.TestRunPublishContext = exports.TestRunOutcome = exports.TestResultsSettingsType = exports.TestResultsSessionState = exports.TestResultsContextType = exports.TestResultGroupBy = exports.TestPointState = exports.TestOutcome = exports.TestLogType = exports.TestLogStoreOperationType = exports.TestLogStoreEndpointType = exports.TestLogStatusCode = exports.TestLogScope = exports.TestConfigurationState = exports.TCMServiceDataMigrationStatus = exports.SuiteExpand = exports.SessionResult = exports.Service = exports.RunType = exports.ResultObjectType = exports.ResultMetaDataDetails = exports.ResultMetadata = exports.ResultGroupType = exports.ResultDetails = exports.OperationType = exports.Metrics = exports.FlakyDetectionType = exports.CustomTestFieldType = exports.CustomTestFieldScope = exports.CoverageSummaryStatus = exports.CoverageStatus = exports.CoverageQueryFlags = exports.CoverageDetailedSummaryStatus = exports.CloneOperationState = exports.AttachmentType = void 0;
 		const SystemData = requireSystemDataInterfaces();
 		const TfsCoreInterfaces = requireCoreInterfaces();
 		(function (AttachmentType) {
@@ -39251,7 +39292,7 @@ function requireTestInterfaces () {
 		     * Attachment type ConsoleLog.
 		     */
 		    AttachmentType[AttachmentType["ConsoleLog"] = 11] = "ConsoleLog";
-		})(exports$1.AttachmentType || (exports$1.AttachmentType = {}));
+		})(exports.AttachmentType || (exports.AttachmentType = {}));
 		(function (CloneOperationState) {
 		    /**
 		     * value for Failed State
@@ -39269,7 +39310,7 @@ function requireTestInterfaces () {
 		     * value for Success state
 		     */
 		    CloneOperationState[CloneOperationState["Succeeded"] = 3] = "Succeeded";
-		})(exports$1.CloneOperationState || (exports$1.CloneOperationState = {}));
+		})(exports.CloneOperationState || (exports.CloneOperationState = {}));
 		(function (CoverageDetailedSummaryStatus) {
 		    /**
 		     * No coverage status
@@ -39363,7 +39404,7 @@ function requireTestInterfaces () {
 		     * Invalid Coverage Input file
 		     */
 		    CoverageDetailedSummaryStatus[CoverageDetailedSummaryStatus["InvalidCoverageInput"] = 22] = "InvalidCoverageInput";
-		})(exports$1.CoverageDetailedSummaryStatus || (exports$1.CoverageDetailedSummaryStatus = {}));
+		})(exports.CoverageDetailedSummaryStatus || (exports.CoverageDetailedSummaryStatus = {}));
 		(function (CoverageQueryFlags) {
 		    /**
 		     * If set, the Coverage.Modules property will be populated.
@@ -39377,12 +39418,12 @@ function requireTestInterfaces () {
 		     * If set, the ModuleCoverage.CoverageData field will be populated.
 		     */
 		    CoverageQueryFlags[CoverageQueryFlags["BlockData"] = 4] = "BlockData";
-		})(exports$1.CoverageQueryFlags || (exports$1.CoverageQueryFlags = {}));
+		})(exports.CoverageQueryFlags || (exports.CoverageQueryFlags = {}));
 		(function (CoverageStatus) {
 		    CoverageStatus[CoverageStatus["Covered"] = 0] = "Covered";
 		    CoverageStatus[CoverageStatus["NotCovered"] = 1] = "NotCovered";
 		    CoverageStatus[CoverageStatus["PartiallyCovered"] = 2] = "PartiallyCovered";
-		})(exports$1.CoverageStatus || (exports$1.CoverageStatus = {}));
+		})(exports.CoverageStatus || (exports.CoverageStatus = {}));
 		(function (CoverageSummaryStatus) {
 		    /**
 		     * No coverage status
@@ -39408,7 +39449,7 @@ function requireTestInterfaces () {
 		     * Summary evaluation may be ongoing but another merge has been requested.
 		     */
 		    CoverageSummaryStatus[CoverageSummaryStatus["UpdateRequestQueued"] = 5] = "UpdateRequestQueued";
-		})(exports$1.CoverageSummaryStatus || (exports$1.CoverageSummaryStatus = {}));
+		})(exports.CoverageSummaryStatus || (exports.CoverageSummaryStatus = {}));
 		(function (CustomTestFieldScope) {
 		    CustomTestFieldScope[CustomTestFieldScope["None"] = 0] = "None";
 		    /**
@@ -39428,7 +39469,7 @@ function requireTestInterfaces () {
 		     */
 		    CustomTestFieldScope[CustomTestFieldScope["System"] = 4] = "System";
 		    CustomTestFieldScope[CustomTestFieldScope["All"] = 7] = "All";
-		})(exports$1.CustomTestFieldScope || (exports$1.CustomTestFieldScope = {}));
+		})(exports.CustomTestFieldScope || (exports.CustomTestFieldScope = {}));
 		(function (CustomTestFieldType) {
 		    /**
 		     * Boolean data type.
@@ -39454,7 +39495,7 @@ function requireTestInterfaces () {
 		     * Unique identifier data type.
 		     */
 		    CustomTestFieldType[CustomTestFieldType["Guid"] = 14] = "Guid";
-		})(exports$1.CustomTestFieldType || (exports$1.CustomTestFieldType = {}));
+		})(exports.CustomTestFieldType || (exports.CustomTestFieldType = {}));
 		(function (FlakyDetectionType) {
 		    /**
 		     * Custom defines manual detection type.
@@ -39464,7 +39505,7 @@ function requireTestInterfaces () {
 		     * Defines System detection type.
 		     */
 		    FlakyDetectionType[FlakyDetectionType["System"] = 2] = "System";
-		})(exports$1.FlakyDetectionType || (exports$1.FlakyDetectionType = {}));
+		})(exports.FlakyDetectionType || (exports.FlakyDetectionType = {}));
 		(function (Metrics) {
 		    /**
 		     * To get results of all matrix.
@@ -39482,11 +39523,11 @@ function requireTestInterfaces () {
 		     * Get runs summary
 		     */
 		    Metrics[Metrics["RunSummary"] = 4] = "RunSummary";
-		})(exports$1.Metrics || (exports$1.Metrics = {}));
+		})(exports.Metrics || (exports.Metrics = {}));
 		(function (OperationType) {
 		    OperationType[OperationType["Add"] = 1] = "Add";
 		    OperationType[OperationType["Delete"] = 2] = "Delete";
-		})(exports$1.OperationType || (exports$1.OperationType = {}));
+		})(exports.OperationType || (exports.OperationType = {}));
 		(function (ResultDetails) {
 		    /**
 		     * Core fields of test result. Core fields includes State, Outcome, Priority, AutomatedTestName, AutomatedTestStorage, Comments, ErrorMessage etc.
@@ -39508,7 +39549,7 @@ function requireTestInterfaces () {
 		     * Point and plan detail in a test result.
 		     */
 		    ResultDetails[ResultDetails["Point"] = 8] = "Point";
-		})(exports$1.ResultDetails || (exports$1.ResultDetails = {}));
+		})(exports.ResultDetails || (exports.ResultDetails = {}));
 		(function (ResultGroupType) {
 		    /**
 		     * Leaf node of test result.
@@ -39530,7 +39571,7 @@ function requireTestInterfaces () {
 		     * Unknown hierarchy type.
 		     */
 		    ResultGroupType[ResultGroupType["Generic"] = 4] = "Generic";
-		})(exports$1.ResultGroupType || (exports$1.ResultGroupType = {}));
+		})(exports.ResultGroupType || (exports.ResultGroupType = {}));
 		(function (ResultMetadata) {
 		    /**
 		     * Rerun metadata
@@ -39540,7 +39581,7 @@ function requireTestInterfaces () {
 		     * Flaky metadata
 		     */
 		    ResultMetadata[ResultMetadata["Flaky"] = 2] = "Flaky";
-		})(exports$1.ResultMetadata || (exports$1.ResultMetadata = {}));
+		})(exports.ResultMetadata || (exports.ResultMetadata = {}));
 		(function (ResultMetaDataDetails) {
 		    /**
 		     * Core fields of test result metadata.
@@ -39550,7 +39591,7 @@ function requireTestInterfaces () {
 		     * Test FlakyIdentifiers details in test result metadata.
 		     */
 		    ResultMetaDataDetails[ResultMetaDataDetails["FlakyIdentifiers"] = 1] = "FlakyIdentifiers";
-		})(exports$1.ResultMetaDataDetails || (exports$1.ResultMetaDataDetails = {}));
+		})(exports.ResultMetaDataDetails || (exports.ResultMetaDataDetails = {}));
 		(function (ResultObjectType) {
 		    /**
 		     * Suite Clone
@@ -39560,7 +39601,7 @@ function requireTestInterfaces () {
 		     * Plan Clone
 		     */
 		    ResultObjectType[ResultObjectType["TestPlan"] = 1] = "TestPlan";
-		})(exports$1.ResultObjectType || (exports$1.ResultObjectType = {}));
+		})(exports.ResultObjectType || (exports.ResultObjectType = {}));
 		(function (RunType) {
 		    /**
 		     * Only used during an update to preserve the existing value.
@@ -39590,12 +39631,12 @@ function requireTestInterfaces () {
 		     * These test run may or may not have published test results but it will have summary like total test, passed test, failed test etc. These are automated tests.
 		     */
 		    RunType[RunType["NoConfigRun"] = 32] = "NoConfigRun";
-		})(exports$1.RunType || (exports$1.RunType = {}));
+		})(exports.RunType || (exports.RunType = {}));
 		(function (Service) {
 		    Service[Service["Any"] = 0] = "Any";
 		    Service[Service["Tcm"] = 1] = "Tcm";
 		    Service[Service["Tfs"] = 2] = "Tfs";
-		})(exports$1.Service || (exports$1.Service = {}));
+		})(exports.Service || (exports.Service = {}));
 		(function (SessionResult) {
 		    /**
 		     * Default
@@ -39613,7 +39654,7 @@ function requireTestInterfaces () {
 		     * Session result still Pending
 		     */
 		    SessionResult[SessionResult["Pending"] = 3] = "Pending";
-		})(exports$1.SessionResult || (exports$1.SessionResult = {}));
+		})(exports.SessionResult || (exports.SessionResult = {}));
 		(function (SuiteExpand) {
 		    /**
 		     * Include children in response.
@@ -39623,7 +39664,7 @@ function requireTestInterfaces () {
 		     * Include default testers in response.
 		     */
 		    SuiteExpand[SuiteExpand["DefaultTesters"] = 2] = "DefaultTesters";
-		})(exports$1.SuiteExpand || (exports$1.SuiteExpand = {}));
+		})(exports.SuiteExpand || (exports.SuiteExpand = {}));
 		(function (TCMServiceDataMigrationStatus) {
 		    /**
 		     * Migration Not Started
@@ -39641,7 +39682,7 @@ function requireTestInterfaces () {
 		     * Migration Failed
 		     */
 		    TCMServiceDataMigrationStatus[TCMServiceDataMigrationStatus["Failed"] = 3] = "Failed";
-		})(exports$1.TCMServiceDataMigrationStatus || (exports$1.TCMServiceDataMigrationStatus = {}));
+		})(exports.TCMServiceDataMigrationStatus || (exports.TCMServiceDataMigrationStatus = {}));
 		(function (TestConfigurationState) {
 		    /**
 		     * The configuration can be used for new test runs.
@@ -39651,7 +39692,7 @@ function requireTestInterfaces () {
 		     * The configuration has been retired and should not be used for new test runs.
 		     */
 		    TestConfigurationState[TestConfigurationState["Inactive"] = 2] = "Inactive";
-		})(exports$1.TestConfigurationState || (exports$1.TestConfigurationState = {}));
+		})(exports.TestConfigurationState || (exports.TestConfigurationState = {}));
 		(function (TestLogScope) {
 		    /**
 		     * Log file is associated with Run, result, subresult
@@ -39665,7 +39706,7 @@ function requireTestInterfaces () {
 		     * Log File associated with Release
 		     */
 		    TestLogScope[TestLogScope["Release"] = 2] = "Release";
-		})(exports$1.TestLogScope || (exports$1.TestLogScope = {}));
+		})(exports.TestLogScope || (exports.TestLogScope = {}));
 		(function (TestLogStatusCode) {
 		    /**
 		     * Operation is successful
@@ -39735,7 +39776,7 @@ function requireTestInterfaces () {
 		     * Storage capacity exceeded
 		     */
 		    TestLogStatusCode[TestLogStatusCode["StorageCapacityExceeded"] = 16] = "StorageCapacityExceeded";
-		})(exports$1.TestLogStatusCode || (exports$1.TestLogStatusCode = {}));
+		})(exports.TestLogStatusCode || (exports.TestLogStatusCode = {}));
 		(function (TestLogStoreEndpointType) {
 		    /**
 		     * Endpoint type is scoped to root
@@ -39745,7 +39786,7 @@ function requireTestInterfaces () {
 		     * Endpoint type is scoped to file
 		     */
 		    TestLogStoreEndpointType[TestLogStoreEndpointType["File"] = 2] = "File";
-		})(exports$1.TestLogStoreEndpointType || (exports$1.TestLogStoreEndpointType = {}));
+		})(exports.TestLogStoreEndpointType || (exports.TestLogStoreEndpointType = {}));
 		(function (TestLogStoreOperationType) {
 		    /**
 		     * Operation is scoped to read data only.
@@ -39759,7 +39800,7 @@ function requireTestInterfaces () {
 		     * Operation is scoped to read and create data.
 		     */
 		    TestLogStoreOperationType[TestLogStoreOperationType["ReadAndCreate"] = 3] = "ReadAndCreate";
-		})(exports$1.TestLogStoreOperationType || (exports$1.TestLogStoreOperationType = {}));
+		})(exports.TestLogStoreOperationType || (exports.TestLogStoreOperationType = {}));
 		(function (TestLogType) {
 		    /**
 		     * Any gereric attachment.
@@ -39785,7 +39826,7 @@ function requireTestInterfaces () {
 		     * merged Coverage file
 		     */
 		    TestLogType[TestLogType["MergedCoverageFile"] = 6] = "MergedCoverageFile";
-		})(exports$1.TestLogType || (exports$1.TestLogType = {}));
+		})(exports.TestLogType || (exports.TestLogType = {}));
 		(function (TestOutcome) {
 		    /**
 		     * Only used during an update to preserve the existing value.
@@ -39848,7 +39889,7 @@ function requireTestInterfaces () {
 		     */
 		    TestOutcome[TestOutcome["NotImpacted"] = 14] = "NotImpacted";
 		    TestOutcome[TestOutcome["MaxValue"] = 14] = "MaxValue";
-		})(exports$1.TestOutcome || (exports$1.TestOutcome = {}));
+		})(exports.TestOutcome || (exports.TestOutcome = {}));
 		(function (TestPointState) {
 		    /**
 		     * Default
@@ -39871,7 +39912,7 @@ function requireTestInterfaces () {
 		     */
 		    TestPointState[TestPointState["InProgress"] = 4] = "InProgress";
 		    TestPointState[TestPointState["MaxValue"] = 4] = "MaxValue";
-		})(exports$1.TestPointState || (exports$1.TestPointState = {}));
+		})(exports.TestPointState || (exports.TestPointState = {}));
 		(function (TestResultGroupBy) {
 		    /**
 		     * Group the results by branches
@@ -39881,12 +39922,12 @@ function requireTestInterfaces () {
 		     * Group the results by environment
 		     */
 		    TestResultGroupBy[TestResultGroupBy["Environment"] = 2] = "Environment";
-		})(exports$1.TestResultGroupBy || (exports$1.TestResultGroupBy = {}));
+		})(exports.TestResultGroupBy || (exports.TestResultGroupBy = {}));
 		(function (TestResultsContextType) {
 		    TestResultsContextType[TestResultsContextType["Build"] = 1] = "Build";
 		    TestResultsContextType[TestResultsContextType["Release"] = 2] = "Release";
 		    TestResultsContextType[TestResultsContextType["Pipeline"] = 3] = "Pipeline";
-		})(exports$1.TestResultsContextType || (exports$1.TestResultsContextType = {}));
+		})(exports.TestResultsContextType || (exports.TestResultsContextType = {}));
 		(function (TestResultsSessionState) {
 		    /**
 		     * Default
@@ -39908,7 +39949,7 @@ function requireTestInterfaces () {
 		     * Session state with Cancelled
 		     */
 		    TestResultsSessionState[TestResultsSessionState["Cancelled"] = 4] = "Cancelled";
-		})(exports$1.TestResultsSessionState || (exports$1.TestResultsSessionState = {}));
+		})(exports.TestResultsSessionState || (exports.TestResultsSessionState = {}));
 		(function (TestResultsSettingsType) {
 		    /**
 		     * Returns All Test Settings.
@@ -39922,7 +39963,7 @@ function requireTestInterfaces () {
 		     * Returns whether to log new tests or not
 		     */
 		    TestResultsSettingsType[TestResultsSettingsType["NewTestLogging"] = 3] = "NewTestLogging";
-		})(exports$1.TestResultsSettingsType || (exports$1.TestResultsSettingsType = {}));
+		})(exports.TestResultsSettingsType || (exports.TestResultsSettingsType = {}));
 		(function (TestRunOutcome) {
 		    /**
 		     * Run with zero failed tests and has at least one impacted test
@@ -39940,7 +39981,7 @@ function requireTestInterfaces () {
 		     * Runs with All tests in other category.
 		     */
 		    TestRunOutcome[TestRunOutcome["Others"] = 3] = "Others";
-		})(exports$1.TestRunOutcome || (exports$1.TestRunOutcome = {}));
+		})(exports.TestRunOutcome || (exports.TestRunOutcome = {}));
 		(function (TestRunPublishContext) {
 		    /**
 		     * Run is published for Build Context.
@@ -39954,7 +39995,7 @@ function requireTestInterfaces () {
 		     * Run is published for any Context.
 		     */
 		    TestRunPublishContext[TestRunPublishContext["All"] = 3] = "All";
-		})(exports$1.TestRunPublishContext || (exports$1.TestRunPublishContext = {}));
+		})(exports.TestRunPublishContext || (exports.TestRunPublishContext = {}));
 		(function (TestRunState) {
 		    /**
 		     * Only used during an update to preserve the existing value.
@@ -39984,7 +40025,7 @@ function requireTestInterfaces () {
 		     * Run requires investigation because of a test point failure This is a legacy state and should not be used any more
 		     */
 		    TestRunState[TestRunState["NeedsInvestigation"] = 6] = "NeedsInvestigation";
-		})(exports$1.TestRunState || (exports$1.TestRunState = {}));
+		})(exports.TestRunState || (exports.TestRunState = {}));
 		(function (TestRunSubstate) {
 		    /**
 		     * Run with noState.
@@ -40022,7 +40063,7 @@ function requireTestInterfaces () {
 		     * Run state when cancellation is in Progress.
 		     */
 		    TestRunSubstate[TestRunSubstate["CancellationInProgress"] = 8] = "CancellationInProgress";
-		})(exports$1.TestRunSubstate || (exports$1.TestRunSubstate = {}));
+		})(exports.TestRunSubstate || (exports.TestRunSubstate = {}));
 		(function (TestSessionSource) {
 		    /**
 		     * Source of test session uncertain as it is stale
@@ -40052,7 +40093,7 @@ function requireTestInterfaces () {
 		     * To show sessions from all supported sources.
 		     */
 		    TestSessionSource[TestSessionSource["SessionInsightsForAll"] = 6] = "SessionInsightsForAll";
-		})(exports$1.TestSessionSource || (exports$1.TestSessionSource = {}));
+		})(exports.TestSessionSource || (exports.TestSessionSource = {}));
 		(function (TestSessionState) {
 		    /**
 		     * Only used during an update to preserve the existing value.
@@ -40078,8 +40119,8 @@ function requireTestInterfaces () {
 		     * This is required for Feedback session which are declined
 		     */
 		    TestSessionState[TestSessionState["Declined"] = 5] = "Declined";
-		})(exports$1.TestSessionState || (exports$1.TestSessionState = {}));
-		exports$1.TypeInfo = {
+		})(exports.TestSessionState || (exports.TestSessionState = {}));
+		exports.TypeInfo = {
 		    AfnStrip: {},
 		    AggregatedDataForResultTrend: {},
 		    AggregatedResultDetailsByOutcome: {},
@@ -40576,104 +40617,104 @@ function requireTestInterfaces () {
 		    UpdateTestRunResponse: {},
 		    WorkItemToTestLinks: {},
 		};
-		exports$1.TypeInfo.AfnStrip.fields = {
+		exports.TypeInfo.AfnStrip.fields = {
 		    creationDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.AggregatedDataForResultTrend.fields = {
+		exports.TypeInfo.AggregatedDataForResultTrend.fields = {
 		    resultsByOutcome: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestOutcome,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.AggregatedResultsByOutcome
+		        dictionaryKeyEnumType: exports.TypeInfo.TestOutcome,
+		        dictionaryValueTypeInfo: exports.TypeInfo.AggregatedResultsByOutcome
 		    },
 		    runSummaryByState: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestRunState,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.AggregatedRunsByState
+		        dictionaryKeyEnumType: exports.TypeInfo.TestRunState,
+		        dictionaryValueTypeInfo: exports.TypeInfo.AggregatedRunsByState
 		    },
 		    testResultsContext: {
-		        typeInfo: exports$1.TypeInfo.TestResultsContext
+		        typeInfo: exports.TypeInfo.TestResultsContext
 		    }
 		};
-		exports$1.TypeInfo.AggregatedResultDetailsByOutcome.fields = {
+		exports.TypeInfo.AggregatedResultDetailsByOutcome.fields = {
 		    outcome: {
-		        enumType: exports$1.TypeInfo.TestOutcome
+		        enumType: exports.TypeInfo.TestOutcome
 		    }
 		};
-		exports$1.TypeInfo.AggregatedResultsAnalysis.fields = {
+		exports.TypeInfo.AggregatedResultsAnalysis.fields = {
 		    notReportedResultsByOutcome: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestOutcome,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.AggregatedResultsByOutcome
+		        dictionaryKeyEnumType: exports.TypeInfo.TestOutcome,
+		        dictionaryValueTypeInfo: exports.TypeInfo.AggregatedResultsByOutcome
 		    },
 		    previousContext: {
-		        typeInfo: exports$1.TypeInfo.TestResultsContext
+		        typeInfo: exports.TypeInfo.TestResultsContext
 		    },
 		    resultsByOutcome: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestOutcome,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.AggregatedResultsByOutcome
+		        dictionaryKeyEnumType: exports.TypeInfo.TestOutcome,
+		        dictionaryValueTypeInfo: exports.TypeInfo.AggregatedResultsByOutcome
 		    },
 		    runSummaryByOutcome: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestRunOutcome,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.AggregatedRunsByOutcome
+		        dictionaryKeyEnumType: exports.TypeInfo.TestRunOutcome,
+		        dictionaryValueTypeInfo: exports.TypeInfo.AggregatedRunsByOutcome
 		    },
 		    runSummaryByState: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestRunState,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.AggregatedRunsByState
+		        dictionaryKeyEnumType: exports.TypeInfo.TestRunState,
+		        dictionaryValueTypeInfo: exports.TypeInfo.AggregatedRunsByState
 		    }
 		};
-		exports$1.TypeInfo.AggregatedResultsByOutcome.fields = {
+		exports.TypeInfo.AggregatedResultsByOutcome.fields = {
 		    outcome: {
-		        enumType: exports$1.TypeInfo.TestOutcome
+		        enumType: exports.TypeInfo.TestOutcome
 		    }
 		};
-		exports$1.TypeInfo.AggregatedRunsByOutcome.fields = {
+		exports.TypeInfo.AggregatedRunsByOutcome.fields = {
 		    outcome: {
-		        enumType: exports$1.TypeInfo.TestRunOutcome
+		        enumType: exports.TypeInfo.TestRunOutcome
 		    }
 		};
-		exports$1.TypeInfo.AggregatedRunsByState.fields = {
+		exports.TypeInfo.AggregatedRunsByState.fields = {
 		    resultsByOutcome: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestOutcome,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.AggregatedResultsByOutcome
+		        dictionaryKeyEnumType: exports.TypeInfo.TestOutcome,
+		        dictionaryValueTypeInfo: exports.TypeInfo.AggregatedResultsByOutcome
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.TestRunState
+		        enumType: exports.TypeInfo.TestRunState
 		    }
 		};
-		exports$1.TypeInfo.BatchResponse.fields = {
+		exports.TypeInfo.BatchResponse.fields = {
 		    responses: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Response
+		        typeInfo: exports.TypeInfo.Response
 		    },
 		};
-		exports$1.TypeInfo.BuildConfiguration.fields = {
+		exports.TypeInfo.BuildConfiguration.fields = {
 		    creationDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BuildCoverage.fields = {
+		exports.TypeInfo.BuildCoverage.fields = {
 		    configuration: {
-		        typeInfo: exports$1.TypeInfo.BuildConfiguration
+		        typeInfo: exports.TypeInfo.BuildConfiguration
 		    }
 		};
-		exports$1.TypeInfo.BuildReference2.fields = {
+		exports.TypeInfo.BuildReference2.fields = {
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BulkResultUpdateRequest.fields = {
+		exports.TypeInfo.BulkResultUpdateRequest.fields = {
 		    requests: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ResultUpdateRequest
+		        typeInfo: exports.TypeInfo.ResultUpdateRequest
 		    }
 		};
-		exports$1.TypeInfo.CloneOperationInformation.fields = {
+		exports.TypeInfo.CloneOperationInformation.fields = {
 		    completionDate: {
 		        isDate: true,
 		    },
@@ -40681,21 +40722,21 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    },
 		    resultObjectType: {
-		        enumType: exports$1.TypeInfo.ResultObjectType
+		        enumType: exports.TypeInfo.ResultObjectType
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.CloneOperationState
+		        enumType: exports.TypeInfo.CloneOperationState
 		    }
 		};
-		exports$1.TypeInfo.CodeCoverageSummary.fields = {
+		exports.TypeInfo.CodeCoverageSummary.fields = {
 		    coverageDetailedSummaryStatus: {
-		        enumType: exports$1.TypeInfo.CoverageDetailedSummaryStatus
+		        enumType: exports.TypeInfo.CoverageDetailedSummaryStatus
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.CoverageSummaryStatus
+		        enumType: exports.TypeInfo.CoverageSummaryStatus
 		    }
 		};
-		exports$1.TypeInfo.Coverage2.fields = {
+		exports.TypeInfo.Coverage2.fields = {
 		    dateCreated: {
 		        isDate: true,
 		    },
@@ -40703,81 +40744,81 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.CreateTestMessageLogEntryRequest.fields = {
+		exports.TypeInfo.CreateTestMessageLogEntryRequest.fields = {
 		    testMessageLogEntry: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestMessageLogEntry
+		        typeInfo: exports.TypeInfo.TestMessageLogEntry
 		    }
 		};
-		exports$1.TypeInfo.CreateTestResultsRequest.fields = {
+		exports.TypeInfo.CreateTestResultsRequest.fields = {
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.LegacyTestCaseResult
+		        typeInfo: exports.TypeInfo.LegacyTestCaseResult
 		    }
 		};
-		exports$1.TypeInfo.CreateTestRunRequest.fields = {
+		exports.TypeInfo.CreateTestRunRequest.fields = {
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.LegacyTestCaseResult
+		        typeInfo: exports.TypeInfo.LegacyTestCaseResult
 		    },
 		    testRun: {
-		        typeInfo: exports$1.TypeInfo.LegacyTestRun
+		        typeInfo: exports.TypeInfo.LegacyTestRun
 		    },
 		    testSettings: {
-		        typeInfo: exports$1.TypeInfo.LegacyTestSettings
+		        typeInfo: exports.TypeInfo.LegacyTestSettings
 		    }
 		};
-		exports$1.TypeInfo.CustomTestFieldDefinition.fields = {
+		exports.TypeInfo.CustomTestFieldDefinition.fields = {
 		    fieldType: {
-		        enumType: exports$1.TypeInfo.CustomTestFieldType
+		        enumType: exports.TypeInfo.CustomTestFieldType
 		    },
 		    scope: {
-		        enumType: exports$1.TypeInfo.CustomTestFieldScope
+		        enumType: exports.TypeInfo.CustomTestFieldScope
 		    }
 		};
-		exports$1.TypeInfo.DatedTestFieldData.fields = {
+		exports.TypeInfo.DatedTestFieldData.fields = {
 		    date: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.FailingSince.fields = {
+		exports.TypeInfo.FailingSince.fields = {
 		    date: {
 		        isDate: true,
 		    },
 		    release: {
-		        typeInfo: exports$1.TypeInfo.ReleaseReference
+		        typeInfo: exports.TypeInfo.ReleaseReference
 		    }
 		};
-		exports$1.TypeInfo.FetchTestResultsResponse.fields = {
+		exports.TypeInfo.FetchTestResultsResponse.fields = {
 		    actionResults: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestActionResult
+		        typeInfo: exports.TypeInfo.TestActionResult
 		    },
 		    attachments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestResultAttachment
+		        typeInfo: exports.TypeInfo.TestResultAttachment
 		    },
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.LegacyTestCaseResult
+		        typeInfo: exports.TypeInfo.LegacyTestCaseResult
 		    }
 		};
-		exports$1.TypeInfo.FlakyDetection.fields = {
+		exports.TypeInfo.FlakyDetection.fields = {
 		    flakyDetectionType: {
-		        enumType: exports$1.TypeInfo.FlakyDetectionType
+		        enumType: exports.TypeInfo.FlakyDetectionType
 		    }
 		};
-		exports$1.TypeInfo.FlakySettings.fields = {
+		exports.TypeInfo.FlakySettings.fields = {
 		    flakyDetection: {
-		        typeInfo: exports$1.TypeInfo.FlakyDetection
+		        typeInfo: exports.TypeInfo.FlakyDetection
 		    }
 		};
-		exports$1.TypeInfo.LastResultDetails.fields = {
+		exports.TypeInfo.LastResultDetails.fields = {
 		    dateCompleted: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.LegacyBuildConfiguration.fields = {
+		exports.TypeInfo.LegacyBuildConfiguration.fields = {
 		    completedDate: {
 		        isDate: true,
 		    },
@@ -40785,7 +40826,7 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.LegacyReleaseReference.fields = {
+		exports.TypeInfo.LegacyReleaseReference.fields = {
 		    environmentCreationDate: {
 		        isDate: true,
 		    },
@@ -40793,16 +40834,16 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.LegacyTestCaseResult.fields = {
+		exports.TypeInfo.LegacyTestCaseResult.fields = {
 		    buildReference: {
-		        typeInfo: exports$1.TypeInfo.LegacyBuildConfiguration
+		        typeInfo: exports.TypeInfo.LegacyBuildConfiguration
 		    },
 		    creationDate: {
 		        isDate: true,
 		    },
 		    customFields: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestExtensionField
+		        typeInfo: exports.TypeInfo.TestExtensionField
 		    },
 		    dateCompleted: {
 		        isDate: true,
@@ -40811,24 +40852,24 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    },
 		    failingSince: {
-		        typeInfo: exports$1.TypeInfo.FailingSince
+		        typeInfo: exports.TypeInfo.FailingSince
 		    },
 		    lastUpdated: {
 		        isDate: true,
 		    },
 		    releaseReference: {
-		        typeInfo: exports$1.TypeInfo.LegacyReleaseReference
+		        typeInfo: exports.TypeInfo.LegacyReleaseReference
 		    },
 		    resultGroupType: {
-		        enumType: exports$1.TypeInfo.ResultGroupType
+		        enumType: exports.TypeInfo.ResultGroupType
 		    },
 		    stackTrace: {
-		        typeInfo: exports$1.TypeInfo.TestExtensionField
+		        typeInfo: exports.TypeInfo.TestExtensionField
 		    }
 		};
-		exports$1.TypeInfo.LegacyTestRun.fields = {
+		exports.TypeInfo.LegacyTestRun.fields = {
 		    buildReference: {
-		        typeInfo: exports$1.TypeInfo.LegacyBuildConfiguration
+		        typeInfo: exports.TypeInfo.LegacyBuildConfiguration
 		    },
 		    completeDate: {
 		        isDate: true,
@@ -40838,7 +40879,7 @@ function requireTestInterfaces () {
 		    },
 		    customFields: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestExtensionField
+		        typeInfo: exports.TypeInfo.TestExtensionField
 		    },
 		    dueDate: {
 		        isDate: true,
@@ -40847,17 +40888,17 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    },
 		    releaseReference: {
-		        typeInfo: exports$1.TypeInfo.LegacyReleaseReference
+		        typeInfo: exports.TypeInfo.LegacyReleaseReference
 		    },
 		    startDate: {
 		        isDate: true,
 		    },
 		    testMessageLogEntries: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestMessageLogDetails
+		        typeInfo: exports.TypeInfo.TestMessageLogDetails
 		    }
 		};
-		exports$1.TypeInfo.LegacyTestSettings.fields = {
+		exports.TypeInfo.LegacyTestSettings.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
@@ -40865,45 +40906,45 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.Machine.fields = {
+		exports.TypeInfo.Machine.fields = {
 		    timeline: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Timeline
+		        typeInfo: exports.TypeInfo.Timeline
 		    }
 		};
-		exports$1.TypeInfo.PipelineTestMetrics.fields = {
+		exports.TypeInfo.PipelineTestMetrics.fields = {
 		    resultSummary: {
-		        typeInfo: exports$1.TypeInfo.ResultSummary
+		        typeInfo: exports.TypeInfo.ResultSummary
 		    },
 		    runSummary: {
-		        typeInfo: exports$1.TypeInfo.RunSummary
+		        typeInfo: exports.TypeInfo.RunSummary
 		    },
 		    summaryAtChild: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.PipelineTestMetrics
+		        typeInfo: exports.TypeInfo.PipelineTestMetrics
 		    }
 		};
-		exports$1.TypeInfo.PointLastResult.fields = {
+		exports.TypeInfo.PointLastResult.fields = {
 		    lastUpdatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.PointsResults2.fields = {
+		exports.TypeInfo.PointsResults2.fields = {
 		    lastUpdated: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.QueryTestActionResultResponse.fields = {
+		exports.TypeInfo.QueryTestActionResultResponse.fields = {
 		    testActionResults: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestActionResult
+		        typeInfo: exports.TypeInfo.TestActionResult
 		    },
 		    testAttachments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestResultAttachment
+		        typeInfo: exports.TypeInfo.TestResultAttachment
 		    }
 		};
-		exports$1.TypeInfo.ReleaseReference.fields = {
+		exports.TypeInfo.ReleaseReference.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
@@ -40911,7 +40952,7 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ReleaseReference2.fields = {
+		exports.TypeInfo.ReleaseReference2.fields = {
 		    environmentCreationDate: {
 		        isDate: true,
 		    },
@@ -40919,7 +40960,7 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.RequirementsToTestsMapping2.fields = {
+		exports.TypeInfo.RequirementsToTestsMapping2.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
@@ -40927,132 +40968,132 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.Response.fields = {};
-		exports$1.TypeInfo.ResultRetentionSettings.fields = {
+		exports.TypeInfo.Response.fields = {};
+		exports.TypeInfo.ResultRetentionSettings.fields = {
 		    lastUpdatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ResultsByQueryResponse.fields = {
+		exports.TypeInfo.ResultsByQueryResponse.fields = {
 		    testResults: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.LegacyTestCaseResult
+		        typeInfo: exports.TypeInfo.LegacyTestCaseResult
 		    }
 		};
-		exports$1.TypeInfo.ResultsFilter.fields = {
+		exports.TypeInfo.ResultsFilter.fields = {
 		    executedIn: {
-		        enumType: exports$1.TypeInfo.Service
+		        enumType: exports.TypeInfo.Service
 		    },
 		    maxCompleteDate: {
 		        isDate: true,
 		    },
 		    testResultsContext: {
-		        typeInfo: exports$1.TypeInfo.TestResultsContext
+		        typeInfo: exports.TypeInfo.TestResultsContext
 		    }
 		};
-		exports$1.TypeInfo.ResultsSummaryByOutcome.fields = {
+		exports.TypeInfo.ResultsSummaryByOutcome.fields = {
 		    aggregatedResultDetailsByOutcome: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestOutcome,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.AggregatedResultDetailsByOutcome
+		        dictionaryKeyEnumType: exports.TypeInfo.TestOutcome,
+		        dictionaryValueTypeInfo: exports.TypeInfo.AggregatedResultDetailsByOutcome
 		    }
 		};
-		exports$1.TypeInfo.ResultSummary.fields = {
+		exports.TypeInfo.ResultSummary.fields = {
 		    resultSummaryByRunState: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestRunState,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.ResultsSummaryByOutcome
+		        dictionaryKeyEnumType: exports.TypeInfo.TestRunState,
+		        dictionaryValueTypeInfo: exports.TypeInfo.ResultsSummaryByOutcome
 		    }
 		};
-		exports$1.TypeInfo.ResultUpdateRequest.fields = {
+		exports.TypeInfo.ResultUpdateRequest.fields = {
 		    actionResultDeletes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestActionResult
+		        typeInfo: exports.TypeInfo.TestActionResult
 		    },
 		    actionResults: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestActionResult
+		        typeInfo: exports.TypeInfo.TestActionResult
 		    },
 		    attachments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestResultAttachment
+		        typeInfo: exports.TypeInfo.TestResultAttachment
 		    },
 		    testCaseResult: {
-		        typeInfo: exports$1.TypeInfo.LegacyTestCaseResult
+		        typeInfo: exports.TypeInfo.LegacyTestCaseResult
 		    }
 		};
-		exports$1.TypeInfo.ResultUpdateRequestModel.fields = {
+		exports.TypeInfo.ResultUpdateRequestModel.fields = {
 		    actionResultDeletes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestActionResultModel
+		        typeInfo: exports.TypeInfo.TestActionResultModel
 		    },
 		    actionResults: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestActionResultModel
+		        typeInfo: exports.TypeInfo.TestActionResultModel
 		    }
 		};
-		exports$1.TypeInfo.ResultUpdateResponse.fields = {
+		exports.TypeInfo.ResultUpdateResponse.fields = {
 		    lastUpdated: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.RunCreateModel.fields = {
+		exports.TypeInfo.RunCreateModel.fields = {
 		    buildReference: {
-		        typeInfo: exports$1.TypeInfo.BuildConfiguration
+		        typeInfo: exports.TypeInfo.BuildConfiguration
 		    },
 		    releaseReference: {
-		        typeInfo: exports$1.TypeInfo.ReleaseReference
+		        typeInfo: exports.TypeInfo.ReleaseReference
 		    },
 		    runSummary: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RunSummaryModel
+		        typeInfo: exports.TypeInfo.RunSummaryModel
 		    }
 		};
-		exports$1.TypeInfo.RunStatistic.fields = {
+		exports.TypeInfo.RunStatistic.fields = {
 		    resultMetadata: {
-		        enumType: exports$1.TypeInfo.ResultMetadata
+		        enumType: exports.TypeInfo.ResultMetadata
 		    }
 		};
-		exports$1.TypeInfo.RunSummary.fields = {
+		exports.TypeInfo.RunSummary.fields = {
 		    runSummaryByOutcome: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestRunOutcome,
+		        dictionaryKeyEnumType: exports.TypeInfo.TestRunOutcome,
 		    },
 		    runSummaryByState: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestRunState,
+		        dictionaryKeyEnumType: exports.TypeInfo.TestRunState,
 		    }
 		};
-		exports$1.TypeInfo.RunSummaryModel.fields = {
+		exports.TypeInfo.RunSummaryModel.fields = {
 		    testOutcome: {
-		        enumType: exports$1.TypeInfo.TestOutcome
+		        enumType: exports.TypeInfo.TestOutcome
 		    }
 		};
-		exports$1.TypeInfo.RunUpdateModel.fields = {
+		exports.TypeInfo.RunUpdateModel.fields = {
 		    logEntries: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestMessageLogDetails
+		        typeInfo: exports.TypeInfo.TestMessageLogDetails
 		    },
 		    runSummary: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RunSummaryModel
+		        typeInfo: exports.TypeInfo.RunSummaryModel
 		    },
 		    substate: {
-		        enumType: exports$1.TypeInfo.TestRunSubstate
+		        enumType: exports.TypeInfo.TestRunSubstate
 		    }
 		};
-		exports$1.TypeInfo.SessionEnvironmentAndMachine.fields = {
+		exports.TypeInfo.SessionEnvironmentAndMachine.fields = {
 		    machines: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Machine
+		        typeInfo: exports.TypeInfo.Machine
 		    }
 		};
-		exports$1.TypeInfo.SourceViewBuildCoverage.fields = {
+		exports.TypeInfo.SourceViewBuildCoverage.fields = {
 		    configuration: {
-		        typeInfo: exports$1.TypeInfo.BuildConfiguration
+		        typeInfo: exports.TypeInfo.BuildConfiguration
 		    }
 		};
-		exports$1.TypeInfo.TestActionResult.fields = {
+		exports.TypeInfo.TestActionResult.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
@@ -41066,7 +41107,7 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestActionResult2.fields = {
+		exports.TypeInfo.TestActionResult2.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
@@ -41080,7 +41121,7 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestActionResultModel.fields = {
+		exports.TypeInfo.TestActionResultModel.fields = {
 		    completedDate: {
 		        isDate: true,
 		    },
@@ -41088,23 +41129,23 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestAttachment.fields = {
+		exports.TypeInfo.TestAttachment.fields = {
 		    attachmentType: {
-		        enumType: exports$1.TypeInfo.AttachmentType
+		        enumType: exports.TypeInfo.AttachmentType
 		    },
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestAuthoringDetails.fields = {
+		exports.TypeInfo.TestAuthoringDetails.fields = {
 		    lastUpdated: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.TestPointState
+		        enumType: exports.TypeInfo.TestPointState
 		    }
 		};
-		exports$1.TypeInfo.TestCaseReference2.fields = {
+		exports.TypeInfo.TestCaseReference2.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
@@ -41112,7 +41153,7 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestCaseResult.fields = {
+		exports.TypeInfo.TestCaseResult.fields = {
 		    completedDate: {
 		        isDate: true,
 		    },
@@ -41120,74 +41161,74 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    },
 		    failingSince: {
-		        typeInfo: exports$1.TypeInfo.FailingSince
+		        typeInfo: exports.TypeInfo.FailingSince
 		    },
 		    iterationDetails: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestIterationDetailsModel
+		        typeInfo: exports.TypeInfo.TestIterationDetailsModel
 		    },
 		    lastUpdatedDate: {
 		        isDate: true,
 		    },
 		    releaseReference: {
-		        typeInfo: exports$1.TypeInfo.ReleaseReference
+		        typeInfo: exports.TypeInfo.ReleaseReference
 		    },
 		    resultGroupType: {
-		        enumType: exports$1.TypeInfo.ResultGroupType
+		        enumType: exports.TypeInfo.ResultGroupType
 		    },
 		    startedDate: {
 		        isDate: true,
 		    },
 		    subResults: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestSubResult
+		        typeInfo: exports.TypeInfo.TestSubResult
 		    }
 		};
-		exports$1.TypeInfo.TestConfiguration.fields = {
+		exports.TypeInfo.TestConfiguration.fields = {
 		    lastUpdatedDate: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.TestConfigurationState
+		        enumType: exports.TypeInfo.TestConfigurationState
 		    }
 		};
-		exports$1.TypeInfo.TestExecutionReportData.fields = {
+		exports.TypeInfo.TestExecutionReportData.fields = {
 		    reportData: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DatedTestFieldData
+		        typeInfo: exports.TypeInfo.DatedTestFieldData
 		    }
 		};
-		exports$1.TypeInfo.TestExtensionField.fields = {
+		exports.TypeInfo.TestExtensionField.fields = {
 		    field: {
-		        typeInfo: exports$1.TypeInfo.TestExtensionFieldDetails
+		        typeInfo: exports.TypeInfo.TestExtensionFieldDetails
 		    }
 		};
-		exports$1.TypeInfo.TestExtensionFieldDetails.fields = {
+		exports.TypeInfo.TestExtensionFieldDetails.fields = {
 		    type: {
 		        enumType: SystemData.TypeInfo.SqlDbType
 		    }
 		};
-		exports$1.TypeInfo.TestFailuresAnalysis.fields = {
+		exports.TypeInfo.TestFailuresAnalysis.fields = {
 		    previousContext: {
-		        typeInfo: exports$1.TypeInfo.TestResultsContext
+		        typeInfo: exports.TypeInfo.TestResultsContext
 		    }
 		};
-		exports$1.TypeInfo.TestHistoryQuery.fields = {
+		exports.TypeInfo.TestHistoryQuery.fields = {
 		    groupBy: {
-		        enumType: exports$1.TypeInfo.TestResultGroupBy
+		        enumType: exports.TypeInfo.TestResultGroupBy
 		    },
 		    maxCompleteDate: {
 		        isDate: true,
 		    },
 		    resultsForGroup: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestResultHistoryForGroup
+		        typeInfo: exports.TypeInfo.TestResultHistoryForGroup
 		    }
 		};
-		exports$1.TypeInfo.TestIterationDetailsModel.fields = {
+		exports.TypeInfo.TestIterationDetailsModel.fields = {
 		    actionResults: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestActionResultModel
+		        typeInfo: exports.TypeInfo.TestActionResultModel
 		    },
 		    completedDate: {
 		        isDate: true,
@@ -41196,64 +41237,64 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestLog.fields = {
+		exports.TypeInfo.TestLog.fields = {
 		    logReference: {
-		        typeInfo: exports$1.TypeInfo.TestLogReference
+		        typeInfo: exports.TypeInfo.TestLogReference
 		    },
 		    modifiedOn: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestLogReference.fields = {
+		exports.TypeInfo.TestLogReference.fields = {
 		    scope: {
-		        enumType: exports$1.TypeInfo.TestLogScope
+		        enumType: exports.TypeInfo.TestLogScope
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.TestLogType
+		        enumType: exports.TypeInfo.TestLogType
 		    }
 		};
-		exports$1.TypeInfo.TestLogStatus.fields = {
+		exports.TypeInfo.TestLogStatus.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.TestLogStatusCode
+		        enumType: exports.TypeInfo.TestLogStatusCode
 		    }
 		};
-		exports$1.TypeInfo.TestLogStoreAttachment.fields = {
+		exports.TypeInfo.TestLogStoreAttachment.fields = {
 		    attachmentType: {
-		        enumType: exports$1.TypeInfo.AttachmentType
+		        enumType: exports.TypeInfo.AttachmentType
 		    },
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestLogStoreEndpointDetails.fields = {
+		exports.TypeInfo.TestLogStoreEndpointDetails.fields = {
 		    endpointType: {
-		        enumType: exports$1.TypeInfo.TestLogStoreEndpointType
+		        enumType: exports.TypeInfo.TestLogStoreEndpointType
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.TestLogStatusCode
+		        enumType: exports.TypeInfo.TestLogStatusCode
 		    }
 		};
-		exports$1.TypeInfo.TestMessageLogDetails.fields = {
+		exports.TypeInfo.TestMessageLogDetails.fields = {
 		    dateCreated: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestMessageLogEntry.fields = {
+		exports.TypeInfo.TestMessageLogEntry.fields = {
 		    dateCreated: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestMessageLogEntry2.fields = {
+		exports.TypeInfo.TestMessageLogEntry2.fields = {
 		    dateCreated: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestMethod.fields = {
+		exports.TypeInfo.TestMethod.fields = {
 		    testResult: {
-		        typeInfo: exports$1.TypeInfo.TestCaseResult
+		        typeInfo: exports.TypeInfo.TestCaseResult
 		    }
 		};
-		exports$1.TypeInfo.TestParameter2.fields = {
+		exports.TypeInfo.TestParameter2.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
@@ -41261,7 +41302,7 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestPlan.fields = {
+		exports.TypeInfo.TestPlan.fields = {
 		    endDate: {
 		        isDate: true,
 		    },
@@ -41272,65 +41313,65 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestPlanCloneRequest.fields = {
+		exports.TypeInfo.TestPlanCloneRequest.fields = {
 		    destinationTestPlan: {
-		        typeInfo: exports$1.TypeInfo.TestPlan
+		        typeInfo: exports.TypeInfo.TestPlan
 		    }
 		};
-		exports$1.TypeInfo.TestPlanHubData.fields = {
+		exports.TypeInfo.TestPlanHubData.fields = {
 		    testPlan: {
-		        typeInfo: exports$1.TypeInfo.TestPlan
+		        typeInfo: exports.TypeInfo.TestPlan
 		    },
 		    testPoints: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestPoint
+		        typeInfo: exports.TypeInfo.TestPoint
 		    },
 		    testSuites: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestSuite
+		        typeInfo: exports.TypeInfo.TestSuite
 		    }
 		};
-		exports$1.TypeInfo.TestPlansWithSelection.fields = {
+		exports.TypeInfo.TestPlansWithSelection.fields = {
 		    plans: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestPlan
+		        typeInfo: exports.TypeInfo.TestPlan
 		    }
 		};
-		exports$1.TypeInfo.TestPoint.fields = {
+		exports.TypeInfo.TestPoint.fields = {
 		    lastResetToActive: {
 		        isDate: true,
 		    },
 		    lastResultDetails: {
-		        typeInfo: exports$1.TypeInfo.LastResultDetails
+		        typeInfo: exports.TypeInfo.LastResultDetails
 		    },
 		    lastUpdatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestPointReference.fields = {
+		exports.TypeInfo.TestPointReference.fields = {
 		    state: {
-		        enumType: exports$1.TypeInfo.TestPointState
+		        enumType: exports.TypeInfo.TestPointState
 		    }
 		};
-		exports$1.TypeInfo.TestPointsEvent.fields = {
+		exports.TypeInfo.TestPointsEvent.fields = {
 		    testPoints: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestPointReference
+		        typeInfo: exports.TypeInfo.TestPointReference
 		    }
 		};
-		exports$1.TypeInfo.TestPointsQuery.fields = {
+		exports.TypeInfo.TestPointsQuery.fields = {
 		    points: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestPoint
+		        typeInfo: exports.TypeInfo.TestPoint
 		    }
 		};
-		exports$1.TypeInfo.TestPointsUpdatedEvent.fields = {
+		exports.TypeInfo.TestPointsUpdatedEvent.fields = {
 		    testPoints: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestPointReference
+		        typeInfo: exports.TypeInfo.TestPointReference
 		    }
 		};
-		exports$1.TypeInfo.TestResult2.fields = {
+		exports.TypeInfo.TestResult2.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
@@ -41344,37 +41385,37 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestResultAcrossProjectResponse.fields = {
+		exports.TypeInfo.TestResultAcrossProjectResponse.fields = {
 		    testResult: {
-		        typeInfo: exports$1.TypeInfo.LegacyTestCaseResult
+		        typeInfo: exports.TypeInfo.LegacyTestCaseResult
 		    }
 		};
-		exports$1.TypeInfo.TestResultAttachment.fields = {
+		exports.TypeInfo.TestResultAttachment.fields = {
 		    attachmentType: {
-		        enumType: exports$1.TypeInfo.AttachmentType
+		        enumType: exports.TypeInfo.AttachmentType
 		    },
 		    creationDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestResultHistory.fields = {
+		exports.TypeInfo.TestResultHistory.fields = {
 		    resultsForGroup: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestResultHistoryDetailsForGroup
+		        typeInfo: exports.TypeInfo.TestResultHistoryDetailsForGroup
 		    }
 		};
-		exports$1.TypeInfo.TestResultHistoryDetailsForGroup.fields = {
+		exports.TypeInfo.TestResultHistoryDetailsForGroup.fields = {
 		    latestResult: {
-		        typeInfo: exports$1.TypeInfo.TestCaseResult
+		        typeInfo: exports.TypeInfo.TestCaseResult
 		    }
 		};
-		exports$1.TypeInfo.TestResultHistoryForGroup.fields = {
+		exports.TypeInfo.TestResultHistoryForGroup.fields = {
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestCaseResult
+		        typeInfo: exports.TypeInfo.TestCaseResult
 		    }
 		};
-		exports$1.TypeInfo.TestResultModelBase.fields = {
+		exports.TypeInfo.TestResultModelBase.fields = {
 		    completedDate: {
 		        isDate: true,
 		    },
@@ -41382,37 +41423,37 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestResultReset2.fields = {
+		exports.TypeInfo.TestResultReset2.fields = {
 		    dateModified: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestResultsContext.fields = {
+		exports.TypeInfo.TestResultsContext.fields = {
 		    contextType: {
-		        enumType: exports$1.TypeInfo.TestResultsContextType
+		        enumType: exports.TypeInfo.TestResultsContextType
 		    },
 		    release: {
-		        typeInfo: exports$1.TypeInfo.ReleaseReference
+		        typeInfo: exports.TypeInfo.ReleaseReference
 		    }
 		};
-		exports$1.TypeInfo.TestResultsDetails.fields = {
+		exports.TypeInfo.TestResultsDetails.fields = {
 		    resultsForGroup: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestResultsDetailsForGroup
+		        typeInfo: exports.TypeInfo.TestResultsDetailsForGroup
 		    }
 		};
-		exports$1.TypeInfo.TestResultsDetailsForGroup.fields = {
+		exports.TypeInfo.TestResultsDetailsForGroup.fields = {
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestCaseResult
+		        typeInfo: exports.TypeInfo.TestCaseResult
 		    },
 		    resultsCountByOutcome: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.TestOutcome,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.AggregatedResultsByOutcome
+		        dictionaryKeyEnumType: exports.TypeInfo.TestOutcome,
+		        dictionaryValueTypeInfo: exports.TypeInfo.AggregatedResultsByOutcome
 		    }
 		};
-		exports$1.TypeInfo.TestResultsEx2.fields = {
+		exports.TypeInfo.TestResultsEx2.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
@@ -41420,74 +41461,74 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestResultsQuery.fields = {
+		exports.TypeInfo.TestResultsQuery.fields = {
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestCaseResult
+		        typeInfo: exports.TypeInfo.TestCaseResult
 		    },
 		    resultsFilter: {
-		        typeInfo: exports$1.TypeInfo.ResultsFilter
+		        typeInfo: exports.TypeInfo.ResultsFilter
 		    }
 		};
-		exports$1.TypeInfo.TestResultsSession.fields = {
+		exports.TypeInfo.TestResultsSession.fields = {
 		    endTimeUTC: {
 		        isDate: true,
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.SessionResult
+		        enumType: exports.TypeInfo.SessionResult
 		    },
 		    startTimeUTC: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.TestResultsSessionState
+		        enumType: exports.TypeInfo.TestResultsSessionState
 		    },
 		    timeline: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Timeline
+		        typeInfo: exports.TypeInfo.Timeline
 		    }
 		};
-		exports$1.TypeInfo.TestResultsSettings.fields = {
+		exports.TypeInfo.TestResultsSettings.fields = {
 		    flakySettings: {
-		        typeInfo: exports$1.TypeInfo.FlakySettings
+		        typeInfo: exports.TypeInfo.FlakySettings
 		    }
 		};
-		exports$1.TypeInfo.TestResultSummary.fields = {
+		exports.TypeInfo.TestResultSummary.fields = {
 		    aggregatedResultsAnalysis: {
-		        typeInfo: exports$1.TypeInfo.AggregatedResultsAnalysis
+		        typeInfo: exports.TypeInfo.AggregatedResultsAnalysis
 		    },
 		    teamProject: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
 		    testFailures: {
-		        typeInfo: exports$1.TypeInfo.TestFailuresAnalysis
+		        typeInfo: exports.TypeInfo.TestFailuresAnalysis
 		    },
 		    testResultsContext: {
-		        typeInfo: exports$1.TypeInfo.TestResultsContext
+		        typeInfo: exports.TypeInfo.TestResultsContext
 		    }
 		};
-		exports$1.TypeInfo.TestResultsUpdateSettings.fields = {
+		exports.TypeInfo.TestResultsUpdateSettings.fields = {
 		    flakySettings: {
-		        typeInfo: exports$1.TypeInfo.FlakySettings
+		        typeInfo: exports.TypeInfo.FlakySettings
 		    }
 		};
-		exports$1.TypeInfo.TestResultsWithWatermark.fields = {
+		exports.TypeInfo.TestResultsWithWatermark.fields = {
 		    changedDate: {
 		        isDate: true,
 		    },
 		    pointsResults: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.PointsResults2
+		        typeInfo: exports.TypeInfo.PointsResults2
 		    }
 		};
-		exports$1.TypeInfo.TestResultTrendFilter.fields = {
+		exports.TypeInfo.TestResultTrendFilter.fields = {
 		    maxCompleteDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestRun.fields = {
+		exports.TypeInfo.TestRun.fields = {
 		    buildConfiguration: {
-		        typeInfo: exports$1.TypeInfo.BuildConfiguration
+		        typeInfo: exports.TypeInfo.BuildConfiguration
 		    },
 		    completedDate: {
 		        isDate: true,
@@ -41502,20 +41543,20 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    },
 		    release: {
-		        typeInfo: exports$1.TypeInfo.ReleaseReference
+		        typeInfo: exports.TypeInfo.ReleaseReference
 		    },
 		    runStatistics: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RunStatistic
+		        typeInfo: exports.TypeInfo.RunStatistic
 		    },
 		    startedDate: {
 		        isDate: true,
 		    },
 		    substate: {
-		        enumType: exports$1.TypeInfo.TestRunSubstate
+		        enumType: exports.TypeInfo.TestRunSubstate
 		    }
 		};
-		exports$1.TypeInfo.TestRun2.fields = {
+		exports.TypeInfo.TestRun2.fields = {
 		    completeDate: {
 		        isDate: true,
 		    },
@@ -41535,22 +41576,22 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestRunCanceledEvent.fields = {
+		exports.TypeInfo.TestRunCanceledEvent.fields = {
 		    testRun: {
-		        typeInfo: exports$1.TypeInfo.TestRun
+		        typeInfo: exports.TypeInfo.TestRun
 		    }
 		};
-		exports$1.TypeInfo.TestRunCreatedEvent.fields = {
+		exports.TypeInfo.TestRunCreatedEvent.fields = {
 		    testRun: {
-		        typeInfo: exports$1.TypeInfo.TestRun
+		        typeInfo: exports.TypeInfo.TestRun
 		    }
 		};
-		exports$1.TypeInfo.TestRunEvent.fields = {
+		exports.TypeInfo.TestRunEvent.fields = {
 		    testRun: {
-		        typeInfo: exports$1.TypeInfo.TestRun
+		        typeInfo: exports.TypeInfo.TestRun
 		    }
 		};
-		exports$1.TypeInfo.TestRunEx2.fields = {
+		exports.TypeInfo.TestRunEx2.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
@@ -41558,28 +41599,28 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestRunStartedEvent.fields = {
+		exports.TypeInfo.TestRunStartedEvent.fields = {
 		    testRun: {
-		        typeInfo: exports$1.TypeInfo.TestRun
+		        typeInfo: exports.TypeInfo.TestRun
 		    }
 		};
-		exports$1.TypeInfo.TestRunStatistic.fields = {
+		exports.TypeInfo.TestRunStatistic.fields = {
 		    runStatistics: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RunStatistic
+		        typeInfo: exports.TypeInfo.RunStatistic
 		    }
 		};
-		exports$1.TypeInfo.TestRunSummary2.fields = {
+		exports.TypeInfo.TestRunSummary2.fields = {
 		    testRunCompletedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestRunWithDtlEnvEvent.fields = {
+		exports.TypeInfo.TestRunWithDtlEnvEvent.fields = {
 		    testRun: {
-		        typeInfo: exports$1.TypeInfo.TestRun
+		        typeInfo: exports.TypeInfo.TestRun
 		    }
 		};
-		exports$1.TypeInfo.TestSession.fields = {
+		exports.TypeInfo.TestSession.fields = {
 		    endDate: {
 		        isDate: true,
 		    },
@@ -41587,16 +41628,16 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    },
 		    source: {
-		        enumType: exports$1.TypeInfo.TestSessionSource
+		        enumType: exports.TypeInfo.TestSessionSource
 		    },
 		    startDate: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.TestSessionState
+		        enumType: exports.TypeInfo.TestSessionState
 		    }
 		};
-		exports$1.TypeInfo.TestSessionExploredWorkItemReference.fields = {
+		exports.TypeInfo.TestSessionExploredWorkItemReference.fields = {
 		    endTime: {
 		        isDate: true,
 		    },
@@ -41604,7 +41645,7 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestSettings2.fields = {
+		exports.TypeInfo.TestSettings2.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
@@ -41612,7 +41653,7 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestSubResult.fields = {
+		exports.TypeInfo.TestSubResult.fields = {
 		    completedDate: {
 		        isDate: true,
 		    },
@@ -41620,20 +41661,20 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    },
 		    resultGroupType: {
-		        enumType: exports$1.TypeInfo.ResultGroupType
+		        enumType: exports.TypeInfo.ResultGroupType
 		    },
 		    startedDate: {
 		        isDate: true,
 		    },
 		    subResults: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestSubResult
+		        typeInfo: exports.TypeInfo.TestSubResult
 		    }
 		};
-		exports$1.TypeInfo.TestSuite.fields = {
+		exports.TypeInfo.TestSuite.fields = {
 		    children: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestSuite
+		        typeInfo: exports.TypeInfo.TestSuite
 		    },
 		    lastPopulatedDate: {
 		        isDate: true,
@@ -41642,47 +41683,47 @@ function requireTestInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestSummaryForWorkItem.fields = {
+		exports.TypeInfo.TestSummaryForWorkItem.fields = {
 		    summary: {
-		        typeInfo: exports$1.TypeInfo.AggregatedDataForResultTrend
+		        typeInfo: exports.TypeInfo.AggregatedDataForResultTrend
 		    }
 		};
-		exports$1.TypeInfo.TestToWorkItemLinks.fields = {
+		exports.TypeInfo.TestToWorkItemLinks.fields = {
 		    test: {
-		        typeInfo: exports$1.TypeInfo.TestMethod
+		        typeInfo: exports.TypeInfo.TestMethod
 		    }
 		};
-		exports$1.TypeInfo.Timeline.fields = {
+		exports.TypeInfo.Timeline.fields = {
 		    timestampUTC: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.UpdatedProperties.fields = {
+		exports.TypeInfo.UpdatedProperties.fields = {
 		    lastUpdated: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.UpdateTestRunRequest.fields = {
+		exports.TypeInfo.UpdateTestRunRequest.fields = {
 		    attachmentsToAdd: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestResultAttachment
+		        typeInfo: exports.TypeInfo.TestResultAttachment
 		    },
 		    testRun: {
-		        typeInfo: exports$1.TypeInfo.LegacyTestRun
+		        typeInfo: exports.TypeInfo.LegacyTestRun
 		    }
 		};
-		exports$1.TypeInfo.UpdateTestRunResponse.fields = {
+		exports.TypeInfo.UpdateTestRunResponse.fields = {
 		    updatedProperties: {
-		        typeInfo: exports$1.TypeInfo.UpdatedProperties
+		        typeInfo: exports.TypeInfo.UpdatedProperties
 		    }
 		};
-		exports$1.TypeInfo.WorkItemToTestLinks.fields = {
+		exports.TypeInfo.WorkItemToTestLinks.fields = {
 		    executedIn: {
-		        enumType: exports$1.TypeInfo.Service
+		        enumType: exports.TypeInfo.Service
 		    },
 		    tests: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestMethod
+		        typeInfo: exports.TypeInfo.TestMethod
 		    }
 		}; 
 	} (TestInterfaces));
@@ -41704,9 +41745,9 @@ var hasRequiredBuildInterfaces;
 function requireBuildInterfaces () {
 	if (hasRequiredBuildInterfaces) return BuildInterfaces;
 	hasRequiredBuildInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.WorkspaceMappingType = exports$1.ValidationResult = exports$1.TimelineRecordState = exports$1.TaskResult = exports$1.SupportLevel = exports$1.StageUpdateType = exports$1.SourceProviderAvailability = exports$1.ServiceHostStatus = exports$1.ScheduleDays = exports$1.ResultSet = exports$1.RepositoryCleanOptions = exports$1.QueuePriority = exports$1.QueueOptions = exports$1.QueryDeletedOption = exports$1.ProcessTemplateType = exports$1.IssueType = exports$1.GetOption = exports$1.FolderQueryOrder = exports$1.DeleteOptions = exports$1.DefinitionType = exports$1.DefinitionTriggerType = exports$1.DefinitionQueueStatus = exports$1.DefinitionQueryOrder = exports$1.DefinitionQuality = exports$1.ControllerStatus = exports$1.BuildStatus = exports$1.BuildResult = exports$1.BuildReason = exports$1.BuildQueryOrder = exports$1.BuildPhaseStatus = exports$1.BuildOptionInputType = exports$1.BuildAuthorizationScope = exports$1.AuditAction = exports$1.AgentStatus = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.WorkspaceMappingType = exports.ValidationResult = exports.TimelineRecordState = exports.TaskResult = exports.SupportLevel = exports.StageUpdateType = exports.SourceProviderAvailability = exports.ServiceHostStatus = exports.ScheduleDays = exports.ResultSet = exports.RepositoryCleanOptions = exports.QueuePriority = exports.QueueOptions = exports.QueryDeletedOption = exports.ProcessTemplateType = exports.IssueType = exports.GetOption = exports.FolderQueryOrder = exports.DeleteOptions = exports.DefinitionType = exports.DefinitionTriggerType = exports.DefinitionQueueStatus = exports.DefinitionQueryOrder = exports.DefinitionQuality = exports.ControllerStatus = exports.BuildStatus = exports.BuildResult = exports.BuildReason = exports.BuildQueryOrder = exports.BuildPhaseStatus = exports.BuildOptionInputType = exports.BuildAuthorizationScope = exports.AuditAction = exports.AgentStatus = void 0;
 		const TFS_TestManagement_Contracts = requireTestInterfaces();
 		const TfsCoreInterfaces = requireCoreInterfaces();
 		(function (AgentStatus) {
@@ -41722,12 +41763,12 @@ function requireBuildInterfaces () {
 		     * Indicates that the build agent has taken itself offline.
 		     */
 		    AgentStatus[AgentStatus["Offline"] = 2] = "Offline";
-		})(exports$1.AgentStatus || (exports$1.AgentStatus = {}));
+		})(exports.AgentStatus || (exports.AgentStatus = {}));
 		(function (AuditAction) {
 		    AuditAction[AuditAction["Add"] = 1] = "Add";
 		    AuditAction[AuditAction["Update"] = 2] = "Update";
 		    AuditAction[AuditAction["Delete"] = 3] = "Delete";
-		})(exports$1.AuditAction || (exports$1.AuditAction = {}));
+		})(exports.AuditAction || (exports.AuditAction = {}));
 		(function (BuildAuthorizationScope) {
 		    /**
 		     * The identity used should have build service account permissions scoped to the project collection. This is useful when resources for a single build are spread across multiple projects.
@@ -41737,7 +41778,7 @@ function requireBuildInterfaces () {
 		     * The identity used should have build service account permissions scoped to the project in which the build definition resides. This is useful for isolation of build jobs to a particular team project to avoid any unintentional escalation of privilege attacks during a build.
 		     */
 		    BuildAuthorizationScope[BuildAuthorizationScope["Project"] = 2] = "Project";
-		})(exports$1.BuildAuthorizationScope || (exports$1.BuildAuthorizationScope = {}));
+		})(exports.BuildAuthorizationScope || (exports.BuildAuthorizationScope = {}));
 		(function (BuildOptionInputType) {
 		    BuildOptionInputType[BuildOptionInputType["String"] = 0] = "String";
 		    BuildOptionInputType[BuildOptionInputType["Boolean"] = 1] = "Boolean";
@@ -41746,7 +41787,7 @@ function requireBuildInterfaces () {
 		    BuildOptionInputType[BuildOptionInputType["PickList"] = 4] = "PickList";
 		    BuildOptionInputType[BuildOptionInputType["MultiLine"] = 5] = "MultiLine";
 		    BuildOptionInputType[BuildOptionInputType["BranchFilter"] = 6] = "BranchFilter";
-		})(exports$1.BuildOptionInputType || (exports$1.BuildOptionInputType = {}));
+		})(exports.BuildOptionInputType || (exports.BuildOptionInputType = {}));
 		(function (BuildPhaseStatus) {
 		    /**
 		     * The state is not known.
@@ -41760,7 +41801,7 @@ function requireBuildInterfaces () {
 		     * The build phase completed successfully.
 		     */
 		    BuildPhaseStatus[BuildPhaseStatus["Succeeded"] = 2] = "Succeeded";
-		})(exports$1.BuildPhaseStatus || (exports$1.BuildPhaseStatus = {}));
+		})(exports.BuildPhaseStatus || (exports.BuildPhaseStatus = {}));
 		(function (BuildQueryOrder) {
 		    /**
 		     * Order by finish time ascending.
@@ -41786,7 +41827,7 @@ function requireBuildInterfaces () {
 		     * Order by start time ascending.
 		     */
 		    BuildQueryOrder[BuildQueryOrder["StartTimeAscending"] = 7] = "StartTimeAscending";
-		})(exports$1.BuildQueryOrder || (exports$1.BuildQueryOrder = {}));
+		})(exports.BuildQueryOrder || (exports.BuildQueryOrder = {}));
 		(function (BuildReason) {
 		    /**
 		     * No reason. This value should not be used.
@@ -41844,7 +41885,7 @@ function requireBuildInterfaces () {
 		     * All reasons.
 		     */
 		    BuildReason[BuildReason["All"] = 2031] = "All";
-		})(exports$1.BuildReason || (exports$1.BuildReason = {}));
+		})(exports.BuildReason || (exports.BuildReason = {}));
 		(function (BuildResult) {
 		    /**
 		     * No result
@@ -41866,7 +41907,7 @@ function requireBuildInterfaces () {
 		     * The build was canceled before starting.
 		     */
 		    BuildResult[BuildResult["Canceled"] = 32] = "Canceled";
-		})(exports$1.BuildResult || (exports$1.BuildResult = {}));
+		})(exports.BuildResult || (exports.BuildResult = {}));
 		(function (BuildStatus) {
 		    /**
 		     * No status.
@@ -41896,7 +41937,7 @@ function requireBuildInterfaces () {
 		     * All status.
 		     */
 		    BuildStatus[BuildStatus["All"] = 47] = "All";
-		})(exports$1.BuildStatus || (exports$1.BuildStatus = {}));
+		})(exports.BuildStatus || (exports.BuildStatus = {}));
 		(function (ControllerStatus) {
 		    /**
 		     * Indicates that the build controller cannot be contacted.
@@ -41910,11 +41951,11 @@ function requireBuildInterfaces () {
 		     * Indicates that the build controller has taken itself offline.
 		     */
 		    ControllerStatus[ControllerStatus["Offline"] = 2] = "Offline";
-		})(exports$1.ControllerStatus || (exports$1.ControllerStatus = {}));
+		})(exports.ControllerStatus || (exports.ControllerStatus = {}));
 		(function (DefinitionQuality) {
 		    DefinitionQuality[DefinitionQuality["Definition"] = 1] = "Definition";
 		    DefinitionQuality[DefinitionQuality["Draft"] = 2] = "Draft";
-		})(exports$1.DefinitionQuality || (exports$1.DefinitionQuality = {}));
+		})(exports.DefinitionQuality || (exports.DefinitionQuality = {}));
 		(function (DefinitionQueryOrder) {
 		    /**
 		     * No order
@@ -41936,7 +41977,7 @@ function requireBuildInterfaces () {
 		     * Order by definition name descending.
 		     */
 		    DefinitionQueryOrder[DefinitionQueryOrder["DefinitionNameDescending"] = 4] = "DefinitionNameDescending";
-		})(exports$1.DefinitionQueryOrder || (exports$1.DefinitionQueryOrder = {}));
+		})(exports.DefinitionQueryOrder || (exports.DefinitionQueryOrder = {}));
 		(function (DefinitionQueueStatus) {
 		    /**
 		     * When enabled the definition queue allows builds to be queued by users, the system will queue scheduled, gated and continuous integration builds, and the queued builds will be started by the system.
@@ -41950,7 +41991,7 @@ function requireBuildInterfaces () {
 		     * When disabled the definition queue will not allow builds to be queued by users and the system will not queue scheduled, gated or continuous integration builds. Builds already in the queue will not be started by the system.
 		     */
 		    DefinitionQueueStatus[DefinitionQueueStatus["Disabled"] = 2] = "Disabled";
-		})(exports$1.DefinitionQueueStatus || (exports$1.DefinitionQueueStatus = {}));
+		})(exports.DefinitionQueueStatus || (exports.DefinitionQueueStatus = {}));
 		(function (DefinitionTriggerType) {
 		    /**
 		     * Manual builds only.
@@ -41988,11 +42029,11 @@ function requireBuildInterfaces () {
 		     * All types.
 		     */
 		    DefinitionTriggerType[DefinitionTriggerType["All"] = 255] = "All";
-		})(exports$1.DefinitionTriggerType || (exports$1.DefinitionTriggerType = {}));
+		})(exports.DefinitionTriggerType || (exports.DefinitionTriggerType = {}));
 		(function (DefinitionType) {
 		    DefinitionType[DefinitionType["Xaml"] = 1] = "Xaml";
 		    DefinitionType[DefinitionType["Build"] = 2] = "Build";
-		})(exports$1.DefinitionType || (exports$1.DefinitionType = {}));
+		})(exports.DefinitionType || (exports.DefinitionType = {}));
 		(function (DeleteOptions) {
 		    /**
 		     * No data should be deleted. This value should not be used.
@@ -42022,7 +42063,7 @@ function requireBuildInterfaces () {
 		     * All data should be deleted.
 		     */
 		    DeleteOptions[DeleteOptions["All"] = 31] = "All";
-		})(exports$1.DeleteOptions || (exports$1.DeleteOptions = {}));
+		})(exports.DeleteOptions || (exports.DeleteOptions = {}));
 		(function (FolderQueryOrder) {
 		    /**
 		     * No order
@@ -42036,7 +42077,7 @@ function requireBuildInterfaces () {
 		     * Order by folder name and path descending.
 		     */
 		    FolderQueryOrder[FolderQueryOrder["FolderDescending"] = 2] = "FolderDescending";
-		})(exports$1.FolderQueryOrder || (exports$1.FolderQueryOrder = {}));
+		})(exports.FolderQueryOrder || (exports.FolderQueryOrder = {}));
 		(function (GetOption) {
 		    /**
 		     * Use the latest changeset at the time the build is queued.
@@ -42050,11 +42091,11 @@ function requireBuildInterfaces () {
 		     * A user-specified version has been supplied.
 		     */
 		    GetOption[GetOption["Custom"] = 2] = "Custom";
-		})(exports$1.GetOption || (exports$1.GetOption = {}));
+		})(exports.GetOption || (exports.GetOption = {}));
 		(function (IssueType) {
 		    IssueType[IssueType["Error"] = 1] = "Error";
 		    IssueType[IssueType["Warning"] = 2] = "Warning";
-		})(exports$1.IssueType || (exports$1.IssueType = {}));
+		})(exports.IssueType || (exports.IssueType = {}));
 		(function (ProcessTemplateType) {
 		    /**
 		     * Indicates a custom template.
@@ -42068,7 +42109,7 @@ function requireBuildInterfaces () {
 		     * Indicates an upgrade template.
 		     */
 		    ProcessTemplateType[ProcessTemplateType["Upgrade"] = 2] = "Upgrade";
-		})(exports$1.ProcessTemplateType || (exports$1.ProcessTemplateType = {}));
+		})(exports.ProcessTemplateType || (exports.ProcessTemplateType = {}));
 		(function (QueryDeletedOption) {
 		    /**
 		     * Include only non-deleted builds.
@@ -42082,7 +42123,7 @@ function requireBuildInterfaces () {
 		     * Include only deleted builds.
 		     */
 		    QueryDeletedOption[QueryDeletedOption["OnlyDeleted"] = 2] = "OnlyDeleted";
-		})(exports$1.QueryDeletedOption || (exports$1.QueryDeletedOption = {}));
+		})(exports.QueryDeletedOption || (exports.QueryDeletedOption = {}));
 		(function (QueueOptions) {
 		    /**
 		     * No queue options
@@ -42092,7 +42133,7 @@ function requireBuildInterfaces () {
 		     * Create a plan Id for the build, do not run it
 		     */
 		    QueueOptions[QueueOptions["DoNotRun"] = 1] = "DoNotRun";
-		})(exports$1.QueueOptions || (exports$1.QueueOptions = {}));
+		})(exports.QueueOptions || (exports.QueueOptions = {}));
 		(function (QueuePriority) {
 		    /**
 		     * Low priority.
@@ -42114,7 +42155,7 @@ function requireBuildInterfaces () {
 		     * High priority.
 		     */
 		    QueuePriority[QueuePriority["High"] = 1] = "High";
-		})(exports$1.QueuePriority || (exports$1.QueuePriority = {}));
+		})(exports.QueuePriority || (exports.QueuePriority = {}));
 		(function (RepositoryCleanOptions) {
 		    /**
 		     * Run git clean -fdx && git reset --hard or Tf /scorch on $(build.sourcesDirectory)
@@ -42132,7 +42173,7 @@ function requireBuildInterfaces () {
 		     * Re-create $(agnet.buildDirectory) which contains $(build.sourcesDirectory), $(build.binariesDirectory) and any folders that left from previous build.
 		     */
 		    RepositoryCleanOptions[RepositoryCleanOptions["AllBuildDir"] = 3] = "AllBuildDir";
-		})(exports$1.RepositoryCleanOptions || (exports$1.RepositoryCleanOptions = {}));
+		})(exports.RepositoryCleanOptions || (exports.RepositoryCleanOptions = {}));
 		(function (ResultSet) {
 		    /**
 		     * Include all repositories
@@ -42142,7 +42183,7 @@ function requireBuildInterfaces () {
 		     * Include most relevant repositories for user
 		     */
 		    ResultSet[ResultSet["Top"] = 1] = "Top";
-		})(exports$1.ResultSet || (exports$1.ResultSet = {}));
+		})(exports.ResultSet || (exports.ResultSet = {}));
 		(function (ScheduleDays) {
 		    /**
 		     * Do not run.
@@ -42180,7 +42221,7 @@ function requireBuildInterfaces () {
 		     * Run on all days of the week.
 		     */
 		    ScheduleDays[ScheduleDays["All"] = 127] = "All";
-		})(exports$1.ScheduleDays || (exports$1.ScheduleDays = {}));
+		})(exports.ScheduleDays || (exports.ScheduleDays = {}));
 		(function (ServiceHostStatus) {
 		    /**
 		     * The service host is currently connected and accepting commands.
@@ -42190,7 +42231,7 @@ function requireBuildInterfaces () {
 		     * The service host is currently disconnected and not accepting commands.
 		     */
 		    ServiceHostStatus[ServiceHostStatus["Offline"] = 2] = "Offline";
-		})(exports$1.ServiceHostStatus || (exports$1.ServiceHostStatus = {}));
+		})(exports.ServiceHostStatus || (exports.ServiceHostStatus = {}));
 		(function (SourceProviderAvailability) {
 		    /**
 		     * The source provider is available in the hosted environment.
@@ -42204,12 +42245,12 @@ function requireBuildInterfaces () {
 		     * The source provider is available in all environments.
 		     */
 		    SourceProviderAvailability[SourceProviderAvailability["All"] = 3] = "All";
-		})(exports$1.SourceProviderAvailability || (exports$1.SourceProviderAvailability = {}));
+		})(exports.SourceProviderAvailability || (exports.SourceProviderAvailability = {}));
 		(function (StageUpdateType) {
 		    StageUpdateType[StageUpdateType["Cancel"] = 0] = "Cancel";
 		    StageUpdateType[StageUpdateType["Retry"] = 1] = "Retry";
 		    StageUpdateType[StageUpdateType["Run"] = 2] = "Run";
-		})(exports$1.StageUpdateType || (exports$1.StageUpdateType = {}));
+		})(exports.StageUpdateType || (exports.StageUpdateType = {}));
 		(function (SupportLevel) {
 		    /**
 		     * The functionality is not supported.
@@ -42223,7 +42264,7 @@ function requireBuildInterfaces () {
 		     * The functionality is required.
 		     */
 		    SupportLevel[SupportLevel["Required"] = 2] = "Required";
-		})(exports$1.SupportLevel || (exports$1.SupportLevel = {}));
+		})(exports.SupportLevel || (exports.SupportLevel = {}));
 		(function (TaskResult) {
 		    TaskResult[TaskResult["Succeeded"] = 0] = "Succeeded";
 		    TaskResult[TaskResult["SucceededWithIssues"] = 1] = "SucceededWithIssues";
@@ -42233,17 +42274,17 @@ function requireBuildInterfaces () {
 		    TaskResult[TaskResult["Abandoned"] = 5] = "Abandoned";
 		    TaskResult[TaskResult["ManuallyQueued"] = 6] = "ManuallyQueued";
 		    TaskResult[TaskResult["DependentOnManualQueue"] = 7] = "DependentOnManualQueue";
-		})(exports$1.TaskResult || (exports$1.TaskResult = {}));
+		})(exports.TaskResult || (exports.TaskResult = {}));
 		(function (TimelineRecordState) {
 		    TimelineRecordState[TimelineRecordState["Pending"] = 0] = "Pending";
 		    TimelineRecordState[TimelineRecordState["InProgress"] = 1] = "InProgress";
 		    TimelineRecordState[TimelineRecordState["Completed"] = 2] = "Completed";
-		})(exports$1.TimelineRecordState || (exports$1.TimelineRecordState = {}));
+		})(exports.TimelineRecordState || (exports.TimelineRecordState = {}));
 		(function (ValidationResult) {
 		    ValidationResult[ValidationResult["OK"] = 0] = "OK";
 		    ValidationResult[ValidationResult["Warning"] = 1] = "Warning";
 		    ValidationResult[ValidationResult["Error"] = 2] = "Error";
-		})(exports$1.ValidationResult || (exports$1.ValidationResult = {}));
+		})(exports.ValidationResult || (exports.ValidationResult = {}));
 		(function (WorkspaceMappingType) {
 		    /**
 		     * The path is mapped in the workspace.
@@ -42253,8 +42294,8 @@ function requireBuildInterfaces () {
 		     * The path is cloaked in the workspace.
 		     */
 		    WorkspaceMappingType[WorkspaceMappingType["Cloak"] = 1] = "Cloak";
-		})(exports$1.WorkspaceMappingType || (exports$1.WorkspaceMappingType = {}));
-		exports$1.TypeInfo = {
+		})(exports.WorkspaceMappingType || (exports.WorkspaceMappingType = {}));
+		exports.TypeInfo = {
 		    AgentStatus: {
 		        enumValues: {
 		            "unavailable": 0,
@@ -42590,12 +42631,12 @@ function requireBuildInterfaces () {
 		    WorkspaceTemplate: {},
 		    XamlBuildDefinition: {},
 		};
-		exports$1.TypeInfo.Build.fields = {
+		exports.TypeInfo.Build.fields = {
 		    controller: {
-		        typeInfo: exports$1.TypeInfo.BuildController
+		        typeInfo: exports.TypeInfo.BuildController
 		    },
 		    definition: {
-		        typeInfo: exports$1.TypeInfo.DefinitionReference
+		        typeInfo: exports.TypeInfo.DefinitionReference
 		    },
 		    deletedDate: {
 		        isDate: true,
@@ -42607,264 +42648,264 @@ function requireBuildInterfaces () {
 		        isDate: true,
 		    },
 		    priority: {
-		        enumType: exports$1.TypeInfo.QueuePriority
+		        enumType: exports.TypeInfo.QueuePriority
 		    },
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
 		    queueOptions: {
-		        enumType: exports$1.TypeInfo.QueueOptions
+		        enumType: exports.TypeInfo.QueueOptions
 		    },
 		    queueTime: {
 		        isDate: true,
 		    },
 		    reason: {
-		        enumType: exports$1.TypeInfo.BuildReason
+		        enumType: exports.TypeInfo.BuildReason
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.BuildResult
+		        enumType: exports.TypeInfo.BuildResult
 		    },
 		    startTime: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.BuildStatus
+		        enumType: exports.TypeInfo.BuildStatus
 		    },
 		    triggeredByBuild: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    },
 		    validationResults: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BuildRequestValidationResult
+		        typeInfo: exports.TypeInfo.BuildRequestValidationResult
 		    }
 		};
-		exports$1.TypeInfo.BuildAgent.fields = {
+		exports.TypeInfo.BuildAgent.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.AgentStatus
+		        enumType: exports.TypeInfo.AgentStatus
 		    },
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BuildCompletedEvent.fields = {
+		exports.TypeInfo.BuildCompletedEvent.fields = {
 		    build: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    },
 		    changes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Change
+		        typeInfo: exports.TypeInfo.Change
 		    },
 		    testResults: {
 		        typeInfo: TFS_TestManagement_Contracts.TypeInfo.AggregatedResultsAnalysis
 		    },
 		    timelineRecords: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TimelineRecord
+		        typeInfo: exports.TypeInfo.TimelineRecord
 		    }
 		};
-		exports$1.TypeInfo.BuildCompletionTrigger.fields = {
+		exports.TypeInfo.BuildCompletionTrigger.fields = {
 		    definition: {
-		        typeInfo: exports$1.TypeInfo.DefinitionReference
+		        typeInfo: exports.TypeInfo.DefinitionReference
 		    },
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.DefinitionTriggerType
+		        enumType: exports.TypeInfo.DefinitionTriggerType
 		    }
 		};
-		exports$1.TypeInfo.BuildController.fields = {
+		exports.TypeInfo.BuildController.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.ControllerStatus
+		        enumType: exports.TypeInfo.ControllerStatus
 		    },
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BuildDefinition.fields = {
+		exports.TypeInfo.BuildDefinition.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    draftOf: {
-		        typeInfo: exports$1.TypeInfo.DefinitionReference
+		        typeInfo: exports.TypeInfo.DefinitionReference
 		    },
 		    drafts: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DefinitionReference
+		        typeInfo: exports.TypeInfo.DefinitionReference
 		    },
 		    jobAuthorizationScope: {
-		        enumType: exports$1.TypeInfo.BuildAuthorizationScope
+		        enumType: exports.TypeInfo.BuildAuthorizationScope
 		    },
 		    latestBuild: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    },
 		    latestCompletedBuild: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    },
 		    metrics: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BuildMetric
+		        typeInfo: exports.TypeInfo.BuildMetric
 		    },
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
 		    quality: {
-		        enumType: exports$1.TypeInfo.DefinitionQuality
+		        enumType: exports.TypeInfo.DefinitionQuality
 		    },
 		    queueStatus: {
-		        enumType: exports$1.TypeInfo.DefinitionQueueStatus
+		        enumType: exports.TypeInfo.DefinitionQueueStatus
 		    },
 		    triggers: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BuildTrigger
+		        typeInfo: exports.TypeInfo.BuildTrigger
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.DefinitionType
+		        enumType: exports.TypeInfo.DefinitionType
 		    }
 		};
-		exports$1.TypeInfo.BuildDefinition3_2.fields = {
+		exports.TypeInfo.BuildDefinition3_2.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    draftOf: {
-		        typeInfo: exports$1.TypeInfo.DefinitionReference
+		        typeInfo: exports.TypeInfo.DefinitionReference
 		    },
 		    drafts: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DefinitionReference
+		        typeInfo: exports.TypeInfo.DefinitionReference
 		    },
 		    jobAuthorizationScope: {
-		        enumType: exports$1.TypeInfo.BuildAuthorizationScope
+		        enumType: exports.TypeInfo.BuildAuthorizationScope
 		    },
 		    latestBuild: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    },
 		    latestCompletedBuild: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    },
 		    metrics: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BuildMetric
+		        typeInfo: exports.TypeInfo.BuildMetric
 		    },
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
 		    quality: {
-		        enumType: exports$1.TypeInfo.DefinitionQuality
+		        enumType: exports.TypeInfo.DefinitionQuality
 		    },
 		    queueStatus: {
-		        enumType: exports$1.TypeInfo.DefinitionQueueStatus
+		        enumType: exports.TypeInfo.DefinitionQueueStatus
 		    },
 		    triggers: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BuildTrigger
+		        typeInfo: exports.TypeInfo.BuildTrigger
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.DefinitionType
+		        enumType: exports.TypeInfo.DefinitionType
 		    }
 		};
-		exports$1.TypeInfo.BuildDefinitionReference.fields = {
+		exports.TypeInfo.BuildDefinitionReference.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    draftOf: {
-		        typeInfo: exports$1.TypeInfo.DefinitionReference
+		        typeInfo: exports.TypeInfo.DefinitionReference
 		    },
 		    drafts: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DefinitionReference
+		        typeInfo: exports.TypeInfo.DefinitionReference
 		    },
 		    latestBuild: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    },
 		    latestCompletedBuild: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    },
 		    metrics: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BuildMetric
+		        typeInfo: exports.TypeInfo.BuildMetric
 		    },
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
 		    quality: {
-		        enumType: exports$1.TypeInfo.DefinitionQuality
+		        enumType: exports.TypeInfo.DefinitionQuality
 		    },
 		    queueStatus: {
-		        enumType: exports$1.TypeInfo.DefinitionQueueStatus
+		        enumType: exports.TypeInfo.DefinitionQueueStatus
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.DefinitionType
+		        enumType: exports.TypeInfo.DefinitionType
 		    }
 		};
-		exports$1.TypeInfo.BuildDefinitionReference3_2.fields = {
+		exports.TypeInfo.BuildDefinitionReference3_2.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    draftOf: {
-		        typeInfo: exports$1.TypeInfo.DefinitionReference
+		        typeInfo: exports.TypeInfo.DefinitionReference
 		    },
 		    drafts: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DefinitionReference
+		        typeInfo: exports.TypeInfo.DefinitionReference
 		    },
 		    metrics: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BuildMetric
+		        typeInfo: exports.TypeInfo.BuildMetric
 		    },
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
 		    quality: {
-		        enumType: exports$1.TypeInfo.DefinitionQuality
+		        enumType: exports.TypeInfo.DefinitionQuality
 		    },
 		    queueStatus: {
-		        enumType: exports$1.TypeInfo.DefinitionQueueStatus
+		        enumType: exports.TypeInfo.DefinitionQueueStatus
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.DefinitionType
+		        enumType: exports.TypeInfo.DefinitionType
 		    }
 		};
-		exports$1.TypeInfo.BuildDefinitionRevision.fields = {
+		exports.TypeInfo.BuildDefinitionRevision.fields = {
 		    changedDate: {
 		        isDate: true,
 		    },
 		    changeType: {
-		        enumType: exports$1.TypeInfo.AuditAction
+		        enumType: exports.TypeInfo.AuditAction
 		    }
 		};
-		exports$1.TypeInfo.BuildDefinitionSourceProvider.fields = {
+		exports.TypeInfo.BuildDefinitionSourceProvider.fields = {
 		    lastModified: {
 		        isDate: true,
 		    },
 		    supportedTriggerTypes: {
-		        enumType: exports$1.TypeInfo.DefinitionTriggerType
+		        enumType: exports.TypeInfo.DefinitionTriggerType
 		    }
 		};
-		exports$1.TypeInfo.BuildDefinitionTemplate.fields = {
+		exports.TypeInfo.BuildDefinitionTemplate.fields = {
 		    template: {
-		        typeInfo: exports$1.TypeInfo.BuildDefinition
+		        typeInfo: exports.TypeInfo.BuildDefinition
 		    }
 		};
-		exports$1.TypeInfo.BuildDefinitionTemplate3_2.fields = {
+		exports.TypeInfo.BuildDefinitionTemplate3_2.fields = {
 		    template: {
-		        typeInfo: exports$1.TypeInfo.BuildDefinition3_2
+		        typeInfo: exports.TypeInfo.BuildDefinition3_2
 		    }
 		};
-		exports$1.TypeInfo.BuildDeletedEvent.fields = {
+		exports.TypeInfo.BuildDeletedEvent.fields = {
 		    build: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    }
 		};
-		exports$1.TypeInfo.BuildDeployment.fields = {
+		exports.TypeInfo.BuildDeployment.fields = {
 		    deployment: {
-		        typeInfo: exports$1.TypeInfo.BuildSummary
+		        typeInfo: exports.TypeInfo.BuildSummary
 		    }
 		};
-		exports$1.TypeInfo.BuildLog.fields = {
+		exports.TypeInfo.BuildLog.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -42872,36 +42913,36 @@ function requireBuildInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BuildMetric.fields = {
+		exports.TypeInfo.BuildMetric.fields = {
 		    date: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BuildOptionDefinition.fields = {
+		exports.TypeInfo.BuildOptionDefinition.fields = {
 		    inputs: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BuildOptionInputDefinition
+		        typeInfo: exports.TypeInfo.BuildOptionInputDefinition
 		    }
 		};
-		exports$1.TypeInfo.BuildOptionInputDefinition.fields = {
+		exports.TypeInfo.BuildOptionInputDefinition.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.BuildOptionInputType
+		        enumType: exports.TypeInfo.BuildOptionInputType
 		    }
 		};
-		exports$1.TypeInfo.BuildProcessTemplate.fields = {
+		exports.TypeInfo.BuildProcessTemplate.fields = {
 		    supportedReasons: {
-		        enumType: exports$1.TypeInfo.BuildReason
+		        enumType: exports.TypeInfo.BuildReason
 		    },
 		    templateType: {
-		        enumType: exports$1.TypeInfo.ProcessTemplateType
+		        enumType: exports.TypeInfo.ProcessTemplateType
 		    }
 		};
-		exports$1.TypeInfo.BuildQueuedEvent.fields = {
+		exports.TypeInfo.BuildQueuedEvent.fields = {
 		    build: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    }
 		};
-		exports$1.TypeInfo.BuildReference.fields = {
+		exports.TypeInfo.BuildReference.fields = {
 		    finishTime: {
 		        isDate: true,
 		    },
@@ -42909,84 +42950,84 @@ function requireBuildInterfaces () {
 		        isDate: true,
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.BuildResult
+		        enumType: exports.TypeInfo.BuildResult
 		    },
 		    startTime: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.BuildStatus
+		        enumType: exports.TypeInfo.BuildStatus
 		    }
 		};
-		exports$1.TypeInfo.BuildRequestValidationResult.fields = {
+		exports.TypeInfo.BuildRequestValidationResult.fields = {
 		    result: {
-		        enumType: exports$1.TypeInfo.ValidationResult
+		        enumType: exports.TypeInfo.ValidationResult
 		    }
 		};
-		exports$1.TypeInfo.BuildRetentionHistory.fields = {
+		exports.TypeInfo.BuildRetentionHistory.fields = {
 		    buildRetentionSamples: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BuildRetentionSample
+		        typeInfo: exports.TypeInfo.BuildRetentionSample
 		    }
 		};
-		exports$1.TypeInfo.BuildRetentionSample.fields = {
+		exports.TypeInfo.BuildRetentionSample.fields = {
 		    sampleTime: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BuildServer.fields = {
+		exports.TypeInfo.BuildServer.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.ServiceHostStatus
+		        enumType: exports.TypeInfo.ServiceHostStatus
 		    },
 		    statusChangedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BuildSummary.fields = {
+		exports.TypeInfo.BuildSummary.fields = {
 		    finishTime: {
 		        isDate: true,
 		    },
 		    reason: {
-		        enumType: exports$1.TypeInfo.BuildReason
+		        enumType: exports.TypeInfo.BuildReason
 		    },
 		    startTime: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.BuildStatus
+		        enumType: exports.TypeInfo.BuildStatus
 		    }
 		};
-		exports$1.TypeInfo.BuildTagsAddedEvent.fields = {
+		exports.TypeInfo.BuildTagsAddedEvent.fields = {
 		    build: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    }
 		};
-		exports$1.TypeInfo.BuildTrigger.fields = {
+		exports.TypeInfo.BuildTrigger.fields = {
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.DefinitionTriggerType
+		        enumType: exports.TypeInfo.DefinitionTriggerType
 		    }
 		};
-		exports$1.TypeInfo.BuildUpdatedEvent.fields = {
+		exports.TypeInfo.BuildUpdatedEvent.fields = {
 		    build: {
-		        typeInfo: exports$1.TypeInfo.Build
+		        typeInfo: exports.TypeInfo.Build
 		    }
 		};
-		exports$1.TypeInfo.Change.fields = {
+		exports.TypeInfo.Change.fields = {
 		    timestamp: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ContinuousDeploymentDefinition.fields = {
+		exports.TypeInfo.ContinuousDeploymentDefinition.fields = {
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.ContinuousIntegrationTrigger.fields = {
+		exports.TypeInfo.ContinuousIntegrationTrigger.fields = {
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.DefinitionTriggerType
+		        enumType: exports.TypeInfo.DefinitionTriggerType
 		    }
 		};
-		exports$1.TypeInfo.DefinitionReference.fields = {
+		exports.TypeInfo.DefinitionReference.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
@@ -42994,19 +43035,19 @@ function requireBuildInterfaces () {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
 		    queueStatus: {
-		        enumType: exports$1.TypeInfo.DefinitionQueueStatus
+		        enumType: exports.TypeInfo.DefinitionQueueStatus
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.DefinitionType
+		        enumType: exports.TypeInfo.DefinitionType
 		    }
 		};
-		exports$1.TypeInfo.DesignerProcess.fields = {
+		exports.TypeInfo.DesignerProcess.fields = {
 		    phases: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Phase
+		        typeInfo: exports.TypeInfo.Phase
 		    }
 		};
-		exports$1.TypeInfo.Folder.fields = {
+		exports.TypeInfo.Folder.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -43017,38 +43058,38 @@ function requireBuildInterfaces () {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.GatedCheckInTrigger.fields = {
+		exports.TypeInfo.GatedCheckInTrigger.fields = {
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.DefinitionTriggerType
+		        enumType: exports.TypeInfo.DefinitionTriggerType
 		    }
 		};
-		exports$1.TypeInfo.InformationNode.fields = {
+		exports.TypeInfo.InformationNode.fields = {
 		    lastModifiedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.Issue.fields = {
+		exports.TypeInfo.Issue.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.IssueType
+		        enumType: exports.TypeInfo.IssueType
 		    }
 		};
-		exports$1.TypeInfo.Phase.fields = {
+		exports.TypeInfo.Phase.fields = {
 		    jobAuthorizationScope: {
-		        enumType: exports$1.TypeInfo.BuildAuthorizationScope
+		        enumType: exports.TypeInfo.BuildAuthorizationScope
 		    }
 		};
-		exports$1.TypeInfo.PullRequestTrigger.fields = {
+		exports.TypeInfo.PullRequestTrigger.fields = {
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.DefinitionTriggerType
+		        enumType: exports.TypeInfo.DefinitionTriggerType
 		    }
 		};
-		exports$1.TypeInfo.RepositoryWebhook.fields = {
+		exports.TypeInfo.RepositoryWebhook.fields = {
 		    types: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.DefinitionTriggerType
+		        enumType: exports.TypeInfo.DefinitionTriggerType
 		    }
 		};
-		exports$1.TypeInfo.RetentionLease.fields = {
+		exports.TypeInfo.RetentionLease.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -43056,93 +43097,93 @@ function requireBuildInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.Schedule.fields = {
+		exports.TypeInfo.Schedule.fields = {
 		    daysToBuild: {
-		        enumType: exports$1.TypeInfo.ScheduleDays
+		        enumType: exports.TypeInfo.ScheduleDays
 		    }
 		};
-		exports$1.TypeInfo.ScheduleTrigger.fields = {
+		exports.TypeInfo.ScheduleTrigger.fields = {
 		    schedules: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Schedule
+		        typeInfo: exports.TypeInfo.Schedule
 		    },
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.DefinitionTriggerType
+		        enumType: exports.TypeInfo.DefinitionTriggerType
 		    }
 		};
-		exports$1.TypeInfo.SourceProviderAttributes.fields = {
+		exports.TypeInfo.SourceProviderAttributes.fields = {
 		    supportedTriggers: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.SupportedTrigger
+		        typeInfo: exports.TypeInfo.SupportedTrigger
 		    }
 		};
-		exports$1.TypeInfo.SupportedTrigger.fields = {
+		exports.TypeInfo.SupportedTrigger.fields = {
 		    supportedCapabilities: {
 		        isDictionary: true,
-		        dictionaryValueEnumType: exports$1.TypeInfo.SupportLevel
+		        dictionaryValueEnumType: exports.TypeInfo.SupportLevel
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.DefinitionTriggerType
+		        enumType: exports.TypeInfo.DefinitionTriggerType
 		    }
 		};
-		exports$1.TypeInfo.Timeline.fields = {
+		exports.TypeInfo.Timeline.fields = {
 		    lastChangedOn: {
 		        isDate: true,
 		    },
 		    records: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TimelineRecord
+		        typeInfo: exports.TypeInfo.TimelineRecord
 		    }
 		};
-		exports$1.TypeInfo.TimelineRecord.fields = {
+		exports.TypeInfo.TimelineRecord.fields = {
 		    finishTime: {
 		        isDate: true,
 		    },
 		    issues: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Issue
+		        typeInfo: exports.TypeInfo.Issue
 		    },
 		    lastModified: {
 		        isDate: true,
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskResult
+		        enumType: exports.TypeInfo.TaskResult
 		    },
 		    startTime: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.TimelineRecordState
+		        enumType: exports.TypeInfo.TimelineRecordState
 		    }
 		};
-		exports$1.TypeInfo.TimelineRecordsUpdatedEvent.fields = {
+		exports.TypeInfo.TimelineRecordsUpdatedEvent.fields = {
 		    timelineRecords: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TimelineRecord
+		        typeInfo: exports.TypeInfo.TimelineRecord
 		    }
 		};
-		exports$1.TypeInfo.UpdateStageParameters.fields = {
+		exports.TypeInfo.UpdateStageParameters.fields = {
 		    state: {
-		        enumType: exports$1.TypeInfo.StageUpdateType
+		        enumType: exports.TypeInfo.StageUpdateType
 		    }
 		};
-		exports$1.TypeInfo.WorkspaceMapping.fields = {
+		exports.TypeInfo.WorkspaceMapping.fields = {
 		    mappingType: {
-		        enumType: exports$1.TypeInfo.WorkspaceMappingType
+		        enumType: exports.TypeInfo.WorkspaceMappingType
 		    }
 		};
-		exports$1.TypeInfo.WorkspaceTemplate.fields = {
+		exports.TypeInfo.WorkspaceTemplate.fields = {
 		    lastModifiedDate: {
 		        isDate: true,
 		    },
 		    mappings: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.WorkspaceMapping
+		        typeInfo: exports.TypeInfo.WorkspaceMapping
 		    }
 		};
-		exports$1.TypeInfo.XamlBuildDefinition.fields = {
+		exports.TypeInfo.XamlBuildDefinition.fields = {
 		    controller: {
-		        typeInfo: exports$1.TypeInfo.BuildController
+		        typeInfo: exports.TypeInfo.BuildController
 		    },
 		    createdDate: {
 		        isDate: true,
@@ -43154,16 +43195,16 @@ function requireBuildInterfaces () {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
 		    queueStatus: {
-		        enumType: exports$1.TypeInfo.DefinitionQueueStatus
+		        enumType: exports.TypeInfo.DefinitionQueueStatus
 		    },
 		    supportedReasons: {
-		        enumType: exports$1.TypeInfo.BuildReason
+		        enumType: exports.TypeInfo.BuildReason
 		    },
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.DefinitionTriggerType
+		        enumType: exports.TypeInfo.DefinitionTriggerType
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.DefinitionType
+		        enumType: exports.TypeInfo.DefinitionType
 		    }
 		}; 
 	} (BuildInterfaces));
@@ -46324,9 +46365,9 @@ var hasRequiredOperationsInterfaces;
 function requireOperationsInterfaces () {
 	if (hasRequiredOperationsInterfaces) return OperationsInterfaces;
 	hasRequiredOperationsInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.OperationStatus = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.OperationStatus = void 0;
 		(function (OperationStatus) {
 		    /**
 		     * The operation does not have a status set.
@@ -46352,8 +46393,8 @@ function requireOperationsInterfaces () {
 		     * The operation completed with a failure.
 		     */
 		    OperationStatus[OperationStatus["Failed"] = 5] = "Failed";
-		})(exports$1.OperationStatus || (exports$1.OperationStatus = {}));
-		exports$1.TypeInfo = {
+		})(exports.OperationStatus || (exports.OperationStatus = {}));
+		exports.TypeInfo = {
 		    Operation: {},
 		    OperationReference: {},
 		    OperationStatus: {
@@ -46367,14 +46408,14 @@ function requireOperationsInterfaces () {
 		        }
 		    },
 		};
-		exports$1.TypeInfo.Operation.fields = {
+		exports.TypeInfo.Operation.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.OperationStatus
+		        enumType: exports.TypeInfo.OperationStatus
 		    }
 		};
-		exports$1.TypeInfo.OperationReference.fields = {
+		exports.TypeInfo.OperationReference.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.OperationStatus
+		        enumType: exports.TypeInfo.OperationStatus
 		    }
 		}; 
 	} (OperationsInterfaces));
@@ -47366,9 +47407,9 @@ var hasRequiredDashboardInterfaces;
 function requireDashboardInterfaces () {
 	if (hasRequiredDashboardInterfaces) return DashboardInterfaces;
 	hasRequiredDashboardInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.WidgetScope = exports$1.TeamDashboardPermission = exports$1.GroupMemberPermission = exports$1.DashboardScope = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.WidgetScope = exports.TeamDashboardPermission = exports.GroupMemberPermission = exports.DashboardScope = void 0;
 		(function (DashboardScope) {
 		    /**
 		     * [DEPRECATED] Dashboard is scoped to the collection user.
@@ -47382,13 +47423,13 @@ function requireDashboardInterfaces () {
 		     * Dashboard is scoped to the project.
 		     */
 		    DashboardScope[DashboardScope["Project"] = 2] = "Project";
-		})(exports$1.DashboardScope || (exports$1.DashboardScope = {}));
+		})(exports.DashboardScope || (exports.DashboardScope = {}));
 		(function (GroupMemberPermission) {
 		    GroupMemberPermission[GroupMemberPermission["None"] = 0] = "None";
 		    GroupMemberPermission[GroupMemberPermission["Edit"] = 1] = "Edit";
 		    GroupMemberPermission[GroupMemberPermission["Manage"] = 2] = "Manage";
 		    GroupMemberPermission[GroupMemberPermission["ManagePermissions"] = 3] = "ManagePermissions";
-		})(exports$1.GroupMemberPermission || (exports$1.GroupMemberPermission = {}));
+		})(exports.GroupMemberPermission || (exports.GroupMemberPermission = {}));
 		(function (TeamDashboardPermission) {
 		    TeamDashboardPermission[TeamDashboardPermission["None"] = 0] = "None";
 		    TeamDashboardPermission[TeamDashboardPermission["Read"] = 1] = "Read";
@@ -47396,12 +47437,12 @@ function requireDashboardInterfaces () {
 		    TeamDashboardPermission[TeamDashboardPermission["Edit"] = 4] = "Edit";
 		    TeamDashboardPermission[TeamDashboardPermission["Delete"] = 8] = "Delete";
 		    TeamDashboardPermission[TeamDashboardPermission["ManagePermissions"] = 16] = "ManagePermissions";
-		})(exports$1.TeamDashboardPermission || (exports$1.TeamDashboardPermission = {}));
+		})(exports.TeamDashboardPermission || (exports.TeamDashboardPermission = {}));
 		(function (WidgetScope) {
 		    WidgetScope[WidgetScope["Collection_User"] = 0] = "Collection_User";
 		    WidgetScope[WidgetScope["Project_Team"] = 1] = "Project_Team";
-		})(exports$1.WidgetScope || (exports$1.WidgetScope = {}));
-		exports$1.TypeInfo = {
+		})(exports.WidgetScope || (exports.WidgetScope = {}));
+		exports.TypeInfo = {
 		    CopyDashboardOptions: {},
 		    CopyDashboardResponse: {},
 		    Dashboard: {},
@@ -47447,22 +47488,22 @@ function requireDashboardInterfaces () {
 		    WidgetsVersionedList: {},
 		    WidgetTypesResponse: {},
 		};
-		exports$1.TypeInfo.CopyDashboardOptions.fields = {
+		exports.TypeInfo.CopyDashboardOptions.fields = {
 		    copyDashboardScope: {
-		        enumType: exports$1.TypeInfo.DashboardScope
+		        enumType: exports.TypeInfo.DashboardScope
 		    }
 		};
-		exports$1.TypeInfo.CopyDashboardResponse.fields = {
+		exports.TypeInfo.CopyDashboardResponse.fields = {
 		    copiedDashboard: {
-		        typeInfo: exports$1.TypeInfo.Dashboard
+		        typeInfo: exports.TypeInfo.Dashboard
 		    },
 		    copyDashboardOptions: {
-		        typeInfo: exports$1.TypeInfo.CopyDashboardOptions
+		        typeInfo: exports.TypeInfo.CopyDashboardOptions
 		    }
 		};
-		exports$1.TypeInfo.Dashboard.fields = {
+		exports.TypeInfo.Dashboard.fields = {
 		    dashboardScope: {
-		        enumType: exports$1.TypeInfo.DashboardScope
+		        enumType: exports.TypeInfo.DashboardScope
 		    },
 		    lastAccessedDate: {
 		        isDate: true,
@@ -47472,24 +47513,24 @@ function requireDashboardInterfaces () {
 		    },
 		    widgets: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Widget
+		        typeInfo: exports.TypeInfo.Widget
 		    }
 		};
-		exports$1.TypeInfo.DashboardGroup.fields = {
+		exports.TypeInfo.DashboardGroup.fields = {
 		    dashboardEntries: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DashboardGroupEntry
+		        typeInfo: exports.TypeInfo.DashboardGroupEntry
 		    },
 		    permission: {
-		        enumType: exports$1.TypeInfo.GroupMemberPermission
+		        enumType: exports.TypeInfo.GroupMemberPermission
 		    },
 		    teamDashboardPermission: {
-		        enumType: exports$1.TypeInfo.TeamDashboardPermission
+		        enumType: exports.TypeInfo.TeamDashboardPermission
 		    }
 		};
-		exports$1.TypeInfo.DashboardGroupEntry.fields = {
+		exports.TypeInfo.DashboardGroupEntry.fields = {
 		    dashboardScope: {
-		        enumType: exports$1.TypeInfo.DashboardScope
+		        enumType: exports.TypeInfo.DashboardScope
 		    },
 		    lastAccessedDate: {
 		        isDate: true,
@@ -47499,12 +47540,12 @@ function requireDashboardInterfaces () {
 		    },
 		    widgets: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Widget
+		        typeInfo: exports.TypeInfo.Widget
 		    }
 		};
-		exports$1.TypeInfo.DashboardGroupEntryResponse.fields = {
+		exports.TypeInfo.DashboardGroupEntryResponse.fields = {
 		    dashboardScope: {
-		        enumType: exports$1.TypeInfo.DashboardScope
+		        enumType: exports.TypeInfo.DashboardScope
 		    },
 		    lastAccessedDate: {
 		        isDate: true,
@@ -47514,12 +47555,12 @@ function requireDashboardInterfaces () {
 		    },
 		    widgets: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Widget
+		        typeInfo: exports.TypeInfo.Widget
 		    }
 		};
-		exports$1.TypeInfo.DashboardResponse.fields = {
+		exports.TypeInfo.DashboardResponse.fields = {
 		    dashboardScope: {
-		        enumType: exports$1.TypeInfo.DashboardScope
+		        enumType: exports.TypeInfo.DashboardScope
 		    },
 		    lastAccessedDate: {
 		        isDate: true,
@@ -47529,40 +47570,40 @@ function requireDashboardInterfaces () {
 		    },
 		    widgets: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Widget
+		        typeInfo: exports.TypeInfo.Widget
 		    }
 		};
-		exports$1.TypeInfo.Widget.fields = {
+		exports.TypeInfo.Widget.fields = {
 		    dashboard: {
-		        typeInfo: exports$1.TypeInfo.Dashboard
+		        typeInfo: exports.TypeInfo.Dashboard
 		    }
 		};
-		exports$1.TypeInfo.WidgetMetadata.fields = {
+		exports.TypeInfo.WidgetMetadata.fields = {
 		    supportedScopes: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.WidgetScope
+		        enumType: exports.TypeInfo.WidgetScope
 		    }
 		};
-		exports$1.TypeInfo.WidgetMetadataResponse.fields = {
+		exports.TypeInfo.WidgetMetadataResponse.fields = {
 		    widgetMetadata: {
-		        typeInfo: exports$1.TypeInfo.WidgetMetadata
+		        typeInfo: exports.TypeInfo.WidgetMetadata
 		    }
 		};
-		exports$1.TypeInfo.WidgetResponse.fields = {
+		exports.TypeInfo.WidgetResponse.fields = {
 		    dashboard: {
-		        typeInfo: exports$1.TypeInfo.Dashboard
+		        typeInfo: exports.TypeInfo.Dashboard
 		    }
 		};
-		exports$1.TypeInfo.WidgetsVersionedList.fields = {
+		exports.TypeInfo.WidgetsVersionedList.fields = {
 		    widgets: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Widget
+		        typeInfo: exports.TypeInfo.Widget
 		    }
 		};
-		exports$1.TypeInfo.WidgetTypesResponse.fields = {
+		exports.TypeInfo.WidgetTypesResponse.fields = {
 		    widgetTypes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.WidgetMetadata
+		        typeInfo: exports.TypeInfo.WidgetMetadata
 		    }
 		}; 
 	} (DashboardInterfaces));
@@ -48081,9 +48122,9 @@ var hasRequiredGalleryInterfaces;
 function requireGalleryInterfaces () {
 	if (hasRequiredGalleryInterfaces) return GalleryInterfaces;
 	hasRequiredGalleryInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.VSCodeWebExtensionStatisicsType = exports$1.SortOrderType = exports$1.SortByType = exports$1.ReviewResourceType = exports$1.ReviewPatchOperation = exports$1.ReviewFilterOptions = exports$1.ReviewEventOperation = exports$1.RestApiResponseStatus = exports$1.QnAItemStatus = exports$1.PublisherState = exports$1.PublisherRoleAccess = exports$1.PublisherQueryFlags = exports$1.PublisherPermissions = exports$1.PublisherFlags = exports$1.PublishedExtensionFlags = exports$1.PagingDirection = exports$1.NotificationTemplateType = exports$1.ExtensionVersionFlags = exports$1.ExtensionStatsAggregateType = exports$1.ExtensionStatisticOperation = exports$1.ExtensionQueryFlags = exports$1.ExtensionQueryFilterType = exports$1.ExtensionPolicyFlags = exports$1.ExtensionLifecycleEventType = exports$1.ExtensionDeploymentTechnology = exports$1.DraftStateType = exports$1.DraftPatchOperation = exports$1.ConcernCategory = exports$1.AcquisitionOperationType = exports$1.AcquisitionOperationState = exports$1.AcquisitionAssignmentType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.VSCodeWebExtensionStatisicsType = exports.SortOrderType = exports.SortByType = exports.ReviewResourceType = exports.ReviewPatchOperation = exports.ReviewFilterOptions = exports.ReviewEventOperation = exports.RestApiResponseStatus = exports.QnAItemStatus = exports.PublisherState = exports.PublisherRoleAccess = exports.PublisherQueryFlags = exports.PublisherPermissions = exports.PublisherFlags = exports.PublishedExtensionFlags = exports.PagingDirection = exports.NotificationTemplateType = exports.ExtensionVersionFlags = exports.ExtensionStatsAggregateType = exports.ExtensionStatisticOperation = exports.ExtensionQueryFlags = exports.ExtensionQueryFilterType = exports.ExtensionPolicyFlags = exports.ExtensionLifecycleEventType = exports.ExtensionDeploymentTechnology = exports.DraftStateType = exports.DraftPatchOperation = exports.ConcernCategory = exports.AcquisitionOperationType = exports.AcquisitionOperationState = exports.AcquisitionAssignmentType = void 0;
 		(function (AcquisitionAssignmentType) {
 		    AcquisitionAssignmentType[AcquisitionAssignmentType["None"] = 0] = "None";
 		    /**
@@ -48094,7 +48135,7 @@ function requireGalleryInterfaces () {
 		     * Assign for all users in the account
 		     */
 		    AcquisitionAssignmentType[AcquisitionAssignmentType["All"] = 2] = "All";
-		})(exports$1.AcquisitionAssignmentType || (exports$1.AcquisitionAssignmentType = {}));
+		})(exports.AcquisitionAssignmentType || (exports.AcquisitionAssignmentType = {}));
 		(function (AcquisitionOperationState) {
 		    /**
 		     * Not allowed to use this AcquisitionOperation
@@ -48108,7 +48149,7 @@ function requireGalleryInterfaces () {
 		     * Operation has already been completed and is no longer available
 		     */
 		    AcquisitionOperationState[AcquisitionOperationState["Completed"] = 3] = "Completed";
-		})(exports$1.AcquisitionOperationState || (exports$1.AcquisitionOperationState = {}));
+		})(exports.AcquisitionOperationState || (exports.AcquisitionOperationState = {}));
 		(function (AcquisitionOperationType) {
 		    /**
 		     * Not yet used
@@ -48138,28 +48179,28 @@ function requireGalleryInterfaces () {
 		     * Request admins for purchasing extension
 		     */
 		    AcquisitionOperationType[AcquisitionOperationType["PurchaseRequest"] = 6] = "PurchaseRequest";
-		})(exports$1.AcquisitionOperationType || (exports$1.AcquisitionOperationType = {}));
+		})(exports.AcquisitionOperationType || (exports.AcquisitionOperationType = {}));
 		(function (ConcernCategory) {
 		    ConcernCategory[ConcernCategory["General"] = 1] = "General";
 		    ConcernCategory[ConcernCategory["Abusive"] = 2] = "Abusive";
 		    ConcernCategory[ConcernCategory["Spam"] = 4] = "Spam";
-		})(exports$1.ConcernCategory || (exports$1.ConcernCategory = {}));
+		})(exports.ConcernCategory || (exports.ConcernCategory = {}));
 		(function (DraftPatchOperation) {
 		    DraftPatchOperation[DraftPatchOperation["Publish"] = 1] = "Publish";
 		    DraftPatchOperation[DraftPatchOperation["Cancel"] = 2] = "Cancel";
-		})(exports$1.DraftPatchOperation || (exports$1.DraftPatchOperation = {}));
+		})(exports.DraftPatchOperation || (exports.DraftPatchOperation = {}));
 		(function (DraftStateType) {
 		    DraftStateType[DraftStateType["Unpublished"] = 1] = "Unpublished";
 		    DraftStateType[DraftStateType["Published"] = 2] = "Published";
 		    DraftStateType[DraftStateType["Cancelled"] = 3] = "Cancelled";
 		    DraftStateType[DraftStateType["Error"] = 4] = "Error";
-		})(exports$1.DraftStateType || (exports$1.DraftStateType = {}));
+		})(exports.DraftStateType || (exports.DraftStateType = {}));
 		(function (ExtensionDeploymentTechnology) {
 		    ExtensionDeploymentTechnology[ExtensionDeploymentTechnology["Exe"] = 1] = "Exe";
 		    ExtensionDeploymentTechnology[ExtensionDeploymentTechnology["Msi"] = 2] = "Msi";
 		    ExtensionDeploymentTechnology[ExtensionDeploymentTechnology["Vsix"] = 3] = "Vsix";
 		    ExtensionDeploymentTechnology[ExtensionDeploymentTechnology["ReferralLink"] = 4] = "ReferralLink";
-		})(exports$1.ExtensionDeploymentTechnology || (exports$1.ExtensionDeploymentTechnology = {}));
+		})(exports.ExtensionDeploymentTechnology || (exports.ExtensionDeploymentTechnology = {}));
 		(function (ExtensionLifecycleEventType) {
 		    ExtensionLifecycleEventType[ExtensionLifecycleEventType["Uninstall"] = 1] = "Uninstall";
 		    ExtensionLifecycleEventType[ExtensionLifecycleEventType["Install"] = 2] = "Install";
@@ -48167,7 +48208,7 @@ function requireGalleryInterfaces () {
 		    ExtensionLifecycleEventType[ExtensionLifecycleEventType["Acquisition"] = 4] = "Acquisition";
 		    ExtensionLifecycleEventType[ExtensionLifecycleEventType["Sales"] = 5] = "Sales";
 		    ExtensionLifecycleEventType[ExtensionLifecycleEventType["Other"] = 999] = "Other";
-		})(exports$1.ExtensionLifecycleEventType || (exports$1.ExtensionLifecycleEventType = {}));
+		})(exports.ExtensionLifecycleEventType || (exports.ExtensionLifecycleEventType = {}));
 		(function (ExtensionPolicyFlags) {
 		    /**
 		     * No permission
@@ -48197,7 +48238,7 @@ function requireGalleryInterfaces () {
 		     * Mask that defines all permissions
 		     */
 		    ExtensionPolicyFlags[ExtensionPolicyFlags["All"] = 31] = "All";
-		})(exports$1.ExtensionPolicyFlags || (exports$1.ExtensionPolicyFlags = {}));
+		})(exports.ExtensionPolicyFlags || (exports.ExtensionPolicyFlags = {}));
 		(function (ExtensionQueryFilterType) {
 		    /**
 		     * The values are used as tags. All tags are treated as "OR" conditions with each other. There may be some value put on the number of matched tags from the query.
@@ -48295,7 +48336,7 @@ function requireGalleryInterfaces () {
 		     * Retrieve an extension based on the extensionName.
 		     */
 		    ExtensionQueryFilterType[ExtensionQueryFilterType["ExtensionName"] = 24] = "ExtensionName";
-		})(exports$1.ExtensionQueryFilterType || (exports$1.ExtensionQueryFilterType = {}));
+		})(exports.ExtensionQueryFilterType || (exports.ExtensionQueryFilterType = {}));
 		(function (ExtensionQueryFlags) {
 		    /**
 		     * None is used to retrieve only the basic extension details.
@@ -48373,17 +48414,17 @@ function requireGalleryInterfaces () {
 		     * AllAttributes is designed to be a mask that defines all sub-elements of the extension should be returned.  NOTE: This is not actually All flags. This is now locked to the set defined since changing this enum would be a breaking change and would change the behavior of anyone using it. Try not to use this value when making calls to the service, instead be explicit about the options required.
 		     */
 		    ExtensionQueryFlags[ExtensionQueryFlags["AllAttributes"] = 16863] = "AllAttributes";
-		})(exports$1.ExtensionQueryFlags || (exports$1.ExtensionQueryFlags = {}));
+		})(exports.ExtensionQueryFlags || (exports.ExtensionQueryFlags = {}));
 		(function (ExtensionStatisticOperation) {
 		    ExtensionStatisticOperation[ExtensionStatisticOperation["None"] = 0] = "None";
 		    ExtensionStatisticOperation[ExtensionStatisticOperation["Set"] = 1] = "Set";
 		    ExtensionStatisticOperation[ExtensionStatisticOperation["Increment"] = 2] = "Increment";
 		    ExtensionStatisticOperation[ExtensionStatisticOperation["Decrement"] = 3] = "Decrement";
 		    ExtensionStatisticOperation[ExtensionStatisticOperation["Delete"] = 4] = "Delete";
-		})(exports$1.ExtensionStatisticOperation || (exports$1.ExtensionStatisticOperation = {}));
+		})(exports.ExtensionStatisticOperation || (exports.ExtensionStatisticOperation = {}));
 		(function (ExtensionStatsAggregateType) {
 		    ExtensionStatsAggregateType[ExtensionStatsAggregateType["Daily"] = 1] = "Daily";
-		})(exports$1.ExtensionStatsAggregateType || (exports$1.ExtensionStatsAggregateType = {}));
+		})(exports.ExtensionStatsAggregateType || (exports.ExtensionStatsAggregateType = {}));
 		(function (ExtensionVersionFlags) {
 		    /**
 		     * No flags exist for this version.
@@ -48397,7 +48438,7 @@ function requireGalleryInterfaces () {
 		     * The Prerelease flag for a version means the extension version is prerelease. This flag is runtime only. We need backfill this flag to database in the future, here is a tracking task: https://dev.azure.com/mseng/AzureDevOps/_workitems/edit/2234733
 		     */
 		    ExtensionVersionFlags[ExtensionVersionFlags["Prerelease"] = 2] = "Prerelease";
-		})(exports$1.ExtensionVersionFlags || (exports$1.ExtensionVersionFlags = {}));
+		})(exports.ExtensionVersionFlags || (exports.ExtensionVersionFlags = {}));
 		(function (NotificationTemplateType) {
 		    /**
 		     * Template type for Review Notification.
@@ -48415,7 +48456,7 @@ function requireGalleryInterfaces () {
 		     * Template type for Publisher Member Notification.
 		     */
 		    NotificationTemplateType[NotificationTemplateType["PublisherMemberUpdateNotification"] = 4] = "PublisherMemberUpdateNotification";
-		})(exports$1.NotificationTemplateType || (exports$1.NotificationTemplateType = {}));
+		})(exports.NotificationTemplateType || (exports.NotificationTemplateType = {}));
 		(function (PagingDirection) {
 		    /**
 		     * Backward will return results from earlier in the resultset.
@@ -48425,7 +48466,7 @@ function requireGalleryInterfaces () {
 		     * Forward will return results from later in the resultset.
 		     */
 		    PagingDirection[PagingDirection["Forward"] = 2] = "Forward";
-		})(exports$1.PagingDirection || (exports$1.PagingDirection = {}));
+		})(exports.PagingDirection || (exports.PagingDirection = {}));
 		(function (PublishedExtensionFlags) {
 		    /**
 		     * No flags exist for this extension.
@@ -48483,7 +48524,7 @@ function requireGalleryInterfaces () {
 		     * This flag is set for extensions we want to hide from Marketplace home and search pages. This will be used to override the exposure of builtIn flags.
 		     */
 		    PublishedExtensionFlags[PublishedExtensionFlags["Hidden"] = 32768] = "Hidden";
-		})(exports$1.PublishedExtensionFlags || (exports$1.PublishedExtensionFlags = {}));
+		})(exports.PublishedExtensionFlags || (exports.PublishedExtensionFlags = {}));
 		(function (PublisherFlags) {
 		    /**
 		     * This should never be returned, it is used to represent a publisher who's flags haven't changed during update calls.
@@ -48509,7 +48550,7 @@ function requireGalleryInterfaces () {
 		     * This is the set of flags that can't be supplied by the developer and is managed by the service itself.
 		     */
 		    PublisherFlags[PublisherFlags["ServiceFlags"] = 7] = "ServiceFlags";
-		})(exports$1.PublisherFlags || (exports$1.PublisherFlags = {}));
+		})(exports.PublisherFlags || (exports.PublisherFlags = {}));
 		(function (PublisherPermissions) {
 		    /**
 		     * This gives the bearer the rights to read Publishers and Extensions.
@@ -48559,7 +48600,7 @@ function requireGalleryInterfaces () {
 		     * This gives the bearer the rights to delete the publisher.
 		     */
 		    PublisherPermissions[PublisherPermissions["DeletePublisher"] = 2048] = "DeletePublisher";
-		})(exports$1.PublisherPermissions || (exports$1.PublisherPermissions = {}));
+		})(exports.PublisherPermissions || (exports.PublisherPermissions = {}));
 		(function (PublisherQueryFlags) {
 		    /**
 		     * None is used to retrieve only the basic publisher details.
@@ -48573,7 +48614,7 @@ function requireGalleryInterfaces () {
 		     * Is used to include email address of all the users who are marked as owners for the publisher
 		     */
 		    PublisherQueryFlags[PublisherQueryFlags["IncludeEmailAddress"] = 2] = "IncludeEmailAddress";
-		})(exports$1.PublisherQueryFlags || (exports$1.PublisherQueryFlags = {}));
+		})(exports.PublisherQueryFlags || (exports.PublisherQueryFlags = {}));
 		(function (PublisherRoleAccess) {
 		    /**
 		     * Access has been explicitly set.
@@ -48583,7 +48624,7 @@ function requireGalleryInterfaces () {
 		     * Access has been inherited from a higher scope.
 		     */
 		    PublisherRoleAccess[PublisherRoleAccess["Inherited"] = 2] = "Inherited";
-		})(exports$1.PublisherRoleAccess || (exports$1.PublisherRoleAccess = {}));
+		})(exports.PublisherRoleAccess || (exports.PublisherRoleAccess = {}));
 		(function (PublisherState) {
 		    /**
 		     * No state exists for this publisher.
@@ -48605,7 +48646,7 @@ function requireGalleryInterfaces () {
 		     * This state indicates that publisher was certified on the Marketplace, but his/her certification got revoked. This state would never be reset, even after publisher gets re-certified. It would indicate that the publisher certification was revoked at least once.
 		     */
 		    PublisherState[PublisherState["CertificationRevoked"] = 8] = "CertificationRevoked";
-		})(exports$1.PublisherState || (exports$1.PublisherState = {}));
+		})(exports.PublisherState || (exports.PublisherState = {}));
 		(function (QnAItemStatus) {
 		    QnAItemStatus[QnAItemStatus["None"] = 0] = "None";
 		    /**
@@ -48616,7 +48657,7 @@ function requireGalleryInterfaces () {
 		     * The PublisherCreated flag indicates whether the item has been created by extension publisher.
 		     */
 		    QnAItemStatus[QnAItemStatus["PublisherCreated"] = 2] = "PublisherCreated";
-		})(exports$1.QnAItemStatus || (exports$1.QnAItemStatus = {}));
+		})(exports.QnAItemStatus || (exports.QnAItemStatus = {}));
 		(function (RestApiResponseStatus) {
 		    /**
 		     * The operation is completed.
@@ -48634,12 +48675,12 @@ function requireGalleryInterfaces () {
 		     * The operation is in skipped.
 		     */
 		    RestApiResponseStatus[RestApiResponseStatus["Skipped"] = 3] = "Skipped";
-		})(exports$1.RestApiResponseStatus || (exports$1.RestApiResponseStatus = {}));
+		})(exports.RestApiResponseStatus || (exports.RestApiResponseStatus = {}));
 		(function (ReviewEventOperation) {
 		    ReviewEventOperation[ReviewEventOperation["Create"] = 1] = "Create";
 		    ReviewEventOperation[ReviewEventOperation["Update"] = 2] = "Update";
 		    ReviewEventOperation[ReviewEventOperation["Delete"] = 3] = "Delete";
-		})(exports$1.ReviewEventOperation || (exports$1.ReviewEventOperation = {}));
+		})(exports.ReviewEventOperation || (exports.ReviewEventOperation = {}));
 		(function (ReviewFilterOptions) {
 		    /**
 		     * No filtering, all reviews are returned (default option)
@@ -48653,7 +48694,7 @@ function requireGalleryInterfaces () {
 		     * Filter out review items with empty usernames
 		     */
 		    ReviewFilterOptions[ReviewFilterOptions["FilterEmptyUserNames"] = 2] = "FilterEmptyUserNames";
-		})(exports$1.ReviewFilterOptions || (exports$1.ReviewFilterOptions = {}));
+		})(exports.ReviewFilterOptions || (exports.ReviewFilterOptions = {}));
 		(function (ReviewPatchOperation) {
 		    /**
 		     * Flag a review
@@ -48679,12 +48720,12 @@ function requireGalleryInterfaces () {
 		     * Delete Publisher Reply
 		     */
 		    ReviewPatchOperation[ReviewPatchOperation["DeletePublisherReply"] = 6] = "DeletePublisherReply";
-		})(exports$1.ReviewPatchOperation || (exports$1.ReviewPatchOperation = {}));
+		})(exports.ReviewPatchOperation || (exports.ReviewPatchOperation = {}));
 		(function (ReviewResourceType) {
 		    ReviewResourceType[ReviewResourceType["Review"] = 1] = "Review";
 		    ReviewResourceType[ReviewResourceType["PublisherReply"] = 2] = "PublisherReply";
 		    ReviewResourceType[ReviewResourceType["AdminReply"] = 3] = "AdminReply";
-		})(exports$1.ReviewResourceType || (exports$1.ReviewResourceType = {}));
+		})(exports.ReviewResourceType || (exports.ReviewResourceType = {}));
 		(function (SortByType) {
 		    /**
 		     * The results will be sorted by relevance in case search query is given, if no search query resutls will be provided as is
@@ -48738,7 +48779,7 @@ function requireGalleryInterfaces () {
 		     * The results will be sorted as per Weighted Rating of the extension.
 		     */
 		    SortByType[SortByType["WeightedRating"] = 12] = "WeightedRating";
-		})(exports$1.SortByType || (exports$1.SortByType = {}));
+		})(exports.SortByType || (exports.SortByType = {}));
 		(function (SortOrderType) {
 		    /**
 		     * Results will be sorted in the default order as per the sorting type defined. The default varies for each type, e.g. for Relevance, default is Descending, for Title default is Ascending etc.
@@ -48752,13 +48793,13 @@ function requireGalleryInterfaces () {
 		     * The results will be sorted in Descending order
 		     */
 		    SortOrderType[SortOrderType["Descending"] = 2] = "Descending";
-		})(exports$1.SortOrderType || (exports$1.SortOrderType = {}));
+		})(exports.SortOrderType || (exports.SortOrderType = {}));
 		(function (VSCodeWebExtensionStatisicsType) {
 		    VSCodeWebExtensionStatisicsType[VSCodeWebExtensionStatisicsType["Install"] = 1] = "Install";
 		    VSCodeWebExtensionStatisicsType[VSCodeWebExtensionStatisicsType["Update"] = 2] = "Update";
 		    VSCodeWebExtensionStatisicsType[VSCodeWebExtensionStatisicsType["Uninstall"] = 3] = "Uninstall";
-		})(exports$1.VSCodeWebExtensionStatisicsType || (exports$1.VSCodeWebExtensionStatisicsType = {}));
-		exports$1.TypeInfo = {
+		})(exports.VSCodeWebExtensionStatisicsType || (exports.VSCodeWebExtensionStatisicsType = {}));
+		exports.TypeInfo = {
 		    AcquisitionAssignmentType: {
 		        enumValues: {
 		            "none": 0,
@@ -49106,162 +49147,162 @@ function requireGalleryInterfaces () {
 		        }
 		    },
 		};
-		exports$1.TypeInfo.AcquisitionOperation.fields = {
+		exports.TypeInfo.AcquisitionOperation.fields = {
 		    operationState: {
-		        enumType: exports$1.TypeInfo.AcquisitionOperationState
+		        enumType: exports.TypeInfo.AcquisitionOperationState
 		    },
 		    operationType: {
-		        enumType: exports$1.TypeInfo.AcquisitionOperationType
+		        enumType: exports.TypeInfo.AcquisitionOperationType
 		    }
 		};
-		exports$1.TypeInfo.AcquisitionOptions.fields = {
+		exports.TypeInfo.AcquisitionOptions.fields = {
 		    defaultOperation: {
-		        typeInfo: exports$1.TypeInfo.AcquisitionOperation
+		        typeInfo: exports.TypeInfo.AcquisitionOperation
 		    },
 		    operations: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.AcquisitionOperation
+		        typeInfo: exports.TypeInfo.AcquisitionOperation
 		    }
 		};
-		exports$1.TypeInfo.AzureRestApiResponseModel.fields = {
+		exports.TypeInfo.AzureRestApiResponseModel.fields = {
 		    operationStatus: {
-		        typeInfo: exports$1.TypeInfo.RestApiResponseStatusModel
+		        typeInfo: exports.TypeInfo.RestApiResponseStatusModel
 		    }
 		};
-		exports$1.TypeInfo.Concern.fields = {
+		exports.TypeInfo.Concern.fields = {
 		    category: {
-		        enumType: exports$1.TypeInfo.ConcernCategory
+		        enumType: exports.TypeInfo.ConcernCategory
 		    },
 		    createdDate: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.QnAItemStatus
+		        enumType: exports.TypeInfo.QnAItemStatus
 		    },
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.CustomerLastContact.fields = {
+		exports.TypeInfo.CustomerLastContact.fields = {
 		    lastContactDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.CustomerSupportRequest.fields = {
+		exports.TypeInfo.CustomerSupportRequest.fields = {
 		    review: {
-		        typeInfo: exports$1.TypeInfo.Review
+		        typeInfo: exports.TypeInfo.Review
 		    }
 		};
-		exports$1.TypeInfo.ExtensionAcquisitionRequest.fields = {
+		exports.TypeInfo.ExtensionAcquisitionRequest.fields = {
 		    assignmentType: {
-		        enumType: exports$1.TypeInfo.AcquisitionAssignmentType
+		        enumType: exports.TypeInfo.AcquisitionAssignmentType
 		    },
 		    operationType: {
-		        enumType: exports$1.TypeInfo.AcquisitionOperationType
+		        enumType: exports.TypeInfo.AcquisitionOperationType
 		    }
 		};
-		exports$1.TypeInfo.ExtensionDailyStat.fields = {
+		exports.TypeInfo.ExtensionDailyStat.fields = {
 		    statisticDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ExtensionDailyStats.fields = {
+		exports.TypeInfo.ExtensionDailyStats.fields = {
 		    dailyStats: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ExtensionDailyStat
+		        typeInfo: exports.TypeInfo.ExtensionDailyStat
 		    }
 		};
-		exports$1.TypeInfo.ExtensionDraft.fields = {
+		exports.TypeInfo.ExtensionDraft.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    draftState: {
-		        enumType: exports$1.TypeInfo.DraftStateType
+		        enumType: exports.TypeInfo.DraftStateType
 		    },
 		    lastUpdated: {
 		        isDate: true,
 		    },
 		    payload: {
-		        typeInfo: exports$1.TypeInfo.ExtensionPayload
+		        typeInfo: exports.TypeInfo.ExtensionPayload
 		    }
 		};
-		exports$1.TypeInfo.ExtensionDraftPatch.fields = {
+		exports.TypeInfo.ExtensionDraftPatch.fields = {
 		    operation: {
-		        enumType: exports$1.TypeInfo.DraftPatchOperation
+		        enumType: exports.TypeInfo.DraftPatchOperation
 		    }
 		};
-		exports$1.TypeInfo.ExtensionEvent.fields = {
+		exports.TypeInfo.ExtensionEvent.fields = {
 		    statisticDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ExtensionEvents.fields = {
+		exports.TypeInfo.ExtensionEvents.fields = {
 		    events: {
 		        isDictionary: true,
 		        dictionaryValueFieldInfo: {
 		            isArray: true,
-		            typeInfo: exports$1.TypeInfo.ExtensionEvent
+		            typeInfo: exports.TypeInfo.ExtensionEvent
 		        }
 		    }
 		};
-		exports$1.TypeInfo.ExtensionFilterResult.fields = {
+		exports.TypeInfo.ExtensionFilterResult.fields = {
 		    extensions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.PublishedExtension
+		        typeInfo: exports.TypeInfo.PublishedExtension
 		    }
 		};
-		exports$1.TypeInfo.ExtensionPayload.fields = {
+		exports.TypeInfo.ExtensionPayload.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.ExtensionDeploymentTechnology
+		        enumType: exports.TypeInfo.ExtensionDeploymentTechnology
 		    }
 		};
-		exports$1.TypeInfo.ExtensionPolicy.fields = {
+		exports.TypeInfo.ExtensionPolicy.fields = {
 		    install: {
-		        enumType: exports$1.TypeInfo.ExtensionPolicyFlags
+		        enumType: exports.TypeInfo.ExtensionPolicyFlags
 		    },
 		    request: {
-		        enumType: exports$1.TypeInfo.ExtensionPolicyFlags
+		        enumType: exports.TypeInfo.ExtensionPolicyFlags
 		    }
 		};
-		exports$1.TypeInfo.ExtensionQuery.fields = {
+		exports.TypeInfo.ExtensionQuery.fields = {
 		    filters: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.QueryFilter
+		        typeInfo: exports.TypeInfo.QueryFilter
 		    },
 		    flags: {
-		        enumType: exports$1.TypeInfo.ExtensionQueryFlags
+		        enumType: exports.TypeInfo.ExtensionQueryFlags
 		    }
 		};
-		exports$1.TypeInfo.ExtensionQueryResult.fields = {
+		exports.TypeInfo.ExtensionQueryResult.fields = {
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ExtensionFilterResult
+		        typeInfo: exports.TypeInfo.ExtensionFilterResult
 		    }
 		};
-		exports$1.TypeInfo.ExtensionStatisticUpdate.fields = {
+		exports.TypeInfo.ExtensionStatisticUpdate.fields = {
 		    operation: {
-		        enumType: exports$1.TypeInfo.ExtensionStatisticOperation
+		        enumType: exports.TypeInfo.ExtensionStatisticOperation
 		    }
 		};
-		exports$1.TypeInfo.ExtensionVersion.fields = {
+		exports.TypeInfo.ExtensionVersion.fields = {
 		    flags: {
-		        enumType: exports$1.TypeInfo.ExtensionVersionFlags
+		        enumType: exports.TypeInfo.ExtensionVersionFlags
 		    },
 		    lastUpdated: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.NotificationsData.fields = {
+		exports.TypeInfo.NotificationsData.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.NotificationTemplateType
+		        enumType: exports.TypeInfo.NotificationTemplateType
 		    }
 		};
-		exports$1.TypeInfo.PublishedExtension.fields = {
+		exports.TypeInfo.PublishedExtension.fields = {
 		    deploymentType: {
-		        enumType: exports$1.TypeInfo.ExtensionDeploymentTechnology
+		        enumType: exports.TypeInfo.ExtensionDeploymentTechnology
 		    },
 		    flags: {
-		        enumType: exports$1.TypeInfo.PublishedExtensionFlags
+		        enumType: exports.TypeInfo.PublishedExtensionFlags
 		    },
 		    lastUpdated: {
 		        isDate: true,
@@ -49270,185 +49311,185 @@ function requireGalleryInterfaces () {
 		        isDate: true,
 		    },
 		    publisher: {
-		        typeInfo: exports$1.TypeInfo.PublisherFacts
+		        typeInfo: exports.TypeInfo.PublisherFacts
 		    },
 		    releaseDate: {
 		        isDate: true,
 		    },
 		    versions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ExtensionVersion
+		        typeInfo: exports.TypeInfo.ExtensionVersion
 		    }
 		};
-		exports$1.TypeInfo.Publisher.fields = {
+		exports.TypeInfo.Publisher.fields = {
 		    extensions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.PublishedExtension
+		        typeInfo: exports.TypeInfo.PublishedExtension
 		    },
 		    flags: {
-		        enumType: exports$1.TypeInfo.PublisherFlags
+		        enumType: exports.TypeInfo.PublisherFlags
 		    },
 		    lastUpdated: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.PublisherState
+		        enumType: exports.TypeInfo.PublisherState
 		    }
 		};
-		exports$1.TypeInfo.PublisherBase.fields = {
+		exports.TypeInfo.PublisherBase.fields = {
 		    extensions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.PublishedExtension
+		        typeInfo: exports.TypeInfo.PublishedExtension
 		    },
 		    flags: {
-		        enumType: exports$1.TypeInfo.PublisherFlags
+		        enumType: exports.TypeInfo.PublisherFlags
 		    },
 		    lastUpdated: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.PublisherState
+		        enumType: exports.TypeInfo.PublisherState
 		    }
 		};
-		exports$1.TypeInfo.PublisherFacts.fields = {
+		exports.TypeInfo.PublisherFacts.fields = {
 		    flags: {
-		        enumType: exports$1.TypeInfo.PublisherFlags
+		        enumType: exports.TypeInfo.PublisherFlags
 		    }
 		};
-		exports$1.TypeInfo.PublisherFilterResult.fields = {
+		exports.TypeInfo.PublisherFilterResult.fields = {
 		    publishers: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Publisher
+		        typeInfo: exports.TypeInfo.Publisher
 		    }
 		};
-		exports$1.TypeInfo.PublisherQuery.fields = {
+		exports.TypeInfo.PublisherQuery.fields = {
 		    filters: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.QueryFilter
+		        typeInfo: exports.TypeInfo.QueryFilter
 		    },
 		    flags: {
-		        enumType: exports$1.TypeInfo.PublisherQueryFlags
+		        enumType: exports.TypeInfo.PublisherQueryFlags
 		    }
 		};
-		exports$1.TypeInfo.PublisherQueryResult.fields = {
+		exports.TypeInfo.PublisherQueryResult.fields = {
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.PublisherFilterResult
+		        typeInfo: exports.TypeInfo.PublisherFilterResult
 		    }
 		};
-		exports$1.TypeInfo.PublisherRoleAssignment.fields = {
+		exports.TypeInfo.PublisherRoleAssignment.fields = {
 		    access: {
-		        enumType: exports$1.TypeInfo.PublisherRoleAccess
+		        enumType: exports.TypeInfo.PublisherRoleAccess
 		    }
 		};
-		exports$1.TypeInfo.QnAItem.fields = {
+		exports.TypeInfo.QnAItem.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.QnAItemStatus
+		        enumType: exports.TypeInfo.QnAItemStatus
 		    },
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.QueryFilter.fields = {
+		exports.TypeInfo.QueryFilter.fields = {
 		    direction: {
-		        enumType: exports$1.TypeInfo.PagingDirection
+		        enumType: exports.TypeInfo.PagingDirection
 		    }
 		};
-		exports$1.TypeInfo.Question.fields = {
+		exports.TypeInfo.Question.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    responses: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Response
+		        typeInfo: exports.TypeInfo.Response
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.QnAItemStatus
+		        enumType: exports.TypeInfo.QnAItemStatus
 		    },
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.QuestionsResult.fields = {
+		exports.TypeInfo.QuestionsResult.fields = {
 		    questions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Question
+		        typeInfo: exports.TypeInfo.Question
 		    }
 		};
-		exports$1.TypeInfo.Response.fields = {
+		exports.TypeInfo.Response.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.QnAItemStatus
+		        enumType: exports.TypeInfo.QnAItemStatus
 		    },
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.RestApiResponseStatusModel.fields = {
+		exports.TypeInfo.RestApiResponseStatusModel.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.RestApiResponseStatus
+		        enumType: exports.TypeInfo.RestApiResponseStatus
 		    }
 		};
-		exports$1.TypeInfo.Review.fields = {
+		exports.TypeInfo.Review.fields = {
 		    adminReply: {
-		        typeInfo: exports$1.TypeInfo.ReviewReply
+		        typeInfo: exports.TypeInfo.ReviewReply
 		    },
 		    reply: {
-		        typeInfo: exports$1.TypeInfo.ReviewReply
+		        typeInfo: exports.TypeInfo.ReviewReply
 		    },
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ReviewEventProperties.fields = {
+		exports.TypeInfo.ReviewEventProperties.fields = {
 		    eventOperation: {
-		        enumType: exports$1.TypeInfo.ReviewEventOperation
+		        enumType: exports.TypeInfo.ReviewEventOperation
 		    },
 		    replyDate: {
 		        isDate: true,
 		    },
 		    resourceType: {
-		        enumType: exports$1.TypeInfo.ReviewResourceType
+		        enumType: exports.TypeInfo.ReviewResourceType
 		    },
 		    reviewDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ReviewPatch.fields = {
+		exports.TypeInfo.ReviewPatch.fields = {
 		    operation: {
-		        enumType: exports$1.TypeInfo.ReviewPatchOperation
+		        enumType: exports.TypeInfo.ReviewPatchOperation
 		    },
 		    reportedConcern: {
-		        typeInfo: exports$1.TypeInfo.UserReportedConcern
+		        typeInfo: exports.TypeInfo.UserReportedConcern
 		    },
 		    reviewItem: {
-		        typeInfo: exports$1.TypeInfo.Review
+		        typeInfo: exports.TypeInfo.Review
 		    }
 		};
-		exports$1.TypeInfo.ReviewReply.fields = {
+		exports.TypeInfo.ReviewReply.fields = {
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ReviewsResult.fields = {
+		exports.TypeInfo.ReviewsResult.fields = {
 		    reviews: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Review
+		        typeInfo: exports.TypeInfo.Review
 		    }
 		};
-		exports$1.TypeInfo.UserExtensionPolicy.fields = {
+		exports.TypeInfo.UserExtensionPolicy.fields = {
 		    permissions: {
-		        typeInfo: exports$1.TypeInfo.ExtensionPolicy
+		        typeInfo: exports.TypeInfo.ExtensionPolicy
 		    }
 		};
-		exports$1.TypeInfo.UserReportedConcern.fields = {
+		exports.TypeInfo.UserReportedConcern.fields = {
 		    category: {
-		        enumType: exports$1.TypeInfo.ConcernCategory
+		        enumType: exports.TypeInfo.ConcernCategory
 		    },
 		    submittedDate: {
 		        isDate: true,
@@ -49473,9 +49514,9 @@ var hasRequiredExtensionManagementInterfaces;
 function requireExtensionManagementInterfaces () {
 	if (hasRequiredExtensionManagementInterfaces) return ExtensionManagementInterfaces;
 	hasRequiredExtensionManagementInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.InstalledExtensionStateIssueType = exports$1.ExtensionUpdateType = exports$1.ExtensionStateFlags = exports$1.ExtensionRequestUpdateType = exports$1.ExtensionRequestState = exports$1.ExtensionFlags = exports$1.ContributionQueryOptions = exports$1.ContributionPropertyType = exports$1.ContributionLicensingBehaviorType = exports$1.AcquisitionOperationType = exports$1.AcquisitionOperationState = exports$1.AcquisitionAssignmentType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.InstalledExtensionStateIssueType = exports.ExtensionUpdateType = exports.ExtensionStateFlags = exports.ExtensionRequestUpdateType = exports.ExtensionRequestState = exports.ExtensionFlags = exports.ContributionQueryOptions = exports.ContributionPropertyType = exports.ContributionLicensingBehaviorType = exports.AcquisitionOperationType = exports.AcquisitionOperationState = exports.AcquisitionAssignmentType = void 0;
 		const GalleryInterfaces = requireGalleryInterfaces();
 		(function (AcquisitionAssignmentType) {
 		    AcquisitionAssignmentType[AcquisitionAssignmentType["None"] = 0] = "None";
@@ -49487,7 +49528,7 @@ function requireExtensionManagementInterfaces () {
 		     * Assign for all users in the account
 		     */
 		    AcquisitionAssignmentType[AcquisitionAssignmentType["All"] = 2] = "All";
-		})(exports$1.AcquisitionAssignmentType || (exports$1.AcquisitionAssignmentType = {}));
+		})(exports.AcquisitionAssignmentType || (exports.AcquisitionAssignmentType = {}));
 		(function (AcquisitionOperationState) {
 		    /**
 		     * Not allowed to use this AcquisitionOperation
@@ -49501,7 +49542,7 @@ function requireExtensionManagementInterfaces () {
 		     * Operation has already been completed and is no longer available
 		     */
 		    AcquisitionOperationState[AcquisitionOperationState["Completed"] = 3] = "Completed";
-		})(exports$1.AcquisitionOperationState || (exports$1.AcquisitionOperationState = {}));
+		})(exports.AcquisitionOperationState || (exports.AcquisitionOperationState = {}));
 		(function (AcquisitionOperationType) {
 		    /**
 		     * Not yet used
@@ -49531,7 +49572,7 @@ function requireExtensionManagementInterfaces () {
 		     * Request admins for purchasing extension
 		     */
 		    AcquisitionOperationType[AcquisitionOperationType["PurchaseRequest"] = 6] = "PurchaseRequest";
-		})(exports$1.AcquisitionOperationType || (exports$1.AcquisitionOperationType = {}));
+		})(exports.AcquisitionOperationType || (exports.AcquisitionOperationType = {}));
 		(function (ContributionLicensingBehaviorType) {
 		    /**
 		     * Default value - only include the contribution if the user is licensed for the extension
@@ -49545,7 +49586,7 @@ function requireExtensionManagementInterfaces () {
 		     * Always include the contribution regardless of whether or not the user is licensed for the extension
 		     */
 		    ContributionLicensingBehaviorType[ContributionLicensingBehaviorType["AlwaysInclude"] = 2] = "AlwaysInclude";
-		})(exports$1.ContributionLicensingBehaviorType || (exports$1.ContributionLicensingBehaviorType = {}));
+		})(exports.ContributionLicensingBehaviorType || (exports.ContributionLicensingBehaviorType = {}));
 		(function (ContributionPropertyType) {
 		    /**
 		     * Contribution type is unknown (value may be anything)
@@ -49591,7 +49632,7 @@ function requireExtensionManagementInterfaces () {
 		     * Value is an arbitrary/custom object
 		     */
 		    ContributionPropertyType[ContributionPropertyType["Object"] = 512] = "Object";
-		})(exports$1.ContributionPropertyType || (exports$1.ContributionPropertyType = {}));
+		})(exports.ContributionPropertyType || (exports.ContributionPropertyType = {}));
 		(function (ContributionQueryOptions) {
 		    ContributionQueryOptions[ContributionQueryOptions["None"] = 0] = "None";
 		    /**
@@ -49614,7 +49655,7 @@ function requireExtensionManagementInterfaces () {
 		     * Some callers may want the entire tree back without constraint evaluation being performed.
 		     */
 		    ContributionQueryOptions[ContributionQueryOptions["IgnoreConstraints"] = 256] = "IgnoreConstraints";
-		})(exports$1.ContributionQueryOptions || (exports$1.ContributionQueryOptions = {}));
+		})(exports.ContributionQueryOptions || (exports.ContributionQueryOptions = {}));
 		(function (ExtensionFlags) {
 		    /**
 		     * A built-in extension is installed for all VSTS accounts by default
@@ -49624,7 +49665,7 @@ function requireExtensionManagementInterfaces () {
 		     * The extension comes from a fully-trusted publisher
 		     */
 		    ExtensionFlags[ExtensionFlags["Trusted"] = 2] = "Trusted";
-		})(exports$1.ExtensionFlags || (exports$1.ExtensionFlags = {}));
+		})(exports.ExtensionFlags || (exports.ExtensionFlags = {}));
 		(function (ExtensionRequestState) {
 		    /**
 		     * The request has been opened, but not yet responded to
@@ -49638,13 +49679,13 @@ function requireExtensionManagementInterfaces () {
 		     * The request was rejected (extension not installed or license not assigned)
 		     */
 		    ExtensionRequestState[ExtensionRequestState["Rejected"] = 2] = "Rejected";
-		})(exports$1.ExtensionRequestState || (exports$1.ExtensionRequestState = {}));
+		})(exports.ExtensionRequestState || (exports.ExtensionRequestState = {}));
 		(function (ExtensionRequestUpdateType) {
 		    ExtensionRequestUpdateType[ExtensionRequestUpdateType["Created"] = 1] = "Created";
 		    ExtensionRequestUpdateType[ExtensionRequestUpdateType["Approved"] = 2] = "Approved";
 		    ExtensionRequestUpdateType[ExtensionRequestUpdateType["Rejected"] = 3] = "Rejected";
 		    ExtensionRequestUpdateType[ExtensionRequestUpdateType["Deleted"] = 4] = "Deleted";
-		})(exports$1.ExtensionRequestUpdateType || (exports$1.ExtensionRequestUpdateType = {}));
+		})(exports.ExtensionRequestUpdateType || (exports.ExtensionRequestUpdateType = {}));
 		(function (ExtensionStateFlags) {
 		    /**
 		     * No flags set
@@ -49694,7 +49735,7 @@ function requireExtensionManagementInterfaces () {
 		     * Extension is currently unpublished in the marketplace. Extension usage should be reviewed and removed if it is no longer needed
 		     */
 		    ExtensionStateFlags[ExtensionStateFlags["Unpublished"] = 1024] = "Unpublished";
-		})(exports$1.ExtensionStateFlags || (exports$1.ExtensionStateFlags = {}));
+		})(exports.ExtensionStateFlags || (exports.ExtensionStateFlags = {}));
 		(function (ExtensionUpdateType) {
 		    ExtensionUpdateType[ExtensionUpdateType["Installed"] = 1] = "Installed";
 		    ExtensionUpdateType[ExtensionUpdateType["Uninstalled"] = 2] = "Uninstalled";
@@ -49703,7 +49744,7 @@ function requireExtensionManagementInterfaces () {
 		    ExtensionUpdateType[ExtensionUpdateType["VersionUpdated"] = 5] = "VersionUpdated";
 		    ExtensionUpdateType[ExtensionUpdateType["ActionRequired"] = 6] = "ActionRequired";
 		    ExtensionUpdateType[ExtensionUpdateType["ActionResolved"] = 7] = "ActionResolved";
-		})(exports$1.ExtensionUpdateType || (exports$1.ExtensionUpdateType = {}));
+		})(exports.ExtensionUpdateType || (exports.ExtensionUpdateType = {}));
 		(function (InstalledExtensionStateIssueType) {
 		    /**
 		     * Represents an installation warning, for example an implicit demand not supported
@@ -49713,8 +49754,8 @@ function requireExtensionManagementInterfaces () {
 		     * Represents an installation error, for example an explicit demand not supported
 		     */
 		    InstalledExtensionStateIssueType[InstalledExtensionStateIssueType["Error"] = 1] = "Error";
-		})(exports$1.InstalledExtensionStateIssueType || (exports$1.InstalledExtensionStateIssueType = {}));
-		exports$1.TypeInfo = {
+		})(exports.InstalledExtensionStateIssueType || (exports.InstalledExtensionStateIssueType = {}));
+		exports.TypeInfo = {
 		    AcquisitionAssignmentType: {
 		        enumValues: {
 		            "none": 0,
@@ -49847,122 +49888,122 @@ function requireExtensionManagementInterfaces () {
 		    LicensingOverride: {},
 		    RequestedExtension: {},
 		};
-		exports$1.TypeInfo.AcquisitionOperation.fields = {
+		exports.TypeInfo.AcquisitionOperation.fields = {
 		    operationState: {
-		        enumType: exports$1.TypeInfo.AcquisitionOperationState
+		        enumType: exports.TypeInfo.AcquisitionOperationState
 		    },
 		    operationType: {
-		        enumType: exports$1.TypeInfo.AcquisitionOperationType
+		        enumType: exports.TypeInfo.AcquisitionOperationType
 		    }
 		};
-		exports$1.TypeInfo.AcquisitionOptions.fields = {
+		exports.TypeInfo.AcquisitionOptions.fields = {
 		    defaultOperation: {
-		        typeInfo: exports$1.TypeInfo.AcquisitionOperation
+		        typeInfo: exports.TypeInfo.AcquisitionOperation
 		    },
 		    operations: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.AcquisitionOperation
+		        typeInfo: exports.TypeInfo.AcquisitionOperation
 		    }
 		};
-		exports$1.TypeInfo.ContributionNodeQuery.fields = {
+		exports.TypeInfo.ContributionNodeQuery.fields = {
 		    queryOptions: {
-		        enumType: exports$1.TypeInfo.ContributionQueryOptions
+		        enumType: exports.TypeInfo.ContributionQueryOptions
 		    }
 		};
-		exports$1.TypeInfo.ContributionPropertyDescription.fields = {
+		exports.TypeInfo.ContributionPropertyDescription.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.ContributionPropertyType
+		        enumType: exports.TypeInfo.ContributionPropertyType
 		    }
 		};
-		exports$1.TypeInfo.ContributionType.fields = {
+		exports.TypeInfo.ContributionType.fields = {
 		    properties: {
 		        isDictionary: true,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.ContributionPropertyDescription
+		        dictionaryValueTypeInfo: exports.TypeInfo.ContributionPropertyDescription
 		    }
 		};
-		exports$1.TypeInfo.ExtensionAcquisitionRequest.fields = {
+		exports.TypeInfo.ExtensionAcquisitionRequest.fields = {
 		    assignmentType: {
-		        enumType: exports$1.TypeInfo.AcquisitionAssignmentType
+		        enumType: exports.TypeInfo.AcquisitionAssignmentType
 		    },
 		    operationType: {
-		        enumType: exports$1.TypeInfo.AcquisitionOperationType
+		        enumType: exports.TypeInfo.AcquisitionOperationType
 		    }
 		};
-		exports$1.TypeInfo.ExtensionAuditLog.fields = {
+		exports.TypeInfo.ExtensionAuditLog.fields = {
 		    entries: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ExtensionAuditLogEntry
+		        typeInfo: exports.TypeInfo.ExtensionAuditLogEntry
 		    }
 		};
-		exports$1.TypeInfo.ExtensionAuditLogEntry.fields = {
+		exports.TypeInfo.ExtensionAuditLogEntry.fields = {
 		    auditDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ExtensionEvent.fields = {
+		exports.TypeInfo.ExtensionEvent.fields = {
 		    extension: {
 		        typeInfo: GalleryInterfaces.TypeInfo.PublishedExtension
 		    },
 		    updateType: {
-		        enumType: exports$1.TypeInfo.ExtensionUpdateType
+		        enumType: exports.TypeInfo.ExtensionUpdateType
 		    }
 		};
-		exports$1.TypeInfo.ExtensionLicensing.fields = {
+		exports.TypeInfo.ExtensionLicensing.fields = {
 		    overrides: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.LicensingOverride
+		        typeInfo: exports.TypeInfo.LicensingOverride
 		    }
 		};
-		exports$1.TypeInfo.ExtensionManifest.fields = {
+		exports.TypeInfo.ExtensionManifest.fields = {
 		    contributionTypes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ContributionType
+		        typeInfo: exports.TypeInfo.ContributionType
 		    },
 		    licensing: {
-		        typeInfo: exports$1.TypeInfo.ExtensionLicensing
+		        typeInfo: exports.TypeInfo.ExtensionLicensing
 		    }
 		};
-		exports$1.TypeInfo.ExtensionRequest.fields = {
+		exports.TypeInfo.ExtensionRequest.fields = {
 		    requestDate: {
 		        isDate: true,
 		    },
 		    requestState: {
-		        enumType: exports$1.TypeInfo.ExtensionRequestState
+		        enumType: exports.TypeInfo.ExtensionRequestState
 		    },
 		    resolveDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ExtensionRequestEvent.fields = {
+		exports.TypeInfo.ExtensionRequestEvent.fields = {
 		    extension: {
 		        typeInfo: GalleryInterfaces.TypeInfo.PublishedExtension
 		    },
 		    request: {
-		        typeInfo: exports$1.TypeInfo.ExtensionRequest
+		        typeInfo: exports.TypeInfo.ExtensionRequest
 		    },
 		    updateType: {
-		        enumType: exports$1.TypeInfo.ExtensionRequestUpdateType
+		        enumType: exports.TypeInfo.ExtensionRequestUpdateType
 		    }
 		};
-		exports$1.TypeInfo.ExtensionRequestsEvent.fields = {
+		exports.TypeInfo.ExtensionRequestsEvent.fields = {
 		    extension: {
 		        typeInfo: GalleryInterfaces.TypeInfo.PublishedExtension
 		    },
 		    requests: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ExtensionRequest
+		        typeInfo: exports.TypeInfo.ExtensionRequest
 		    },
 		    updateType: {
-		        enumType: exports$1.TypeInfo.ExtensionRequestUpdateType
+		        enumType: exports.TypeInfo.ExtensionRequestUpdateType
 		    }
 		};
-		exports$1.TypeInfo.ExtensionState.fields = {
+		exports.TypeInfo.ExtensionState.fields = {
 		    flags: {
-		        enumType: exports$1.TypeInfo.ExtensionStateFlags
+		        enumType: exports.TypeInfo.ExtensionStateFlags
 		    },
 		    installationIssues: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.InstalledExtensionStateIssue
+		        typeInfo: exports.TypeInfo.InstalledExtensionStateIssue
 		    },
 		    lastUpdated: {
 		        isDate: true,
@@ -49971,50 +50012,50 @@ function requireExtensionManagementInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.InstalledExtension.fields = {
+		exports.TypeInfo.InstalledExtension.fields = {
 		    contributionTypes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ContributionType
+		        typeInfo: exports.TypeInfo.ContributionType
 		    },
 		    flags: {
-		        enumType: exports$1.TypeInfo.ExtensionFlags
+		        enumType: exports.TypeInfo.ExtensionFlags
 		    },
 		    installState: {
-		        typeInfo: exports$1.TypeInfo.InstalledExtensionState
+		        typeInfo: exports.TypeInfo.InstalledExtensionState
 		    },
 		    lastPublished: {
 		        isDate: true,
 		    },
 		    licensing: {
-		        typeInfo: exports$1.TypeInfo.ExtensionLicensing
+		        typeInfo: exports.TypeInfo.ExtensionLicensing
 		    }
 		};
-		exports$1.TypeInfo.InstalledExtensionState.fields = {
+		exports.TypeInfo.InstalledExtensionState.fields = {
 		    flags: {
-		        enumType: exports$1.TypeInfo.ExtensionStateFlags
+		        enumType: exports.TypeInfo.ExtensionStateFlags
 		    },
 		    installationIssues: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.InstalledExtensionStateIssue
+		        typeInfo: exports.TypeInfo.InstalledExtensionStateIssue
 		    },
 		    lastUpdated: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.InstalledExtensionStateIssue.fields = {
+		exports.TypeInfo.InstalledExtensionStateIssue.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.InstalledExtensionStateIssueType
+		        enumType: exports.TypeInfo.InstalledExtensionStateIssueType
 		    }
 		};
-		exports$1.TypeInfo.LicensingOverride.fields = {
+		exports.TypeInfo.LicensingOverride.fields = {
 		    behavior: {
-		        enumType: exports$1.TypeInfo.ContributionLicensingBehaviorType
+		        enumType: exports.TypeInfo.ContributionLicensingBehaviorType
 		    }
 		};
-		exports$1.TypeInfo.RequestedExtension.fields = {
+		exports.TypeInfo.RequestedExtension.fields = {
 		    extensionRequests: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ExtensionRequest
+		        typeInfo: exports.TypeInfo.ExtensionRequest
 		    }
 		}; 
 	} (ExtensionManagementInterfaces));
@@ -50821,9 +50862,9 @@ var hasRequiredFeatureManagementInterfaces;
 function requireFeatureManagementInterfaces () {
 	if (hasRequiredFeatureManagementInterfaces) return FeatureManagementInterfaces;
 	hasRequiredFeatureManagementInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.ContributedFeatureEnabledValue = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.ContributedFeatureEnabledValue = void 0;
 		(function (ContributedFeatureEnabledValue) {
 		    /**
 		     * The state of the feature is not set for the specified scope
@@ -50837,8 +50878,8 @@ function requireFeatureManagementInterfaces () {
 		     * The feature is enabled at the specified scope
 		     */
 		    ContributedFeatureEnabledValue[ContributedFeatureEnabledValue["Enabled"] = 1] = "Enabled";
-		})(exports$1.ContributedFeatureEnabledValue || (exports$1.ContributedFeatureEnabledValue = {}));
-		exports$1.TypeInfo = {
+		})(exports.ContributedFeatureEnabledValue || (exports.ContributedFeatureEnabledValue = {}));
+		exports.TypeInfo = {
 		    ContributedFeatureEnabledValue: {
 		        enumValues: {
 		            "undefined": -1,
@@ -50849,15 +50890,15 @@ function requireFeatureManagementInterfaces () {
 		    ContributedFeatureState: {},
 		    ContributedFeatureStateQuery: {},
 		};
-		exports$1.TypeInfo.ContributedFeatureState.fields = {
+		exports.TypeInfo.ContributedFeatureState.fields = {
 		    state: {
-		        enumType: exports$1.TypeInfo.ContributedFeatureEnabledValue
+		        enumType: exports.TypeInfo.ContributedFeatureEnabledValue
 		    }
 		};
-		exports$1.TypeInfo.ContributedFeatureStateQuery.fields = {
+		exports.TypeInfo.ContributedFeatureStateQuery.fields = {
 		    featureStates: {
 		        isDictionary: true,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.ContributedFeatureState
+		        dictionaryValueTypeInfo: exports.TypeInfo.ContributedFeatureState
 		    }
 		}; 
 	} (FeatureManagementInterfaces));
@@ -51190,13 +51231,13 @@ var hasRequiredFileContainerInterfaces;
 function requireFileContainerInterfaces () {
 	if (hasRequiredFileContainerInterfaces) return FileContainerInterfaces;
 	hasRequiredFileContainerInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.ContainerOptions = exports$1.ContainerItemType = exports$1.ContainerItemStatus = exports$1.BlobCompressionType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.ContainerOptions = exports.ContainerItemType = exports.ContainerItemStatus = exports.BlobCompressionType = void 0;
 		(function (BlobCompressionType) {
 		    BlobCompressionType[BlobCompressionType["None"] = 0] = "None";
 		    BlobCompressionType[BlobCompressionType["GZip"] = 1] = "GZip";
-		})(exports$1.BlobCompressionType || (exports$1.BlobCompressionType = {}));
+		})(exports.BlobCompressionType || (exports.BlobCompressionType = {}));
 		(function (ContainerItemStatus) {
 		    /**
 		     * Item is created.
@@ -51206,7 +51247,7 @@ function requireFileContainerInterfaces () {
 		     * Item is a file pending for upload.
 		     */
 		    ContainerItemStatus[ContainerItemStatus["PendingUpload"] = 2] = "PendingUpload";
-		})(exports$1.ContainerItemStatus || (exports$1.ContainerItemStatus = {}));
+		})(exports.ContainerItemStatus || (exports.ContainerItemStatus = {}));
 		(function (ContainerItemType) {
 		    /**
 		     * Any item type.
@@ -51220,14 +51261,14 @@ function requireFileContainerInterfaces () {
 		     * Item is a file which is stored in the file service.
 		     */
 		    ContainerItemType[ContainerItemType["File"] = 2] = "File";
-		})(exports$1.ContainerItemType || (exports$1.ContainerItemType = {}));
+		})(exports.ContainerItemType || (exports.ContainerItemType = {}));
 		(function (ContainerOptions) {
 		    /**
 		     * No option.
 		     */
 		    ContainerOptions[ContainerOptions["None"] = 0] = "None";
-		})(exports$1.ContainerOptions || (exports$1.ContainerOptions = {}));
-		exports$1.TypeInfo = {
+		})(exports.ContainerOptions || (exports.ContainerOptions = {}));
+		exports.TypeInfo = {
 		    BlobCompressionType: {
 		        enumValues: {
 		            "none": 0,
@@ -51256,22 +51297,22 @@ function requireFileContainerInterfaces () {
 		    FileContainer: {},
 		    FileContainerItem: {},
 		};
-		exports$1.TypeInfo.ContainerItemBlobReference.fields = {
+		exports.TypeInfo.ContainerItemBlobReference.fields = {
 		    compressionType: {
-		        enumType: exports$1.TypeInfo.BlobCompressionType
+		        enumType: exports.TypeInfo.BlobCompressionType
 		    }
 		};
-		exports$1.TypeInfo.FileContainer.fields = {
+		exports.TypeInfo.FileContainer.fields = {
 		    dateCreated: {
 		        isDate: true,
 		    },
 		    options: {
-		        enumType: exports$1.TypeInfo.ContainerOptions
+		        enumType: exports.TypeInfo.ContainerOptions
 		    }
 		};
-		exports$1.TypeInfo.FileContainerItem.fields = {
+		exports.TypeInfo.FileContainerItem.fields = {
 		    blobMetadata: {
-		        typeInfo: exports$1.TypeInfo.ContainerItemBlobReference
+		        typeInfo: exports.TypeInfo.ContainerItemBlobReference
 		    },
 		    dateCreated: {
 		        isDate: true,
@@ -51280,10 +51321,10 @@ function requireFileContainerInterfaces () {
 		        isDate: true,
 		    },
 		    itemType: {
-		        enumType: exports$1.TypeInfo.ContainerItemType
+		        enumType: exports.TypeInfo.ContainerItemType
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.ContainerItemStatus
+		        enumType: exports.TypeInfo.ContainerItemStatus
 		    }
 		}; 
 	} (FileContainerInterfaces));
@@ -54435,9 +54476,9 @@ var hasRequiredPolicyInterfaces;
 function requirePolicyInterfaces () {
 	if (hasRequiredPolicyInterfaces) return PolicyInterfaces;
 	hasRequiredPolicyInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.PolicyEvaluationStatus = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.PolicyEvaluationStatus = void 0;
 		(function (PolicyEvaluationStatus) {
 		    /**
 		     * The policy is either queued to run, or is waiting for some event before progressing.
@@ -54463,8 +54504,8 @@ function requirePolicyInterfaces () {
 		     * The policy has encountered an unexpected error.
 		     */
 		    PolicyEvaluationStatus[PolicyEvaluationStatus["Broken"] = 5] = "Broken";
-		})(exports$1.PolicyEvaluationStatus || (exports$1.PolicyEvaluationStatus = {}));
-		exports$1.TypeInfo = {
+		})(exports.PolicyEvaluationStatus || (exports.PolicyEvaluationStatus = {}));
+		exports.TypeInfo = {
 		    PolicyConfiguration: {},
 		    PolicyEvaluationRecord: {},
 		    PolicyEvaluationStatus: {
@@ -54478,23 +54519,23 @@ function requirePolicyInterfaces () {
 		        }
 		    },
 		};
-		exports$1.TypeInfo.PolicyConfiguration.fields = {
+		exports.TypeInfo.PolicyConfiguration.fields = {
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.PolicyEvaluationRecord.fields = {
+		exports.TypeInfo.PolicyEvaluationRecord.fields = {
 		    completedDate: {
 		        isDate: true,
 		    },
 		    configuration: {
-		        typeInfo: exports$1.TypeInfo.PolicyConfiguration
+		        typeInfo: exports.TypeInfo.PolicyConfiguration
 		    },
 		    startedDate: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.PolicyEvaluationStatus
+		        enumType: exports.TypeInfo.PolicyEvaluationStatus
 		    }
 		}; 
 	} (PolicyInterfaces));
@@ -54516,9 +54557,9 @@ var hasRequiredGitInterfaces;
 function requireGitInterfaces () {
 	if (hasRequiredGitInterfaces) return GitInterfaces;
 	hasRequiredGitInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.VersionControlRecursionType = exports$1.VersionControlChangeType = exports$1.TfvcVersionType = exports$1.TfvcVersionOption = exports$1.SupportedIdeType = exports$1.RefFavoriteType = exports$1.PullRequestTimeRangeType = exports$1.PullRequestStatus = exports$1.PullRequestMergeFailureType = exports$1.PullRequestAsyncStatus = exports$1.LineDiffBlockChangeType = exports$1.IterationReason = exports$1.ItemContentType = exports$1.GitVersionType = exports$1.GitVersionOptions = exports$1.GitStatusState = exports$1.GitResolutionWhichAction = exports$1.GitResolutionStatus = exports$1.GitResolutionRename1to2Action = exports$1.GitResolutionPathConflictAction = exports$1.GitResolutionMergeType = exports$1.GitResolutionError = exports$1.GitRefUpdateStatus = exports$1.GitRefUpdateMode = exports$1.GitRefSearchType = exports$1.GitPullRequestReviewFileType = exports$1.GitPullRequestQueryType = exports$1.GitPullRequestQueryIncludeOptions = exports$1.GitPullRequestMergeStrategy = exports$1.GitPathActions = exports$1.GitObjectType = exports$1.GitHistoryMode = exports$1.GitConflictUpdateStatus = exports$1.GitConflictType = exports$1.GitAsyncRefOperationFailureStatus = exports$1.GitAsyncOperationStatus = exports$1.CommentType = exports$1.CommentThreadStatus = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.VersionControlRecursionType = exports.VersionControlChangeType = exports.TfvcVersionType = exports.TfvcVersionOption = exports.SupportedIdeType = exports.RefFavoriteType = exports.PullRequestTimeRangeType = exports.PullRequestStatus = exports.PullRequestMergeFailureType = exports.PullRequestAsyncStatus = exports.LineDiffBlockChangeType = exports.IterationReason = exports.ItemContentType = exports.GitVersionType = exports.GitVersionOptions = exports.GitStatusState = exports.GitResolutionWhichAction = exports.GitResolutionStatus = exports.GitResolutionRename1to2Action = exports.GitResolutionPathConflictAction = exports.GitResolutionMergeType = exports.GitResolutionError = exports.GitRefUpdateStatus = exports.GitRefUpdateMode = exports.GitRefSearchType = exports.GitPullRequestReviewFileType = exports.GitPullRequestQueryType = exports.GitPullRequestQueryIncludeOptions = exports.GitPullRequestMergeStrategy = exports.GitPathActions = exports.GitObjectType = exports.GitHistoryMode = exports.GitConflictUpdateStatus = exports.GitConflictType = exports.GitAsyncRefOperationFailureStatus = exports.GitAsyncOperationStatus = exports.CommentType = exports.CommentThreadStatus = void 0;
 		const PolicyInterfaces = requirePolicyInterfaces();
 		const TfsCoreInterfaces = requireCoreInterfaces();
 		(function (CommentThreadStatus) {
@@ -54550,7 +54591,7 @@ function requireGitInterfaces () {
 		     * The thread status is pending.
 		     */
 		    CommentThreadStatus[CommentThreadStatus["Pending"] = 6] = "Pending";
-		})(exports$1.CommentThreadStatus || (exports$1.CommentThreadStatus = {}));
+		})(exports.CommentThreadStatus || (exports.CommentThreadStatus = {}));
 		(function (CommentType) {
 		    /**
 		     * The comment type is not known.
@@ -54568,7 +54609,7 @@ function requireGitInterfaces () {
 		     * The comment represents a system message.
 		     */
 		    CommentType[CommentType["System"] = 3] = "System";
-		})(exports$1.CommentType || (exports$1.CommentType = {}));
+		})(exports.CommentType || (exports.CommentType = {}));
 		(function (GitAsyncOperationStatus) {
 		    /**
 		     * The operation is waiting in a queue and has not yet started.
@@ -54590,7 +54631,7 @@ function requireGitInterfaces () {
 		     * The operation has been abandoned.
 		     */
 		    GitAsyncOperationStatus[GitAsyncOperationStatus["Abandoned"] = 5] = "Abandoned";
-		})(exports$1.GitAsyncOperationStatus || (exports$1.GitAsyncOperationStatus = {}));
+		})(exports.GitAsyncOperationStatus || (exports.GitAsyncOperationStatus = {}));
 		(function (GitAsyncRefOperationFailureStatus) {
 		    /**
 		     * No status
@@ -54636,7 +54677,7 @@ function requireGitInterfaces () {
 		     * Initiator of async operation has signature with empty name or email
 		     */
 		    GitAsyncRefOperationFailureStatus[GitAsyncRefOperationFailureStatus["EmptyCommitterSignature"] = 10] = "EmptyCommitterSignature";
-		})(exports$1.GitAsyncRefOperationFailureStatus || (exports$1.GitAsyncRefOperationFailureStatus = {}));
+		})(exports.GitAsyncRefOperationFailureStatus || (exports.GitAsyncRefOperationFailureStatus = {}));
 		(function (GitConflictType) {
 		    /**
 		     * No conflict
@@ -54698,7 +54739,7 @@ function requireGitInterfaces () {
 		     * Rename destination on both source and target; content differs
 		     */
 		    GitConflictType[GitConflictType["RenameRename"] = 14] = "RenameRename";
-		})(exports$1.GitConflictType || (exports$1.GitConflictType = {}));
+		})(exports.GitConflictType || (exports.GitConflictType = {}));
 		(function (GitConflictUpdateStatus) {
 		    /**
 		     * Indicates that pull request conflict update request was completed successfully
@@ -54720,7 +54761,7 @@ function requireGitInterfaces () {
 		     * Indicates that the conflict could not be found
 		     */
 		    GitConflictUpdateStatus[GitConflictUpdateStatus["NotFound"] = 4] = "NotFound";
-		})(exports$1.GitConflictUpdateStatus || (exports$1.GitConflictUpdateStatus = {}));
+		})(exports.GitConflictUpdateStatus || (exports.GitConflictUpdateStatus = {}));
 		(function (GitHistoryMode) {
 		    /**
 		     * The history mode used by `git log`. This is the default.
@@ -54738,7 +54779,7 @@ function requireGitInterfaces () {
 		     * The history mode used by `git log --full-history --simplify-merges`
 		     */
 		    GitHistoryMode[GitHistoryMode["FullHistorySimplifyMerges"] = 3] = "FullHistorySimplifyMerges";
-		})(exports$1.GitHistoryMode || (exports$1.GitHistoryMode = {}));
+		})(exports.GitHistoryMode || (exports.GitHistoryMode = {}));
 		(function (GitObjectType) {
 		    GitObjectType[GitObjectType["Bad"] = 0] = "Bad";
 		    GitObjectType[GitObjectType["Commit"] = 1] = "Commit";
@@ -54748,14 +54789,14 @@ function requireGitInterfaces () {
 		    GitObjectType[GitObjectType["Ext2"] = 5] = "Ext2";
 		    GitObjectType[GitObjectType["OfsDelta"] = 6] = "OfsDelta";
 		    GitObjectType[GitObjectType["RefDelta"] = 7] = "RefDelta";
-		})(exports$1.GitObjectType || (exports$1.GitObjectType = {}));
+		})(exports.GitObjectType || (exports.GitObjectType = {}));
 		(function (GitPathActions) {
 		    GitPathActions[GitPathActions["None"] = 0] = "None";
 		    GitPathActions[GitPathActions["Edit"] = 1] = "Edit";
 		    GitPathActions[GitPathActions["Delete"] = 2] = "Delete";
 		    GitPathActions[GitPathActions["Add"] = 3] = "Add";
 		    GitPathActions[GitPathActions["Rename"] = 4] = "Rename";
-		})(exports$1.GitPathActions || (exports$1.GitPathActions = {}));
+		})(exports.GitPathActions || (exports.GitPathActions = {}));
 		(function (GitPullRequestMergeStrategy) {
 		    /**
 		     * A two-parent, no-fast-forward merge. The source branch is unchanged. This is the default behavior.
@@ -54773,7 +54814,7 @@ function requireGitInterfaces () {
 		     * Rebase the source branch on top of the target branch HEAD commit, and create a two-parent, no-fast-forward merge. The source branch is updated during the rebase operation.
 		     */
 		    GitPullRequestMergeStrategy[GitPullRequestMergeStrategy["RebaseMerge"] = 4] = "RebaseMerge";
-		})(exports$1.GitPullRequestMergeStrategy || (exports$1.GitPullRequestMergeStrategy = {}));
+		})(exports.GitPullRequestMergeStrategy || (exports.GitPullRequestMergeStrategy = {}));
 		(function (GitPullRequestQueryIncludeOptions) {
 		    /**
 		     * No additional elements included.
@@ -54783,7 +54824,7 @@ function requireGitInterfaces () {
 		     * Enforces adding associated labels to the response.
 		     */
 		    GitPullRequestQueryIncludeOptions[GitPullRequestQueryIncludeOptions["Labels"] = 1] = "Labels";
-		})(exports$1.GitPullRequestQueryIncludeOptions || (exports$1.GitPullRequestQueryIncludeOptions = {}));
+		})(exports.GitPullRequestQueryIncludeOptions || (exports.GitPullRequestQueryIncludeOptions = {}));
 		(function (GitPullRequestQueryType) {
 		    /**
 		     * No query type set.
@@ -54797,16 +54838,16 @@ function requireGitInterfaces () {
 		     * Search for pull requests that merged the supplied commits.
 		     */
 		    GitPullRequestQueryType[GitPullRequestQueryType["Commit"] = 2] = "Commit";
-		})(exports$1.GitPullRequestQueryType || (exports$1.GitPullRequestQueryType = {}));
+		})(exports.GitPullRequestQueryType || (exports.GitPullRequestQueryType = {}));
 		(function (GitPullRequestReviewFileType) {
 		    GitPullRequestReviewFileType[GitPullRequestReviewFileType["ChangeEntry"] = 0] = "ChangeEntry";
 		    GitPullRequestReviewFileType[GitPullRequestReviewFileType["Attachment"] = 1] = "Attachment";
-		})(exports$1.GitPullRequestReviewFileType || (exports$1.GitPullRequestReviewFileType = {}));
+		})(exports.GitPullRequestReviewFileType || (exports.GitPullRequestReviewFileType = {}));
 		(function (GitRefSearchType) {
 		    GitRefSearchType[GitRefSearchType["Exact"] = 0] = "Exact";
 		    GitRefSearchType[GitRefSearchType["StartsWith"] = 1] = "StartsWith";
 		    GitRefSearchType[GitRefSearchType["Contains"] = 2] = "Contains";
-		})(exports$1.GitRefSearchType || (exports$1.GitRefSearchType = {}));
+		})(exports.GitRefSearchType || (exports.GitRefSearchType = {}));
 		(function (GitRefUpdateMode) {
 		    /**
 		     * Indicates the Git protocol model where any refs that can be updated will be updated, but any failures will not prevent other updates from succeeding.
@@ -54816,7 +54857,7 @@ function requireGitInterfaces () {
 		     * Indicates that all ref updates must succeed or none will succeed. All ref updates will be atomically written. If any failure is encountered, previously successful updates will be rolled back and the entire operation will fail.
 		     */
 		    GitRefUpdateMode[GitRefUpdateMode["AllOrNone"] = 1] = "AllOrNone";
-		})(exports$1.GitRefUpdateMode || (exports$1.GitRefUpdateMode = {}));
+		})(exports.GitRefUpdateMode || (exports.GitRefUpdateMode = {}));
 		(function (GitRefUpdateStatus) {
 		    /**
 		     * Indicates that the ref update request was completed successfully.
@@ -54882,7 +54923,7 @@ function requireGitInterfaces () {
 		     * Indicates that the ref update request was completed successfully, but the passed-in ref was corrupt - as in, the old object ID was bad.  This should only happen during deletes.
 		     */
 		    GitRefUpdateStatus[GitRefUpdateStatus["SucceededCorruptRef"] = 15] = "SucceededCorruptRef";
-		})(exports$1.GitRefUpdateStatus || (exports$1.GitRefUpdateStatus = {}));
+		})(exports.GitRefUpdateStatus || (exports.GitRefUpdateStatus = {}));
 		(function (GitResolutionError) {
 		    /**
 		     * No error
@@ -54912,37 +54953,37 @@ function requireGitInterfaces () {
 		     * Any error for which a more specific code doesn't apply
 		     */
 		    GitResolutionError[GitResolutionError["OtherError"] = 255] = "OtherError";
-		})(exports$1.GitResolutionError || (exports$1.GitResolutionError = {}));
+		})(exports.GitResolutionError || (exports.GitResolutionError = {}));
 		(function (GitResolutionMergeType) {
 		    GitResolutionMergeType[GitResolutionMergeType["Undecided"] = 0] = "Undecided";
 		    GitResolutionMergeType[GitResolutionMergeType["TakeSourceContent"] = 1] = "TakeSourceContent";
 		    GitResolutionMergeType[GitResolutionMergeType["TakeTargetContent"] = 2] = "TakeTargetContent";
 		    GitResolutionMergeType[GitResolutionMergeType["AutoMerged"] = 3] = "AutoMerged";
 		    GitResolutionMergeType[GitResolutionMergeType["UserMerged"] = 4] = "UserMerged";
-		})(exports$1.GitResolutionMergeType || (exports$1.GitResolutionMergeType = {}));
+		})(exports.GitResolutionMergeType || (exports.GitResolutionMergeType = {}));
 		(function (GitResolutionPathConflictAction) {
 		    GitResolutionPathConflictAction[GitResolutionPathConflictAction["Undecided"] = 0] = "Undecided";
 		    GitResolutionPathConflictAction[GitResolutionPathConflictAction["KeepSourceRenameTarget"] = 1] = "KeepSourceRenameTarget";
 		    GitResolutionPathConflictAction[GitResolutionPathConflictAction["KeepSourceDeleteTarget"] = 2] = "KeepSourceDeleteTarget";
 		    GitResolutionPathConflictAction[GitResolutionPathConflictAction["KeepTargetRenameSource"] = 3] = "KeepTargetRenameSource";
 		    GitResolutionPathConflictAction[GitResolutionPathConflictAction["KeepTargetDeleteSource"] = 4] = "KeepTargetDeleteSource";
-		})(exports$1.GitResolutionPathConflictAction || (exports$1.GitResolutionPathConflictAction = {}));
+		})(exports.GitResolutionPathConflictAction || (exports.GitResolutionPathConflictAction = {}));
 		(function (GitResolutionRename1to2Action) {
 		    GitResolutionRename1to2Action[GitResolutionRename1to2Action["Undecided"] = 0] = "Undecided";
 		    GitResolutionRename1to2Action[GitResolutionRename1to2Action["KeepSourcePath"] = 1] = "KeepSourcePath";
 		    GitResolutionRename1to2Action[GitResolutionRename1to2Action["KeepTargetPath"] = 2] = "KeepTargetPath";
 		    GitResolutionRename1to2Action[GitResolutionRename1to2Action["KeepBothFiles"] = 3] = "KeepBothFiles";
-		})(exports$1.GitResolutionRename1to2Action || (exports$1.GitResolutionRename1to2Action = {}));
+		})(exports.GitResolutionRename1to2Action || (exports.GitResolutionRename1to2Action = {}));
 		(function (GitResolutionStatus) {
 		    GitResolutionStatus[GitResolutionStatus["Unresolved"] = 0] = "Unresolved";
 		    GitResolutionStatus[GitResolutionStatus["PartiallyResolved"] = 1] = "PartiallyResolved";
 		    GitResolutionStatus[GitResolutionStatus["Resolved"] = 2] = "Resolved";
-		})(exports$1.GitResolutionStatus || (exports$1.GitResolutionStatus = {}));
+		})(exports.GitResolutionStatus || (exports.GitResolutionStatus = {}));
 		(function (GitResolutionWhichAction) {
 		    GitResolutionWhichAction[GitResolutionWhichAction["Undecided"] = 0] = "Undecided";
 		    GitResolutionWhichAction[GitResolutionWhichAction["PickSourceAction"] = 1] = "PickSourceAction";
 		    GitResolutionWhichAction[GitResolutionWhichAction["PickTargetAction"] = 2] = "PickTargetAction";
-		})(exports$1.GitResolutionWhichAction || (exports$1.GitResolutionWhichAction = {}));
+		})(exports.GitResolutionWhichAction || (exports.GitResolutionWhichAction = {}));
 		(function (GitStatusState) {
 		    /**
 		     * Status state not set. Default state.
@@ -54972,7 +55013,7 @@ function requireGitInterfaces () {
 		     * Status Partially Succeeded, build finished with warnings.
 		     */
 		    GitStatusState[GitStatusState["PartiallySucceeded"] = 6] = "PartiallySucceeded";
-		})(exports$1.GitStatusState || (exports$1.GitStatusState = {}));
+		})(exports.GitStatusState || (exports.GitStatusState = {}));
 		(function (GitVersionOptions) {
 		    /**
 		     * Not specified
@@ -54986,7 +55027,7 @@ function requireGitInterfaces () {
 		     * First parent of commit (HEAD^)
 		     */
 		    GitVersionOptions[GitVersionOptions["FirstParent"] = 2] = "FirstParent";
-		})(exports$1.GitVersionOptions || (exports$1.GitVersionOptions = {}));
+		})(exports.GitVersionOptions || (exports.GitVersionOptions = {}));
 		(function (GitVersionType) {
 		    /**
 		     * Interpret the version as a branch name
@@ -55000,11 +55041,11 @@ function requireGitInterfaces () {
 		     * Interpret the version as a commit ID (SHA1)
 		     */
 		    GitVersionType[GitVersionType["Commit"] = 2] = "Commit";
-		})(exports$1.GitVersionType || (exports$1.GitVersionType = {}));
+		})(exports.GitVersionType || (exports.GitVersionType = {}));
 		(function (ItemContentType) {
 		    ItemContentType[ItemContentType["RawText"] = 0] = "RawText";
 		    ItemContentType[ItemContentType["Base64Encoded"] = 1] = "Base64Encoded";
-		})(exports$1.ItemContentType || (exports$1.ItemContentType = {}));
+		})(exports.ItemContentType || (exports.ItemContentType = {}));
 		(function (IterationReason) {
 		    IterationReason[IterationReason["Push"] = 0] = "Push";
 		    IterationReason[IterationReason["ForcePush"] = 1] = "ForcePush";
@@ -55013,7 +55054,7 @@ function requireGitInterfaces () {
 		    IterationReason[IterationReason["Unknown"] = 8] = "Unknown";
 		    IterationReason[IterationReason["Retarget"] = 16] = "Retarget";
 		    IterationReason[IterationReason["ResolveConflicts"] = 32] = "ResolveConflicts";
-		})(exports$1.IterationReason || (exports$1.IterationReason = {}));
+		})(exports.IterationReason || (exports.IterationReason = {}));
 		(function (LineDiffBlockChangeType) {
 		    /**
 		     * No change - both the blocks are identical
@@ -55031,7 +55072,7 @@ function requireGitInterfaces () {
 		     * Lines were modified
 		     */
 		    LineDiffBlockChangeType[LineDiffBlockChangeType["Edit"] = 3] = "Edit";
-		})(exports$1.LineDiffBlockChangeType || (exports$1.LineDiffBlockChangeType = {}));
+		})(exports.LineDiffBlockChangeType || (exports.LineDiffBlockChangeType = {}));
 		(function (PullRequestAsyncStatus) {
 		    /**
 		     * Status is not set. Default state.
@@ -55057,7 +55098,7 @@ function requireGitInterfaces () {
 		     * Pull request merge failed.
 		     */
 		    PullRequestAsyncStatus[PullRequestAsyncStatus["Failure"] = 5] = "Failure";
-		})(exports$1.PullRequestAsyncStatus || (exports$1.PullRequestAsyncStatus = {}));
+		})(exports.PullRequestAsyncStatus || (exports.PullRequestAsyncStatus = {}));
 		(function (PullRequestMergeFailureType) {
 		    /**
 		     * Type is not set. Default type.
@@ -55075,7 +55116,7 @@ function requireGitInterfaces () {
 		     * Pull request merge failed due to an object being too large.
 		     */
 		    PullRequestMergeFailureType[PullRequestMergeFailureType["ObjectTooLarge"] = 3] = "ObjectTooLarge";
-		})(exports$1.PullRequestMergeFailureType || (exports$1.PullRequestMergeFailureType = {}));
+		})(exports.PullRequestMergeFailureType || (exports.PullRequestMergeFailureType = {}));
 		(function (PullRequestStatus) {
 		    /**
 		     * Status not set. Default state.
@@ -55097,7 +55138,7 @@ function requireGitInterfaces () {
 		     * Used in pull request search criteria to include all statuses.
 		     */
 		    PullRequestStatus[PullRequestStatus["All"] = 4] = "All";
-		})(exports$1.PullRequestStatus || (exports$1.PullRequestStatus = {}));
+		})(exports.PullRequestStatus || (exports.PullRequestStatus = {}));
 		(function (PullRequestTimeRangeType) {
 		    /**
 		     * The date when the pull request was created.
@@ -55107,12 +55148,12 @@ function requireGitInterfaces () {
 		     * The date when the pull request was closed (completed, abandoned, or merged externally).
 		     */
 		    PullRequestTimeRangeType[PullRequestTimeRangeType["Closed"] = 2] = "Closed";
-		})(exports$1.PullRequestTimeRangeType || (exports$1.PullRequestTimeRangeType = {}));
+		})(exports.PullRequestTimeRangeType || (exports.PullRequestTimeRangeType = {}));
 		(function (RefFavoriteType) {
 		    RefFavoriteType[RefFavoriteType["Invalid"] = 0] = "Invalid";
 		    RefFavoriteType[RefFavoriteType["Folder"] = 1] = "Folder";
 		    RefFavoriteType[RefFavoriteType["Ref"] = 2] = "Ref";
-		})(exports$1.RefFavoriteType || (exports$1.RefFavoriteType = {}));
+		})(exports.RefFavoriteType || (exports.RefFavoriteType = {}));
 		(function (SupportedIdeType) {
 		    SupportedIdeType[SupportedIdeType["Unknown"] = 0] = "Unknown";
 		    SupportedIdeType[SupportedIdeType["AndroidStudio"] = 1] = "AndroidStudio";
@@ -55129,7 +55170,7 @@ function requireGitInterfaces () {
 		    SupportedIdeType[SupportedIdeType["VisualStudio"] = 11] = "VisualStudio";
 		    SupportedIdeType[SupportedIdeType["VSCode"] = 14] = "VSCode";
 		    SupportedIdeType[SupportedIdeType["WebStorm"] = 12] = "WebStorm";
-		})(exports$1.SupportedIdeType || (exports$1.SupportedIdeType = {}));
+		})(exports.SupportedIdeType || (exports.SupportedIdeType = {}));
 		(function (TfvcVersionOption) {
 		    /**
 		     * None.
@@ -55143,7 +55184,7 @@ function requireGitInterfaces () {
 		     * Only usuable with versiontype MergeSource and integer versions, uses RenameSource identifier instead of Merge identifier.
 		     */
 		    TfvcVersionOption[TfvcVersionOption["UseRename"] = 2] = "UseRename";
-		})(exports$1.TfvcVersionOption || (exports$1.TfvcVersionOption = {}));
+		})(exports.TfvcVersionOption || (exports.TfvcVersionOption = {}));
 		(function (TfvcVersionType) {
 		    /**
 		     * Version is treated as a ChangesetId.
@@ -55177,7 +55218,7 @@ function requireGitInterfaces () {
 		     * Version will be treated as a MergeSource.
 		     */
 		    TfvcVersionType[TfvcVersionType["MergeSource"] = 7] = "MergeSource";
-		})(exports$1.TfvcVersionType || (exports$1.TfvcVersionType = {}));
+		})(exports.TfvcVersionType || (exports.TfvcVersionType = {}));
 		(function (VersionControlChangeType) {
 		    VersionControlChangeType[VersionControlChangeType["None"] = 0] = "None";
 		    VersionControlChangeType[VersionControlChangeType["Add"] = 1] = "Add";
@@ -55194,7 +55235,7 @@ function requireGitInterfaces () {
 		    VersionControlChangeType[VersionControlChangeType["TargetRename"] = 2048] = "TargetRename";
 		    VersionControlChangeType[VersionControlChangeType["Property"] = 4096] = "Property";
 		    VersionControlChangeType[VersionControlChangeType["All"] = 8191] = "All";
-		})(exports$1.VersionControlChangeType || (exports$1.VersionControlChangeType = {}));
+		})(exports.VersionControlChangeType || (exports.VersionControlChangeType = {}));
 		(function (VersionControlRecursionType) {
 		    /**
 		     * Only return the specified item.
@@ -55212,8 +55253,8 @@ function requireGitInterfaces () {
 		     * Return specified item and all descendants
 		     */
 		    VersionControlRecursionType[VersionControlRecursionType["Full"] = 120] = "Full";
-		})(exports$1.VersionControlRecursionType || (exports$1.VersionControlRecursionType = {}));
-		exports$1.TypeInfo = {
+		})(exports.VersionControlRecursionType || (exports.VersionControlRecursionType = {}));
+		exports.TypeInfo = {
 		    AdvSecEnablementStatus: {},
 		    Attachment: {},
 		    BillableCommitterDetail: {},
@@ -55695,17 +55736,17 @@ function requireGitInterfaces () {
 		        }
 		    },
 		};
-		exports$1.TypeInfo.AdvSecEnablementStatus.fields = {
+		exports.TypeInfo.AdvSecEnablementStatus.fields = {
 		    changedOnDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.Attachment.fields = {
+		exports.TypeInfo.Attachment.fields = {
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BillableCommitterDetail.fields = {
+		exports.TypeInfo.BillableCommitterDetail.fields = {
 		    commitTime: {
 		        isDate: true,
 		    },
@@ -55713,18 +55754,18 @@ function requireGitInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.Change.fields = {
+		exports.TypeInfo.Change.fields = {
 		    changeType: {
-		        enumType: exports$1.TypeInfo.VersionControlChangeType
+		        enumType: exports.TypeInfo.VersionControlChangeType
 		    },
 		    newContent: {
-		        typeInfo: exports$1.TypeInfo.ItemContent
+		        typeInfo: exports.TypeInfo.ItemContent
 		    }
 		};
-		exports$1.TypeInfo.ChangeList.fields = {
+		exports.TypeInfo.ChangeList.fields = {
 		    changeCounts: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.VersionControlChangeType,
+		        dictionaryKeyEnumType: exports.TypeInfo.VersionControlChangeType,
 		    },
 		    creationDate: {
 		        isDate: true,
@@ -55733,9 +55774,9 @@ function requireGitInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.Comment.fields = {
+		exports.TypeInfo.Comment.fields = {
 		    commentType: {
-		        enumType: exports$1.TypeInfo.CommentType
+		        enumType: exports.TypeInfo.CommentType
 		    },
 		    lastContentUpdatedDate: {
 		        isDate: true,
@@ -55747,10 +55788,10 @@ function requireGitInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.CommentThread.fields = {
+		exports.TypeInfo.CommentThread.fields = {
 		    comments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Comment
+		        typeInfo: exports.TypeInfo.Comment
 		    },
 		    lastUpdatedDate: {
 		        isDate: true,
@@ -55759,530 +55800,530 @@ function requireGitInterfaces () {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.CommentThreadStatus
+		        enumType: exports.TypeInfo.CommentThreadStatus
 		    }
 		};
-		exports$1.TypeInfo.FileDiff.fields = {
+		exports.TypeInfo.FileDiff.fields = {
 		    lineDiffBlocks: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.LineDiffBlock
+		        typeInfo: exports.TypeInfo.LineDiffBlock
 		    }
 		};
-		exports$1.TypeInfo.GitAnnotatedTag.fields = {
+		exports.TypeInfo.GitAnnotatedTag.fields = {
 		    taggedBy: {
-		        typeInfo: exports$1.TypeInfo.GitUserDate
+		        typeInfo: exports.TypeInfo.GitUserDate
 		    },
 		    taggedObject: {
-		        typeInfo: exports$1.TypeInfo.GitObject
+		        typeInfo: exports.TypeInfo.GitObject
 		    }
 		};
-		exports$1.TypeInfo.GitAsyncRefOperation.fields = {
+		exports.TypeInfo.GitAsyncRefOperation.fields = {
 		    detailedStatus: {
-		        typeInfo: exports$1.TypeInfo.GitAsyncRefOperationDetail
+		        typeInfo: exports.TypeInfo.GitAsyncRefOperationDetail
 		    },
 		    parameters: {
-		        typeInfo: exports$1.TypeInfo.GitAsyncRefOperationParameters
+		        typeInfo: exports.TypeInfo.GitAsyncRefOperationParameters
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.GitAsyncOperationStatus
+		        enumType: exports.TypeInfo.GitAsyncOperationStatus
 		    }
 		};
-		exports$1.TypeInfo.GitAsyncRefOperationDetail.fields = {
+		exports.TypeInfo.GitAsyncRefOperationDetail.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.GitAsyncRefOperationFailureStatus
+		        enumType: exports.TypeInfo.GitAsyncRefOperationFailureStatus
 		    }
 		};
-		exports$1.TypeInfo.GitAsyncRefOperationParameters.fields = {
+		exports.TypeInfo.GitAsyncRefOperationParameters.fields = {
 		    repository: {
-		        typeInfo: exports$1.TypeInfo.GitRepository
+		        typeInfo: exports.TypeInfo.GitRepository
 		    },
 		    source: {
-		        typeInfo: exports$1.TypeInfo.GitAsyncRefOperationSource
+		        typeInfo: exports.TypeInfo.GitAsyncRefOperationSource
 		    }
 		};
-		exports$1.TypeInfo.GitAsyncRefOperationSource.fields = {
+		exports.TypeInfo.GitAsyncRefOperationSource.fields = {
 		    commitList: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    }
 		};
-		exports$1.TypeInfo.GitBaseVersionDescriptor.fields = {
+		exports.TypeInfo.GitBaseVersionDescriptor.fields = {
 		    baseVersionOptions: {
-		        enumType: exports$1.TypeInfo.GitVersionOptions
+		        enumType: exports.TypeInfo.GitVersionOptions
 		    },
 		    baseVersionType: {
-		        enumType: exports$1.TypeInfo.GitVersionType
+		        enumType: exports.TypeInfo.GitVersionType
 		    },
 		    versionOptions: {
-		        enumType: exports$1.TypeInfo.GitVersionOptions
+		        enumType: exports.TypeInfo.GitVersionOptions
 		    },
 		    versionType: {
-		        enumType: exports$1.TypeInfo.GitVersionType
+		        enumType: exports.TypeInfo.GitVersionType
 		    }
 		};
-		exports$1.TypeInfo.GitBranchStats.fields = {
+		exports.TypeInfo.GitBranchStats.fields = {
 		    commit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    }
 		};
-		exports$1.TypeInfo.GitChange.fields = {
+		exports.TypeInfo.GitChange.fields = {
 		    changeType: {
-		        enumType: exports$1.TypeInfo.VersionControlChangeType
+		        enumType: exports.TypeInfo.VersionControlChangeType
 		    },
 		    newContent: {
-		        typeInfo: exports$1.TypeInfo.ItemContent
+		        typeInfo: exports.TypeInfo.ItemContent
 		    }
 		};
-		exports$1.TypeInfo.GitCherryPick.fields = {
+		exports.TypeInfo.GitCherryPick.fields = {
 		    detailedStatus: {
-		        typeInfo: exports$1.TypeInfo.GitAsyncRefOperationDetail
+		        typeInfo: exports.TypeInfo.GitAsyncRefOperationDetail
 		    },
 		    parameters: {
-		        typeInfo: exports$1.TypeInfo.GitAsyncRefOperationParameters
+		        typeInfo: exports.TypeInfo.GitAsyncRefOperationParameters
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.GitAsyncOperationStatus
+		        enumType: exports.TypeInfo.GitAsyncOperationStatus
 		    }
 		};
-		exports$1.TypeInfo.GitCommit.fields = {
+		exports.TypeInfo.GitCommit.fields = {
 		    author: {
-		        typeInfo: exports$1.TypeInfo.GitUserDate
+		        typeInfo: exports.TypeInfo.GitUserDate
 		    },
 		    changes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitChange
+		        typeInfo: exports.TypeInfo.GitChange
 		    },
 		    committer: {
-		        typeInfo: exports$1.TypeInfo.GitUserDate
+		        typeInfo: exports.TypeInfo.GitUserDate
 		    },
 		    push: {
-		        typeInfo: exports$1.TypeInfo.GitPushRef
+		        typeInfo: exports.TypeInfo.GitPushRef
 		    },
 		    statuses: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitStatus
+		        typeInfo: exports.TypeInfo.GitStatus
 		    }
 		};
-		exports$1.TypeInfo.GitCommitChanges.fields = {
+		exports.TypeInfo.GitCommitChanges.fields = {
 		    changes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitChange
+		        typeInfo: exports.TypeInfo.GitChange
 		    }
 		};
-		exports$1.TypeInfo.GitCommitDiffs.fields = {
+		exports.TypeInfo.GitCommitDiffs.fields = {
 		    changeCounts: {
 		        isDictionary: true,
-		        dictionaryKeyEnumType: exports$1.TypeInfo.VersionControlChangeType,
+		        dictionaryKeyEnumType: exports.TypeInfo.VersionControlChangeType,
 		    },
 		    changes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitChange
+		        typeInfo: exports.TypeInfo.GitChange
 		    }
 		};
-		exports$1.TypeInfo.GitCommitRef.fields = {
+		exports.TypeInfo.GitCommitRef.fields = {
 		    author: {
-		        typeInfo: exports$1.TypeInfo.GitUserDate
+		        typeInfo: exports.TypeInfo.GitUserDate
 		    },
 		    changes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitChange
+		        typeInfo: exports.TypeInfo.GitChange
 		    },
 		    committer: {
-		        typeInfo: exports$1.TypeInfo.GitUserDate
+		        typeInfo: exports.TypeInfo.GitUserDate
 		    },
 		    push: {
-		        typeInfo: exports$1.TypeInfo.GitPushRef
+		        typeInfo: exports.TypeInfo.GitPushRef
 		    },
 		    statuses: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitStatus
+		        typeInfo: exports.TypeInfo.GitStatus
 		    }
 		};
-		exports$1.TypeInfo.GitCommitToCreate.fields = {
+		exports.TypeInfo.GitCommitToCreate.fields = {
 		    baseRef: {
-		        typeInfo: exports$1.TypeInfo.GitRef
+		        typeInfo: exports.TypeInfo.GitRef
 		    },
 		    pathActions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitPathAction
+		        typeInfo: exports.TypeInfo.GitPathAction
 		    }
 		};
-		exports$1.TypeInfo.GitConflict.fields = {
+		exports.TypeInfo.GitConflict.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictAddAdd.fields = {
+		exports.TypeInfo.GitConflictAddAdd.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionMergeContent
+		        typeInfo: exports.TypeInfo.GitResolutionMergeContent
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictAddRename.fields = {
+		exports.TypeInfo.GitConflictAddRename.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionPathConflict
+		        typeInfo: exports.TypeInfo.GitResolutionPathConflict
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictDeleteEdit.fields = {
+		exports.TypeInfo.GitConflictDeleteEdit.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionPickOneAction
+		        typeInfo: exports.TypeInfo.GitResolutionPickOneAction
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictDeleteRename.fields = {
+		exports.TypeInfo.GitConflictDeleteRename.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionPickOneAction
+		        typeInfo: exports.TypeInfo.GitResolutionPickOneAction
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictDirectoryFile.fields = {
+		exports.TypeInfo.GitConflictDirectoryFile.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionPathConflict
+		        typeInfo: exports.TypeInfo.GitResolutionPathConflict
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    },
 		    sourceTree: {
-		        typeInfo: exports$1.TypeInfo.GitTreeRef
+		        typeInfo: exports.TypeInfo.GitTreeRef
 		    }
 		};
-		exports$1.TypeInfo.GitConflictEditDelete.fields = {
+		exports.TypeInfo.GitConflictEditDelete.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionPickOneAction
+		        typeInfo: exports.TypeInfo.GitResolutionPickOneAction
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictEditEdit.fields = {
+		exports.TypeInfo.GitConflictEditEdit.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionMergeContent
+		        typeInfo: exports.TypeInfo.GitResolutionMergeContent
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictFileDirectory.fields = {
+		exports.TypeInfo.GitConflictFileDirectory.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionPathConflict
+		        typeInfo: exports.TypeInfo.GitResolutionPathConflict
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    },
 		    targetTree: {
-		        typeInfo: exports$1.TypeInfo.GitTreeRef
+		        typeInfo: exports.TypeInfo.GitTreeRef
 		    }
 		};
-		exports$1.TypeInfo.GitConflictRename1to2.fields = {
+		exports.TypeInfo.GitConflictRename1to2.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionRename1to2
+		        typeInfo: exports.TypeInfo.GitResolutionRename1to2
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictRename2to1.fields = {
+		exports.TypeInfo.GitConflictRename2to1.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionPathConflict
+		        typeInfo: exports.TypeInfo.GitResolutionPathConflict
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictRenameAdd.fields = {
+		exports.TypeInfo.GitConflictRenameAdd.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionPathConflict
+		        typeInfo: exports.TypeInfo.GitResolutionPathConflict
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictRenameDelete.fields = {
+		exports.TypeInfo.GitConflictRenameDelete.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionPickOneAction
+		        typeInfo: exports.TypeInfo.GitResolutionPickOneAction
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictRenameRename.fields = {
+		exports.TypeInfo.GitConflictRenameRename.fields = {
 		    conflictType: {
-		        enumType: exports$1.TypeInfo.GitConflictType
+		        enumType: exports.TypeInfo.GitConflictType
 		    },
 		    mergeBaseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    resolution: {
-		        typeInfo: exports$1.TypeInfo.GitResolutionMergeContent
+		        typeInfo: exports.TypeInfo.GitResolutionMergeContent
 		    },
 		    resolutionError: {
-		        enumType: exports$1.TypeInfo.GitResolutionError
+		        enumType: exports.TypeInfo.GitResolutionError
 		    },
 		    resolutionStatus: {
-		        enumType: exports$1.TypeInfo.GitResolutionStatus
+		        enumType: exports.TypeInfo.GitResolutionStatus
 		    },
 		    resolvedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitConflictUpdateResult.fields = {
+		exports.TypeInfo.GitConflictUpdateResult.fields = {
 		    updatedConflict: {
-		        typeInfo: exports$1.TypeInfo.GitConflict
+		        typeInfo: exports.TypeInfo.GitConflict
 		    },
 		    updateStatus: {
-		        enumType: exports$1.TypeInfo.GitConflictUpdateStatus
+		        enumType: exports.TypeInfo.GitConflictUpdateStatus
 		    }
 		};
-		exports$1.TypeInfo.GitDeletedRepository.fields = {
+		exports.TypeInfo.GitDeletedRepository.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
@@ -56293,21 +56334,21 @@ function requireGitInterfaces () {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.GitForkRef.fields = {
+		exports.TypeInfo.GitForkRef.fields = {
 		    repository: {
-		        typeInfo: exports$1.TypeInfo.GitRepository
+		        typeInfo: exports.TypeInfo.GitRepository
 		    },
 		    statuses: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitStatus
+		        typeInfo: exports.TypeInfo.GitStatus
 		    }
 		};
-		exports$1.TypeInfo.GitForkSyncRequest.fields = {
+		exports.TypeInfo.GitForkSyncRequest.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.GitAsyncOperationStatus
+		        enumType: exports.TypeInfo.GitAsyncOperationStatus
 		    }
 		};
-		exports$1.TypeInfo.GitForkTeamProjectReference.fields = {
+		exports.TypeInfo.GitForkTeamProjectReference.fields = {
 		    lastUpdateTime: {
 		        isDate: true,
 		    },
@@ -56315,98 +56356,98 @@ function requireGitInterfaces () {
 		        enumType: TfsCoreInterfaces.TypeInfo.ProjectVisibility
 		    }
 		};
-		exports$1.TypeInfo.GitImportFailedEvent.fields = {
+		exports.TypeInfo.GitImportFailedEvent.fields = {
 		    targetRepository: {
-		        typeInfo: exports$1.TypeInfo.GitRepository
+		        typeInfo: exports.TypeInfo.GitRepository
 		    }
 		};
-		exports$1.TypeInfo.GitImportRequest.fields = {
+		exports.TypeInfo.GitImportRequest.fields = {
 		    repository: {
-		        typeInfo: exports$1.TypeInfo.GitRepository
+		        typeInfo: exports.TypeInfo.GitRepository
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.GitAsyncOperationStatus
+		        enumType: exports.TypeInfo.GitAsyncOperationStatus
 		    }
 		};
-		exports$1.TypeInfo.GitImportSucceededEvent.fields = {
+		exports.TypeInfo.GitImportSucceededEvent.fields = {
 		    targetRepository: {
-		        typeInfo: exports$1.TypeInfo.GitRepository
+		        typeInfo: exports.TypeInfo.GitRepository
 		    }
 		};
-		exports$1.TypeInfo.GitItem.fields = {
+		exports.TypeInfo.GitItem.fields = {
 		    gitObjectType: {
-		        enumType: exports$1.TypeInfo.GitObjectType
+		        enumType: exports.TypeInfo.GitObjectType
 		    },
 		    latestProcessedChange: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    }
 		};
-		exports$1.TypeInfo.GitItemDescriptor.fields = {
+		exports.TypeInfo.GitItemDescriptor.fields = {
 		    recursionLevel: {
-		        enumType: exports$1.TypeInfo.VersionControlRecursionType
+		        enumType: exports.TypeInfo.VersionControlRecursionType
 		    },
 		    versionOptions: {
-		        enumType: exports$1.TypeInfo.GitVersionOptions
+		        enumType: exports.TypeInfo.GitVersionOptions
 		    },
 		    versionType: {
-		        enumType: exports$1.TypeInfo.GitVersionType
+		        enumType: exports.TypeInfo.GitVersionType
 		    }
 		};
-		exports$1.TypeInfo.GitItemRequestData.fields = {
+		exports.TypeInfo.GitItemRequestData.fields = {
 		    itemDescriptors: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitItemDescriptor
+		        typeInfo: exports.TypeInfo.GitItemDescriptor
 		    }
 		};
-		exports$1.TypeInfo.GitLastChangeTreeItems.fields = {
+		exports.TypeInfo.GitLastChangeTreeItems.fields = {
 		    commits: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    lastExploredTime: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitMerge.fields = {
+		exports.TypeInfo.GitMerge.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.GitAsyncOperationStatus
+		        enumType: exports.TypeInfo.GitAsyncOperationStatus
 		    }
 		};
-		exports$1.TypeInfo.GitObject.fields = {
+		exports.TypeInfo.GitObject.fields = {
 		    objectType: {
-		        enumType: exports$1.TypeInfo.GitObjectType
+		        enumType: exports.TypeInfo.GitObjectType
 		    }
 		};
-		exports$1.TypeInfo.GitPathAction.fields = {
+		exports.TypeInfo.GitPathAction.fields = {
 		    action: {
-		        enumType: exports$1.TypeInfo.GitPathActions
+		        enumType: exports.TypeInfo.GitPathActions
 		    }
 		};
-		exports$1.TypeInfo.GitPathToItemsCollection.fields = {
+		exports.TypeInfo.GitPathToItemsCollection.fields = {
 		    items: {
 		        isDictionary: true,
 		        dictionaryValueFieldInfo: {
 		            isArray: true,
-		            typeInfo: exports$1.TypeInfo.GitItem
+		            typeInfo: exports.TypeInfo.GitItem
 		        }
 		    }
 		};
-		exports$1.TypeInfo.GitPolicyConfigurationResponse.fields = {
+		exports.TypeInfo.GitPolicyConfigurationResponse.fields = {
 		    policyConfigurations: {
 		        isArray: true,
 		        typeInfo: PolicyInterfaces.TypeInfo.PolicyConfiguration
 		    }
 		};
-		exports$1.TypeInfo.GitPullRequest.fields = {
+		exports.TypeInfo.GitPullRequest.fields = {
 		    closedDate: {
 		        isDate: true,
 		    },
 		    commits: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    completionOptions: {
-		        typeInfo: exports$1.TypeInfo.GitPullRequestCompletionOptions
+		        typeInfo: exports.TypeInfo.GitPullRequestCompletionOptions
 		    },
 		    completionQueueTime: {
 		        isDate: true,
@@ -56415,42 +56456,42 @@ function requireGitInterfaces () {
 		        isDate: true,
 		    },
 		    forkSource: {
-		        typeInfo: exports$1.TypeInfo.GitForkRef
+		        typeInfo: exports.TypeInfo.GitForkRef
 		    },
 		    lastMergeCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    lastMergeSourceCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    lastMergeTargetCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    mergeFailureType: {
-		        enumType: exports$1.TypeInfo.PullRequestMergeFailureType
+		        enumType: exports.TypeInfo.PullRequestMergeFailureType
 		    },
 		    mergeStatus: {
-		        enumType: exports$1.TypeInfo.PullRequestAsyncStatus
+		        enumType: exports.TypeInfo.PullRequestAsyncStatus
 		    },
 		    repository: {
-		        typeInfo: exports$1.TypeInfo.GitRepository
+		        typeInfo: exports.TypeInfo.GitRepository
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.PullRequestStatus
+		        enumType: exports.TypeInfo.PullRequestStatus
 		    }
 		};
-		exports$1.TypeInfo.GitPullRequestChange.fields = {
+		exports.TypeInfo.GitPullRequestChange.fields = {
 		    changeType: {
-		        enumType: exports$1.TypeInfo.VersionControlChangeType
+		        enumType: exports.TypeInfo.VersionControlChangeType
 		    },
 		    newContent: {
-		        typeInfo: exports$1.TypeInfo.ItemContent
+		        typeInfo: exports.TypeInfo.ItemContent
 		    }
 		};
-		exports$1.TypeInfo.GitPullRequestCommentThread.fields = {
+		exports.TypeInfo.GitPullRequestCommentThread.fields = {
 		    comments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Comment
+		        typeInfo: exports.TypeInfo.Comment
 		    },
 		    lastUpdatedDate: {
 		        isDate: true,
@@ -56459,66 +56500,66 @@ function requireGitInterfaces () {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.CommentThreadStatus
+		        enumType: exports.TypeInfo.CommentThreadStatus
 		    }
 		};
-		exports$1.TypeInfo.GitPullRequestCompletionOptions.fields = {
+		exports.TypeInfo.GitPullRequestCompletionOptions.fields = {
 		    mergeStrategy: {
-		        enumType: exports$1.TypeInfo.GitPullRequestMergeStrategy
+		        enumType: exports.TypeInfo.GitPullRequestMergeStrategy
 		    }
 		};
-		exports$1.TypeInfo.GitPullRequestIteration.fields = {
+		exports.TypeInfo.GitPullRequestIteration.fields = {
 		    changeList: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitPullRequestChange
+		        typeInfo: exports.TypeInfo.GitPullRequestChange
 		    },
 		    commits: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    commonRefCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    createdDate: {
 		        isDate: true,
 		    },
 		    push: {
-		        typeInfo: exports$1.TypeInfo.GitPushRef
+		        typeInfo: exports.TypeInfo.GitPushRef
 		    },
 		    reason: {
-		        enumType: exports$1.TypeInfo.IterationReason
+		        enumType: exports.TypeInfo.IterationReason
 		    },
 		    sourceRefCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    targetRefCommit: {
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitPullRequestIterationChanges.fields = {
+		exports.TypeInfo.GitPullRequestIterationChanges.fields = {
 		    changeEntries: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitPullRequestChange
+		        typeInfo: exports.TypeInfo.GitPullRequestChange
 		    }
 		};
-		exports$1.TypeInfo.GitPullRequestQuery.fields = {
+		exports.TypeInfo.GitPullRequestQuery.fields = {
 		    queries: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitPullRequestQueryInput
+		        typeInfo: exports.TypeInfo.GitPullRequestQueryInput
 		    },
 		};
-		exports$1.TypeInfo.GitPullRequestQueryInput.fields = {
+		exports.TypeInfo.GitPullRequestQueryInput.fields = {
 		    include: {
-		        enumType: exports$1.TypeInfo.GitPullRequestQueryIncludeOptions
+		        enumType: exports.TypeInfo.GitPullRequestQueryIncludeOptions
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.GitPullRequestQueryType
+		        enumType: exports.TypeInfo.GitPullRequestQueryType
 		    }
 		};
-		exports$1.TypeInfo.GitPullRequestSearchCriteria.fields = {
+		exports.TypeInfo.GitPullRequestSearchCriteria.fields = {
 		    maxTime: {
 		        isDate: true,
 		    },
@@ -56526,50 +56567,50 @@ function requireGitInterfaces () {
 		        isDate: true,
 		    },
 		    queryTimeRangeType: {
-		        enumType: exports$1.TypeInfo.PullRequestTimeRangeType
+		        enumType: exports.TypeInfo.PullRequestTimeRangeType
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.PullRequestStatus
+		        enumType: exports.TypeInfo.PullRequestStatus
 		    }
 		};
-		exports$1.TypeInfo.GitPullRequestStatus.fields = {
+		exports.TypeInfo.GitPullRequestStatus.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.GitStatusState
+		        enumType: exports.TypeInfo.GitStatusState
 		    },
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitPush.fields = {
+		exports.TypeInfo.GitPush.fields = {
 		    commits: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitCommitRef
+		        typeInfo: exports.TypeInfo.GitCommitRef
 		    },
 		    date: {
 		        isDate: true,
 		    },
 		    repository: {
-		        typeInfo: exports$1.TypeInfo.GitRepository
+		        typeInfo: exports.TypeInfo.GitRepository
 		    }
 		};
-		exports$1.TypeInfo.GitPushEventData.fields = {
+		exports.TypeInfo.GitPushEventData.fields = {
 		    commits: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitCommit
+		        typeInfo: exports.TypeInfo.GitCommit
 		    },
 		    repository: {
-		        typeInfo: exports$1.TypeInfo.GitRepository
+		        typeInfo: exports.TypeInfo.GitRepository
 		    }
 		};
-		exports$1.TypeInfo.GitPushRef.fields = {
+		exports.TypeInfo.GitPushRef.fields = {
 		    date: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitPushSearchCriteria.fields = {
+		exports.TypeInfo.GitPushSearchCriteria.fields = {
 		    fromDate: {
 		        isDate: true,
 		    },
@@ -56577,321 +56618,321 @@ function requireGitInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitQueryBranchStatsCriteria.fields = {
+		exports.TypeInfo.GitQueryBranchStatsCriteria.fields = {
 		    baseCommit: {
-		        typeInfo: exports$1.TypeInfo.GitVersionDescriptor
+		        typeInfo: exports.TypeInfo.GitVersionDescriptor
 		    },
 		    targetCommits: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitVersionDescriptor
+		        typeInfo: exports.TypeInfo.GitVersionDescriptor
 		    }
 		};
-		exports$1.TypeInfo.GitQueryCommitsCriteria.fields = {
+		exports.TypeInfo.GitQueryCommitsCriteria.fields = {
 		    compareVersion: {
-		        typeInfo: exports$1.TypeInfo.GitVersionDescriptor
+		        typeInfo: exports.TypeInfo.GitVersionDescriptor
 		    },
 		    historyMode: {
-		        enumType: exports$1.TypeInfo.GitHistoryMode
+		        enumType: exports.TypeInfo.GitHistoryMode
 		    },
 		    itemVersion: {
-		        typeInfo: exports$1.TypeInfo.GitVersionDescriptor
+		        typeInfo: exports.TypeInfo.GitVersionDescriptor
 		    }
 		};
-		exports$1.TypeInfo.GitQueryRefsCriteria.fields = {
+		exports.TypeInfo.GitQueryRefsCriteria.fields = {
 		    searchType: {
-		        enumType: exports$1.TypeInfo.GitRefSearchType
+		        enumType: exports.TypeInfo.GitRefSearchType
 		    }
 		};
-		exports$1.TypeInfo.GitRef.fields = {
+		exports.TypeInfo.GitRef.fields = {
 		    statuses: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitStatus
+		        typeInfo: exports.TypeInfo.GitStatus
 		    }
 		};
-		exports$1.TypeInfo.GitRefFavorite.fields = {
+		exports.TypeInfo.GitRefFavorite.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.RefFavoriteType
+		        enumType: exports.TypeInfo.RefFavoriteType
 		    }
 		};
-		exports$1.TypeInfo.GitRefUpdateResult.fields = {
+		exports.TypeInfo.GitRefUpdateResult.fields = {
 		    updateStatus: {
-		        enumType: exports$1.TypeInfo.GitRefUpdateStatus
+		        enumType: exports.TypeInfo.GitRefUpdateStatus
 		    }
 		};
-		exports$1.TypeInfo.GitRepository.fields = {
+		exports.TypeInfo.GitRepository.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
 		    parentRepository: {
-		        typeInfo: exports$1.TypeInfo.GitRepositoryRef
+		        typeInfo: exports.TypeInfo.GitRepositoryRef
 		    },
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.GitRepositoryCreateOptions.fields = {
+		exports.TypeInfo.GitRepositoryCreateOptions.fields = {
 		    parentRepository: {
-		        typeInfo: exports$1.TypeInfo.GitRepositoryRef
+		        typeInfo: exports.TypeInfo.GitRepositoryRef
 		    },
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.GitRepositoryRef.fields = {
+		exports.TypeInfo.GitRepositoryRef.fields = {
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.GitResolutionMergeContent.fields = {
+		exports.TypeInfo.GitResolutionMergeContent.fields = {
 		    mergeType: {
-		        enumType: exports$1.TypeInfo.GitResolutionMergeType
+		        enumType: exports.TypeInfo.GitResolutionMergeType
 		    }
 		};
-		exports$1.TypeInfo.GitResolutionPathConflict.fields = {
+		exports.TypeInfo.GitResolutionPathConflict.fields = {
 		    action: {
-		        enumType: exports$1.TypeInfo.GitResolutionPathConflictAction
+		        enumType: exports.TypeInfo.GitResolutionPathConflictAction
 		    }
 		};
-		exports$1.TypeInfo.GitResolutionPickOneAction.fields = {
+		exports.TypeInfo.GitResolutionPickOneAction.fields = {
 		    action: {
-		        enumType: exports$1.TypeInfo.GitResolutionWhichAction
+		        enumType: exports.TypeInfo.GitResolutionWhichAction
 		    }
 		};
-		exports$1.TypeInfo.GitResolutionRename1to2.fields = {
+		exports.TypeInfo.GitResolutionRename1to2.fields = {
 		    action: {
-		        enumType: exports$1.TypeInfo.GitResolutionRename1to2Action
+		        enumType: exports.TypeInfo.GitResolutionRename1to2Action
 		    },
 		    mergeType: {
-		        enumType: exports$1.TypeInfo.GitResolutionMergeType
+		        enumType: exports.TypeInfo.GitResolutionMergeType
 		    }
 		};
-		exports$1.TypeInfo.GitRevert.fields = {
+		exports.TypeInfo.GitRevert.fields = {
 		    detailedStatus: {
-		        typeInfo: exports$1.TypeInfo.GitAsyncRefOperationDetail
+		        typeInfo: exports.TypeInfo.GitAsyncRefOperationDetail
 		    },
 		    parameters: {
-		        typeInfo: exports$1.TypeInfo.GitAsyncRefOperationParameters
+		        typeInfo: exports.TypeInfo.GitAsyncRefOperationParameters
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.GitAsyncOperationStatus
+		        enumType: exports.TypeInfo.GitAsyncOperationStatus
 		    }
 		};
-		exports$1.TypeInfo.GitStatus.fields = {
+		exports.TypeInfo.GitStatus.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.GitStatusState
+		        enumType: exports.TypeInfo.GitStatusState
 		    },
 		    updatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitTargetVersionDescriptor.fields = {
+		exports.TypeInfo.GitTargetVersionDescriptor.fields = {
 		    targetVersionOptions: {
-		        enumType: exports$1.TypeInfo.GitVersionOptions
+		        enumType: exports.TypeInfo.GitVersionOptions
 		    },
 		    targetVersionType: {
-		        enumType: exports$1.TypeInfo.GitVersionType
+		        enumType: exports.TypeInfo.GitVersionType
 		    },
 		    versionOptions: {
-		        enumType: exports$1.TypeInfo.GitVersionOptions
+		        enumType: exports.TypeInfo.GitVersionOptions
 		    },
 		    versionType: {
-		        enumType: exports$1.TypeInfo.GitVersionType
+		        enumType: exports.TypeInfo.GitVersionType
 		    }
 		};
-		exports$1.TypeInfo.GitTreeDiff.fields = {
+		exports.TypeInfo.GitTreeDiff.fields = {
 		    diffEntries: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitTreeDiffEntry
+		        typeInfo: exports.TypeInfo.GitTreeDiffEntry
 		    }
 		};
-		exports$1.TypeInfo.GitTreeDiffEntry.fields = {
+		exports.TypeInfo.GitTreeDiffEntry.fields = {
 		    changeType: {
-		        enumType: exports$1.TypeInfo.VersionControlChangeType
+		        enumType: exports.TypeInfo.VersionControlChangeType
 		    },
 		    objectType: {
-		        enumType: exports$1.TypeInfo.GitObjectType
+		        enumType: exports.TypeInfo.GitObjectType
 		    }
 		};
-		exports$1.TypeInfo.GitTreeDiffResponse.fields = {
+		exports.TypeInfo.GitTreeDiffResponse.fields = {
 		    treeDiff: {
-		        typeInfo: exports$1.TypeInfo.GitTreeDiff
+		        typeInfo: exports.TypeInfo.GitTreeDiff
 		    }
 		};
-		exports$1.TypeInfo.GitTreeEntryRef.fields = {
+		exports.TypeInfo.GitTreeEntryRef.fields = {
 		    gitObjectType: {
-		        enumType: exports$1.TypeInfo.GitObjectType
+		        enumType: exports.TypeInfo.GitObjectType
 		    }
 		};
-		exports$1.TypeInfo.GitTreeRef.fields = {
+		exports.TypeInfo.GitTreeRef.fields = {
 		    treeEntries: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.GitTreeEntryRef
+		        typeInfo: exports.TypeInfo.GitTreeEntryRef
 		    }
 		};
-		exports$1.TypeInfo.GitUserDate.fields = {
+		exports.TypeInfo.GitUserDate.fields = {
 		    date: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GitVersionDescriptor.fields = {
+		exports.TypeInfo.GitVersionDescriptor.fields = {
 		    versionOptions: {
-		        enumType: exports$1.TypeInfo.GitVersionOptions
+		        enumType: exports.TypeInfo.GitVersionOptions
 		    },
 		    versionType: {
-		        enumType: exports$1.TypeInfo.GitVersionType
+		        enumType: exports.TypeInfo.GitVersionType
 		    }
 		};
-		exports$1.TypeInfo.HistoryEntry.fields = {
+		exports.TypeInfo.HistoryEntry.fields = {
 		    itemChangeType: {
-		        enumType: exports$1.TypeInfo.VersionControlChangeType
+		        enumType: exports.TypeInfo.VersionControlChangeType
 		    }
 		};
-		exports$1.TypeInfo.IncludedGitCommit.fields = {
+		exports.TypeInfo.IncludedGitCommit.fields = {
 		    commitTime: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ItemContent.fields = {
+		exports.TypeInfo.ItemContent.fields = {
 		    contentType: {
-		        enumType: exports$1.TypeInfo.ItemContentType
+		        enumType: exports.TypeInfo.ItemContentType
 		    }
 		};
-		exports$1.TypeInfo.ItemDetailsOptions.fields = {
+		exports.TypeInfo.ItemDetailsOptions.fields = {
 		    recursionLevel: {
-		        enumType: exports$1.TypeInfo.VersionControlRecursionType
+		        enumType: exports.TypeInfo.VersionControlRecursionType
 		    }
 		};
-		exports$1.TypeInfo.LineDiffBlock.fields = {
+		exports.TypeInfo.LineDiffBlock.fields = {
 		    changeType: {
-		        enumType: exports$1.TypeInfo.LineDiffBlockChangeType
+		        enumType: exports.TypeInfo.LineDiffBlockChangeType
 		    }
 		};
-		exports$1.TypeInfo.SupportedIde.fields = {
+		exports.TypeInfo.SupportedIde.fields = {
 		    ideType: {
-		        enumType: exports$1.TypeInfo.SupportedIdeType
+		        enumType: exports.TypeInfo.SupportedIdeType
 		    }
 		};
-		exports$1.TypeInfo.TfvcBranch.fields = {
+		exports.TypeInfo.TfvcBranch.fields = {
 		    children: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TfvcBranch
+		        typeInfo: exports.TypeInfo.TfvcBranch
 		    },
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcBranchRef.fields = {
+		exports.TypeInfo.TfvcBranchRef.fields = {
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcChange.fields = {
+		exports.TypeInfo.TfvcChange.fields = {
 		    changeType: {
-		        enumType: exports$1.TypeInfo.VersionControlChangeType
+		        enumType: exports.TypeInfo.VersionControlChangeType
 		    },
 		    newContent: {
-		        typeInfo: exports$1.TypeInfo.ItemContent
+		        typeInfo: exports.TypeInfo.ItemContent
 		    }
 		};
-		exports$1.TypeInfo.TfvcChangeset.fields = {
+		exports.TypeInfo.TfvcChangeset.fields = {
 		    changes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TfvcChange
+		        typeInfo: exports.TypeInfo.TfvcChange
 		    },
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcChangesetRef.fields = {
+		exports.TypeInfo.TfvcChangesetRef.fields = {
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcCheckinEventData.fields = {
+		exports.TypeInfo.TfvcCheckinEventData.fields = {
 		    changeset: {
-		        typeInfo: exports$1.TypeInfo.TfvcChangeset
+		        typeInfo: exports.TypeInfo.TfvcChangeset
 		    },
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.TfvcHistoryEntry.fields = {
+		exports.TypeInfo.TfvcHistoryEntry.fields = {
 		    itemChangeType: {
-		        enumType: exports$1.TypeInfo.VersionControlChangeType
+		        enumType: exports.TypeInfo.VersionControlChangeType
 		    }
 		};
-		exports$1.TypeInfo.TfvcItem.fields = {
+		exports.TypeInfo.TfvcItem.fields = {
 		    changeDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcItemDescriptor.fields = {
+		exports.TypeInfo.TfvcItemDescriptor.fields = {
 		    recursionLevel: {
-		        enumType: exports$1.TypeInfo.VersionControlRecursionType
+		        enumType: exports.TypeInfo.VersionControlRecursionType
 		    },
 		    versionOption: {
-		        enumType: exports$1.TypeInfo.TfvcVersionOption
+		        enumType: exports.TypeInfo.TfvcVersionOption
 		    },
 		    versionType: {
-		        enumType: exports$1.TypeInfo.TfvcVersionType
+		        enumType: exports.TypeInfo.TfvcVersionType
 		    }
 		};
-		exports$1.TypeInfo.TfvcItemPreviousHash.fields = {
+		exports.TypeInfo.TfvcItemPreviousHash.fields = {
 		    changeDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcItemRequestData.fields = {
+		exports.TypeInfo.TfvcItemRequestData.fields = {
 		    itemDescriptors: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TfvcItemDescriptor
+		        typeInfo: exports.TypeInfo.TfvcItemDescriptor
 		    }
 		};
-		exports$1.TypeInfo.TfvcLabel.fields = {
+		exports.TypeInfo.TfvcLabel.fields = {
 		    items: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TfvcItem
+		        typeInfo: exports.TypeInfo.TfvcItem
 		    },
 		    modifiedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcLabelRef.fields = {
+		exports.TypeInfo.TfvcLabelRef.fields = {
 		    modifiedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcShelveset.fields = {
+		exports.TypeInfo.TfvcShelveset.fields = {
 		    changes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TfvcChange
+		        typeInfo: exports.TypeInfo.TfvcChange
 		    },
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcShelvesetRef.fields = {
+		exports.TypeInfo.TfvcShelvesetRef.fields = {
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcVersionDescriptor.fields = {
+		exports.TypeInfo.TfvcVersionDescriptor.fields = {
 		    versionOption: {
-		        enumType: exports$1.TypeInfo.TfvcVersionOption
+		        enumType: exports.TypeInfo.TfvcVersionOption
 		    },
 		    versionType: {
-		        enumType: exports$1.TypeInfo.TfvcVersionType
+		        enumType: exports.TypeInfo.TfvcVersionType
 		    }
 		};
-		exports$1.TypeInfo.UpdateRefsRequest.fields = {
+		exports.TypeInfo.UpdateRefsRequest.fields = {
 		    updateMode: {
-		        enumType: exports$1.TypeInfo.GitRefUpdateMode
+		        enumType: exports.TypeInfo.GitRefUpdateMode
 		    }
 		};
-		exports$1.TypeInfo.VersionControlProjectInfo.fields = {
+		exports.TypeInfo.VersionControlProjectInfo.fields = {
 		    defaultSourceControlType: {
 		        enumType: TfsCoreInterfaces.TypeInfo.SourceControlTypes
 		    },
@@ -62140,9 +62181,9 @@ var hasRequiredVSSInterfaces;
 function requireVSSInterfaces () {
 	if (hasRequiredVSSInterfaces) return VSSInterfaces;
 	hasRequiredVSSInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.Operation = exports$1.JWTAlgorithm = exports$1.DeploymentFlags = exports$1.ConnectOptions = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.Operation = exports.JWTAlgorithm = exports.DeploymentFlags = exports.ConnectOptions = void 0;
 		(function (ConnectOptions) {
 		    /**
 		     * Retrieve no optional data.
@@ -62164,17 +62205,17 @@ function requireVSSInterfaces () {
 		     * When true will only return non inherited definitions. Only valid at non-deployment host.
 		     */
 		    ConnectOptions[ConnectOptions["IncludeNonInheritedDefinitionsOnly"] = 8] = "IncludeNonInheritedDefinitionsOnly";
-		})(exports$1.ConnectOptions || (exports$1.ConnectOptions = {}));
+		})(exports.ConnectOptions || (exports.ConnectOptions = {}));
 		(function (DeploymentFlags) {
 		    DeploymentFlags[DeploymentFlags["None"] = 0] = "None";
 		    DeploymentFlags[DeploymentFlags["Hosted"] = 1] = "Hosted";
 		    DeploymentFlags[DeploymentFlags["OnPremises"] = 2] = "OnPremises";
-		})(exports$1.DeploymentFlags || (exports$1.DeploymentFlags = {}));
+		})(exports.DeploymentFlags || (exports.DeploymentFlags = {}));
 		(function (JWTAlgorithm) {
 		    JWTAlgorithm[JWTAlgorithm["None"] = 0] = "None";
 		    JWTAlgorithm[JWTAlgorithm["HS256"] = 1] = "HS256";
 		    JWTAlgorithm[JWTAlgorithm["RS256"] = 2] = "RS256";
-		})(exports$1.JWTAlgorithm || (exports$1.JWTAlgorithm = {}));
+		})(exports.JWTAlgorithm || (exports.JWTAlgorithm = {}));
 		(function (Operation) {
 		    Operation[Operation["Add"] = 0] = "Add";
 		    Operation[Operation["Remove"] = 1] = "Remove";
@@ -62182,8 +62223,8 @@ function requireVSSInterfaces () {
 		    Operation[Operation["Move"] = 3] = "Move";
 		    Operation[Operation["Copy"] = 4] = "Copy";
 		    Operation[Operation["Test"] = 5] = "Test";
-		})(exports$1.Operation || (exports$1.Operation = {}));
-		exports$1.TypeInfo = {
+		})(exports.Operation || (exports.Operation = {}));
+		exports.TypeInfo = {
 		    ConnectOptions: {
 		        enumValues: {
 		            "none": 0,
@@ -62222,22 +62263,22 @@ function requireVSSInterfaces () {
 		    TraceFilter: {},
 		    VssNotificationEvent: {},
 		};
-		exports$1.TypeInfo.JsonPatchOperation.fields = {
+		exports.TypeInfo.JsonPatchOperation.fields = {
 		    op: {
-		        enumType: exports$1.TypeInfo.Operation
+		        enumType: exports.TypeInfo.Operation
 		    }
 		};
-		exports$1.TypeInfo.SignedUrl.fields = {
+		exports.TypeInfo.SignedUrl.fields = {
 		    signatureExpires: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TraceFilter.fields = {
+		exports.TypeInfo.TraceFilter.fields = {
 		    timeCreated: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.VssNotificationEvent.fields = {
+		exports.TypeInfo.VssNotificationEvent.fields = {
 		    sourceEventCreatedTime: {
 		        isDate: true,
 		    }
@@ -62261,9 +62302,9 @@ var hasRequiredLocationsInterfaces;
 function requireLocationsInterfaces () {
 	if (hasRequiredLocationsInterfaces) return LocationsInterfaces;
 	hasRequiredLocationsInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.ServiceStatus = exports$1.RelativeToSetting = exports$1.InheritLevel = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.ServiceStatus = exports.RelativeToSetting = exports.InheritLevel = void 0;
 		const VSSInterfaces = requireVSSInterfaces();
 		(function (InheritLevel) {
 		    InheritLevel[InheritLevel["None"] = 0] = "None";
@@ -62271,18 +62312,18 @@ function requireLocationsInterfaces () {
 		    InheritLevel[InheritLevel["Account"] = 2] = "Account";
 		    InheritLevel[InheritLevel["Collection"] = 4] = "Collection";
 		    InheritLevel[InheritLevel["All"] = 7] = "All";
-		})(exports$1.InheritLevel || (exports$1.InheritLevel = {}));
+		})(exports.InheritLevel || (exports.InheritLevel = {}));
 		(function (RelativeToSetting) {
 		    RelativeToSetting[RelativeToSetting["Context"] = 0] = "Context";
 		    RelativeToSetting[RelativeToSetting["WebApplication"] = 2] = "WebApplication";
 		    RelativeToSetting[RelativeToSetting["FullyQualified"] = 3] = "FullyQualified";
-		})(exports$1.RelativeToSetting || (exports$1.RelativeToSetting = {}));
+		})(exports.RelativeToSetting || (exports.RelativeToSetting = {}));
 		(function (ServiceStatus) {
 		    ServiceStatus[ServiceStatus["Assigned"] = 0] = "Assigned";
 		    ServiceStatus[ServiceStatus["Active"] = 1] = "Active";
 		    ServiceStatus[ServiceStatus["Moving"] = 2] = "Moving";
-		})(exports$1.ServiceStatus || (exports$1.ServiceStatus = {}));
-		exports$1.TypeInfo = {
+		})(exports.ServiceStatus || (exports.ServiceStatus = {}));
+		exports.TypeInfo = {
 		    ConnectionData: {},
 		    InheritLevel: {
 		        enumValues: {
@@ -62310,7 +62351,7 @@ function requireLocationsInterfaces () {
 		        }
 		    },
 		};
-		exports$1.TypeInfo.ConnectionData.fields = {
+		exports.TypeInfo.ConnectionData.fields = {
 		    deploymentType: {
 		        enumType: VSSInterfaces.TypeInfo.DeploymentFlags
 		    },
@@ -62318,24 +62359,24 @@ function requireLocationsInterfaces () {
 		        isDate: true,
 		    },
 		    locationServiceData: {
-		        typeInfo: exports$1.TypeInfo.LocationServiceData
+		        typeInfo: exports.TypeInfo.LocationServiceData
 		    }
 		};
-		exports$1.TypeInfo.LocationServiceData.fields = {
+		exports.TypeInfo.LocationServiceData.fields = {
 		    serviceDefinitions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ServiceDefinition
+		        typeInfo: exports.TypeInfo.ServiceDefinition
 		    }
 		};
-		exports$1.TypeInfo.ServiceDefinition.fields = {
+		exports.TypeInfo.ServiceDefinition.fields = {
 		    inheritLevel: {
-		        enumType: exports$1.TypeInfo.InheritLevel
+		        enumType: exports.TypeInfo.InheritLevel
 		    },
 		    relativeToSetting: {
-		        enumType: exports$1.TypeInfo.RelativeToSetting
+		        enumType: exports.TypeInfo.RelativeToSetting
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.ServiceStatus
+		        enumType: exports.TypeInfo.ServiceStatus
 		    }
 		}; 
 	} (LocationsInterfaces));
@@ -62690,9 +62731,9 @@ var hasRequiredManagementInterfaces;
 function requireManagementInterfaces () {
 	if (hasRequiredManagementInterfaces) return ManagementInterfaces;
 	hasRequiredManagementInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.Plan = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.Plan = void 0;
 		(function (Plan) {
 		    /**
 		     * No plan is indicated
@@ -62710,8 +62751,8 @@ function requireManagementInterfaces () {
 		     * Include all plans
 		     */
 		    Plan[Plan["All"] = 3] = "All";
-		})(exports$1.Plan || (exports$1.Plan = {}));
-		exports$1.TypeInfo = {
+		})(exports.Plan || (exports.Plan = {}));
+		exports.TypeInfo = {
 		    AdvSecEnablementSettings: {},
 		    AdvSecEnablementStatus: {},
 		    BillableCommitterDetails: {},
@@ -62730,18 +62771,18 @@ function requireManagementInterfaces () {
 		    RepoEnablementSettings: {},
 		    SecretProtectionFeatures: {},
 		};
-		exports$1.TypeInfo.AdvSecEnablementSettings.fields = {
+		exports.TypeInfo.AdvSecEnablementSettings.fields = {
 		    reposEnablementStatus: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.AdvSecEnablementStatus
+		        typeInfo: exports.TypeInfo.AdvSecEnablementStatus
 		    }
 		};
-		exports$1.TypeInfo.AdvSecEnablementStatus.fields = {
+		exports.TypeInfo.AdvSecEnablementStatus.fields = {
 		    advSecEnablementLastChangedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BillableCommitterDetails.fields = {
+		exports.TypeInfo.BillableCommitterDetails.fields = {
 		    commitTime: {
 		        isDate: true,
 		    },
@@ -62749,54 +62790,54 @@ function requireManagementInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.CodeSecurityFeatures.fields = {
+		exports.TypeInfo.CodeSecurityFeatures.fields = {
 		    codeSecurityEnablementLastChangedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.MeterUsage.fields = {
+		exports.TypeInfo.MeterUsage.fields = {
 		    billingDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.MeterUsageForPlan.fields = {
+		exports.TypeInfo.MeterUsageForPlan.fields = {
 		    billingDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.OrgEnablementSettings.fields = {
+		exports.TypeInfo.OrgEnablementSettings.fields = {
 		    codeSecurityFeatures: {
-		        typeInfo: exports$1.TypeInfo.CodeSecurityFeatures
+		        typeInfo: exports.TypeInfo.CodeSecurityFeatures
 		    },
 		    reposEnablementStatus: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RepoEnablementSettings
+		        typeInfo: exports.TypeInfo.RepoEnablementSettings
 		    },
 		    secretProtectionFeatures: {
-		        typeInfo: exports$1.TypeInfo.SecretProtectionFeatures
+		        typeInfo: exports.TypeInfo.SecretProtectionFeatures
 		    }
 		};
-		exports$1.TypeInfo.ProjectEnablementSettings.fields = {
+		exports.TypeInfo.ProjectEnablementSettings.fields = {
 		    codeSecurityFeatures: {
-		        typeInfo: exports$1.TypeInfo.CodeSecurityFeatures
+		        typeInfo: exports.TypeInfo.CodeSecurityFeatures
 		    },
 		    reposEnablementStatus: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RepoEnablementSettings
+		        typeInfo: exports.TypeInfo.RepoEnablementSettings
 		    },
 		    secretProtectionFeatures: {
-		        typeInfo: exports$1.TypeInfo.SecretProtectionFeatures
+		        typeInfo: exports.TypeInfo.SecretProtectionFeatures
 		    }
 		};
-		exports$1.TypeInfo.RepoEnablementSettings.fields = {
+		exports.TypeInfo.RepoEnablementSettings.fields = {
 		    codeSecurityFeatures: {
-		        typeInfo: exports$1.TypeInfo.CodeSecurityFeatures
+		        typeInfo: exports.TypeInfo.CodeSecurityFeatures
 		    },
 		    secretProtectionFeatures: {
-		        typeInfo: exports$1.TypeInfo.SecretProtectionFeatures
+		        typeInfo: exports.TypeInfo.SecretProtectionFeatures
 		    }
 		};
-		exports$1.TypeInfo.SecretProtectionFeatures.fields = {
+		exports.TypeInfo.SecretProtectionFeatures.fields = {
 		    secretProtectionEnablementLastChangedDate: {
 		        isDate: true,
 		    }
@@ -63694,9 +63735,9 @@ var hasRequiredNotificationInterfaces;
 function requireNotificationInterfaces () {
 	if (hasRequiredNotificationInterfaces) return NotificationInterfaces;
 	hasRequiredNotificationInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.SubscriptionTemplateType = exports$1.SubscriptionTemplateQueryFlags = exports$1.SubscriptionStatus = exports$1.SubscriptionQueryFlags = exports$1.SubscriptionPermissions = exports$1.SubscriptionFlags = exports$1.SubscriptionFieldType = exports$1.SubscriberFlags = exports$1.NotificationSubscriberDeliveryPreference = exports$1.NotificationStatisticType = exports$1.NotificationReasonType = exports$1.NotificationOperation = exports$1.EventTypeQueryFlags = exports$1.EventPublisherQueryFlags = exports$1.EvaluationOperationStatus = exports$1.DefaultGroupDeliveryPreference = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.SubscriptionTemplateType = exports.SubscriptionTemplateQueryFlags = exports.SubscriptionStatus = exports.SubscriptionQueryFlags = exports.SubscriptionPermissions = exports.SubscriptionFlags = exports.SubscriptionFieldType = exports.SubscriberFlags = exports.NotificationSubscriberDeliveryPreference = exports.NotificationStatisticType = exports.NotificationReasonType = exports.NotificationOperation = exports.EventTypeQueryFlags = exports.EventPublisherQueryFlags = exports.EvaluationOperationStatus = exports.DefaultGroupDeliveryPreference = void 0;
 		(function (DefaultGroupDeliveryPreference) {
 		    /**
 		     * Do not send notifications by default. Note: notifications can still be delivered to subscribers, for example via a custom subscription.
@@ -63706,7 +63747,7 @@ function requireNotificationInterfaces () {
 		     * Deliver notifications to each member of the group representing the subscriber. Only applicable when the subscriber is a group.
 		     */
 		    DefaultGroupDeliveryPreference[DefaultGroupDeliveryPreference["EachMember"] = 2] = "EachMember";
-		})(exports$1.DefaultGroupDeliveryPreference || (exports$1.DefaultGroupDeliveryPreference = {}));
+		})(exports.DefaultGroupDeliveryPreference || (exports.DefaultGroupDeliveryPreference = {}));
 		(function (EvaluationOperationStatus) {
 		    /**
 		     * The operation object does not have the status set.
@@ -63740,25 +63781,25 @@ function requireNotificationInterfaces () {
 		     * The operation could not be found.
 		     */
 		    EvaluationOperationStatus[EvaluationOperationStatus["NotFound"] = 7] = "NotFound";
-		})(exports$1.EvaluationOperationStatus || (exports$1.EvaluationOperationStatus = {}));
+		})(exports.EvaluationOperationStatus || (exports.EvaluationOperationStatus = {}));
 		(function (EventPublisherQueryFlags) {
 		    EventPublisherQueryFlags[EventPublisherQueryFlags["None"] = 0] = "None";
 		    /**
 		     * Include event types from the remote services too
 		     */
 		    EventPublisherQueryFlags[EventPublisherQueryFlags["IncludeRemoteServices"] = 2] = "IncludeRemoteServices";
-		})(exports$1.EventPublisherQueryFlags || (exports$1.EventPublisherQueryFlags = {}));
+		})(exports.EventPublisherQueryFlags || (exports.EventPublisherQueryFlags = {}));
 		(function (EventTypeQueryFlags) {
 		    EventTypeQueryFlags[EventTypeQueryFlags["None"] = 0] = "None";
 		    /**
 		     * IncludeFields will include all fields and their types
 		     */
 		    EventTypeQueryFlags[EventTypeQueryFlags["IncludeFields"] = 1] = "IncludeFields";
-		})(exports$1.EventTypeQueryFlags || (exports$1.EventTypeQueryFlags = {}));
+		})(exports.EventTypeQueryFlags || (exports.EventTypeQueryFlags = {}));
 		(function (NotificationOperation) {
 		    NotificationOperation[NotificationOperation["None"] = 0] = "None";
 		    NotificationOperation[NotificationOperation["SuspendUnprocessed"] = 1] = "SuspendUnprocessed";
-		})(exports$1.NotificationOperation || (exports$1.NotificationOperation = {}));
+		})(exports.NotificationOperation || (exports.NotificationOperation = {}));
 		(function (NotificationReasonType) {
 		    NotificationReasonType[NotificationReasonType["Unknown"] = 0] = "Unknown";
 		    NotificationReasonType[NotificationReasonType["Follows"] = 1] = "Follows";
@@ -63772,7 +63813,7 @@ function requireNotificationInterfaces () {
 		    NotificationReasonType[NotificationReasonType["DirectMemberGroupRole"] = 9] = "DirectMemberGroupRole";
 		    NotificationReasonType[NotificationReasonType["InDirectMemberGroupRole"] = 10] = "InDirectMemberGroupRole";
 		    NotificationReasonType[NotificationReasonType["AliasMemberGroupRole"] = 11] = "AliasMemberGroupRole";
-		})(exports$1.NotificationReasonType || (exports$1.NotificationReasonType = {}));
+		})(exports.NotificationReasonType || (exports.NotificationReasonType = {}));
 		(function (NotificationStatisticType) {
 		    NotificationStatisticType[NotificationStatisticType["NotificationBySubscription"] = 0] = "NotificationBySubscription";
 		    NotificationStatisticType[NotificationStatisticType["EventsByEventType"] = 1] = "EventsByEventType";
@@ -63803,7 +63844,7 @@ function requireNotificationInterfaces () {
 		    NotificationStatisticType[NotificationStatisticType["HourlyTotalPipelineTime"] = 1201] = "HourlyTotalPipelineTime";
 		    NotificationStatisticType[NotificationStatisticType["HourlyNotificationPipelineTime"] = 1202] = "HourlyNotificationPipelineTime";
 		    NotificationStatisticType[NotificationStatisticType["HourlyEventPipelineTime"] = 1203] = "HourlyEventPipelineTime";
-		})(exports$1.NotificationStatisticType || (exports$1.NotificationStatisticType = {}));
+		})(exports.NotificationStatisticType || (exports.NotificationStatisticType = {}));
 		(function (NotificationSubscriberDeliveryPreference) {
 		    /**
 		     * Do not send notifications by default. Note: notifications can still be delivered to this subscriber, for example via a custom subscription.
@@ -63821,7 +63862,7 @@ function requireNotificationInterfaces () {
 		     * Use default
 		     */
 		    NotificationSubscriberDeliveryPreference[NotificationSubscriberDeliveryPreference["UseDefault"] = 3] = "UseDefault";
-		})(exports$1.NotificationSubscriberDeliveryPreference || (exports$1.NotificationSubscriberDeliveryPreference = {}));
+		})(exports.NotificationSubscriberDeliveryPreference || (exports.NotificationSubscriberDeliveryPreference = {}));
 		(function (SubscriberFlags) {
 		    SubscriberFlags[SubscriberFlags["None"] = 0] = "None";
 		    /**
@@ -63852,7 +63893,7 @@ function requireNotificationInterfaces () {
 		     * Subscriber is a team
 		     */
 		    SubscriberFlags[SubscriberFlags["IsTeam"] = 128] = "IsTeam";
-		})(exports$1.SubscriberFlags || (exports$1.SubscriberFlags = {}));
+		})(exports.SubscriberFlags || (exports.SubscriberFlags = {}));
 		(function (SubscriptionFieldType) {
 		    SubscriptionFieldType[SubscriptionFieldType["String"] = 1] = "String";
 		    SubscriptionFieldType[SubscriptionFieldType["Integer"] = 2] = "Integer";
@@ -63869,7 +63910,7 @@ function requireNotificationInterfaces () {
 		    SubscriptionFieldType[SubscriptionFieldType["PicklistString"] = 15] = "PicklistString";
 		    SubscriptionFieldType[SubscriptionFieldType["PicklistDouble"] = 16] = "PicklistDouble";
 		    SubscriptionFieldType[SubscriptionFieldType["TeamProject"] = 17] = "TeamProject";
-		})(exports$1.SubscriptionFieldType || (exports$1.SubscriptionFieldType = {}));
+		})(exports.SubscriptionFieldType || (exports.SubscriptionFieldType = {}));
 		(function (SubscriptionFlags) {
 		    /**
 		     * None
@@ -63895,7 +63936,7 @@ function requireNotificationInterfaces () {
 		     * For role based subscriptions, there is an expectation that there will always be at least one actor that matches
 		     */
 		    SubscriptionFlags[SubscriptionFlags["OneActorMatches"] = 16] = "OneActorMatches";
-		})(exports$1.SubscriptionFlags || (exports$1.SubscriptionFlags = {}));
+		})(exports.SubscriptionFlags || (exports.SubscriptionFlags = {}));
 		(function (SubscriptionPermissions) {
 		    /**
 		     * None
@@ -63913,7 +63954,7 @@ function requireNotificationInterfaces () {
 		     * delete subscription
 		     */
 		    SubscriptionPermissions[SubscriptionPermissions["Delete"] = 4] = "Delete";
-		})(exports$1.SubscriptionPermissions || (exports$1.SubscriptionPermissions = {}));
+		})(exports.SubscriptionPermissions || (exports.SubscriptionPermissions = {}));
 		(function (SubscriptionQueryFlags) {
 		    SubscriptionQueryFlags[SubscriptionQueryFlags["None"] = 0] = "None";
 		    /**
@@ -63936,7 +63977,7 @@ function requireNotificationInterfaces () {
 		     * Include system subscriptions.
 		     */
 		    SubscriptionQueryFlags[SubscriptionQueryFlags["IncludeSystemSubscriptions"] = 32] = "IncludeSystemSubscriptions";
-		})(exports$1.SubscriptionQueryFlags || (exports$1.SubscriptionQueryFlags = {}));
+		})(exports.SubscriptionQueryFlags || (exports.SubscriptionQueryFlags = {}));
 		(function (SubscriptionStatus) {
 		    /**
 		     * Subscription is disabled because it generated a high volume of notifications.
@@ -64002,7 +64043,7 @@ function requireNotificationInterfaces () {
 		     * Subscription is active, but is on probation due to failed deliveries or other issues with the subscription.
 		     */
 		    SubscriptionStatus[SubscriptionStatus["EnabledOnProbation"] = 1] = "EnabledOnProbation";
-		})(exports$1.SubscriptionStatus || (exports$1.SubscriptionStatus = {}));
+		})(exports.SubscriptionStatus || (exports.SubscriptionStatus = {}));
 		(function (SubscriptionTemplateQueryFlags) {
 		    SubscriptionTemplateQueryFlags[SubscriptionTemplateQueryFlags["None"] = 0] = "None";
 		    /**
@@ -64021,14 +64062,14 @@ function requireNotificationInterfaces () {
 		     * Include the event type details like the fields and operators
 		     */
 		    SubscriptionTemplateQueryFlags[SubscriptionTemplateQueryFlags["IncludeEventTypeInformation"] = 22] = "IncludeEventTypeInformation";
-		})(exports$1.SubscriptionTemplateQueryFlags || (exports$1.SubscriptionTemplateQueryFlags = {}));
+		})(exports.SubscriptionTemplateQueryFlags || (exports.SubscriptionTemplateQueryFlags = {}));
 		(function (SubscriptionTemplateType) {
 		    SubscriptionTemplateType[SubscriptionTemplateType["User"] = 0] = "User";
 		    SubscriptionTemplateType[SubscriptionTemplateType["Team"] = 1] = "Team";
 		    SubscriptionTemplateType[SubscriptionTemplateType["Both"] = 2] = "Both";
 		    SubscriptionTemplateType[SubscriptionTemplateType["None"] = 3] = "None";
-		})(exports$1.SubscriptionTemplateType || (exports$1.SubscriptionTemplateType = {}));
-		exports$1.TypeInfo = {
+		})(exports.SubscriptionTemplateType || (exports.SubscriptionTemplateType = {}));
+		exports.TypeInfo = {
 		    ActorNotificationReason: {},
 		    BatchNotificationOperation: {},
 		    DefaultGroupDeliveryPreference: {
@@ -64252,17 +64293,17 @@ function requireNotificationInterfaces () {
 		    SubscriptionTraceNotificationDeliveryLog: {},
 		    SubscriptionTracing: {},
 		};
-		exports$1.TypeInfo.ActorNotificationReason.fields = {
+		exports.TypeInfo.ActorNotificationReason.fields = {
 		    notificationReasonType: {
-		        enumType: exports$1.TypeInfo.NotificationReasonType
+		        enumType: exports.TypeInfo.NotificationReasonType
 		    }
 		};
-		exports$1.TypeInfo.BatchNotificationOperation.fields = {
+		exports.TypeInfo.BatchNotificationOperation.fields = {
 		    notificationOperation: {
-		        enumType: exports$1.TypeInfo.NotificationOperation
+		        enumType: exports.TypeInfo.NotificationOperation
 		    }
 		};
-		exports$1.TypeInfo.EventBacklogStatus.fields = {
+		exports.TypeInfo.EventBacklogStatus.fields = {
 		    captureTime: {
 		        isDate: true,
 		    },
@@ -64282,7 +64323,7 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.EventProcessingLog.fields = {
+		exports.TypeInfo.EventProcessingLog.fields = {
 		    endTime: {
 		        isDate: true,
 		    },
@@ -64290,7 +64331,7 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.INotificationDiagnosticLog.fields = {
+		exports.TypeInfo.INotificationDiagnosticLog.fields = {
 		    endTime: {
 		        isDate: true,
 		    },
@@ -64298,17 +64339,17 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.NotificationAdminSettings.fields = {
+		exports.TypeInfo.NotificationAdminSettings.fields = {
 		    defaultGroupDeliveryPreference: {
-		        enumType: exports$1.TypeInfo.DefaultGroupDeliveryPreference
+		        enumType: exports.TypeInfo.DefaultGroupDeliveryPreference
 		    }
 		};
-		exports$1.TypeInfo.NotificationAdminSettingsUpdateParameters.fields = {
+		exports.TypeInfo.NotificationAdminSettingsUpdateParameters.fields = {
 		    defaultGroupDeliveryPreference: {
-		        enumType: exports$1.TypeInfo.DefaultGroupDeliveryPreference
+		        enumType: exports.TypeInfo.DefaultGroupDeliveryPreference
 		    }
 		};
-		exports$1.TypeInfo.NotificationBacklogStatus.fields = {
+		exports.TypeInfo.NotificationBacklogStatus.fields = {
 		    captureTime: {
 		        isDate: true,
 		    },
@@ -64328,7 +64369,7 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.NotificationDeliveryLog.fields = {
+		exports.TypeInfo.NotificationDeliveryLog.fields = {
 		    endTime: {
 		        isDate: true,
 		    },
@@ -64336,7 +64377,7 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.NotificationDiagnosticLog.fields = {
+		exports.TypeInfo.NotificationDiagnosticLog.fields = {
 		    endTime: {
 		        isDate: true,
 		    },
@@ -64344,33 +64385,33 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.NotificationEventBacklogStatus.fields = {
+		exports.TypeInfo.NotificationEventBacklogStatus.fields = {
 		    eventBacklogStatus: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.EventBacklogStatus
+		        typeInfo: exports.TypeInfo.EventBacklogStatus
 		    },
 		    notificationBacklogStatus: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.NotificationBacklogStatus
+		        typeInfo: exports.TypeInfo.NotificationBacklogStatus
 		    }
 		};
-		exports$1.TypeInfo.NotificationEventField.fields = {
+		exports.TypeInfo.NotificationEventField.fields = {
 		    fieldType: {
-		        typeInfo: exports$1.TypeInfo.NotificationEventFieldType
+		        typeInfo: exports.TypeInfo.NotificationEventFieldType
 		    }
 		};
-		exports$1.TypeInfo.NotificationEventFieldType.fields = {
+		exports.TypeInfo.NotificationEventFieldType.fields = {
 		    subscriptionFieldType: {
-		        enumType: exports$1.TypeInfo.SubscriptionFieldType
+		        enumType: exports.TypeInfo.SubscriptionFieldType
 		    }
 		};
-		exports$1.TypeInfo.NotificationEventType.fields = {
+		exports.TypeInfo.NotificationEventType.fields = {
 		    fields: {
 		        isDictionary: true,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.NotificationEventField
+		        dictionaryValueTypeInfo: exports.TypeInfo.NotificationEventField
 		    }
 		};
-		exports$1.TypeInfo.NotificationJobDiagnosticLog.fields = {
+		exports.TypeInfo.NotificationJobDiagnosticLog.fields = {
 		    endTime: {
 		        isDate: true,
 		    },
@@ -64378,26 +64419,26 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.NotificationReason.fields = {
+		exports.TypeInfo.NotificationReason.fields = {
 		    notificationReasonType: {
-		        enumType: exports$1.TypeInfo.NotificationReasonType
+		        enumType: exports.TypeInfo.NotificationReasonType
 		    }
 		};
-		exports$1.TypeInfo.NotificationStatistic.fields = {
+		exports.TypeInfo.NotificationStatistic.fields = {
 		    date: {
 		        isDate: true,
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.NotificationStatisticType
+		        enumType: exports.TypeInfo.NotificationStatisticType
 		    }
 		};
-		exports$1.TypeInfo.NotificationStatisticsQuery.fields = {
+		exports.TypeInfo.NotificationStatisticsQuery.fields = {
 		    conditions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.NotificationStatisticsQueryConditions
+		        typeInfo: exports.TypeInfo.NotificationStatisticsQueryConditions
 		    }
 		};
-		exports$1.TypeInfo.NotificationStatisticsQueryConditions.fields = {
+		exports.TypeInfo.NotificationStatisticsQueryConditions.fields = {
 		    endDate: {
 		        isDate: true,
 		    },
@@ -64405,88 +64446,88 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.NotificationStatisticType
+		        enumType: exports.TypeInfo.NotificationStatisticType
 		    }
 		};
-		exports$1.TypeInfo.NotificationSubscriber.fields = {
+		exports.TypeInfo.NotificationSubscriber.fields = {
 		    deliveryPreference: {
-		        enumType: exports$1.TypeInfo.NotificationSubscriberDeliveryPreference
+		        enumType: exports.TypeInfo.NotificationSubscriberDeliveryPreference
 		    },
 		    flags: {
-		        enumType: exports$1.TypeInfo.SubscriberFlags
+		        enumType: exports.TypeInfo.SubscriberFlags
 		    }
 		};
-		exports$1.TypeInfo.NotificationSubscriberUpdateParameters.fields = {
+		exports.TypeInfo.NotificationSubscriberUpdateParameters.fields = {
 		    deliveryPreference: {
-		        enumType: exports$1.TypeInfo.NotificationSubscriberDeliveryPreference
+		        enumType: exports.TypeInfo.NotificationSubscriberDeliveryPreference
 		    }
 		};
-		exports$1.TypeInfo.NotificationSubscription.fields = {
+		exports.TypeInfo.NotificationSubscription.fields = {
 		    diagnostics: {
-		        typeInfo: exports$1.TypeInfo.SubscriptionDiagnostics
+		        typeInfo: exports.TypeInfo.SubscriptionDiagnostics
 		    },
 		    flags: {
-		        enumType: exports$1.TypeInfo.SubscriptionFlags
+		        enumType: exports.TypeInfo.SubscriptionFlags
 		    },
 		    modifiedDate: {
 		        isDate: true,
 		    },
 		    permissions: {
-		        enumType: exports$1.TypeInfo.SubscriptionPermissions
+		        enumType: exports.TypeInfo.SubscriptionPermissions
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.SubscriptionStatus
+		        enumType: exports.TypeInfo.SubscriptionStatus
 		    }
 		};
-		exports$1.TypeInfo.NotificationSubscriptionTemplate.fields = {
+		exports.TypeInfo.NotificationSubscriptionTemplate.fields = {
 		    notificationEventInformation: {
-		        typeInfo: exports$1.TypeInfo.NotificationEventType
+		        typeInfo: exports.TypeInfo.NotificationEventType
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.SubscriptionTemplateType
+		        enumType: exports.TypeInfo.SubscriptionTemplateType
 		    }
 		};
-		exports$1.TypeInfo.NotificationSubscriptionUpdateParameters.fields = {
+		exports.TypeInfo.NotificationSubscriptionUpdateParameters.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.SubscriptionStatus
+		        enumType: exports.TypeInfo.SubscriptionStatus
 		    }
 		};
-		exports$1.TypeInfo.SubscriptionDiagnostics.fields = {
+		exports.TypeInfo.SubscriptionDiagnostics.fields = {
 		    deliveryResults: {
-		        typeInfo: exports$1.TypeInfo.SubscriptionTracing
+		        typeInfo: exports.TypeInfo.SubscriptionTracing
 		    },
 		    deliveryTracing: {
-		        typeInfo: exports$1.TypeInfo.SubscriptionTracing
+		        typeInfo: exports.TypeInfo.SubscriptionTracing
 		    },
 		    evaluationTracing: {
-		        typeInfo: exports$1.TypeInfo.SubscriptionTracing
+		        typeInfo: exports.TypeInfo.SubscriptionTracing
 		    }
 		};
-		exports$1.TypeInfo.SubscriptionEvaluationRequest.fields = {
+		exports.TypeInfo.SubscriptionEvaluationRequest.fields = {
 		    minEventsCreatedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.SubscriptionEvaluationResult.fields = {
+		exports.TypeInfo.SubscriptionEvaluationResult.fields = {
 		    evaluationJobStatus: {
-		        enumType: exports$1.TypeInfo.EvaluationOperationStatus
+		        enumType: exports.TypeInfo.EvaluationOperationStatus
 		    }
 		};
-		exports$1.TypeInfo.SubscriptionQuery.fields = {
+		exports.TypeInfo.SubscriptionQuery.fields = {
 		    conditions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.SubscriptionQueryCondition
+		        typeInfo: exports.TypeInfo.SubscriptionQueryCondition
 		    },
 		    queryFlags: {
-		        enumType: exports$1.TypeInfo.SubscriptionQueryFlags
+		        enumType: exports.TypeInfo.SubscriptionQueryFlags
 		    }
 		};
-		exports$1.TypeInfo.SubscriptionQueryCondition.fields = {
+		exports.TypeInfo.SubscriptionQueryCondition.fields = {
 		    flags: {
-		        enumType: exports$1.TypeInfo.SubscriptionFlags
+		        enumType: exports.TypeInfo.SubscriptionFlags
 		    }
 		};
-		exports$1.TypeInfo.SubscriptionTraceDiagnosticLog.fields = {
+		exports.TypeInfo.SubscriptionTraceDiagnosticLog.fields = {
 		    endTime: {
 		        isDate: true,
 		    },
@@ -64494,7 +64535,7 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.SubscriptionTraceEventProcessingLog.fields = {
+		exports.TypeInfo.SubscriptionTraceEventProcessingLog.fields = {
 		    endTime: {
 		        isDate: true,
 		    },
@@ -64502,7 +64543,7 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.SubscriptionTraceNotificationDeliveryLog.fields = {
+		exports.TypeInfo.SubscriptionTraceNotificationDeliveryLog.fields = {
 		    endTime: {
 		        isDate: true,
 		    },
@@ -64510,7 +64551,7 @@ function requireNotificationInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.SubscriptionTracing.fields = {
+		exports.TypeInfo.SubscriptionTracing.fields = {
 		    endDate: {
 		        isDate: true,
 		    },
@@ -65592,15 +65633,15 @@ var hasRequiredProfileInterfaces;
 function requireProfileInterfaces () {
 	if (hasRequiredProfileInterfaces) return ProfileInterfaces;
 	hasRequiredProfileInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.AvatarSize = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.AvatarSize = void 0;
 		(function (AvatarSize) {
 		    AvatarSize[AvatarSize["Small"] = 0] = "Small";
 		    AvatarSize[AvatarSize["Medium"] = 1] = "Medium";
 		    AvatarSize[AvatarSize["Large"] = 2] = "Large";
-		})(exports$1.AvatarSize || (exports$1.AvatarSize = {}));
-		exports$1.TypeInfo = {
+		})(exports.AvatarSize || (exports.AvatarSize = {}));
+		exports.TypeInfo = {
 		    AttributeDescriptor: {
 		        fields: null
 		    },
@@ -65645,59 +65686,59 @@ function requireProfileInterfaces () {
 		        fields: null
 		    },
 		};
-		exports$1.TypeInfo.AttributeDescriptor.fields = {};
-		exports$1.TypeInfo.AttributesContainer.fields = {
+		exports.TypeInfo.AttributeDescriptor.fields = {};
+		exports.TypeInfo.AttributesContainer.fields = {
 		    attributes: {},
 		};
-		exports$1.TypeInfo.Avatar.fields = {
+		exports.TypeInfo.Avatar.fields = {
 		    size: {
-		        enumType: exports$1.TypeInfo.AvatarSize
+		        enumType: exports.TypeInfo.AvatarSize
 		    },
 		    timeStamp: {
 		        isDate: true,
 		    },
 		};
-		exports$1.TypeInfo.CoreProfileAttribute.fields = {
+		exports.TypeInfo.CoreProfileAttribute.fields = {
 		    descriptor: {
-		        typeInfo: exports$1.TypeInfo.AttributeDescriptor
+		        typeInfo: exports.TypeInfo.AttributeDescriptor
 		    },
 		    timeStamp: {
 		        isDate: true,
 		    },
 		};
-		exports$1.TypeInfo.Country.fields = {};
-		exports$1.TypeInfo.CreateProfileContext.fields = {};
-		exports$1.TypeInfo.GeoRegion.fields = {};
-		exports$1.TypeInfo.Profile.fields = {
+		exports.TypeInfo.Country.fields = {};
+		exports.TypeInfo.CreateProfileContext.fields = {};
+		exports.TypeInfo.GeoRegion.fields = {};
+		exports.TypeInfo.Profile.fields = {
 		    applicationContainer: {
-		        typeInfo: exports$1.TypeInfo.AttributesContainer
+		        typeInfo: exports.TypeInfo.AttributesContainer
 		    },
 		    coreAttributes: {},
 		    timeStamp: {
 		        isDate: true,
 		    },
 		};
-		exports$1.TypeInfo.ProfileAttribute.fields = {
+		exports.TypeInfo.ProfileAttribute.fields = {
 		    descriptor: {
-		        typeInfo: exports$1.TypeInfo.AttributeDescriptor
+		        typeInfo: exports.TypeInfo.AttributeDescriptor
 		    },
 		    timeStamp: {
 		        isDate: true,
 		    },
 		};
-		exports$1.TypeInfo.ProfileAttributeBase.fields = {
+		exports.TypeInfo.ProfileAttributeBase.fields = {
 		    descriptor: {
-		        typeInfo: exports$1.TypeInfo.AttributeDescriptor
+		        typeInfo: exports.TypeInfo.AttributeDescriptor
 		    },
 		    timeStamp: {
 		        isDate: true,
 		    },
 		};
-		exports$1.TypeInfo.ProfileRegion.fields = {};
-		exports$1.TypeInfo.ProfileRegions.fields = {
+		exports.TypeInfo.ProfileRegion.fields = {};
+		exports.TypeInfo.ProfileRegions.fields = {
 		    regions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ProfileRegion
+		        typeInfo: exports.TypeInfo.ProfileRegion
 		    },
 		}; 
 	} (ProfileInterfaces));
@@ -66226,18 +66267,18 @@ var hasRequiredProjectAnalysisInterfaces;
 function requireProjectAnalysisInterfaces () {
 	if (hasRequiredProjectAnalysisInterfaces) return ProjectAnalysisInterfaces;
 	hasRequiredProjectAnalysisInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.ResultPhase = exports$1.AggregationType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.ResultPhase = exports.AggregationType = void 0;
 		(function (AggregationType) {
 		    AggregationType[AggregationType["Hourly"] = 0] = "Hourly";
 		    AggregationType[AggregationType["Daily"] = 1] = "Daily";
-		})(exports$1.AggregationType || (exports$1.AggregationType = {}));
+		})(exports.AggregationType || (exports.AggregationType = {}));
 		(function (ResultPhase) {
 		    ResultPhase[ResultPhase["Preliminary"] = 0] = "Preliminary";
 		    ResultPhase[ResultPhase["Full"] = 1] = "Full";
-		})(exports$1.ResultPhase || (exports$1.ResultPhase = {}));
-		exports$1.TypeInfo = {
+		})(exports.ResultPhase || (exports.ResultPhase = {}));
+		exports.TypeInfo = {
 		    AggregationType: {
 		        enumValues: {
 		            "hourly": 0,
@@ -66256,35 +66297,35 @@ function requireProjectAnalysisInterfaces () {
 		        }
 		    },
 		};
-		exports$1.TypeInfo.CodeChangeTrendItem.fields = {
+		exports.TypeInfo.CodeChangeTrendItem.fields = {
 		    time: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ProjectActivityMetrics.fields = {
+		exports.TypeInfo.ProjectActivityMetrics.fields = {
 		    codeChangesTrend: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.CodeChangeTrendItem
+		        typeInfo: exports.TypeInfo.CodeChangeTrendItem
 		    }
 		};
-		exports$1.TypeInfo.ProjectLanguageAnalytics.fields = {
+		exports.TypeInfo.ProjectLanguageAnalytics.fields = {
 		    repositoryLanguageAnalytics: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RepositoryLanguageAnalytics
+		        typeInfo: exports.TypeInfo.RepositoryLanguageAnalytics
 		    },
 		    resultPhase: {
-		        enumType: exports$1.TypeInfo.ResultPhase
+		        enumType: exports.TypeInfo.ResultPhase
 		    }
 		};
-		exports$1.TypeInfo.RepositoryActivityMetrics.fields = {
+		exports.TypeInfo.RepositoryActivityMetrics.fields = {
 		    codeChangesTrend: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.CodeChangeTrendItem
+		        typeInfo: exports.TypeInfo.CodeChangeTrendItem
 		    }
 		};
-		exports$1.TypeInfo.RepositoryLanguageAnalytics.fields = {
+		exports.TypeInfo.RepositoryLanguageAnalytics.fields = {
 		    resultPhase: {
-		        enumType: exports$1.TypeInfo.ResultPhase
+		        enumType: exports.TypeInfo.ResultPhase
 		    },
 		    updatedTime: {
 		        isDate: true,
@@ -66501,9 +66542,9 @@ var hasRequiredFormInputInterfaces;
 function requireFormInputInterfaces () {
 	if (hasRequiredFormInputInterfaces) return FormInputInterfaces;
 	hasRequiredFormInputInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.InputMode = exports$1.InputFilterOperator = exports$1.InputDataType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.InputMode = exports.InputFilterOperator = exports.InputDataType = void 0;
 		(function (InputDataType) {
 		    /**
 		     * No data type is specified.
@@ -66529,11 +66570,11 @@ function requireFormInputInterfaces () {
 		     * Represents a URI.
 		     */
 		    InputDataType[InputDataType["Uri"] = 50] = "Uri";
-		})(exports$1.InputDataType || (exports$1.InputDataType = {}));
+		})(exports.InputDataType || (exports.InputDataType = {}));
 		(function (InputFilterOperator) {
 		    InputFilterOperator[InputFilterOperator["Equals"] = 0] = "Equals";
 		    InputFilterOperator[InputFilterOperator["NotEquals"] = 1] = "NotEquals";
-		})(exports$1.InputFilterOperator || (exports$1.InputFilterOperator = {}));
+		})(exports.InputFilterOperator || (exports.InputFilterOperator = {}));
 		(function (InputMode) {
 		    /**
 		     * This input should not be shown in the UI
@@ -66563,8 +66604,8 @@ function requireFormInputInterfaces () {
 		     * A multi-line text area should be shown
 		     */
 		    InputMode[InputMode["TextArea"] = 60] = "TextArea";
-		})(exports$1.InputMode || (exports$1.InputMode = {}));
-		exports$1.TypeInfo = {
+		})(exports.InputMode || (exports.InputMode = {}));
+		exports.TypeInfo = {
 		    InputDataType: {
 		        enumValues: {
 		            "none": 0,
@@ -66617,48 +66658,48 @@ function requireFormInputInterfaces () {
 		        fields: null
 		    },
 		};
-		exports$1.TypeInfo.InputDescriptor.fields = {
+		exports.TypeInfo.InputDescriptor.fields = {
 		    inputMode: {
-		        enumType: exports$1.TypeInfo.InputMode
+		        enumType: exports.TypeInfo.InputMode
 		    },
 		    validation: {
-		        typeInfo: exports$1.TypeInfo.InputValidation
+		        typeInfo: exports.TypeInfo.InputValidation
 		    },
 		    values: {
-		        typeInfo: exports$1.TypeInfo.InputValues
+		        typeInfo: exports.TypeInfo.InputValues
 		    },
 		};
-		exports$1.TypeInfo.InputFilter.fields = {
+		exports.TypeInfo.InputFilter.fields = {
 		    conditions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.InputFilterCondition
+		        typeInfo: exports.TypeInfo.InputFilterCondition
 		    },
 		};
-		exports$1.TypeInfo.InputFilterCondition.fields = {
+		exports.TypeInfo.InputFilterCondition.fields = {
 		    operator: {
-		        enumType: exports$1.TypeInfo.InputFilterOperator
+		        enumType: exports.TypeInfo.InputFilterOperator
 		    },
 		};
-		exports$1.TypeInfo.InputValidation.fields = {
+		exports.TypeInfo.InputValidation.fields = {
 		    dataType: {
-		        enumType: exports$1.TypeInfo.InputDataType
+		        enumType: exports.TypeInfo.InputDataType
 		    },
 		};
-		exports$1.TypeInfo.InputValue.fields = {};
-		exports$1.TypeInfo.InputValues.fields = {
+		exports.TypeInfo.InputValue.fields = {};
+		exports.TypeInfo.InputValues.fields = {
 		    error: {
-		        typeInfo: exports$1.TypeInfo.InputValuesError
+		        typeInfo: exports.TypeInfo.InputValuesError
 		    },
 		    possibleValues: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.InputValue
+		        typeInfo: exports.TypeInfo.InputValue
 		    },
 		};
-		exports$1.TypeInfo.InputValuesError.fields = {};
-		exports$1.TypeInfo.InputValuesQuery.fields = {
+		exports.TypeInfo.InputValuesError.fields = {};
+		exports.TypeInfo.InputValuesQuery.fields = {
 		    inputValues: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.InputValues
+		        typeInfo: exports.TypeInfo.InputValues
 		    },
 		}; 
 	} (FormInputInterfaces));
@@ -66680,9 +66721,9 @@ var hasRequiredReleaseInterfaces;
 function requireReleaseInterfaces () {
 	if (hasRequiredReleaseInterfaces) return ReleaseInterfaces;
 	hasRequiredReleaseInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.YamlFileSourceTypes = exports$1.VariableGroupActionFilter = exports$1.TaskStatus = exports$1.SingleReleaseExpands = exports$1.SenderType = exports$1.ScheduleDays = exports$1.ReleaseTriggerType = exports$1.ReleaseStatus = exports$1.ReleaseReason = exports$1.ReleaseQueryOrder = exports$1.ReleaseExpands = exports$1.ReleaseEnvironmentExpands = exports$1.ReleaseDefinitionSource = exports$1.ReleaseDefinitionQueryOrder = exports$1.ReleaseDefinitionExpands = exports$1.PullRequestSystemType = exports$1.PropertySelectorType = exports$1.PipelineProcessTypes = exports$1.ParallelExecutionTypes = exports$1.ManualInterventionType = exports$1.ManualInterventionStatus = exports$1.MailSectionType = exports$1.IssueSource = exports$1.GateStatus = exports$1.FolderPathQueryOrder = exports$1.EnvironmentTriggerType = exports$1.EnvironmentStatus = exports$1.DeployPhaseTypes = exports$1.DeployPhaseStatus = exports$1.DeploymentStatus = exports$1.DeploymentsQueryType = exports$1.DeploymentReason = exports$1.DeploymentOperationStatus = exports$1.DeploymentExpands = exports$1.DeploymentAuthorizationOwner = exports$1.ConditionType = exports$1.AuthorizationHeaderFor = exports$1.AuditAction = exports$1.ApprovalType = exports$1.ApprovalStatus = exports$1.ApprovalFilters = exports$1.ApprovalExecutionOrder = exports$1.AgentArtifactType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.YamlFileSourceTypes = exports.VariableGroupActionFilter = exports.TaskStatus = exports.SingleReleaseExpands = exports.SenderType = exports.ScheduleDays = exports.ReleaseTriggerType = exports.ReleaseStatus = exports.ReleaseReason = exports.ReleaseQueryOrder = exports.ReleaseExpands = exports.ReleaseEnvironmentExpands = exports.ReleaseDefinitionSource = exports.ReleaseDefinitionQueryOrder = exports.ReleaseDefinitionExpands = exports.PullRequestSystemType = exports.PropertySelectorType = exports.PipelineProcessTypes = exports.ParallelExecutionTypes = exports.ManualInterventionType = exports.ManualInterventionStatus = exports.MailSectionType = exports.IssueSource = exports.GateStatus = exports.FolderPathQueryOrder = exports.EnvironmentTriggerType = exports.EnvironmentStatus = exports.DeployPhaseTypes = exports.DeployPhaseStatus = exports.DeploymentStatus = exports.DeploymentsQueryType = exports.DeploymentReason = exports.DeploymentOperationStatus = exports.DeploymentExpands = exports.DeploymentAuthorizationOwner = exports.ConditionType = exports.AuthorizationHeaderFor = exports.AuditAction = exports.ApprovalType = exports.ApprovalStatus = exports.ApprovalFilters = exports.ApprovalExecutionOrder = exports.AgentArtifactType = void 0;
 		const FormInputInterfaces = requireFormInputInterfaces();
 		(function (AgentArtifactType) {
 		    /**
@@ -66729,7 +66770,7 @@ function requireReleaseInterfaces () {
 		     * Indicates Tfvc artifact
 		     */
 		    AgentArtifactType[AgentArtifactType["Tfvc"] = 10] = "Tfvc";
-		})(exports$1.AgentArtifactType || (exports$1.AgentArtifactType = {}));
+		})(exports.AgentArtifactType || (exports.AgentArtifactType = {}));
 		(function (ApprovalExecutionOrder) {
 		    /**
 		     * Approvals shown before gates.
@@ -66743,7 +66784,7 @@ function requireReleaseInterfaces () {
 		     * Approvals shown always after execution of gates.
 		     */
 		    ApprovalExecutionOrder[ApprovalExecutionOrder["AfterGatesAlways"] = 4] = "AfterGatesAlways";
-		})(exports$1.ApprovalExecutionOrder || (exports$1.ApprovalExecutionOrder = {}));
+		})(exports.ApprovalExecutionOrder || (exports.ApprovalExecutionOrder = {}));
 		(function (ApprovalFilters) {
 		    /**
 		     * No approvals or approval snapshots.
@@ -66765,7 +66806,7 @@ function requireReleaseInterfaces () {
 		     * All approval steps and approval snapshots.
 		     */
 		    ApprovalFilters[ApprovalFilters["All"] = 7] = "All";
-		})(exports$1.ApprovalFilters || (exports$1.ApprovalFilters = {}));
+		})(exports.ApprovalFilters || (exports.ApprovalFilters = {}));
 		(function (ApprovalStatus) {
 		    /**
 		     * Indicates the approval does not have the status set.
@@ -66795,7 +66836,7 @@ function requireReleaseInterfaces () {
 		     * Indicates the approval is skipped.
 		     */
 		    ApprovalStatus[ApprovalStatus["Skipped"] = 8] = "Skipped";
-		})(exports$1.ApprovalStatus || (exports$1.ApprovalStatus = {}));
+		})(exports.ApprovalStatus || (exports.ApprovalStatus = {}));
 		(function (ApprovalType) {
 		    /**
 		     * Indicates the approval type does not set.
@@ -66813,7 +66854,7 @@ function requireReleaseInterfaces () {
 		     * Indicates all approvals.
 		     */
 		    ApprovalType[ApprovalType["All"] = 3] = "All";
-		})(exports$1.ApprovalType || (exports$1.ApprovalType = {}));
+		})(exports.ApprovalType || (exports.ApprovalType = {}));
 		(function (AuditAction) {
 		    /**
 		     * Indicates the audit add.
@@ -66831,11 +66872,11 @@ function requireReleaseInterfaces () {
 		     * Indicates the audit undelete.
 		     */
 		    AuditAction[AuditAction["Undelete"] = 4] = "Undelete";
-		})(exports$1.AuditAction || (exports$1.AuditAction = {}));
+		})(exports.AuditAction || (exports.AuditAction = {}));
 		(function (AuthorizationHeaderFor) {
 		    AuthorizationHeaderFor[AuthorizationHeaderFor["RevalidateApproverIdentity"] = 0] = "RevalidateApproverIdentity";
 		    AuthorizationHeaderFor[AuthorizationHeaderFor["OnBehalfOf"] = 1] = "OnBehalfOf";
-		})(exports$1.AuthorizationHeaderFor || (exports$1.AuthorizationHeaderFor = {}));
+		})(exports.AuthorizationHeaderFor || (exports.AuthorizationHeaderFor = {}));
 		(function (ConditionType) {
 		    /**
 		     * The condition type is undefined.
@@ -66853,18 +66894,18 @@ function requireReleaseInterfaces () {
 		     * The condition type is artifact.
 		     */
 		    ConditionType[ConditionType["Artifact"] = 4] = "Artifact";
-		})(exports$1.ConditionType || (exports$1.ConditionType = {}));
+		})(exports.ConditionType || (exports.ConditionType = {}));
 		(function (DeploymentAuthorizationOwner) {
 		    DeploymentAuthorizationOwner[DeploymentAuthorizationOwner["Automatic"] = 0] = "Automatic";
 		    DeploymentAuthorizationOwner[DeploymentAuthorizationOwner["DeploymentSubmitter"] = 1] = "DeploymentSubmitter";
 		    DeploymentAuthorizationOwner[DeploymentAuthorizationOwner["FirstPreDeploymentApprover"] = 2] = "FirstPreDeploymentApprover";
-		})(exports$1.DeploymentAuthorizationOwner || (exports$1.DeploymentAuthorizationOwner = {}));
+		})(exports.DeploymentAuthorizationOwner || (exports.DeploymentAuthorizationOwner = {}));
 		(function (DeploymentExpands) {
 		    DeploymentExpands[DeploymentExpands["All"] = 0] = "All";
 		    DeploymentExpands[DeploymentExpands["DeploymentOnly"] = 1] = "DeploymentOnly";
 		    DeploymentExpands[DeploymentExpands["Approvals"] = 2] = "Approvals";
 		    DeploymentExpands[DeploymentExpands["Artifacts"] = 4] = "Artifacts";
-		})(exports$1.DeploymentExpands || (exports$1.DeploymentExpands = {}));
+		})(exports.DeploymentExpands || (exports.DeploymentExpands = {}));
 		(function (DeploymentOperationStatus) {
 		    /**
 		     * The deployment operation status is undefined.
@@ -66946,7 +66987,7 @@ function requireReleaseInterfaces () {
 		     * The deployment operation status is all.
 		     */
 		    DeploymentOperationStatus[DeploymentOperationStatus["All"] = 258047] = "All";
-		})(exports$1.DeploymentOperationStatus || (exports$1.DeploymentOperationStatus = {}));
+		})(exports.DeploymentOperationStatus || (exports.DeploymentOperationStatus = {}));
 		(function (DeploymentReason) {
 		    /**
 		     * The deployment reason is none.
@@ -66968,11 +67009,11 @@ function requireReleaseInterfaces () {
 		     * The deployment reason is RedeployTrigger.
 		     */
 		    DeploymentReason[DeploymentReason["RedeployTrigger"] = 8] = "RedeployTrigger";
-		})(exports$1.DeploymentReason || (exports$1.DeploymentReason = {}));
+		})(exports.DeploymentReason || (exports.DeploymentReason = {}));
 		(function (DeploymentsQueryType) {
 		    DeploymentsQueryType[DeploymentsQueryType["Regular"] = 1] = "Regular";
 		    DeploymentsQueryType[DeploymentsQueryType["FailingSince"] = 2] = "FailingSince";
-		})(exports$1.DeploymentsQueryType || (exports$1.DeploymentsQueryType = {}));
+		})(exports.DeploymentsQueryType || (exports.DeploymentsQueryType = {}));
 		(function (DeploymentStatus) {
 		    /**
 		     * The deployment status is undefined.
@@ -67002,7 +67043,7 @@ function requireReleaseInterfaces () {
 		     * The deployment status is all.
 		     */
 		    DeploymentStatus[DeploymentStatus["All"] = 31] = "All";
-		})(exports$1.DeploymentStatus || (exports$1.DeploymentStatus = {}));
+		})(exports.DeploymentStatus || (exports.DeploymentStatus = {}));
 		(function (DeployPhaseStatus) {
 		    /**
 		     * Phase status not set.
@@ -67040,7 +67081,7 @@ function requireReleaseInterfaces () {
 		     * Phase is in cancelling state.
 		     */
 		    DeployPhaseStatus[DeployPhaseStatus["Cancelling"] = 128] = "Cancelling";
-		})(exports$1.DeployPhaseStatus || (exports$1.DeployPhaseStatus = {}));
+		})(exports.DeployPhaseStatus || (exports.DeployPhaseStatus = {}));
 		(function (DeployPhaseTypes) {
 		    /**
 		     * Phase type not defined. Don't use this.
@@ -67062,7 +67103,7 @@ function requireReleaseInterfaces () {
 		     * Phase type which contains tasks which acts as Gates for the deployment to go forward.
 		     */
 		    DeployPhaseTypes[DeployPhaseTypes["DeploymentGates"] = 8] = "DeploymentGates";
-		})(exports$1.DeployPhaseTypes || (exports$1.DeployPhaseTypes = {}));
+		})(exports.DeployPhaseTypes || (exports.DeployPhaseTypes = {}));
 		(function (EnvironmentStatus) {
 		    /**
 		     * Environment status not set.
@@ -67100,7 +67141,7 @@ function requireReleaseInterfaces () {
 		     * Environment is in partially succeeded state.
 		     */
 		    EnvironmentStatus[EnvironmentStatus["PartiallySucceeded"] = 128] = "PartiallySucceeded";
-		})(exports$1.EnvironmentStatus || (exports$1.EnvironmentStatus = {}));
+		})(exports.EnvironmentStatus || (exports.EnvironmentStatus = {}));
 		(function (EnvironmentTriggerType) {
 		    /**
 		     * Environment trigger type undefined.
@@ -67114,7 +67155,7 @@ function requireReleaseInterfaces () {
 		     * Environment trigger type is Rollback.
 		     */
 		    EnvironmentTriggerType[EnvironmentTriggerType["RollbackRedeploy"] = 2] = "RollbackRedeploy";
-		})(exports$1.EnvironmentTriggerType || (exports$1.EnvironmentTriggerType = {}));
+		})(exports.EnvironmentTriggerType || (exports.EnvironmentTriggerType = {}));
 		(function (FolderPathQueryOrder) {
 		    /**
 		     * No order.
@@ -67128,7 +67169,7 @@ function requireReleaseInterfaces () {
 		     * Order by folder name and path descending.
 		     */
 		    FolderPathQueryOrder[FolderPathQueryOrder["Descending"] = 2] = "Descending";
-		})(exports$1.FolderPathQueryOrder || (exports$1.FolderPathQueryOrder = {}));
+		})(exports.FolderPathQueryOrder || (exports.FolderPathQueryOrder = {}));
 		(function (GateStatus) {
 		    /**
 		     * The gate does not have the status set.
@@ -67154,12 +67195,12 @@ function requireReleaseInterfaces () {
 		     * The gate execution cancelled.
 		     */
 		    GateStatus[GateStatus["Canceled"] = 16] = "Canceled";
-		})(exports$1.GateStatus || (exports$1.GateStatus = {}));
+		})(exports.GateStatus || (exports.GateStatus = {}));
 		(function (IssueSource) {
 		    IssueSource[IssueSource["None"] = 0] = "None";
 		    IssueSource[IssueSource["User"] = 1] = "User";
 		    IssueSource[IssueSource["System"] = 2] = "System";
-		})(exports$1.IssueSource || (exports$1.IssueSource = {}));
+		})(exports.IssueSource || (exports.IssueSource = {}));
 		(function (MailSectionType) {
 		    MailSectionType[MailSectionType["Details"] = 0] = "Details";
 		    MailSectionType[MailSectionType["Environments"] = 1] = "Environments";
@@ -67167,7 +67208,7 @@ function requireReleaseInterfaces () {
 		    MailSectionType[MailSectionType["TestResults"] = 3] = "TestResults";
 		    MailSectionType[MailSectionType["WorkItems"] = 4] = "WorkItems";
 		    MailSectionType[MailSectionType["ReleaseInfo"] = 5] = "ReleaseInfo";
-		})(exports$1.MailSectionType || (exports$1.MailSectionType = {}));
+		})(exports.MailSectionType || (exports.MailSectionType = {}));
 		(function (ManualInterventionStatus) {
 		    /**
 		     * The manual intervention does not have the status set.
@@ -67193,7 +67234,7 @@ function requireReleaseInterfaces () {
 		     * The manual intervention is bypassed.
 		     */
 		    ManualInterventionStatus[ManualInterventionStatus["Bypassed"] = 16] = "Bypassed";
-		})(exports$1.ManualInterventionStatus || (exports$1.ManualInterventionStatus = {}));
+		})(exports.ManualInterventionStatus || (exports.ManualInterventionStatus = {}));
 		(function (ManualInterventionType) {
 		    /**
 		     * The manual intervention server task.
@@ -67203,16 +67244,16 @@ function requireReleaseInterfaces () {
 		     * The manual intervention proof of presence server task.
 		     */
 		    ManualInterventionType[ManualInterventionType["ProofOfPresence"] = 2] = "ProofOfPresence";
-		})(exports$1.ManualInterventionType || (exports$1.ManualInterventionType = {}));
+		})(exports.ManualInterventionType || (exports.ManualInterventionType = {}));
 		(function (ParallelExecutionTypes) {
 		    ParallelExecutionTypes[ParallelExecutionTypes["None"] = 0] = "None";
 		    ParallelExecutionTypes[ParallelExecutionTypes["MultiConfiguration"] = 1] = "MultiConfiguration";
 		    ParallelExecutionTypes[ParallelExecutionTypes["MultiMachine"] = 2] = "MultiMachine";
-		})(exports$1.ParallelExecutionTypes || (exports$1.ParallelExecutionTypes = {}));
+		})(exports.ParallelExecutionTypes || (exports.ParallelExecutionTypes = {}));
 		(function (PipelineProcessTypes) {
 		    PipelineProcessTypes[PipelineProcessTypes["Designer"] = 1] = "Designer";
 		    PipelineProcessTypes[PipelineProcessTypes["Yaml"] = 2] = "Yaml";
-		})(exports$1.PipelineProcessTypes || (exports$1.PipelineProcessTypes = {}));
+		})(exports.PipelineProcessTypes || (exports.PipelineProcessTypes = {}));
 		(function (PropertySelectorType) {
 		    /**
 		     * Include in property selector.
@@ -67222,12 +67263,12 @@ function requireReleaseInterfaces () {
 		     * Exclude in property selector.
 		     */
 		    PropertySelectorType[PropertySelectorType["Exclusion"] = 1] = "Exclusion";
-		})(exports$1.PropertySelectorType || (exports$1.PropertySelectorType = {}));
+		})(exports.PropertySelectorType || (exports.PropertySelectorType = {}));
 		(function (PullRequestSystemType) {
 		    PullRequestSystemType[PullRequestSystemType["None"] = 0] = "None";
 		    PullRequestSystemType[PullRequestSystemType["TfsGit"] = 1] = "TfsGit";
 		    PullRequestSystemType[PullRequestSystemType["GitHub"] = 2] = "GitHub";
-		})(exports$1.PullRequestSystemType || (exports$1.PullRequestSystemType = {}));
+		})(exports.PullRequestSystemType || (exports.PullRequestSystemType = {}));
 		(function (ReleaseDefinitionExpands) {
 		    /**
 		     * Returns top level properties of object.
@@ -67257,7 +67298,7 @@ function requireReleaseInterfaces () {
 		     * Include last release in return object.
 		     */
 		    ReleaseDefinitionExpands[ReleaseDefinitionExpands["LastRelease"] = 64] = "LastRelease";
-		})(exports$1.ReleaseDefinitionExpands || (exports$1.ReleaseDefinitionExpands = {}));
+		})(exports.ReleaseDefinitionExpands || (exports.ReleaseDefinitionExpands = {}));
 		(function (ReleaseDefinitionQueryOrder) {
 		    /**
 		     * Return results based on release definition Id ascending order.
@@ -67275,7 +67316,7 @@ function requireReleaseInterfaces () {
 		     * Return results based on release definition name descending order.
 		     */
 		    ReleaseDefinitionQueryOrder[ReleaseDefinitionQueryOrder["NameDescending"] = 3] = "NameDescending";
-		})(exports$1.ReleaseDefinitionQueryOrder || (exports$1.ReleaseDefinitionQueryOrder = {}));
+		})(exports.ReleaseDefinitionQueryOrder || (exports.ReleaseDefinitionQueryOrder = {}));
 		(function (ReleaseDefinitionSource) {
 		    /**
 		     * Indicates ReleaseDefinition source not defined.
@@ -67297,7 +67338,7 @@ function requireReleaseInterfaces () {
 		     * Indicates ReleaseDefinition created from PortalExtension API.
 		     */
 		    ReleaseDefinitionSource[ReleaseDefinitionSource["PortalExtensionApi"] = 8] = "PortalExtensionApi";
-		})(exports$1.ReleaseDefinitionSource || (exports$1.ReleaseDefinitionSource = {}));
+		})(exports.ReleaseDefinitionSource || (exports.ReleaseDefinitionSource = {}));
 		(function (ReleaseEnvironmentExpands) {
 		    /**
 		     * Return top level properties of object.
@@ -67307,7 +67348,7 @@ function requireReleaseInterfaces () {
 		     * Expand environment with tasks.
 		     */
 		    ReleaseEnvironmentExpands[ReleaseEnvironmentExpands["Tasks"] = 1] = "Tasks";
-		})(exports$1.ReleaseEnvironmentExpands || (exports$1.ReleaseEnvironmentExpands = {}));
+		})(exports.ReleaseEnvironmentExpands || (exports.ReleaseEnvironmentExpands = {}));
 		(function (ReleaseExpands) {
 		    ReleaseExpands[ReleaseExpands["None"] = 0] = "None";
 		    ReleaseExpands[ReleaseExpands["Environments"] = 2] = "Environments";
@@ -67316,7 +67357,7 @@ function requireReleaseInterfaces () {
 		    ReleaseExpands[ReleaseExpands["ManualInterventions"] = 16] = "ManualInterventions";
 		    ReleaseExpands[ReleaseExpands["Variables"] = 32] = "Variables";
 		    ReleaseExpands[ReleaseExpands["Tags"] = 64] = "Tags";
-		})(exports$1.ReleaseExpands || (exports$1.ReleaseExpands = {}));
+		})(exports.ReleaseExpands || (exports.ReleaseExpands = {}));
 		(function (ReleaseQueryOrder) {
 		    /**
 		     * Return results in descending order.
@@ -67326,7 +67367,7 @@ function requireReleaseInterfaces () {
 		     * Return results in ascending order.
 		     */
 		    ReleaseQueryOrder[ReleaseQueryOrder["Ascending"] = 1] = "Ascending";
-		})(exports$1.ReleaseQueryOrder || (exports$1.ReleaseQueryOrder = {}));
+		})(exports.ReleaseQueryOrder || (exports.ReleaseQueryOrder = {}));
 		(function (ReleaseReason) {
 		    /**
 		     * Indicates the release triggered reason not set.
@@ -67348,7 +67389,7 @@ function requireReleaseInterfaces () {
 		     * Indicates the release triggered by PullRequest.
 		     */
 		    ReleaseReason[ReleaseReason["PullRequest"] = 4] = "PullRequest";
-		})(exports$1.ReleaseReason || (exports$1.ReleaseReason = {}));
+		})(exports.ReleaseReason || (exports.ReleaseReason = {}));
 		(function (ReleaseStatus) {
 		    /**
 		     * Release status not set.
@@ -67366,7 +67407,7 @@ function requireReleaseInterfaces () {
 		     * Release status is in abandoned.
 		     */
 		    ReleaseStatus[ReleaseStatus["Abandoned"] = 4] = "Abandoned";
-		})(exports$1.ReleaseStatus || (exports$1.ReleaseStatus = {}));
+		})(exports.ReleaseStatus || (exports.ReleaseStatus = {}));
 		(function (ReleaseTriggerType) {
 		    /**
 		     * Release trigger type not set.
@@ -67396,7 +67437,7 @@ function requireReleaseInterfaces () {
 		     * Pull request based release trigger.
 		     */
 		    ReleaseTriggerType[ReleaseTriggerType["PullRequest"] = 6] = "PullRequest";
-		})(exports$1.ReleaseTriggerType || (exports$1.ReleaseTriggerType = {}));
+		})(exports.ReleaseTriggerType || (exports.ReleaseTriggerType = {}));
 		(function (ScheduleDays) {
 		    /**
 		     * Scheduled day not set.
@@ -67434,11 +67475,11 @@ function requireReleaseInterfaces () {
 		     * Scheduled on all the days in week.
 		     */
 		    ScheduleDays[ScheduleDays["All"] = 127] = "All";
-		})(exports$1.ScheduleDays || (exports$1.ScheduleDays = {}));
+		})(exports.ScheduleDays || (exports.ScheduleDays = {}));
 		(function (SenderType) {
 		    SenderType[SenderType["ServiceAccount"] = 1] = "ServiceAccount";
 		    SenderType[SenderType["RequestingUser"] = 2] = "RequestingUser";
-		})(exports$1.SenderType || (exports$1.SenderType = {}));
+		})(exports.SenderType || (exports.SenderType = {}));
 		(function (SingleReleaseExpands) {
 		    /**
 		     * Return top level properties of object.
@@ -67448,7 +67489,7 @@ function requireReleaseInterfaces () {
 		     * Expand release with tasks.
 		     */
 		    SingleReleaseExpands[SingleReleaseExpands["Tasks"] = 1] = "Tasks";
-		})(exports$1.SingleReleaseExpands || (exports$1.SingleReleaseExpands = {}));
+		})(exports.SingleReleaseExpands || (exports.SingleReleaseExpands = {}));
 		(function (TaskStatus) {
 		    /**
 		     * The task does not have the status set.
@@ -67490,17 +67531,17 @@ function requireReleaseInterfaces () {
 		     * The task execution partially succeeded.
 		     */
 		    TaskStatus[TaskStatus["PartiallySucceeded"] = 9] = "PartiallySucceeded";
-		})(exports$1.TaskStatus || (exports$1.TaskStatus = {}));
+		})(exports.TaskStatus || (exports.TaskStatus = {}));
 		(function (VariableGroupActionFilter) {
 		    VariableGroupActionFilter[VariableGroupActionFilter["None"] = 0] = "None";
 		    VariableGroupActionFilter[VariableGroupActionFilter["Manage"] = 2] = "Manage";
 		    VariableGroupActionFilter[VariableGroupActionFilter["Use"] = 16] = "Use";
-		})(exports$1.VariableGroupActionFilter || (exports$1.VariableGroupActionFilter = {}));
+		})(exports.VariableGroupActionFilter || (exports.VariableGroupActionFilter = {}));
 		(function (YamlFileSourceTypes) {
 		    YamlFileSourceTypes[YamlFileSourceTypes["None"] = 0] = "None";
 		    YamlFileSourceTypes[YamlFileSourceTypes["TFSGit"] = 1] = "TFSGit";
-		})(exports$1.YamlFileSourceTypes || (exports$1.YamlFileSourceTypes = {}));
-		exports$1.TypeInfo = {
+		})(exports.YamlFileSourceTypes || (exports.YamlFileSourceTypes = {}));
+		exports.TypeInfo = {
 		    AgentArtifactDefinition: {},
 		    AgentArtifactType: {
 		        enumValues: {
@@ -67975,150 +68016,150 @@ function requireReleaseInterfaces () {
 		    },
 		    YamlPipelineProcess: {},
 		};
-		exports$1.TypeInfo.AgentArtifactDefinition.fields = {
+		exports.TypeInfo.AgentArtifactDefinition.fields = {
 		    artifactType: {
-		        enumType: exports$1.TypeInfo.AgentArtifactType
+		        enumType: exports.TypeInfo.AgentArtifactType
 		    }
 		};
-		exports$1.TypeInfo.AgentBasedDeployPhase.fields = {
+		exports.TypeInfo.AgentBasedDeployPhase.fields = {
 		    deploymentInput: {
-		        typeInfo: exports$1.TypeInfo.AgentDeploymentInput
+		        typeInfo: exports.TypeInfo.AgentDeploymentInput
 		    },
 		    phaseType: {
-		        enumType: exports$1.TypeInfo.DeployPhaseTypes
+		        enumType: exports.TypeInfo.DeployPhaseTypes
 		    }
 		};
-		exports$1.TypeInfo.AgentDeploymentInput.fields = {
+		exports.TypeInfo.AgentDeploymentInput.fields = {
 		    parallelExecution: {
-		        typeInfo: exports$1.TypeInfo.ExecutionInput
+		        typeInfo: exports.TypeInfo.ExecutionInput
 		    }
 		};
-		exports$1.TypeInfo.ApprovalOptions.fields = {
+		exports.TypeInfo.ApprovalOptions.fields = {
 		    executionOrder: {
-		        enumType: exports$1.TypeInfo.ApprovalExecutionOrder
+		        enumType: exports.TypeInfo.ApprovalExecutionOrder
 		    }
 		};
-		exports$1.TypeInfo.ArtifactContributionDefinition.fields = {
+		exports.TypeInfo.ArtifactContributionDefinition.fields = {
 		    inputDescriptors: {
 		        isArray: true,
 		        typeInfo: FormInputInterfaces.TypeInfo.InputDescriptor
 		    }
 		};
-		exports$1.TypeInfo.ArtifactMetadata.fields = {
+		exports.TypeInfo.ArtifactMetadata.fields = {
 		    instanceReference: {
-		        typeInfo: exports$1.TypeInfo.BuildVersion
+		        typeInfo: exports.TypeInfo.BuildVersion
 		    }
 		};
-		exports$1.TypeInfo.ArtifactSourceTrigger.fields = {
+		exports.TypeInfo.ArtifactSourceTrigger.fields = {
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.ReleaseTriggerType
+		        enumType: exports.TypeInfo.ReleaseTriggerType
 		    }
 		};
-		exports$1.TypeInfo.ArtifactTypeDefinition.fields = {
+		exports.TypeInfo.ArtifactTypeDefinition.fields = {
 		    inputDescriptors: {
 		        isArray: true,
 		        typeInfo: FormInputInterfaces.TypeInfo.InputDescriptor
 		    }
 		};
-		exports$1.TypeInfo.ArtifactVersion.fields = {
+		exports.TypeInfo.ArtifactVersion.fields = {
 		    defaultVersion: {
-		        typeInfo: exports$1.TypeInfo.BuildVersion
+		        typeInfo: exports.TypeInfo.BuildVersion
 		    },
 		    versions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BuildVersion
+		        typeInfo: exports.TypeInfo.BuildVersion
 		    }
 		};
-		exports$1.TypeInfo.ArtifactVersionQueryResult.fields = {
+		exports.TypeInfo.ArtifactVersionQueryResult.fields = {
 		    artifactVersions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ArtifactVersion
+		        typeInfo: exports.TypeInfo.ArtifactVersion
 		    }
 		};
-		exports$1.TypeInfo.AutoTriggerIssue.fields = {
+		exports.TypeInfo.AutoTriggerIssue.fields = {
 		    issueSource: {
-		        enumType: exports$1.TypeInfo.IssueSource
+		        enumType: exports.TypeInfo.IssueSource
 		    },
 		    releaseTriggerType: {
-		        enumType: exports$1.TypeInfo.ReleaseTriggerType
+		        enumType: exports.TypeInfo.ReleaseTriggerType
 		    }
 		};
-		exports$1.TypeInfo.AzureKeyVaultVariableGroupProviderData.fields = {
+		exports.TypeInfo.AzureKeyVaultVariableGroupProviderData.fields = {
 		    lastRefreshedOn: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.AzureKeyVaultVariableValue.fields = {
+		exports.TypeInfo.AzureKeyVaultVariableValue.fields = {
 		    expires: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.BuildVersion.fields = {
+		exports.TypeInfo.BuildVersion.fields = {
 		    sourcePullRequestVersion: {
-		        typeInfo: exports$1.TypeInfo.SourcePullRequestVersion
+		        typeInfo: exports.TypeInfo.SourcePullRequestVersion
 		    }
 		};
-		exports$1.TypeInfo.Change.fields = {
+		exports.TypeInfo.Change.fields = {
 		    timestamp: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.CodeRepositoryReference.fields = {
+		exports.TypeInfo.CodeRepositoryReference.fields = {
 		    systemType: {
-		        enumType: exports$1.TypeInfo.PullRequestSystemType
+		        enumType: exports.TypeInfo.PullRequestSystemType
 		    }
 		};
-		exports$1.TypeInfo.Condition.fields = {
+		exports.TypeInfo.Condition.fields = {
 		    conditionType: {
-		        enumType: exports$1.TypeInfo.ConditionType
+		        enumType: exports.TypeInfo.ConditionType
 		    }
 		};
-		exports$1.TypeInfo.ContainerImageTrigger.fields = {
+		exports.TypeInfo.ContainerImageTrigger.fields = {
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.ReleaseTriggerType
+		        enumType: exports.TypeInfo.ReleaseTriggerType
 		    }
 		};
-		exports$1.TypeInfo.ContinuousDeploymentTriggerIssue.fields = {
+		exports.TypeInfo.ContinuousDeploymentTriggerIssue.fields = {
 		    issueSource: {
-		        enumType: exports$1.TypeInfo.IssueSource
+		        enumType: exports.TypeInfo.IssueSource
 		    },
 		    releaseTriggerType: {
-		        enumType: exports$1.TypeInfo.ReleaseTriggerType
+		        enumType: exports.TypeInfo.ReleaseTriggerType
 		    }
 		};
-		exports$1.TypeInfo.Deployment.fields = {
+		exports.TypeInfo.Deployment.fields = {
 		    completedOn: {
 		        isDate: true,
 		    },
 		    conditions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Condition
+		        typeInfo: exports.TypeInfo.Condition
 		    },
 		    deploymentStatus: {
-		        enumType: exports$1.TypeInfo.DeploymentStatus
+		        enumType: exports.TypeInfo.DeploymentStatus
 		    },
 		    lastModifiedOn: {
 		        isDate: true,
 		    },
 		    operationStatus: {
-		        enumType: exports$1.TypeInfo.DeploymentOperationStatus
+		        enumType: exports.TypeInfo.DeploymentOperationStatus
 		    },
 		    postDeployApprovals: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    preDeployApprovals: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    queuedOn: {
 		        isDate: true,
 		    },
 		    reason: {
-		        enumType: exports$1.TypeInfo.DeploymentReason
+		        enumType: exports.TypeInfo.DeploymentReason
 		    },
 		    release: {
-		        typeInfo: exports$1.TypeInfo.ReleaseReference
+		        typeInfo: exports.TypeInfo.ReleaseReference
 		    },
 		    scheduledDeploymentTime: {
 		        isDate: true,
@@ -68127,112 +68168,112 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.DeploymentApprovalCompletedEvent.fields = {
+		exports.TypeInfo.DeploymentApprovalCompletedEvent.fields = {
 		    approval: {
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    release: {
-		        typeInfo: exports$1.TypeInfo.Release
+		        typeInfo: exports.TypeInfo.Release
 		    }
 		};
-		exports$1.TypeInfo.DeploymentApprovalPendingEvent.fields = {
+		exports.TypeInfo.DeploymentApprovalPendingEvent.fields = {
 		    approval: {
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    approvalOptions: {
-		        typeInfo: exports$1.TypeInfo.ApprovalOptions
+		        typeInfo: exports.TypeInfo.ApprovalOptions
 		    },
 		    completedApprovals: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    deployment: {
-		        typeInfo: exports$1.TypeInfo.Deployment
+		        typeInfo: exports.TypeInfo.Deployment
 		    },
 		    pendingApprovals: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    release: {
-		        typeInfo: exports$1.TypeInfo.Release
+		        typeInfo: exports.TypeInfo.Release
 		    }
 		};
-		exports$1.TypeInfo.DeploymentAttempt.fields = {
+		exports.TypeInfo.DeploymentAttempt.fields = {
 		    job: {
-		        typeInfo: exports$1.TypeInfo.ReleaseTask
+		        typeInfo: exports.TypeInfo.ReleaseTask
 		    },
 		    lastModifiedOn: {
 		        isDate: true,
 		    },
 		    operationStatus: {
-		        enumType: exports$1.TypeInfo.DeploymentOperationStatus
+		        enumType: exports.TypeInfo.DeploymentOperationStatus
 		    },
 		    postDeploymentGates: {
-		        typeInfo: exports$1.TypeInfo.ReleaseGates
+		        typeInfo: exports.TypeInfo.ReleaseGates
 		    },
 		    preDeploymentGates: {
-		        typeInfo: exports$1.TypeInfo.ReleaseGates
+		        typeInfo: exports.TypeInfo.ReleaseGates
 		    },
 		    queuedOn: {
 		        isDate: true,
 		    },
 		    reason: {
-		        enumType: exports$1.TypeInfo.DeploymentReason
+		        enumType: exports.TypeInfo.DeploymentReason
 		    },
 		    releaseDeployPhases: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseDeployPhase
+		        typeInfo: exports.TypeInfo.ReleaseDeployPhase
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.DeploymentStatus
+		        enumType: exports.TypeInfo.DeploymentStatus
 		    },
 		    tasks: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseTask
+		        typeInfo: exports.TypeInfo.ReleaseTask
 		    }
 		};
-		exports$1.TypeInfo.DeploymentAuthorizationInfo.fields = {
+		exports.TypeInfo.DeploymentAuthorizationInfo.fields = {
 		    authorizationHeaderFor: {
-		        enumType: exports$1.TypeInfo.AuthorizationHeaderFor
+		        enumType: exports.TypeInfo.AuthorizationHeaderFor
 		    }
 		};
-		exports$1.TypeInfo.DeploymentCompletedEvent.fields = {
+		exports.TypeInfo.DeploymentCompletedEvent.fields = {
 		    deployment: {
-		        typeInfo: exports$1.TypeInfo.Deployment
+		        typeInfo: exports.TypeInfo.Deployment
 		    },
 		    environment: {
-		        typeInfo: exports$1.TypeInfo.ReleaseEnvironment
+		        typeInfo: exports.TypeInfo.ReleaseEnvironment
 		    }
 		};
-		exports$1.TypeInfo.DeploymentJob.fields = {
+		exports.TypeInfo.DeploymentJob.fields = {
 		    job: {
-		        typeInfo: exports$1.TypeInfo.ReleaseTask
+		        typeInfo: exports.TypeInfo.ReleaseTask
 		    },
 		    tasks: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseTask
+		        typeInfo: exports.TypeInfo.ReleaseTask
 		    }
 		};
-		exports$1.TypeInfo.DeploymentManualInterventionPendingEvent.fields = {
+		exports.TypeInfo.DeploymentManualInterventionPendingEvent.fields = {
 		    approval: {
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    deployment: {
-		        typeInfo: exports$1.TypeInfo.Deployment
+		        typeInfo: exports.TypeInfo.Deployment
 		    },
 		    manualIntervention: {
-		        typeInfo: exports$1.TypeInfo.ManualIntervention
+		        typeInfo: exports.TypeInfo.ManualIntervention
 		    },
 		    release: {
-		        typeInfo: exports$1.TypeInfo.Release
+		        typeInfo: exports.TypeInfo.Release
 		    }
 		};
-		exports$1.TypeInfo.DeploymentQueryParameters.fields = {
+		exports.TypeInfo.DeploymentQueryParameters.fields = {
 		    deploymentStatus: {
-		        enumType: exports$1.TypeInfo.DeploymentStatus
+		        enumType: exports.TypeInfo.DeploymentStatus
 		    },
 		    expands: {
-		        enumType: exports$1.TypeInfo.DeploymentExpands
+		        enumType: exports.TypeInfo.DeploymentExpands
 		    },
 		    maxModifiedTime: {
 		        isDate: true,
@@ -68241,39 +68282,39 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    },
 		    operationStatus: {
-		        enumType: exports$1.TypeInfo.DeploymentOperationStatus
+		        enumType: exports.TypeInfo.DeploymentOperationStatus
 		    },
 		    queryOrder: {
-		        enumType: exports$1.TypeInfo.ReleaseQueryOrder
+		        enumType: exports.TypeInfo.ReleaseQueryOrder
 		    },
 		    queryType: {
-		        enumType: exports$1.TypeInfo.DeploymentsQueryType
+		        enumType: exports.TypeInfo.DeploymentsQueryType
 		    }
 		};
-		exports$1.TypeInfo.DeploymentStartedEvent.fields = {
+		exports.TypeInfo.DeploymentStartedEvent.fields = {
 		    environment: {
-		        typeInfo: exports$1.TypeInfo.ReleaseEnvironment
+		        typeInfo: exports.TypeInfo.ReleaseEnvironment
 		    },
 		    release: {
-		        typeInfo: exports$1.TypeInfo.Release
+		        typeInfo: exports.TypeInfo.Release
 		    }
 		};
-		exports$1.TypeInfo.DeployPhase.fields = {
+		exports.TypeInfo.DeployPhase.fields = {
 		    phaseType: {
-		        enumType: exports$1.TypeInfo.DeployPhaseTypes
+		        enumType: exports.TypeInfo.DeployPhaseTypes
 		    }
 		};
-		exports$1.TypeInfo.EnvironmentTrigger.fields = {
+		exports.TypeInfo.EnvironmentTrigger.fields = {
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.EnvironmentTriggerType
+		        enumType: exports.TypeInfo.EnvironmentTriggerType
 		    }
 		};
-		exports$1.TypeInfo.ExecutionInput.fields = {
+		exports.TypeInfo.ExecutionInput.fields = {
 		    parallelExecutionType: {
-		        enumType: exports$1.TypeInfo.ParallelExecutionTypes
+		        enumType: exports.TypeInfo.ParallelExecutionTypes
 		    }
 		};
-		exports$1.TypeInfo.Folder.fields = {
+		exports.TypeInfo.Folder.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -68281,34 +68322,34 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.GatesDeployPhase.fields = {
+		exports.TypeInfo.GatesDeployPhase.fields = {
 		    phaseType: {
-		        enumType: exports$1.TypeInfo.DeployPhaseTypes
+		        enumType: exports.TypeInfo.DeployPhaseTypes
 		    }
 		};
-		exports$1.TypeInfo.IgnoredGate.fields = {
+		exports.TypeInfo.IgnoredGate.fields = {
 		    lastModifiedOn: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.MachineGroupBasedDeployPhase.fields = {
+		exports.TypeInfo.MachineGroupBasedDeployPhase.fields = {
 		    phaseType: {
-		        enumType: exports$1.TypeInfo.DeployPhaseTypes
+		        enumType: exports.TypeInfo.DeployPhaseTypes
 		    }
 		};
-		exports$1.TypeInfo.MailMessage.fields = {
+		exports.TypeInfo.MailMessage.fields = {
 		    replyBy: {
 		        isDate: true,
 		    },
 		    sections: {
 		        isArray: true,
-		        enumType: exports$1.TypeInfo.MailSectionType
+		        enumType: exports.TypeInfo.MailSectionType
 		    },
 		    senderType: {
-		        enumType: exports$1.TypeInfo.SenderType
+		        enumType: exports.TypeInfo.SenderType
 		    }
 		};
-		exports$1.TypeInfo.ManualIntervention.fields = {
+		exports.TypeInfo.ManualIntervention.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -68316,106 +68357,106 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.ManualInterventionStatus
+		        enumType: exports.TypeInfo.ManualInterventionStatus
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.ManualInterventionType
+		        enumType: exports.TypeInfo.ManualInterventionType
 		    }
 		};
-		exports$1.TypeInfo.ManualInterventionUpdateMetadata.fields = {
+		exports.TypeInfo.ManualInterventionUpdateMetadata.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.ManualInterventionStatus
+		        enumType: exports.TypeInfo.ManualInterventionStatus
 		    }
 		};
-		exports$1.TypeInfo.MultiConfigInput.fields = {
+		exports.TypeInfo.MultiConfigInput.fields = {
 		    parallelExecutionType: {
-		        enumType: exports$1.TypeInfo.ParallelExecutionTypes
+		        enumType: exports.TypeInfo.ParallelExecutionTypes
 		    }
 		};
-		exports$1.TypeInfo.MultiMachineInput.fields = {
+		exports.TypeInfo.MultiMachineInput.fields = {
 		    parallelExecutionType: {
-		        enumType: exports$1.TypeInfo.ParallelExecutionTypes
+		        enumType: exports.TypeInfo.ParallelExecutionTypes
 		    }
 		};
-		exports$1.TypeInfo.PackageTrigger.fields = {
+		exports.TypeInfo.PackageTrigger.fields = {
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.ReleaseTriggerType
+		        enumType: exports.TypeInfo.ReleaseTriggerType
 		    }
 		};
-		exports$1.TypeInfo.ParallelExecutionInputBase.fields = {
+		exports.TypeInfo.ParallelExecutionInputBase.fields = {
 		    parallelExecutionType: {
-		        enumType: exports$1.TypeInfo.ParallelExecutionTypes
+		        enumType: exports.TypeInfo.ParallelExecutionTypes
 		    }
 		};
-		exports$1.TypeInfo.PipelineProcess.fields = {
+		exports.TypeInfo.PipelineProcess.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.PipelineProcessTypes
+		        enumType: exports.TypeInfo.PipelineProcessTypes
 		    }
 		};
-		exports$1.TypeInfo.PropertySelector.fields = {
+		exports.TypeInfo.PropertySelector.fields = {
 		    selectorType: {
-		        enumType: exports$1.TypeInfo.PropertySelectorType
+		        enumType: exports.TypeInfo.PropertySelectorType
 		    }
 		};
-		exports$1.TypeInfo.PullRequestConfiguration.fields = {
+		exports.TypeInfo.PullRequestConfiguration.fields = {
 		    codeRepositoryReference: {
-		        typeInfo: exports$1.TypeInfo.CodeRepositoryReference
+		        typeInfo: exports.TypeInfo.CodeRepositoryReference
 		    }
 		};
-		exports$1.TypeInfo.PullRequestTrigger.fields = {
+		exports.TypeInfo.PullRequestTrigger.fields = {
 		    pullRequestConfiguration: {
-		        typeInfo: exports$1.TypeInfo.PullRequestConfiguration
+		        typeInfo: exports.TypeInfo.PullRequestConfiguration
 		    },
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.ReleaseTriggerType
+		        enumType: exports.TypeInfo.ReleaseTriggerType
 		    }
 		};
-		exports$1.TypeInfo.Release.fields = {
+		exports.TypeInfo.Release.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
 		    environments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseEnvironment
+		        typeInfo: exports.TypeInfo.ReleaseEnvironment
 		    },
 		    modifiedOn: {
 		        isDate: true,
 		    },
 		    reason: {
-		        enumType: exports$1.TypeInfo.ReleaseReason
+		        enumType: exports.TypeInfo.ReleaseReason
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.ReleaseStatus
+		        enumType: exports.TypeInfo.ReleaseStatus
 		    },
 		    variableGroups: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.VariableGroup
+		        typeInfo: exports.TypeInfo.VariableGroup
 		    }
 		};
-		exports$1.TypeInfo.ReleaseAbandonedEvent.fields = {
+		exports.TypeInfo.ReleaseAbandonedEvent.fields = {
 		    release: {
-		        typeInfo: exports$1.TypeInfo.Release
+		        typeInfo: exports.TypeInfo.Release
 		    }
 		};
-		exports$1.TypeInfo.ReleaseApproval.fields = {
+		exports.TypeInfo.ReleaseApproval.fields = {
 		    approvalType: {
-		        enumType: exports$1.TypeInfo.ApprovalType
+		        enumType: exports.TypeInfo.ApprovalType
 		    },
 		    createdOn: {
 		        isDate: true,
 		    },
 		    history: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseApprovalHistory
+		        typeInfo: exports.TypeInfo.ReleaseApprovalHistory
 		    },
 		    modifiedOn: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.ApprovalStatus
+		        enumType: exports.TypeInfo.ApprovalStatus
 		    }
 		};
-		exports$1.TypeInfo.ReleaseApprovalHistory.fields = {
+		exports.TypeInfo.ReleaseApprovalHistory.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -68423,146 +68464,146 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ReleaseApprovalPendingEvent.fields = {
+		exports.TypeInfo.ReleaseApprovalPendingEvent.fields = {
 		    approval: {
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    approvalOptions: {
-		        typeInfo: exports$1.TypeInfo.ApprovalOptions
+		        typeInfo: exports.TypeInfo.ApprovalOptions
 		    },
 		    completedApprovals: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    deployment: {
-		        typeInfo: exports$1.TypeInfo.Deployment
+		        typeInfo: exports.TypeInfo.Deployment
 		    },
 		    environments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseEnvironment
+		        typeInfo: exports.TypeInfo.ReleaseEnvironment
 		    },
 		    pendingApprovals: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    }
 		};
-		exports$1.TypeInfo.ReleaseCondition.fields = {
+		exports.TypeInfo.ReleaseCondition.fields = {
 		    conditionType: {
-		        enumType: exports$1.TypeInfo.ConditionType
+		        enumType: exports.TypeInfo.ConditionType
 		    }
 		};
-		exports$1.TypeInfo.ReleaseCreatedEvent.fields = {
+		exports.TypeInfo.ReleaseCreatedEvent.fields = {
 		    release: {
-		        typeInfo: exports$1.TypeInfo.Release
+		        typeInfo: exports.TypeInfo.Release
 		    }
 		};
-		exports$1.TypeInfo.ReleaseDefinition.fields = {
+		exports.TypeInfo.ReleaseDefinition.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
 		    environments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseDefinitionEnvironment
+		        typeInfo: exports.TypeInfo.ReleaseDefinitionEnvironment
 		    },
 		    lastRelease: {
-		        typeInfo: exports$1.TypeInfo.ReleaseReference
+		        typeInfo: exports.TypeInfo.ReleaseReference
 		    },
 		    modifiedOn: {
 		        isDate: true,
 		    },
 		    pipelineProcess: {
-		        typeInfo: exports$1.TypeInfo.PipelineProcess
+		        typeInfo: exports.TypeInfo.PipelineProcess
 		    },
 		    source: {
-		        enumType: exports$1.TypeInfo.ReleaseDefinitionSource
+		        enumType: exports.TypeInfo.ReleaseDefinitionSource
 		    },
 		    triggers: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseTriggerBase
+		        typeInfo: exports.TypeInfo.ReleaseTriggerBase
 		    }
 		};
-		exports$1.TypeInfo.ReleaseDefinitionApprovals.fields = {
+		exports.TypeInfo.ReleaseDefinitionApprovals.fields = {
 		    approvalOptions: {
-		        typeInfo: exports$1.TypeInfo.ApprovalOptions
+		        typeInfo: exports.TypeInfo.ApprovalOptions
 		    }
 		};
-		exports$1.TypeInfo.ReleaseDefinitionEnvironment.fields = {
+		exports.TypeInfo.ReleaseDefinitionEnvironment.fields = {
 		    conditions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Condition
+		        typeInfo: exports.TypeInfo.Condition
 		    },
 		    deployPhases: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeployPhase
+		        typeInfo: exports.TypeInfo.DeployPhase
 		    },
 		    environmentTriggers: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.EnvironmentTrigger
+		        typeInfo: exports.TypeInfo.EnvironmentTrigger
 		    },
 		    postDeployApprovals: {
-		        typeInfo: exports$1.TypeInfo.ReleaseDefinitionApprovals
+		        typeInfo: exports.TypeInfo.ReleaseDefinitionApprovals
 		    },
 		    preDeployApprovals: {
-		        typeInfo: exports$1.TypeInfo.ReleaseDefinitionApprovals
+		        typeInfo: exports.TypeInfo.ReleaseDefinitionApprovals
 		    },
 		    schedules: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseSchedule
+		        typeInfo: exports.TypeInfo.ReleaseSchedule
 		    }
 		};
-		exports$1.TypeInfo.ReleaseDefinitionEnvironmentTemplate.fields = {
+		exports.TypeInfo.ReleaseDefinitionEnvironmentTemplate.fields = {
 		    environment: {
-		        typeInfo: exports$1.TypeInfo.ReleaseDefinitionEnvironment
+		        typeInfo: exports.TypeInfo.ReleaseDefinitionEnvironment
 		    }
 		};
-		exports$1.TypeInfo.ReleaseDefinitionRevision.fields = {
+		exports.TypeInfo.ReleaseDefinitionRevision.fields = {
 		    changedDate: {
 		        isDate: true,
 		    },
 		    changeType: {
-		        enumType: exports$1.TypeInfo.AuditAction
+		        enumType: exports.TypeInfo.AuditAction
 		    }
 		};
-		exports$1.TypeInfo.ReleaseDefinitionSummary.fields = {
+		exports.TypeInfo.ReleaseDefinitionSummary.fields = {
 		    releases: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Release
+		        typeInfo: exports.TypeInfo.Release
 		    }
 		};
-		exports$1.TypeInfo.ReleaseDeployPhase.fields = {
+		exports.TypeInfo.ReleaseDeployPhase.fields = {
 		    deploymentJobs: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeploymentJob
+		        typeInfo: exports.TypeInfo.DeploymentJob
 		    },
 		    manualInterventions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ManualIntervention
+		        typeInfo: exports.TypeInfo.ManualIntervention
 		    },
 		    phaseType: {
-		        enumType: exports$1.TypeInfo.DeployPhaseTypes
+		        enumType: exports.TypeInfo.DeployPhaseTypes
 		    },
 		    startedOn: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.DeployPhaseStatus
+		        enumType: exports.TypeInfo.DeployPhaseStatus
 		    }
 		};
-		exports$1.TypeInfo.ReleaseEnvironment.fields = {
+		exports.TypeInfo.ReleaseEnvironment.fields = {
 		    conditions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseCondition
+		        typeInfo: exports.TypeInfo.ReleaseCondition
 		    },
 		    createdOn: {
 		        isDate: true,
 		    },
 		    deployPhasesSnapshot: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeployPhase
+		        typeInfo: exports.TypeInfo.DeployPhase
 		    },
 		    deploySteps: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeploymentAttempt
+		        typeInfo: exports.TypeInfo.DeploymentAttempt
 		    },
 		    modifiedOn: {
 		        isDate: true,
@@ -68571,69 +68612,69 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    },
 		    postApprovalsSnapshot: {
-		        typeInfo: exports$1.TypeInfo.ReleaseDefinitionApprovals
+		        typeInfo: exports.TypeInfo.ReleaseDefinitionApprovals
 		    },
 		    postDeployApprovals: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    preApprovalsSnapshot: {
-		        typeInfo: exports$1.TypeInfo.ReleaseDefinitionApprovals
+		        typeInfo: exports.TypeInfo.ReleaseDefinitionApprovals
 		    },
 		    preDeployApprovals: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseApproval
+		        typeInfo: exports.TypeInfo.ReleaseApproval
 		    },
 		    scheduledDeploymentTime: {
 		        isDate: true,
 		    },
 		    schedules: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseSchedule
+		        typeInfo: exports.TypeInfo.ReleaseSchedule
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.EnvironmentStatus
+		        enumType: exports.TypeInfo.EnvironmentStatus
 		    },
 		    variableGroups: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.VariableGroup
+		        typeInfo: exports.TypeInfo.VariableGroup
 		    }
 		};
-		exports$1.TypeInfo.ReleaseEnvironmentCompletedEvent.fields = {
+		exports.TypeInfo.ReleaseEnvironmentCompletedEvent.fields = {
 		    environment: {
-		        typeInfo: exports$1.TypeInfo.ReleaseEnvironment
+		        typeInfo: exports.TypeInfo.ReleaseEnvironment
 		    },
 		    reason: {
-		        enumType: exports$1.TypeInfo.DeploymentReason
+		        enumType: exports.TypeInfo.DeploymentReason
 		    }
 		};
-		exports$1.TypeInfo.ReleaseEnvironmentStatusUpdatedEvent.fields = {
+		exports.TypeInfo.ReleaseEnvironmentStatusUpdatedEvent.fields = {
 		    environmentStatus: {
-		        enumType: exports$1.TypeInfo.EnvironmentStatus
+		        enumType: exports.TypeInfo.EnvironmentStatus
 		    },
 		    latestDeploymentOperationStatus: {
-		        enumType: exports$1.TypeInfo.DeploymentOperationStatus
+		        enumType: exports.TypeInfo.DeploymentOperationStatus
 		    },
 		    latestDeploymentStatus: {
-		        enumType: exports$1.TypeInfo.DeploymentStatus
+		        enumType: exports.TypeInfo.DeploymentStatus
 		    }
 		};
-		exports$1.TypeInfo.ReleaseEnvironmentUpdateMetadata.fields = {
+		exports.TypeInfo.ReleaseEnvironmentUpdateMetadata.fields = {
 		    scheduledDeploymentTime: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.EnvironmentStatus
+		        enumType: exports.TypeInfo.EnvironmentStatus
 		    }
 		};
-		exports$1.TypeInfo.ReleaseGates.fields = {
+		exports.TypeInfo.ReleaseGates.fields = {
 		    deploymentJobs: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeploymentJob
+		        typeInfo: exports.TypeInfo.DeploymentJob
 		    },
 		    ignoredGates: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.IgnoredGate
+		        typeInfo: exports.TypeInfo.IgnoredGate
 		    },
 		    lastModifiedOn: {
 		        isDate: true,
@@ -68645,27 +68686,27 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.GateStatus
+		        enumType: exports.TypeInfo.GateStatus
 		    },
 		    succeedingSince: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ReleaseGatesPhase.fields = {
+		exports.TypeInfo.ReleaseGatesPhase.fields = {
 		    deploymentJobs: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeploymentJob
+		        typeInfo: exports.TypeInfo.DeploymentJob
 		    },
 		    ignoredGates: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.IgnoredGate
+		        typeInfo: exports.TypeInfo.IgnoredGate
 		    },
 		    manualInterventions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ManualIntervention
+		        typeInfo: exports.TypeInfo.ManualIntervention
 		    },
 		    phaseType: {
-		        enumType: exports$1.TypeInfo.DeployPhaseTypes
+		        enumType: exports.TypeInfo.DeployPhaseTypes
 		    },
 		    stabilizationCompletedOn: {
 		        isDate: true,
@@ -68674,45 +68715,45 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.DeployPhaseStatus
+		        enumType: exports.TypeInfo.DeployPhaseStatus
 		    },
 		    succeedingSince: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ReleaseNotCreatedEvent.fields = {
+		exports.TypeInfo.ReleaseNotCreatedEvent.fields = {
 		    releaseReason: {
-		        enumType: exports$1.TypeInfo.ReleaseReason
+		        enumType: exports.TypeInfo.ReleaseReason
 		    }
 		};
-		exports$1.TypeInfo.ReleaseReference.fields = {
+		exports.TypeInfo.ReleaseReference.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
 		    reason: {
-		        enumType: exports$1.TypeInfo.ReleaseReason
+		        enumType: exports.TypeInfo.ReleaseReason
 		    }
 		};
-		exports$1.TypeInfo.ReleaseRevision.fields = {
+		exports.TypeInfo.ReleaseRevision.fields = {
 		    changedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ReleaseSchedule.fields = {
+		exports.TypeInfo.ReleaseSchedule.fields = {
 		    daysToRelease: {
-		        enumType: exports$1.TypeInfo.ScheduleDays
+		        enumType: exports.TypeInfo.ScheduleDays
 		    }
 		};
-		exports$1.TypeInfo.ReleaseStartMetadata.fields = {
+		exports.TypeInfo.ReleaseStartMetadata.fields = {
 		    artifacts: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ArtifactMetadata
+		        typeInfo: exports.TypeInfo.ArtifactMetadata
 		    },
 		    reason: {
-		        enumType: exports$1.TypeInfo.ReleaseReason
+		        enumType: exports.TypeInfo.ReleaseReason
 		    }
 		};
-		exports$1.TypeInfo.ReleaseTask.fields = {
+		exports.TypeInfo.ReleaseTask.fields = {
 		    dateEnded: {
 		        isDate: true,
 		    },
@@ -68726,10 +68767,10 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.TaskStatus
+		        enumType: exports.TypeInfo.TaskStatus
 		    }
 		};
-		exports$1.TypeInfo.ReleaseTaskAttachment.fields = {
+		exports.TypeInfo.ReleaseTaskAttachment.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -68737,67 +68778,67 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ReleaseTasksUpdatedEvent.fields = {
+		exports.TypeInfo.ReleaseTasksUpdatedEvent.fields = {
 		    job: {
-		        typeInfo: exports$1.TypeInfo.ReleaseTask
+		        typeInfo: exports.TypeInfo.ReleaseTask
 		    },
 		    tasks: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ReleaseTask
+		        typeInfo: exports.TypeInfo.ReleaseTask
 		    }
 		};
-		exports$1.TypeInfo.ReleaseTriggerBase.fields = {
+		exports.TypeInfo.ReleaseTriggerBase.fields = {
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.ReleaseTriggerType
+		        enumType: exports.TypeInfo.ReleaseTriggerType
 		    }
 		};
-		exports$1.TypeInfo.ReleaseUpdatedEvent.fields = {
+		exports.TypeInfo.ReleaseUpdatedEvent.fields = {
 		    release: {
-		        typeInfo: exports$1.TypeInfo.Release
+		        typeInfo: exports.TypeInfo.Release
 		    }
 		};
-		exports$1.TypeInfo.ReleaseUpdateMetadata.fields = {
+		exports.TypeInfo.ReleaseUpdateMetadata.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.ReleaseStatus
+		        enumType: exports.TypeInfo.ReleaseStatus
 		    }
 		};
-		exports$1.TypeInfo.RunOnServerDeployPhase.fields = {
+		exports.TypeInfo.RunOnServerDeployPhase.fields = {
 		    deploymentInput: {
-		        typeInfo: exports$1.TypeInfo.ServerDeploymentInput
+		        typeInfo: exports.TypeInfo.ServerDeploymentInput
 		    },
 		    phaseType: {
-		        enumType: exports$1.TypeInfo.DeployPhaseTypes
+		        enumType: exports.TypeInfo.DeployPhaseTypes
 		    }
 		};
-		exports$1.TypeInfo.ScheduledReleaseTrigger.fields = {
+		exports.TypeInfo.ScheduledReleaseTrigger.fields = {
 		    schedule: {
-		        typeInfo: exports$1.TypeInfo.ReleaseSchedule
+		        typeInfo: exports.TypeInfo.ReleaseSchedule
 		    },
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.ReleaseTriggerType
+		        enumType: exports.TypeInfo.ReleaseTriggerType
 		    }
 		};
-		exports$1.TypeInfo.ServerDeploymentInput.fields = {
+		exports.TypeInfo.ServerDeploymentInput.fields = {
 		    parallelExecution: {
-		        typeInfo: exports$1.TypeInfo.ExecutionInput
+		        typeInfo: exports.TypeInfo.ExecutionInput
 		    }
 		};
-		exports$1.TypeInfo.SourcePullRequestVersion.fields = {
+		exports.TypeInfo.SourcePullRequestVersion.fields = {
 		    pullRequestMergedAt: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.SourceRepoTrigger.fields = {
+		exports.TypeInfo.SourceRepoTrigger.fields = {
 		    triggerType: {
-		        enumType: exports$1.TypeInfo.ReleaseTriggerType
+		        enumType: exports.TypeInfo.ReleaseTriggerType
 		    }
 		};
-		exports$1.TypeInfo.SummaryMailSection.fields = {
+		exports.TypeInfo.SummaryMailSection.fields = {
 		    sectionType: {
-		        enumType: exports$1.TypeInfo.MailSectionType
+		        enumType: exports.TypeInfo.MailSectionType
 		    }
 		};
-		exports$1.TypeInfo.VariableGroup.fields = {
+		exports.TypeInfo.VariableGroup.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -68805,17 +68846,17 @@ function requireReleaseInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.YamlFileSource.fields = {
+		exports.TypeInfo.YamlFileSource.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.YamlFileSourceTypes
+		        enumType: exports.TypeInfo.YamlFileSourceTypes
 		    }
 		};
-		exports$1.TypeInfo.YamlPipelineProcess.fields = {
+		exports.TypeInfo.YamlPipelineProcess.fields = {
 		    fileSource: {
-		        typeInfo: exports$1.TypeInfo.YamlFileSource
+		        typeInfo: exports.TypeInfo.YamlFileSource
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.PipelineProcessTypes
+		        enumType: exports.TypeInfo.PipelineProcessTypes
 		    }
 		}; 
 	} (ReleaseInterfaces));
@@ -71656,9 +71697,9 @@ var hasRequiredSecurityRolesInterfaces;
 function requireSecurityRolesInterfaces () {
 	if (hasRequiredSecurityRolesInterfaces) return SecurityRolesInterfaces;
 	hasRequiredSecurityRolesInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.RoleAccess = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.RoleAccess = void 0;
 		(function (RoleAccess) {
 		    /**
 		     * Access has been explicitly set.
@@ -71668,8 +71709,8 @@ function requireSecurityRolesInterfaces () {
 		     * Access has been inherited from a higher scope.
 		     */
 		    RoleAccess[RoleAccess["Inherited"] = 2] = "Inherited";
-		})(exports$1.RoleAccess || (exports$1.RoleAccess = {}));
-		exports$1.TypeInfo = {
+		})(exports.RoleAccess || (exports.RoleAccess = {}));
+		exports.TypeInfo = {
 		    RoleAccess: {
 		        enumValues: {
 		            "assigned": 1,
@@ -71678,9 +71719,9 @@ function requireSecurityRolesInterfaces () {
 		    },
 		    RoleAssignment: {},
 		};
-		exports$1.TypeInfo.RoleAssignment.fields = {
+		exports.TypeInfo.RoleAssignment.fields = {
 		    access: {
-		        enumType: exports$1.TypeInfo.RoleAccess
+		        enumType: exports.TypeInfo.RoleAccess
 		    },
 		}; 
 	} (SecurityRolesInterfaces));
@@ -71905,9 +71946,9 @@ var hasRequiredTaskAgentInterfaces;
 function requireTaskAgentInterfaces () {
 	if (hasRequiredTaskAgentInterfaces) return TaskAgentInterfaces;
 	hasRequiredTaskAgentInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.VariableGroupQueryOrder = exports$1.VariableGroupActionFilter = exports$1.TimelineRecordState = exports$1.TaskResult = exports$1.TaskOrchestrationPlanState = exports$1.TaskOrchestrationItemType = exports$1.TaskGroupQueryOrder = exports$1.TaskGroupExpands = exports$1.TaskDefinitionStatus = exports$1.TaskCommandMode = exports$1.TaskAgentUpdateReasonType = exports$1.TaskAgentStatusFilter = exports$1.TaskAgentStatus = exports$1.TaskAgentRequestUpdateOptions = exports$1.TaskAgentQueueActionFilter = exports$1.TaskAgentPoolType = exports$1.TaskAgentPoolOptions = exports$1.TaskAgentPoolMaintenanceScheduleDays = exports$1.TaskAgentPoolMaintenanceJobStatus = exports$1.TaskAgentPoolMaintenanceJobResult = exports$1.TaskAgentPoolActionFilter = exports$1.TaskAgentJobStepType = exports$1.TaskAgentJobResultFilter = exports$1.StageTriggerType = exports$1.SecureFileActionFilter = exports$1.ResourceLockStatus = exports$1.PlanGroupStatusFilter = exports$1.PlanGroupStatus = exports$1.OrchestrationType = exports$1.OperationType = exports$1.OperatingSystemType = exports$1.MaskType = exports$1.MachineGroupActionFilter = exports$1.LogLevel = exports$1.IssueType = exports$1.ExclusiveLockType = exports$1.EnvironmentResourceType = exports$1.EnvironmentExpands = exports$1.EnvironmentActionFilter = exports$1.ElasticPoolState = exports$1.ElasticNodeState = exports$1.ElasticComputeState = exports$1.ElasticAgentState = exports$1.DeploymentTargetExpands = exports$1.DeploymentPoolSummaryExpands = exports$1.DeploymentMachineExpands = exports$1.DeploymentGroupExpands = exports$1.DeploymentGroupActionFilter = exports$1.DemandSourceType = exports$1.AuditAction = exports$1.AadLoginPromptOption = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.VariableGroupQueryOrder = exports.VariableGroupActionFilter = exports.TimelineRecordState = exports.TaskResult = exports.TaskOrchestrationPlanState = exports.TaskOrchestrationItemType = exports.TaskGroupQueryOrder = exports.TaskGroupExpands = exports.TaskDefinitionStatus = exports.TaskCommandMode = exports.TaskAgentUpdateReasonType = exports.TaskAgentStatusFilter = exports.TaskAgentStatus = exports.TaskAgentRequestUpdateOptions = exports.TaskAgentQueueActionFilter = exports.TaskAgentPoolType = exports.TaskAgentPoolOptions = exports.TaskAgentPoolMaintenanceScheduleDays = exports.TaskAgentPoolMaintenanceJobStatus = exports.TaskAgentPoolMaintenanceJobResult = exports.TaskAgentPoolActionFilter = exports.TaskAgentJobStepType = exports.TaskAgentJobResultFilter = exports.StageTriggerType = exports.SecureFileActionFilter = exports.ResourceLockStatus = exports.PlanGroupStatusFilter = exports.PlanGroupStatus = exports.OrchestrationType = exports.OperationType = exports.OperatingSystemType = exports.MaskType = exports.MachineGroupActionFilter = exports.LogLevel = exports.IssueType = exports.ExclusiveLockType = exports.EnvironmentResourceType = exports.EnvironmentExpands = exports.EnvironmentActionFilter = exports.ElasticPoolState = exports.ElasticNodeState = exports.ElasticComputeState = exports.ElasticAgentState = exports.DeploymentTargetExpands = exports.DeploymentPoolSummaryExpands = exports.DeploymentMachineExpands = exports.DeploymentGroupExpands = exports.DeploymentGroupActionFilter = exports.DemandSourceType = exports.AuditAction = exports.AadLoginPromptOption = void 0;
 		const FormInputInterfaces = requireFormInputInterfaces();
 		(function (AadLoginPromptOption) {
 		    /**
@@ -71930,17 +71971,17 @@ function requireTaskAgentInterfaces () {
 		     * Force the user to login again with mfa. <remarks> Ignore current authentication state and force the user to authenticate again. This option should be used instead of Login, if MFA is required. </remarks>
 		     */
 		    AadLoginPromptOption[AadLoginPromptOption["FreshLoginWithMfa"] = 4] = "FreshLoginWithMfa";
-		})(exports$1.AadLoginPromptOption || (exports$1.AadLoginPromptOption = {}));
+		})(exports.AadLoginPromptOption || (exports.AadLoginPromptOption = {}));
 		(function (AuditAction) {
 		    AuditAction[AuditAction["Add"] = 1] = "Add";
 		    AuditAction[AuditAction["Update"] = 2] = "Update";
 		    AuditAction[AuditAction["Delete"] = 3] = "Delete";
 		    AuditAction[AuditAction["Undelete"] = 4] = "Undelete";
-		})(exports$1.AuditAction || (exports$1.AuditAction = {}));
+		})(exports.AuditAction || (exports.AuditAction = {}));
 		(function (DemandSourceType) {
 		    DemandSourceType[DemandSourceType["Task"] = 0] = "Task";
 		    DemandSourceType[DemandSourceType["Feature"] = 1] = "Feature";
-		})(exports$1.DemandSourceType || (exports$1.DemandSourceType = {}));
+		})(exports.DemandSourceType || (exports.DemandSourceType = {}));
 		(function (DeploymentGroupActionFilter) {
 		    /**
 		     * All deployment groups.
@@ -71954,7 +71995,7 @@ function requireTaskAgentInterfaces () {
 		     * Only deployment groups for which caller has **use** permission.
 		     */
 		    DeploymentGroupActionFilter[DeploymentGroupActionFilter["Use"] = 16] = "Use";
-		})(exports$1.DeploymentGroupActionFilter || (exports$1.DeploymentGroupActionFilter = {}));
+		})(exports.DeploymentGroupActionFilter || (exports.DeploymentGroupActionFilter = {}));
 		(function (DeploymentGroupExpands) {
 		    /**
 		     * No additional properties.
@@ -71968,12 +72009,12 @@ function requireTaskAgentInterfaces () {
 		     * Include unique list of tags across all deployment targets.
 		     */
 		    DeploymentGroupExpands[DeploymentGroupExpands["Tags"] = 4] = "Tags";
-		})(exports$1.DeploymentGroupExpands || (exports$1.DeploymentGroupExpands = {}));
+		})(exports.DeploymentGroupExpands || (exports.DeploymentGroupExpands = {}));
 		(function (DeploymentMachineExpands) {
 		    DeploymentMachineExpands[DeploymentMachineExpands["None"] = 0] = "None";
 		    DeploymentMachineExpands[DeploymentMachineExpands["Capabilities"] = 2] = "Capabilities";
 		    DeploymentMachineExpands[DeploymentMachineExpands["AssignedRequest"] = 4] = "AssignedRequest";
-		})(exports$1.DeploymentMachineExpands || (exports$1.DeploymentMachineExpands = {}));
+		})(exports.DeploymentMachineExpands || (exports.DeploymentMachineExpands = {}));
 		(function (DeploymentPoolSummaryExpands) {
 		    /**
 		     * No additional properties
@@ -71987,7 +72028,7 @@ function requireTaskAgentInterfaces () {
 		     * Include Resource referring to the deployment pool.
 		     */
 		    DeploymentPoolSummaryExpands[DeploymentPoolSummaryExpands["Resource"] = 4] = "Resource";
-		})(exports$1.DeploymentPoolSummaryExpands || (exports$1.DeploymentPoolSummaryExpands = {}));
+		})(exports.DeploymentPoolSummaryExpands || (exports.DeploymentPoolSummaryExpands = {}));
 		(function (DeploymentTargetExpands) {
 		    /**
 		     * No additional properties.
@@ -72005,13 +72046,13 @@ function requireTaskAgentInterfaces () {
 		     * Include the last completed job request of the deployment agent.
 		     */
 		    DeploymentTargetExpands[DeploymentTargetExpands["LastCompletedRequest"] = 8] = "LastCompletedRequest";
-		})(exports$1.DeploymentTargetExpands || (exports$1.DeploymentTargetExpands = {}));
+		})(exports.DeploymentTargetExpands || (exports.DeploymentTargetExpands = {}));
 		(function (ElasticAgentState) {
 		    ElasticAgentState[ElasticAgentState["None"] = 0] = "None";
 		    ElasticAgentState[ElasticAgentState["Enabled"] = 1] = "Enabled";
 		    ElasticAgentState[ElasticAgentState["Online"] = 2] = "Online";
 		    ElasticAgentState[ElasticAgentState["Assigned"] = 4] = "Assigned";
-		})(exports$1.ElasticAgentState || (exports$1.ElasticAgentState = {}));
+		})(exports.ElasticAgentState || (exports.ElasticAgentState = {}));
 		(function (ElasticComputeState) {
 		    ElasticComputeState[ElasticComputeState["None"] = 0] = "None";
 		    ElasticComputeState[ElasticComputeState["Healthy"] = 1] = "Healthy";
@@ -72022,7 +72063,7 @@ function requireTaskAgentInterfaces () {
 		    ElasticComputeState[ElasticComputeState["Reimaging"] = 6] = "Reimaging";
 		    ElasticComputeState[ElasticComputeState["UnhealthyVm"] = 7] = "UnhealthyVm";
 		    ElasticComputeState[ElasticComputeState["UnhealthyVmssVm"] = 8] = "UnhealthyVmssVm";
-		})(exports$1.ElasticComputeState || (exports$1.ElasticComputeState = {}));
+		})(exports.ElasticComputeState || (exports.ElasticComputeState = {}));
 		(function (ElasticNodeState) {
 		    ElasticNodeState[ElasticNodeState["None"] = 0] = "None";
 		    ElasticNodeState[ElasticNodeState["New"] = 1] = "New";
@@ -72047,7 +72088,7 @@ function requireTaskAgentInterfaces () {
 		    ElasticNodeState[ElasticNodeState["UnhealthyVm"] = 20] = "UnhealthyVm";
 		    ElasticNodeState[ElasticNodeState["UnhealthyVmPendingDelete"] = 21] = "UnhealthyVmPendingDelete";
 		    ElasticNodeState[ElasticNodeState["PendingReimageCandidate"] = 22] = "PendingReimageCandidate";
-		})(exports$1.ElasticNodeState || (exports$1.ElasticNodeState = {}));
+		})(exports.ElasticNodeState || (exports.ElasticNodeState = {}));
 		(function (ElasticPoolState) {
 		    /**
 		     * Online and healthy
@@ -72056,7 +72097,7 @@ function requireTaskAgentInterfaces () {
 		    ElasticPoolState[ElasticPoolState["Offline"] = 1] = "Offline";
 		    ElasticPoolState[ElasticPoolState["Unhealthy"] = 2] = "Unhealthy";
 		    ElasticPoolState[ElasticPoolState["New"] = 3] = "New";
-		})(exports$1.ElasticPoolState || (exports$1.ElasticPoolState = {}));
+		})(exports.ElasticPoolState || (exports.ElasticPoolState = {}));
 		(function (EnvironmentActionFilter) {
 		    /**
 		     * All environments for which user has **view** permission.
@@ -72070,7 +72111,7 @@ function requireTaskAgentInterfaces () {
 		     * Only environments for which caller has **use** permission.
 		     */
 		    EnvironmentActionFilter[EnvironmentActionFilter["Use"] = 16] = "Use";
-		})(exports$1.EnvironmentActionFilter || (exports$1.EnvironmentActionFilter = {}));
+		})(exports.EnvironmentActionFilter || (exports.EnvironmentActionFilter = {}));
 		(function (EnvironmentExpands) {
 		    /**
 		     * No additional properties
@@ -72080,7 +72121,7 @@ function requireTaskAgentInterfaces () {
 		     * Include resource references referring to the environment.
 		     */
 		    EnvironmentExpands[EnvironmentExpands["ResourceReferences"] = 1] = "ResourceReferences";
-		})(exports$1.EnvironmentExpands || (exports$1.EnvironmentExpands = {}));
+		})(exports.EnvironmentExpands || (exports.EnvironmentExpands = {}));
 		(function (EnvironmentResourceType) {
 		    EnvironmentResourceType[EnvironmentResourceType["Undefined"] = 0] = "Undefined";
 		    /**
@@ -72095,56 +72136,56 @@ function requireTaskAgentInterfaces () {
 		     * Kubernetes resource type
 		     */
 		    EnvironmentResourceType[EnvironmentResourceType["Kubernetes"] = 4] = "Kubernetes";
-		})(exports$1.EnvironmentResourceType || (exports$1.EnvironmentResourceType = {}));
+		})(exports.EnvironmentResourceType || (exports.EnvironmentResourceType = {}));
 		(function (ExclusiveLockType) {
 		    ExclusiveLockType[ExclusiveLockType["RunLatest"] = 0] = "RunLatest";
 		    ExclusiveLockType[ExclusiveLockType["Sequential"] = 1] = "Sequential";
 		    ExclusiveLockType[ExclusiveLockType["BranchRunLatest"] = 2] = "BranchRunLatest";
 		    ExclusiveLockType[ExclusiveLockType["Parallel"] = 3] = "Parallel";
-		})(exports$1.ExclusiveLockType || (exports$1.ExclusiveLockType = {}));
+		})(exports.ExclusiveLockType || (exports.ExclusiveLockType = {}));
 		(function (IssueType) {
 		    IssueType[IssueType["Error"] = 1] = "Error";
 		    IssueType[IssueType["Warning"] = 2] = "Warning";
-		})(exports$1.IssueType || (exports$1.IssueType = {}));
+		})(exports.IssueType || (exports.IssueType = {}));
 		(function (LogLevel) {
 		    LogLevel[LogLevel["Error"] = 0] = "Error";
 		    LogLevel[LogLevel["Warning"] = 1] = "Warning";
 		    LogLevel[LogLevel["Info"] = 2] = "Info";
-		})(exports$1.LogLevel || (exports$1.LogLevel = {}));
+		})(exports.LogLevel || (exports.LogLevel = {}));
 		(function (MachineGroupActionFilter) {
 		    MachineGroupActionFilter[MachineGroupActionFilter["None"] = 0] = "None";
 		    MachineGroupActionFilter[MachineGroupActionFilter["Manage"] = 2] = "Manage";
 		    MachineGroupActionFilter[MachineGroupActionFilter["Use"] = 16] = "Use";
-		})(exports$1.MachineGroupActionFilter || (exports$1.MachineGroupActionFilter = {}));
+		})(exports.MachineGroupActionFilter || (exports.MachineGroupActionFilter = {}));
 		(function (MaskType) {
 		    MaskType[MaskType["Variable"] = 1] = "Variable";
 		    MaskType[MaskType["Regex"] = 2] = "Regex";
-		})(exports$1.MaskType || (exports$1.MaskType = {}));
+		})(exports.MaskType || (exports.MaskType = {}));
 		(function (OperatingSystemType) {
 		    OperatingSystemType[OperatingSystemType["Windows"] = 0] = "Windows";
 		    OperatingSystemType[OperatingSystemType["Linux"] = 1] = "Linux";
-		})(exports$1.OperatingSystemType || (exports$1.OperatingSystemType = {}));
+		})(exports.OperatingSystemType || (exports.OperatingSystemType = {}));
 		(function (OperationType) {
 		    OperationType[OperationType["ConfigurationJob"] = 0] = "ConfigurationJob";
 		    OperationType[OperationType["SizingJob"] = 1] = "SizingJob";
 		    OperationType[OperationType["IncreaseCapacity"] = 2] = "IncreaseCapacity";
 		    OperationType[OperationType["Reimage"] = 3] = "Reimage";
 		    OperationType[OperationType["DeleteVMs"] = 4] = "DeleteVMs";
-		})(exports$1.OperationType || (exports$1.OperationType = {}));
+		})(exports.OperationType || (exports.OperationType = {}));
 		(function (OrchestrationType) {
 		    OrchestrationType[OrchestrationType["Uniform"] = 0] = "Uniform";
 		    OrchestrationType[OrchestrationType["Flexible"] = 1] = "Flexible";
-		})(exports$1.OrchestrationType || (exports$1.OrchestrationType = {}));
+		})(exports.OrchestrationType || (exports.OrchestrationType = {}));
 		(function (PlanGroupStatus) {
 		    PlanGroupStatus[PlanGroupStatus["Running"] = 1] = "Running";
 		    PlanGroupStatus[PlanGroupStatus["Queued"] = 2] = "Queued";
 		    PlanGroupStatus[PlanGroupStatus["All"] = 3] = "All";
-		})(exports$1.PlanGroupStatus || (exports$1.PlanGroupStatus = {}));
+		})(exports.PlanGroupStatus || (exports.PlanGroupStatus = {}));
 		(function (PlanGroupStatusFilter) {
 		    PlanGroupStatusFilter[PlanGroupStatusFilter["Running"] = 1] = "Running";
 		    PlanGroupStatusFilter[PlanGroupStatusFilter["Queued"] = 2] = "Queued";
 		    PlanGroupStatusFilter[PlanGroupStatusFilter["All"] = 3] = "All";
-		})(exports$1.PlanGroupStatusFilter || (exports$1.PlanGroupStatusFilter = {}));
+		})(exports.PlanGroupStatusFilter || (exports.PlanGroupStatusFilter = {}));
 		(function (ResourceLockStatus) {
 		    ResourceLockStatus[ResourceLockStatus["Queued"] = 0] = "Queued";
 		    ResourceLockStatus[ResourceLockStatus["InUse"] = 1] = "InUse";
@@ -72153,12 +72194,12 @@ function requireTaskAgentInterfaces () {
 		    ResourceLockStatus[ResourceLockStatus["Canceled"] = 4] = "Canceled";
 		    ResourceLockStatus[ResourceLockStatus["Abandoned"] = 5] = "Abandoned";
 		    ResourceLockStatus[ResourceLockStatus["WaitingOnChecks"] = 6] = "WaitingOnChecks";
-		})(exports$1.ResourceLockStatus || (exports$1.ResourceLockStatus = {}));
+		})(exports.ResourceLockStatus || (exports.ResourceLockStatus = {}));
 		(function (SecureFileActionFilter) {
 		    SecureFileActionFilter[SecureFileActionFilter["None"] = 0] = "None";
 		    SecureFileActionFilter[SecureFileActionFilter["Manage"] = 2] = "Manage";
 		    SecureFileActionFilter[SecureFileActionFilter["Use"] = 16] = "Use";
-		})(exports$1.SecureFileActionFilter || (exports$1.SecureFileActionFilter = {}));
+		})(exports.SecureFileActionFilter || (exports.SecureFileActionFilter = {}));
 		(function (StageTriggerType) {
 		    /**
 		     * Stage starts automatically
@@ -72168,7 +72209,7 @@ function requireTaskAgentInterfaces () {
 		     * Stage starts on manual run
 		     */
 		    StageTriggerType[StageTriggerType["Manual"] = 1] = "Manual";
-		})(exports$1.StageTriggerType || (exports$1.StageTriggerType = {}));
+		})(exports.StageTriggerType || (exports.StageTriggerType = {}));
 		(function (TaskAgentJobResultFilter) {
 		    /**
 		     * Only those deployment targets on which last job failed (**Abandoned**, **Canceled**, **Failed**, **Skipped**).
@@ -72186,27 +72227,27 @@ function requireTaskAgentInterfaces () {
 		     * All deployment targets.
 		     */
 		    TaskAgentJobResultFilter[TaskAgentJobResultFilter["All"] = 7] = "All";
-		})(exports$1.TaskAgentJobResultFilter || (exports$1.TaskAgentJobResultFilter = {}));
+		})(exports.TaskAgentJobResultFilter || (exports.TaskAgentJobResultFilter = {}));
 		(function (TaskAgentJobStepType) {
 		    TaskAgentJobStepType[TaskAgentJobStepType["Task"] = 1] = "Task";
 		    TaskAgentJobStepType[TaskAgentJobStepType["Action"] = 2] = "Action";
-		})(exports$1.TaskAgentJobStepType || (exports$1.TaskAgentJobStepType = {}));
+		})(exports.TaskAgentJobStepType || (exports.TaskAgentJobStepType = {}));
 		(function (TaskAgentPoolActionFilter) {
 		    TaskAgentPoolActionFilter[TaskAgentPoolActionFilter["None"] = 0] = "None";
 		    TaskAgentPoolActionFilter[TaskAgentPoolActionFilter["Manage"] = 2] = "Manage";
 		    TaskAgentPoolActionFilter[TaskAgentPoolActionFilter["Use"] = 16] = "Use";
-		})(exports$1.TaskAgentPoolActionFilter || (exports$1.TaskAgentPoolActionFilter = {}));
+		})(exports.TaskAgentPoolActionFilter || (exports.TaskAgentPoolActionFilter = {}));
 		(function (TaskAgentPoolMaintenanceJobResult) {
 		    TaskAgentPoolMaintenanceJobResult[TaskAgentPoolMaintenanceJobResult["Succeeded"] = 1] = "Succeeded";
 		    TaskAgentPoolMaintenanceJobResult[TaskAgentPoolMaintenanceJobResult["Failed"] = 2] = "Failed";
 		    TaskAgentPoolMaintenanceJobResult[TaskAgentPoolMaintenanceJobResult["Canceled"] = 4] = "Canceled";
-		})(exports$1.TaskAgentPoolMaintenanceJobResult || (exports$1.TaskAgentPoolMaintenanceJobResult = {}));
+		})(exports.TaskAgentPoolMaintenanceJobResult || (exports.TaskAgentPoolMaintenanceJobResult = {}));
 		(function (TaskAgentPoolMaintenanceJobStatus) {
 		    TaskAgentPoolMaintenanceJobStatus[TaskAgentPoolMaintenanceJobStatus["InProgress"] = 1] = "InProgress";
 		    TaskAgentPoolMaintenanceJobStatus[TaskAgentPoolMaintenanceJobStatus["Completed"] = 2] = "Completed";
 		    TaskAgentPoolMaintenanceJobStatus[TaskAgentPoolMaintenanceJobStatus["Cancelling"] = 4] = "Cancelling";
 		    TaskAgentPoolMaintenanceJobStatus[TaskAgentPoolMaintenanceJobStatus["Queued"] = 8] = "Queued";
-		})(exports$1.TaskAgentPoolMaintenanceJobStatus || (exports$1.TaskAgentPoolMaintenanceJobStatus = {}));
+		})(exports.TaskAgentPoolMaintenanceJobStatus || (exports.TaskAgentPoolMaintenanceJobStatus = {}));
 		(function (TaskAgentPoolMaintenanceScheduleDays) {
 		    /**
 		     * Do not run.
@@ -72244,7 +72285,7 @@ function requireTaskAgentInterfaces () {
 		     * Run on all days of the week.
 		     */
 		    TaskAgentPoolMaintenanceScheduleDays[TaskAgentPoolMaintenanceScheduleDays["All"] = 127] = "All";
-		})(exports$1.TaskAgentPoolMaintenanceScheduleDays || (exports$1.TaskAgentPoolMaintenanceScheduleDays = {}));
+		})(exports.TaskAgentPoolMaintenanceScheduleDays || (exports.TaskAgentPoolMaintenanceScheduleDays = {}));
 		(function (TaskAgentPoolOptions) {
 		    TaskAgentPoolOptions[TaskAgentPoolOptions["None"] = 0] = "None";
 		    /**
@@ -72259,7 +72300,7 @@ function requireTaskAgentInterfaces () {
 		     * Set to true if agents are held for investigation after a TaskAgentJobRequest failure
 		     */
 		    TaskAgentPoolOptions[TaskAgentPoolOptions["PreserveAgentOnJobFailure"] = 4] = "PreserveAgentOnJobFailure";
-		})(exports$1.TaskAgentPoolOptions || (exports$1.TaskAgentPoolOptions = {}));
+		})(exports.TaskAgentPoolOptions || (exports.TaskAgentPoolOptions = {}));
 		(function (TaskAgentPoolType) {
 		    /**
 		     * A typical pool of task agents
@@ -72269,20 +72310,20 @@ function requireTaskAgentInterfaces () {
 		     * A deployment pool
 		     */
 		    TaskAgentPoolType[TaskAgentPoolType["Deployment"] = 2] = "Deployment";
-		})(exports$1.TaskAgentPoolType || (exports$1.TaskAgentPoolType = {}));
+		})(exports.TaskAgentPoolType || (exports.TaskAgentPoolType = {}));
 		(function (TaskAgentQueueActionFilter) {
 		    TaskAgentQueueActionFilter[TaskAgentQueueActionFilter["None"] = 0] = "None";
 		    TaskAgentQueueActionFilter[TaskAgentQueueActionFilter["Manage"] = 2] = "Manage";
 		    TaskAgentQueueActionFilter[TaskAgentQueueActionFilter["Use"] = 16] = "Use";
-		})(exports$1.TaskAgentQueueActionFilter || (exports$1.TaskAgentQueueActionFilter = {}));
+		})(exports.TaskAgentQueueActionFilter || (exports.TaskAgentQueueActionFilter = {}));
 		(function (TaskAgentRequestUpdateOptions) {
 		    TaskAgentRequestUpdateOptions[TaskAgentRequestUpdateOptions["None"] = 0] = "None";
 		    TaskAgentRequestUpdateOptions[TaskAgentRequestUpdateOptions["BumpRequestToTop"] = 1] = "BumpRequestToTop";
-		})(exports$1.TaskAgentRequestUpdateOptions || (exports$1.TaskAgentRequestUpdateOptions = {}));
+		})(exports.TaskAgentRequestUpdateOptions || (exports.TaskAgentRequestUpdateOptions = {}));
 		(function (TaskAgentStatus) {
 		    TaskAgentStatus[TaskAgentStatus["Offline"] = 1] = "Offline";
 		    TaskAgentStatus[TaskAgentStatus["Online"] = 2] = "Online";
-		})(exports$1.TaskAgentStatus || (exports$1.TaskAgentStatus = {}));
+		})(exports.TaskAgentStatus || (exports.TaskAgentStatus = {}));
 		(function (TaskAgentStatusFilter) {
 		    /**
 		     * Only deployment targets that are offline.
@@ -72296,16 +72337,16 @@ function requireTaskAgentInterfaces () {
 		     * All deployment targets.
 		     */
 		    TaskAgentStatusFilter[TaskAgentStatusFilter["All"] = 3] = "All";
-		})(exports$1.TaskAgentStatusFilter || (exports$1.TaskAgentStatusFilter = {}));
+		})(exports.TaskAgentStatusFilter || (exports.TaskAgentStatusFilter = {}));
 		(function (TaskAgentUpdateReasonType) {
 		    TaskAgentUpdateReasonType[TaskAgentUpdateReasonType["Manual"] = 1] = "Manual";
 		    TaskAgentUpdateReasonType[TaskAgentUpdateReasonType["MinAgentVersionRequired"] = 2] = "MinAgentVersionRequired";
 		    TaskAgentUpdateReasonType[TaskAgentUpdateReasonType["Downgrade"] = 3] = "Downgrade";
-		})(exports$1.TaskAgentUpdateReasonType || (exports$1.TaskAgentUpdateReasonType = {}));
+		})(exports.TaskAgentUpdateReasonType || (exports.TaskAgentUpdateReasonType = {}));
 		(function (TaskCommandMode) {
 		    TaskCommandMode[TaskCommandMode["Any"] = 0] = "Any";
 		    TaskCommandMode[TaskCommandMode["Restricted"] = 1] = "Restricted";
-		})(exports$1.TaskCommandMode || (exports$1.TaskCommandMode = {}));
+		})(exports.TaskCommandMode || (exports.TaskCommandMode = {}));
 		(function (TaskDefinitionStatus) {
 		    TaskDefinitionStatus[TaskDefinitionStatus["Preinstalled"] = 1] = "Preinstalled";
 		    TaskDefinitionStatus[TaskDefinitionStatus["ReceivedInstallOrUpdate"] = 2] = "ReceivedInstallOrUpdate";
@@ -72316,11 +72357,11 @@ function requireTaskAgentInterfaces () {
 		    TaskDefinitionStatus[TaskDefinitionStatus["Updated"] = 7] = "Updated";
 		    TaskDefinitionStatus[TaskDefinitionStatus["AlreadyUpToDate"] = 8] = "AlreadyUpToDate";
 		    TaskDefinitionStatus[TaskDefinitionStatus["InlineUpdateReceived"] = 9] = "InlineUpdateReceived";
-		})(exports$1.TaskDefinitionStatus || (exports$1.TaskDefinitionStatus = {}));
+		})(exports.TaskDefinitionStatus || (exports.TaskDefinitionStatus = {}));
 		(function (TaskGroupExpands) {
 		    TaskGroupExpands[TaskGroupExpands["None"] = 0] = "None";
 		    TaskGroupExpands[TaskGroupExpands["Tasks"] = 2] = "Tasks";
-		})(exports$1.TaskGroupExpands || (exports$1.TaskGroupExpands = {}));
+		})(exports.TaskGroupExpands || (exports.TaskGroupExpands = {}));
 		(function (TaskGroupQueryOrder) {
 		    /**
 		     * Order by createdon ascending.
@@ -72330,17 +72371,17 @@ function requireTaskAgentInterfaces () {
 		     * Order by createdon descending.
 		     */
 		    TaskGroupQueryOrder[TaskGroupQueryOrder["CreatedOnDescending"] = 1] = "CreatedOnDescending";
-		})(exports$1.TaskGroupQueryOrder || (exports$1.TaskGroupQueryOrder = {}));
+		})(exports.TaskGroupQueryOrder || (exports.TaskGroupQueryOrder = {}));
 		(function (TaskOrchestrationItemType) {
 		    TaskOrchestrationItemType[TaskOrchestrationItemType["Container"] = 0] = "Container";
 		    TaskOrchestrationItemType[TaskOrchestrationItemType["Job"] = 1] = "Job";
-		})(exports$1.TaskOrchestrationItemType || (exports$1.TaskOrchestrationItemType = {}));
+		})(exports.TaskOrchestrationItemType || (exports.TaskOrchestrationItemType = {}));
 		(function (TaskOrchestrationPlanState) {
 		    TaskOrchestrationPlanState[TaskOrchestrationPlanState["InProgress"] = 1] = "InProgress";
 		    TaskOrchestrationPlanState[TaskOrchestrationPlanState["Queued"] = 2] = "Queued";
 		    TaskOrchestrationPlanState[TaskOrchestrationPlanState["Completed"] = 4] = "Completed";
 		    TaskOrchestrationPlanState[TaskOrchestrationPlanState["Throttled"] = 8] = "Throttled";
-		})(exports$1.TaskOrchestrationPlanState || (exports$1.TaskOrchestrationPlanState = {}));
+		})(exports.TaskOrchestrationPlanState || (exports.TaskOrchestrationPlanState = {}));
 		(function (TaskResult) {
 		    TaskResult[TaskResult["Succeeded"] = 0] = "Succeeded";
 		    TaskResult[TaskResult["SucceededWithIssues"] = 1] = "SucceededWithIssues";
@@ -72350,17 +72391,17 @@ function requireTaskAgentInterfaces () {
 		    TaskResult[TaskResult["Abandoned"] = 5] = "Abandoned";
 		    TaskResult[TaskResult["ManuallyQueued"] = 6] = "ManuallyQueued";
 		    TaskResult[TaskResult["DependentOnManualQueue"] = 7] = "DependentOnManualQueue";
-		})(exports$1.TaskResult || (exports$1.TaskResult = {}));
+		})(exports.TaskResult || (exports.TaskResult = {}));
 		(function (TimelineRecordState) {
 		    TimelineRecordState[TimelineRecordState["Pending"] = 0] = "Pending";
 		    TimelineRecordState[TimelineRecordState["InProgress"] = 1] = "InProgress";
 		    TimelineRecordState[TimelineRecordState["Completed"] = 2] = "Completed";
-		})(exports$1.TimelineRecordState || (exports$1.TimelineRecordState = {}));
+		})(exports.TimelineRecordState || (exports.TimelineRecordState = {}));
 		(function (VariableGroupActionFilter) {
 		    VariableGroupActionFilter[VariableGroupActionFilter["None"] = 0] = "None";
 		    VariableGroupActionFilter[VariableGroupActionFilter["Manage"] = 2] = "Manage";
 		    VariableGroupActionFilter[VariableGroupActionFilter["Use"] = 16] = "Use";
-		})(exports$1.VariableGroupActionFilter || (exports$1.VariableGroupActionFilter = {}));
+		})(exports.VariableGroupActionFilter || (exports.VariableGroupActionFilter = {}));
 		(function (VariableGroupQueryOrder) {
 		    /**
 		     * Order by id ascending.
@@ -72370,8 +72411,8 @@ function requireTaskAgentInterfaces () {
 		     * Order by id descending.
 		     */
 		    VariableGroupQueryOrder[VariableGroupQueryOrder["IdDescending"] = 1] = "IdDescending";
-		})(exports$1.VariableGroupQueryOrder || (exports$1.VariableGroupQueryOrder = {}));
-		exports$1.TypeInfo = {
+		})(exports.VariableGroupQueryOrder || (exports.VariableGroupQueryOrder = {}));
+		exports.TypeInfo = {
 		    AadLoginPromptOption: {
 		        enumValues: {
 		            "noOption": 0,
@@ -72872,192 +72913,192 @@ function requireTaskAgentInterfaces () {
 		    VirtualMachineResource: {},
 		    VirtualMachineResourceCreateParameters: {},
 		};
-		exports$1.TypeInfo.AgentChangeEvent.fields = {
+		exports.TypeInfo.AgentChangeEvent.fields = {
 		    agent: {
-		        typeInfo: exports$1.TypeInfo.TaskAgent
+		        typeInfo: exports.TypeInfo.TaskAgent
 		    },
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    },
 		    timeStamp: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.AgentJobRequestMessage.fields = {
+		exports.TypeInfo.AgentJobRequestMessage.fields = {
 		    environment: {
-		        typeInfo: exports$1.TypeInfo.JobEnvironment
+		        typeInfo: exports.TypeInfo.JobEnvironment
 		    },
 		    lockedUntil: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.AgentPoolEvent.fields = {
+		exports.TypeInfo.AgentPoolEvent.fields = {
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPool
+		        typeInfo: exports.TypeInfo.TaskAgentPool
 		    }
 		};
-		exports$1.TypeInfo.AgentQueueEvent.fields = {
+		exports.TypeInfo.AgentQueueEvent.fields = {
 		    queue: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentQueue
+		        typeInfo: exports.TypeInfo.TaskAgentQueue
 		    }
 		};
-		exports$1.TypeInfo.AgentQueuesEvent.fields = {
+		exports.TypeInfo.AgentQueuesEvent.fields = {
 		    queues: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TaskAgentQueue
+		        typeInfo: exports.TypeInfo.TaskAgentQueue
 		    }
 		};
-		exports$1.TypeInfo.AzureKeyVaultVariableGroupProviderData.fields = {
+		exports.TypeInfo.AzureKeyVaultVariableGroupProviderData.fields = {
 		    lastRefreshedOn: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.AzureKeyVaultVariableValue.fields = {
+		exports.TypeInfo.AzureKeyVaultVariableValue.fields = {
 		    expires: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.DemandMinimumVersion.fields = {
+		exports.TypeInfo.DemandMinimumVersion.fields = {
 		    source: {
-		        typeInfo: exports$1.TypeInfo.DemandSource
+		        typeInfo: exports.TypeInfo.DemandSource
 		    }
 		};
-		exports$1.TypeInfo.DemandSource.fields = {
+		exports.TypeInfo.DemandSource.fields = {
 		    sourceType: {
-		        enumType: exports$1.TypeInfo.DemandSourceType
+		        enumType: exports.TypeInfo.DemandSourceType
 		    }
 		};
-		exports$1.TypeInfo.DeploymentGroup.fields = {
+		exports.TypeInfo.DeploymentGroup.fields = {
 		    machines: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeploymentMachine
+		        typeInfo: exports.TypeInfo.DeploymentMachine
 		    },
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    }
 		};
-		exports$1.TypeInfo.DeploymentGroupMetrics.fields = {
+		exports.TypeInfo.DeploymentGroupMetrics.fields = {
 		    deploymentGroup: {
-		        typeInfo: exports$1.TypeInfo.DeploymentGroupReference
+		        typeInfo: exports.TypeInfo.DeploymentGroupReference
 		    }
 		};
-		exports$1.TypeInfo.DeploymentGroupReference.fields = {
+		exports.TypeInfo.DeploymentGroupReference.fields = {
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    }
 		};
-		exports$1.TypeInfo.DeploymentMachine.fields = {
+		exports.TypeInfo.DeploymentMachine.fields = {
 		    agent: {
-		        typeInfo: exports$1.TypeInfo.TaskAgent
+		        typeInfo: exports.TypeInfo.TaskAgent
 		    }
 		};
-		exports$1.TypeInfo.DeploymentMachineChangedData.fields = {
+		exports.TypeInfo.DeploymentMachineChangedData.fields = {
 		    agent: {
-		        typeInfo: exports$1.TypeInfo.TaskAgent
+		        typeInfo: exports.TypeInfo.TaskAgent
 		    }
 		};
-		exports$1.TypeInfo.DeploymentMachineGroup.fields = {
+		exports.TypeInfo.DeploymentMachineGroup.fields = {
 		    machines: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeploymentMachine
+		        typeInfo: exports.TypeInfo.DeploymentMachine
 		    },
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    }
 		};
-		exports$1.TypeInfo.DeploymentMachineGroupReference.fields = {
+		exports.TypeInfo.DeploymentMachineGroupReference.fields = {
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    }
 		};
-		exports$1.TypeInfo.DeploymentMachinesChangeEvent.fields = {
+		exports.TypeInfo.DeploymentMachinesChangeEvent.fields = {
 		    machineGroupReference: {
-		        typeInfo: exports$1.TypeInfo.DeploymentGroupReference
+		        typeInfo: exports.TypeInfo.DeploymentGroupReference
 		    },
 		    machines: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeploymentMachineChangedData
+		        typeInfo: exports.TypeInfo.DeploymentMachineChangedData
 		    }
 		};
-		exports$1.TypeInfo.DeploymentPoolSummary.fields = {
+		exports.TypeInfo.DeploymentPoolSummary.fields = {
 		    deploymentGroups: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeploymentGroupReference
+		        typeInfo: exports.TypeInfo.DeploymentGroupReference
 		    },
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    },
 		    resource: {
-		        typeInfo: exports$1.TypeInfo.EnvironmentResourceReference
+		        typeInfo: exports.TypeInfo.EnvironmentResourceReference
 		    }
 		};
-		exports$1.TypeInfo.ElasticNode.fields = {
+		exports.TypeInfo.ElasticNode.fields = {
 		    agentState: {
-		        enumType: exports$1.TypeInfo.ElasticAgentState
+		        enumType: exports.TypeInfo.ElasticAgentState
 		    },
 		    computeState: {
-		        enumType: exports$1.TypeInfo.ElasticComputeState
+		        enumType: exports.TypeInfo.ElasticComputeState
 		    },
 		    desiredState: {
-		        enumType: exports$1.TypeInfo.ElasticNodeState
+		        enumType: exports.TypeInfo.ElasticNodeState
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.ElasticNodeState
+		        enumType: exports.TypeInfo.ElasticNodeState
 		    },
 		    stateChangedOn: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ElasticNodeSettings.fields = {
+		exports.TypeInfo.ElasticNodeSettings.fields = {
 		    state: {
-		        enumType: exports$1.TypeInfo.ElasticNodeState
+		        enumType: exports.TypeInfo.ElasticNodeState
 		    }
 		};
-		exports$1.TypeInfo.ElasticPool.fields = {
+		exports.TypeInfo.ElasticPool.fields = {
 		    offlineSince: {
 		        isDate: true,
 		    },
 		    orchestrationType: {
-		        enumType: exports$1.TypeInfo.OrchestrationType
+		        enumType: exports.TypeInfo.OrchestrationType
 		    },
 		    osType: {
-		        enumType: exports$1.TypeInfo.OperatingSystemType
+		        enumType: exports.TypeInfo.OperatingSystemType
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.ElasticPoolState
+		        enumType: exports.TypeInfo.ElasticPoolState
 		    }
 		};
-		exports$1.TypeInfo.ElasticPoolCreationResult.fields = {
+		exports.TypeInfo.ElasticPoolCreationResult.fields = {
 		    agentPool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPool
+		        typeInfo: exports.TypeInfo.TaskAgentPool
 		    },
 		    agentQueue: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentQueue
+		        typeInfo: exports.TypeInfo.TaskAgentQueue
 		    },
 		    elasticPool: {
-		        typeInfo: exports$1.TypeInfo.ElasticPool
+		        typeInfo: exports.TypeInfo.ElasticPool
 		    }
 		};
-		exports$1.TypeInfo.ElasticPoolLog.fields = {
+		exports.TypeInfo.ElasticPoolLog.fields = {
 		    level: {
-		        enumType: exports$1.TypeInfo.LogLevel
+		        enumType: exports.TypeInfo.LogLevel
 		    },
 		    operation: {
-		        enumType: exports$1.TypeInfo.OperationType
+		        enumType: exports.TypeInfo.OperationType
 		    },
 		    timestamp: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ElasticPoolSettings.fields = {
+		exports.TypeInfo.ElasticPoolSettings.fields = {
 		    orchestrationType: {
-		        enumType: exports$1.TypeInfo.OrchestrationType
+		        enumType: exports.TypeInfo.OrchestrationType
 		    },
 		    osType: {
-		        enumType: exports$1.TypeInfo.OperatingSystemType
+		        enumType: exports.TypeInfo.OperatingSystemType
 		    }
 		};
-		exports$1.TypeInfo.EnvironmentDeploymentExecutionRecord.fields = {
+		exports.TypeInfo.EnvironmentDeploymentExecutionRecord.fields = {
 		    finishTime: {
 		        isDate: true,
 		    },
@@ -73065,13 +73106,13 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskResult
+		        enumType: exports.TypeInfo.TaskResult
 		    },
 		    startTime: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.EnvironmentInstance.fields = {
+		exports.TypeInfo.EnvironmentInstance.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -73080,10 +73121,10 @@ function requireTaskAgentInterfaces () {
 		    },
 		    resources: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.EnvironmentResourceReference
+		        typeInfo: exports.TypeInfo.EnvironmentResourceReference
 		    }
 		};
-		exports$1.TypeInfo.EnvironmentResource.fields = {
+		exports.TypeInfo.EnvironmentResource.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -73091,63 +73132,63 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.EnvironmentResourceType
+		        enumType: exports.TypeInfo.EnvironmentResourceType
 		    }
 		};
-		exports$1.TypeInfo.EnvironmentResourceDeploymentExecutionRecord.fields = {
+		exports.TypeInfo.EnvironmentResourceDeploymentExecutionRecord.fields = {
 		    finishTime: {
 		        isDate: true,
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskResult
+		        enumType: exports.TypeInfo.TaskResult
 		    },
 		    startTime: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.EnvironmentResourceReference.fields = {
+		exports.TypeInfo.EnvironmentResourceReference.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.EnvironmentResourceType
+		        enumType: exports.TypeInfo.EnvironmentResourceType
 		    }
 		};
-		exports$1.TypeInfo.Issue.fields = {
+		exports.TypeInfo.Issue.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.IssueType
+		        enumType: exports.TypeInfo.IssueType
 		    }
 		};
-		exports$1.TypeInfo.JobAssignedEvent.fields = {
+		exports.TypeInfo.JobAssignedEvent.fields = {
 		    request: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentJobRequest
+		        typeInfo: exports.TypeInfo.TaskAgentJobRequest
 		    }
 		};
-		exports$1.TypeInfo.JobCompletedEvent.fields = {
+		exports.TypeInfo.JobCompletedEvent.fields = {
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskResult
+		        enumType: exports.TypeInfo.TaskResult
 		    }
 		};
-		exports$1.TypeInfo.JobEnvironment.fields = {
+		exports.TypeInfo.JobEnvironment.fields = {
 		    endpoints: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ServiceEndpoint
+		        typeInfo: exports.TypeInfo.ServiceEndpoint
 		    },
 		    mask: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.MaskHint
+		        typeInfo: exports.TypeInfo.MaskHint
 		    },
 		    secureFiles: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.SecureFile
+		        typeInfo: exports.TypeInfo.SecureFile
 		    },
 		    systemConnection: {
-		        typeInfo: exports$1.TypeInfo.ServiceEndpoint
+		        typeInfo: exports.TypeInfo.ServiceEndpoint
 		    }
 		};
-		exports$1.TypeInfo.JobRequestMessage.fields = {
+		exports.TypeInfo.JobRequestMessage.fields = {
 		    environment: {
-		        typeInfo: exports$1.TypeInfo.JobEnvironment
+		        typeInfo: exports.TypeInfo.JobEnvironment
 		    }
 		};
-		exports$1.TypeInfo.KubernetesResource.fields = {
+		exports.TypeInfo.KubernetesResource.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -73155,31 +73196,31 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.EnvironmentResourceType
+		        enumType: exports.TypeInfo.EnvironmentResourceType
 		    }
 		};
-		exports$1.TypeInfo.KubernetesResourceCreateParametersNewEndpoint.fields = {
+		exports.TypeInfo.KubernetesResourceCreateParametersNewEndpoint.fields = {
 		    endpoint: {
-		        typeInfo: exports$1.TypeInfo.ServiceEndpoint
+		        typeInfo: exports.TypeInfo.ServiceEndpoint
 		    }
 		};
-		exports$1.TypeInfo.MaskHint.fields = {
+		exports.TypeInfo.MaskHint.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.MaskType
+		        enumType: exports.TypeInfo.MaskType
 		    }
 		};
-		exports$1.TypeInfo.PackageMetadata.fields = {
+		exports.TypeInfo.PackageMetadata.fields = {
 		    createdOn: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.PlanEnvironment.fields = {
+		exports.TypeInfo.PlanEnvironment.fields = {
 		    mask: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.MaskHint
+		        typeInfo: exports.TypeInfo.MaskHint
 		    }
 		};
-		exports$1.TypeInfo.ResourceLockRequest.fields = {
+		exports.TypeInfo.ResourceLockRequest.fields = {
 		    assignTime: {
 		        isDate: true,
 		    },
@@ -73187,22 +73228,22 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    },
 		    lockType: {
-		        enumType: exports$1.TypeInfo.ExclusiveLockType
+		        enumType: exports.TypeInfo.ExclusiveLockType
 		    },
 		    queueTime: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.ResourceLockStatus
+		        enumType: exports.TypeInfo.ResourceLockStatus
 		    }
 		};
-		exports$1.TypeInfo.ResourceUsage.fields = {
+		exports.TypeInfo.ResourceUsage.fields = {
 		    runningRequests: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TaskAgentJobRequest
+		        typeInfo: exports.TypeInfo.TaskAgentJobRequest
 		    }
 		};
-		exports$1.TypeInfo.SecureFile.fields = {
+		exports.TypeInfo.SecureFile.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -73210,21 +73251,21 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.SecureFileEvent.fields = {
+		exports.TypeInfo.SecureFileEvent.fields = {
 		    secureFiles: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.SecureFile
+		        typeInfo: exports.TypeInfo.SecureFile
 		    }
 		};
-		exports$1.TypeInfo.ServerTaskRequestMessage.fields = {
+		exports.TypeInfo.ServerTaskRequestMessage.fields = {
 		    environment: {
-		        typeInfo: exports$1.TypeInfo.JobEnvironment
+		        typeInfo: exports.TypeInfo.JobEnvironment
 		    },
 		    taskDefinition: {
-		        typeInfo: exports$1.TypeInfo.TaskDefinition
+		        typeInfo: exports.TypeInfo.TaskDefinition
 		    }
 		};
-		exports$1.TypeInfo.ServiceEndpoint.fields = {
+		exports.TypeInfo.ServiceEndpoint.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
@@ -73232,76 +73273,76 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ServiceEndpointAuthenticationScheme.fields = {
+		exports.TypeInfo.ServiceEndpointAuthenticationScheme.fields = {
 		    inputDescriptors: {
 		        isArray: true,
 		        typeInfo: FormInputInterfaces.TypeInfo.InputDescriptor
 		    }
 		};
-		exports$1.TypeInfo.ServiceEndpointExecutionData.fields = {
+		exports.TypeInfo.ServiceEndpointExecutionData.fields = {
 		    finishTime: {
 		        isDate: true,
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskResult
+		        enumType: exports.TypeInfo.TaskResult
 		    },
 		    startTime: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ServiceEndpointExecutionRecord.fields = {
+		exports.TypeInfo.ServiceEndpointExecutionRecord.fields = {
 		    data: {
-		        typeInfo: exports$1.TypeInfo.ServiceEndpointExecutionData
+		        typeInfo: exports.TypeInfo.ServiceEndpointExecutionData
 		    }
 		};
-		exports$1.TypeInfo.ServiceEndpointExecutionRecordsInput.fields = {
+		exports.TypeInfo.ServiceEndpointExecutionRecordsInput.fields = {
 		    data: {
-		        typeInfo: exports$1.TypeInfo.ServiceEndpointExecutionData
+		        typeInfo: exports.TypeInfo.ServiceEndpointExecutionData
 		    }
 		};
-		exports$1.TypeInfo.ServiceEndpointRequestResult.fields = {};
-		exports$1.TypeInfo.ServiceEndpointType.fields = {
+		exports.TypeInfo.ServiceEndpointRequestResult.fields = {};
+		exports.TypeInfo.ServiceEndpointType.fields = {
 		    authenticationSchemes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.ServiceEndpointAuthenticationScheme
+		        typeInfo: exports.TypeInfo.ServiceEndpointAuthenticationScheme
 		    },
 		    inputDescriptors: {
 		        isArray: true,
 		        typeInfo: FormInputInterfaces.TypeInfo.InputDescriptor
 		    }
 		};
-		exports$1.TypeInfo.TaskAgent.fields = {
+		exports.TypeInfo.TaskAgent.fields = {
 		    assignedAgentCloudRequest: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentCloudRequest
+		        typeInfo: exports.TypeInfo.TaskAgentCloudRequest
 		    },
 		    assignedRequest: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentJobRequest
+		        typeInfo: exports.TypeInfo.TaskAgentJobRequest
 		    },
 		    createdOn: {
 		        isDate: true,
 		    },
 		    lastCompletedRequest: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentJobRequest
+		        typeInfo: exports.TypeInfo.TaskAgentJobRequest
 		    },
 		    pendingUpdate: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentUpdate
+		        typeInfo: exports.TypeInfo.TaskAgentUpdate
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.TaskAgentStatus
+		        enumType: exports.TypeInfo.TaskAgentStatus
 		    },
 		    statusChangedOn: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentCloudRequest.fields = {
+		exports.TypeInfo.TaskAgentCloudRequest.fields = {
 		    agent: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentReference
+		        typeInfo: exports.TypeInfo.TaskAgentReference
 		    },
 		    agentConnectedTime: {
 		        isDate: true,
 		    },
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    },
 		    provisionedTime: {
 		        isDate: true,
@@ -73313,24 +73354,24 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentCloudType.fields = {
+		exports.TypeInfo.TaskAgentCloudType.fields = {
 		    inputDescriptors: {
 		        isArray: true,
 		        typeInfo: FormInputInterfaces.TypeInfo.InputDescriptor
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentDowngrade.fields = {
+		exports.TypeInfo.TaskAgentDowngrade.fields = {
 		    code: {
-		        enumType: exports$1.TypeInfo.TaskAgentUpdateReasonType
+		        enumType: exports.TypeInfo.TaskAgentUpdateReasonType
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentJob.fields = {
+		exports.TypeInfo.TaskAgentJob.fields = {
 		    steps: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TaskAgentJobStep
+		        typeInfo: exports.TypeInfo.TaskAgentJobStep
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentJobRequest.fields = {
+		exports.TypeInfo.TaskAgentJobRequest.fields = {
 		    assignTime: {
 		        isDate: true,
 		    },
@@ -73342,7 +73383,7 @@ function requireTaskAgentInterfaces () {
 		    },
 		    matchedAgents: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TaskAgentReference
+		        typeInfo: exports.TypeInfo.TaskAgentReference
 		    },
 		    queueTime: {
 		        isDate: true,
@@ -73351,144 +73392,144 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    },
 		    reservedAgent: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentReference
+		        typeInfo: exports.TypeInfo.TaskAgentReference
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskResult
+		        enumType: exports.TypeInfo.TaskResult
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentJobStep.fields = {
+		exports.TypeInfo.TaskAgentJobStep.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.TaskAgentJobStepType
+		        enumType: exports.TypeInfo.TaskAgentJobStepType
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentManualUpdate.fields = {
+		exports.TypeInfo.TaskAgentManualUpdate.fields = {
 		    code: {
-		        enumType: exports$1.TypeInfo.TaskAgentUpdateReasonType
+		        enumType: exports.TypeInfo.TaskAgentUpdateReasonType
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentMinAgentVersionRequiredUpdate.fields = {
+		exports.TypeInfo.TaskAgentMinAgentVersionRequiredUpdate.fields = {
 		    code: {
-		        enumType: exports$1.TypeInfo.TaskAgentUpdateReasonType
+		        enumType: exports.TypeInfo.TaskAgentUpdateReasonType
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentPool.fields = {
+		exports.TypeInfo.TaskAgentPool.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
 		    options: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolOptions
+		        enumType: exports.TypeInfo.TaskAgentPoolOptions
 		    },
 		    poolType: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolType
+		        enumType: exports.TypeInfo.TaskAgentPoolType
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentPoolMaintenanceDefinition.fields = {
+		exports.TypeInfo.TaskAgentPoolMaintenanceDefinition.fields = {
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    },
 		    scheduleSetting: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolMaintenanceSchedule
+		        typeInfo: exports.TypeInfo.TaskAgentPoolMaintenanceSchedule
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentPoolMaintenanceJob.fields = {
+		exports.TypeInfo.TaskAgentPoolMaintenanceJob.fields = {
 		    finishTime: {
 		        isDate: true,
 		    },
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    },
 		    queueTime: {
 		        isDate: true,
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolMaintenanceJobResult
+		        enumType: exports.TypeInfo.TaskAgentPoolMaintenanceJobResult
 		    },
 		    startTime: {
 		        isDate: true,
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolMaintenanceJobStatus
+		        enumType: exports.TypeInfo.TaskAgentPoolMaintenanceJobStatus
 		    },
 		    targetAgents: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolMaintenanceJobTargetAgent
+		        typeInfo: exports.TypeInfo.TaskAgentPoolMaintenanceJobTargetAgent
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentPoolMaintenanceJobTargetAgent.fields = {
+		exports.TypeInfo.TaskAgentPoolMaintenanceJobTargetAgent.fields = {
 		    agent: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentReference
+		        typeInfo: exports.TypeInfo.TaskAgentReference
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolMaintenanceJobResult
+		        enumType: exports.TypeInfo.TaskAgentPoolMaintenanceJobResult
 		    },
 		    status: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolMaintenanceJobStatus
+		        enumType: exports.TypeInfo.TaskAgentPoolMaintenanceJobStatus
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentPoolMaintenanceSchedule.fields = {
+		exports.TypeInfo.TaskAgentPoolMaintenanceSchedule.fields = {
 		    daysToBuild: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolMaintenanceScheduleDays
+		        enumType: exports.TypeInfo.TaskAgentPoolMaintenanceScheduleDays
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentPoolReference.fields = {
+		exports.TypeInfo.TaskAgentPoolReference.fields = {
 		    options: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolOptions
+		        enumType: exports.TypeInfo.TaskAgentPoolOptions
 		    },
 		    poolType: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolType
+		        enumType: exports.TypeInfo.TaskAgentPoolType
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentPoolStatus.fields = {
+		exports.TypeInfo.TaskAgentPoolStatus.fields = {
 		    options: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolOptions
+		        enumType: exports.TypeInfo.TaskAgentPoolOptions
 		    },
 		    poolType: {
-		        enumType: exports$1.TypeInfo.TaskAgentPoolType
+		        enumType: exports.TypeInfo.TaskAgentPoolType
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentPoolSummary.fields = {
+		exports.TypeInfo.TaskAgentPoolSummary.fields = {
 		    deploymentGroups: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DeploymentGroupReference
+		        typeInfo: exports.TypeInfo.DeploymentGroupReference
 		    },
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    },
 		    queues: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TaskAgentQueue
+		        typeInfo: exports.TypeInfo.TaskAgentQueue
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentQueue.fields = {
+		exports.TypeInfo.TaskAgentQueue.fields = {
 		    pool: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentPoolReference
+		        typeInfo: exports.TypeInfo.TaskAgentPoolReference
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentReference.fields = {
+		exports.TypeInfo.TaskAgentReference.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.TaskAgentStatus
+		        enumType: exports.TypeInfo.TaskAgentStatus
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentSession.fields = {
+		exports.TypeInfo.TaskAgentSession.fields = {
 		    agent: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentReference
+		        typeInfo: exports.TypeInfo.TaskAgentReference
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentUpdate.fields = {
+		exports.TypeInfo.TaskAgentUpdate.fields = {
 		    reason: {
-		        typeInfo: exports$1.TypeInfo.TaskAgentUpdateReason
+		        typeInfo: exports.TypeInfo.TaskAgentUpdateReason
 		    },
 		    requestTime: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TaskAgentUpdateReason.fields = {
+		exports.TypeInfo.TaskAgentUpdateReason.fields = {
 		    code: {
-		        enumType: exports$1.TypeInfo.TaskAgentUpdateReasonType
+		        enumType: exports.TypeInfo.TaskAgentUpdateReasonType
 		    }
 		};
-		exports$1.TypeInfo.TaskAttachment.fields = {
+		exports.TypeInfo.TaskAttachment.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -73496,22 +73537,22 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TaskCommandRestrictions.fields = {
+		exports.TypeInfo.TaskCommandRestrictions.fields = {
 		    mode: {
-		        enumType: exports$1.TypeInfo.TaskCommandMode
+		        enumType: exports.TypeInfo.TaskCommandMode
 		    }
 		};
-		exports$1.TypeInfo.TaskCompletedEvent.fields = {
+		exports.TypeInfo.TaskCompletedEvent.fields = {
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskResult
+		        enumType: exports.TypeInfo.TaskResult
 		    }
 		};
-		exports$1.TypeInfo.TaskDefinition.fields = {
+		exports.TypeInfo.TaskDefinition.fields = {
 		    restrictions: {
-		        typeInfo: exports$1.TypeInfo.TaskRestrictions
+		        typeInfo: exports.TypeInfo.TaskRestrictions
 		    }
 		};
-		exports$1.TypeInfo.TaskGroup.fields = {
+		exports.TypeInfo.TaskGroup.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -73519,18 +73560,18 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    },
 		    restrictions: {
-		        typeInfo: exports$1.TypeInfo.TaskRestrictions
+		        typeInfo: exports.TypeInfo.TaskRestrictions
 		    }
 		};
-		exports$1.TypeInfo.TaskGroupRevision.fields = {
+		exports.TypeInfo.TaskGroupRevision.fields = {
 		    changedDate: {
 		        isDate: true,
 		    },
 		    changeType: {
-		        enumType: exports$1.TypeInfo.AuditAction
+		        enumType: exports.TypeInfo.AuditAction
 		    }
 		};
-		exports$1.TypeInfo.TaskLog.fields = {
+		exports.TypeInfo.TaskLog.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -73538,60 +73579,60 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TaskOrchestrationContainer.fields = {
+		exports.TypeInfo.TaskOrchestrationContainer.fields = {
 		    children: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TaskOrchestrationItem
+		        typeInfo: exports.TypeInfo.TaskOrchestrationItem
 		    },
 		    itemType: {
-		        enumType: exports$1.TypeInfo.TaskOrchestrationItemType
+		        enumType: exports.TypeInfo.TaskOrchestrationItemType
 		    },
 		    rollback: {
-		        typeInfo: exports$1.TypeInfo.TaskOrchestrationContainer
+		        typeInfo: exports.TypeInfo.TaskOrchestrationContainer
 		    }
 		};
-		exports$1.TypeInfo.TaskOrchestrationItem.fields = {
+		exports.TypeInfo.TaskOrchestrationItem.fields = {
 		    itemType: {
-		        enumType: exports$1.TypeInfo.TaskOrchestrationItemType
+		        enumType: exports.TypeInfo.TaskOrchestrationItemType
 		    }
 		};
-		exports$1.TypeInfo.TaskOrchestrationJob.fields = {
+		exports.TypeInfo.TaskOrchestrationJob.fields = {
 		    itemType: {
-		        enumType: exports$1.TypeInfo.TaskOrchestrationItemType
+		        enumType: exports.TypeInfo.TaskOrchestrationItemType
 		    }
 		};
-		exports$1.TypeInfo.TaskOrchestrationPlan.fields = {
+		exports.TypeInfo.TaskOrchestrationPlan.fields = {
 		    environment: {
-		        typeInfo: exports$1.TypeInfo.PlanEnvironment
+		        typeInfo: exports.TypeInfo.PlanEnvironment
 		    },
 		    finishTime: {
 		        isDate: true,
 		    },
 		    implementation: {
-		        typeInfo: exports$1.TypeInfo.TaskOrchestrationContainer
+		        typeInfo: exports.TypeInfo.TaskOrchestrationContainer
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskResult
+		        enumType: exports.TypeInfo.TaskResult
 		    },
 		    startTime: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.TaskOrchestrationPlanState
+		        enumType: exports.TypeInfo.TaskOrchestrationPlanState
 		    }
 		};
-		exports$1.TypeInfo.TaskOrchestrationPlanGroup.fields = {
+		exports.TypeInfo.TaskOrchestrationPlanGroup.fields = {
 		    runningRequests: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TaskAgentJobRequest
+		        typeInfo: exports.TypeInfo.TaskAgentJobRequest
 		    }
 		};
-		exports$1.TypeInfo.TaskOrchestrationPlanGroupsQueueMetrics.fields = {
+		exports.TypeInfo.TaskOrchestrationPlanGroupsQueueMetrics.fields = {
 		    status: {
-		        enumType: exports$1.TypeInfo.PlanGroupStatus
+		        enumType: exports.TypeInfo.PlanGroupStatus
 		    }
 		};
-		exports$1.TypeInfo.TaskOrchestrationQueuedPlan.fields = {
+		exports.TypeInfo.TaskOrchestrationQueuedPlan.fields = {
 		    assignTime: {
 		        isDate: true,
 		    },
@@ -73599,53 +73640,53 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TaskOrchestrationQueuedPlanGroup.fields = {
+		exports.TypeInfo.TaskOrchestrationQueuedPlanGroup.fields = {
 		    plans: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TaskOrchestrationQueuedPlan
+		        typeInfo: exports.TypeInfo.TaskOrchestrationQueuedPlan
 		    }
 		};
-		exports$1.TypeInfo.TaskRestrictions.fields = {
+		exports.TypeInfo.TaskRestrictions.fields = {
 		    commands: {
-		        typeInfo: exports$1.TypeInfo.TaskCommandRestrictions
+		        typeInfo: exports.TypeInfo.TaskCommandRestrictions
 		    }
 		};
-		exports$1.TypeInfo.Timeline.fields = {
+		exports.TypeInfo.Timeline.fields = {
 		    lastChangedOn: {
 		        isDate: true,
 		    },
 		    records: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TimelineRecord
+		        typeInfo: exports.TypeInfo.TimelineRecord
 		    }
 		};
-		exports$1.TypeInfo.TimelineRecord.fields = {
+		exports.TypeInfo.TimelineRecord.fields = {
 		    finishTime: {
 		        isDate: true,
 		    },
 		    issues: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Issue
+		        typeInfo: exports.TypeInfo.Issue
 		    },
 		    lastModified: {
 		        isDate: true,
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.TaskResult
+		        enumType: exports.TypeInfo.TaskResult
 		    },
 		    startTime: {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.TimelineRecordState
+		        enumType: exports.TypeInfo.TimelineRecordState
 		    }
 		};
-		exports$1.TypeInfo.TimelineRecordReference.fields = {
+		exports.TypeInfo.TimelineRecordReference.fields = {
 		    state: {
-		        enumType: exports$1.TypeInfo.TimelineRecordState
+		        enumType: exports.TypeInfo.TimelineRecordState
 		    }
 		};
-		exports$1.TypeInfo.VariableGroup.fields = {
+		exports.TypeInfo.VariableGroup.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -73653,12 +73694,12 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.VirtualMachine.fields = {
+		exports.TypeInfo.VirtualMachine.fields = {
 		    agent: {
-		        typeInfo: exports$1.TypeInfo.TaskAgent
+		        typeInfo: exports.TypeInfo.TaskAgent
 		    }
 		};
-		exports$1.TypeInfo.VirtualMachineGroup.fields = {
+		exports.TypeInfo.VirtualMachineGroup.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -73666,12 +73707,12 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.EnvironmentResourceType
+		        enumType: exports.TypeInfo.EnvironmentResourceType
 		    }
 		};
-		exports$1.TypeInfo.VirtualMachineResource.fields = {
+		exports.TypeInfo.VirtualMachineResource.fields = {
 		    agent: {
-		        typeInfo: exports$1.TypeInfo.TaskAgent
+		        typeInfo: exports.TypeInfo.TaskAgent
 		    },
 		    createdOn: {
 		        isDate: true,
@@ -73680,12 +73721,12 @@ function requireTaskAgentInterfaces () {
 		        isDate: true,
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.EnvironmentResourceType
+		        enumType: exports.TypeInfo.EnvironmentResourceType
 		    }
 		};
-		exports$1.TypeInfo.VirtualMachineResourceCreateParameters.fields = {
+		exports.TypeInfo.VirtualMachineResourceCreateParameters.fields = {
 		    virtualMachineResource: {
-		        typeInfo: exports$1.TypeInfo.VirtualMachineResource
+		        typeInfo: exports.TypeInfo.VirtualMachineResource
 		    }
 		}; 
 	} (TaskAgentInterfaces));
@@ -82002,9 +82043,9 @@ var hasRequiredTestPlanInterfaces;
 function requireTestPlanInterfaces () {
 	if (hasRequiredTestPlanInterfaces) return TestPlanInterfaces;
 	hasRequiredTestPlanInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.UserFriendlyTestOutcome = exports$1.TestSuiteType = exports$1.TestPlansLibraryWorkItemFilterMode = exports$1.TestPlansLibraryQuery = exports$1.TestEntityTypes = exports$1.SuiteExpand = exports$1.SuiteEntryTypes = exports$1.ResultState = exports$1.PointState = exports$1.Outcome = exports$1.LibraryTestCasesDataReturnCode = exports$1.LastResolutionState = exports$1.FailureType = exports$1.ExcludeFlags = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.UserFriendlyTestOutcome = exports.TestSuiteType = exports.TestPlansLibraryWorkItemFilterMode = exports.TestPlansLibraryQuery = exports.TestEntityTypes = exports.SuiteExpand = exports.SuiteEntryTypes = exports.ResultState = exports.PointState = exports.Outcome = exports.LibraryTestCasesDataReturnCode = exports.LastResolutionState = exports.FailureType = exports.ExcludeFlags = void 0;
 		const TFS_TestManagement_Contracts = requireTestInterfaces();
 		const TfsCoreInterfaces = requireCoreInterfaces();
 		(function (ExcludeFlags) {
@@ -82020,7 +82061,7 @@ function requireTestPlanInterfaces () {
 		     * To exclude extra information (links, test plan, test suite), pass exclude = 2
 		     */
 		    ExcludeFlags[ExcludeFlags["ExtraInformation"] = 2] = "ExtraInformation";
-		})(exports$1.ExcludeFlags || (exports$1.ExcludeFlags = {}));
+		})(exports.ExcludeFlags || (exports.ExcludeFlags = {}));
 		(function (FailureType) {
 		    FailureType[FailureType["None"] = 0] = "None";
 		    FailureType[FailureType["Regression"] = 1] = "Regression";
@@ -82029,7 +82070,7 @@ function requireTestPlanInterfaces () {
 		    FailureType[FailureType["Unknown"] = 4] = "Unknown";
 		    FailureType[FailureType["Null_Value"] = 5] = "Null_Value";
 		    FailureType[FailureType["MaxValue"] = 5] = "MaxValue";
-		})(exports$1.FailureType || (exports$1.FailureType = {}));
+		})(exports.FailureType || (exports.FailureType = {}));
 		(function (LastResolutionState) {
 		    LastResolutionState[LastResolutionState["None"] = 0] = "None";
 		    LastResolutionState[LastResolutionState["NeedsInvestigation"] = 1] = "NeedsInvestigation";
@@ -82038,11 +82079,11 @@ function requireTestPlanInterfaces () {
 		    LastResolutionState[LastResolutionState["ConfigurationIssue"] = 4] = "ConfigurationIssue";
 		    LastResolutionState[LastResolutionState["NullValue"] = 5] = "NullValue";
 		    LastResolutionState[LastResolutionState["MaxValue"] = 5] = "MaxValue";
-		})(exports$1.LastResolutionState || (exports$1.LastResolutionState = {}));
+		})(exports.LastResolutionState || (exports.LastResolutionState = {}));
 		(function (LibraryTestCasesDataReturnCode) {
 		    LibraryTestCasesDataReturnCode[LibraryTestCasesDataReturnCode["Success"] = 0] = "Success";
 		    LibraryTestCasesDataReturnCode[LibraryTestCasesDataReturnCode["Error"] = 1] = "Error";
-		})(exports$1.LibraryTestCasesDataReturnCode || (exports$1.LibraryTestCasesDataReturnCode = {}));
+		})(exports.LibraryTestCasesDataReturnCode || (exports.LibraryTestCasesDataReturnCode = {}));
 		(function (Outcome) {
 		    /**
 		     * Only used during an update to preserve the existing value.
@@ -82105,7 +82146,7 @@ function requireTestPlanInterfaces () {
 		     */
 		    Outcome[Outcome["NotImpacted"] = 14] = "NotImpacted";
 		    Outcome[Outcome["MaxValue"] = 14] = "MaxValue";
-		})(exports$1.Outcome || (exports$1.Outcome = {}));
+		})(exports.Outcome || (exports.Outcome = {}));
 		(function (PointState) {
 		    /**
 		     * Default
@@ -82128,7 +82169,7 @@ function requireTestPlanInterfaces () {
 		     */
 		    PointState[PointState["InProgress"] = 4] = "InProgress";
 		    PointState[PointState["MaxValue"] = 4] = "MaxValue";
-		})(exports$1.PointState || (exports$1.PointState = {}));
+		})(exports.PointState || (exports.PointState = {}));
 		(function (ResultState) {
 		    /**
 		     * Only used during an update to preserve the existing value.
@@ -82155,7 +82196,7 @@ function requireTestPlanInterfaces () {
 		     */
 		    ResultState[ResultState["Completed"] = 5] = "Completed";
 		    ResultState[ResultState["MaxValue"] = 5] = "MaxValue";
-		})(exports$1.ResultState || (exports$1.ResultState = {}));
+		})(exports.ResultState || (exports.ResultState = {}));
 		(function (SuiteEntryTypes) {
 		    /**
 		     * Test Case
@@ -82165,7 +82206,7 @@ function requireTestPlanInterfaces () {
 		     * Child Suite
 		     */
 		    SuiteEntryTypes[SuiteEntryTypes["Suite"] = 1] = "Suite";
-		})(exports$1.SuiteEntryTypes || (exports$1.SuiteEntryTypes = {}));
+		})(exports.SuiteEntryTypes || (exports.SuiteEntryTypes = {}));
 		(function (SuiteExpand) {
 		    /**
 		     * Dont include any of the expansions in output.
@@ -82179,11 +82220,11 @@ function requireTestPlanInterfaces () {
 		     * Include default testers in response.
 		     */
 		    SuiteExpand[SuiteExpand["DefaultTesters"] = 2] = "DefaultTesters";
-		})(exports$1.SuiteExpand || (exports$1.SuiteExpand = {}));
+		})(exports.SuiteExpand || (exports.SuiteExpand = {}));
 		(function (TestEntityTypes) {
 		    TestEntityTypes[TestEntityTypes["TestCase"] = 0] = "TestCase";
 		    TestEntityTypes[TestEntityTypes["TestPoint"] = 1] = "TestPoint";
-		})(exports$1.TestEntityTypes || (exports$1.TestEntityTypes = {}));
+		})(exports.TestEntityTypes || (exports.TestEntityTypes = {}));
 		(function (TestPlansLibraryQuery) {
 		    TestPlansLibraryQuery[TestPlansLibraryQuery["None"] = 0] = "None";
 		    TestPlansLibraryQuery[TestPlansLibraryQuery["AllTestCases"] = 1] = "AllTestCases";
@@ -82192,7 +82233,7 @@ function requireTestPlanInterfaces () {
 		    TestPlansLibraryQuery[TestPlansLibraryQuery["TestCasesLinkedToRequirements"] = 4] = "TestCasesLinkedToRequirements";
 		    TestPlansLibraryQuery[TestPlansLibraryQuery["AllSharedSteps"] = 11] = "AllSharedSteps";
 		    TestPlansLibraryQuery[TestPlansLibraryQuery["SharedStepsNotLinkedToRequirement"] = 12] = "SharedStepsNotLinkedToRequirement";
-		})(exports$1.TestPlansLibraryQuery || (exports$1.TestPlansLibraryQuery = {}));
+		})(exports.TestPlansLibraryQuery || (exports.TestPlansLibraryQuery = {}));
 		(function (TestPlansLibraryWorkItemFilterMode) {
 		    /**
 		     * Default. Have the field values separated by an OR clause.
@@ -82202,7 +82243,7 @@ function requireTestPlanInterfaces () {
 		     * Have the field values separated by an AND clause.
 		     */
 		    TestPlansLibraryWorkItemFilterMode[TestPlansLibraryWorkItemFilterMode["And"] = 1] = "And";
-		})(exports$1.TestPlansLibraryWorkItemFilterMode || (exports$1.TestPlansLibraryWorkItemFilterMode = {}));
+		})(exports.TestPlansLibraryWorkItemFilterMode || (exports.TestPlansLibraryWorkItemFilterMode = {}));
 		(function (TestSuiteType) {
 		    /**
 		     * Default suite type
@@ -82220,7 +82261,7 @@ function requireTestPlanInterfaces () {
 		     * Requirement based Test Suite
 		     */
 		    TestSuiteType[TestSuiteType["RequirementTestSuite"] = 3] = "RequirementTestSuite";
-		})(exports$1.TestSuiteType || (exports$1.TestSuiteType = {}));
+		})(exports.TestSuiteType || (exports.TestSuiteType = {}));
 		(function (UserFriendlyTestOutcome) {
 		    UserFriendlyTestOutcome[UserFriendlyTestOutcome["InProgress"] = 0] = "InProgress";
 		    UserFriendlyTestOutcome[UserFriendlyTestOutcome["Blocked"] = 1] = "Blocked";
@@ -82239,8 +82280,8 @@ function requireTestPlanInterfaces () {
 		    UserFriendlyTestOutcome[UserFriendlyTestOutcome["NotImpacted"] = 14] = "NotImpacted";
 		    UserFriendlyTestOutcome[UserFriendlyTestOutcome["Unspecified"] = 15] = "Unspecified";
 		    UserFriendlyTestOutcome[UserFriendlyTestOutcome["MaxValue"] = 15] = "MaxValue";
-		})(exports$1.UserFriendlyTestOutcome || (exports$1.UserFriendlyTestOutcome = {}));
-		exports$1.TypeInfo = {
+		})(exports.UserFriendlyTestOutcome || (exports.UserFriendlyTestOutcome = {}));
+		exports.TypeInfo = {
 		    CloneOperationCommonResponse: {},
 		    CloneTestCaseOperationInformation: {},
 		    CloneTestPlanOperationInformation: {},
@@ -82416,7 +82457,7 @@ function requireTestPlanInterfaces () {
 		        }
 		    },
 		};
-		exports$1.TypeInfo.CloneOperationCommonResponse.fields = {
+		exports.TypeInfo.CloneOperationCommonResponse.fields = {
 		    completionDate: {
 		        isDate: true,
 		    },
@@ -82427,48 +82468,48 @@ function requireTestPlanInterfaces () {
 		        enumType: TFS_TestManagement_Contracts.TypeInfo.CloneOperationState
 		    }
 		};
-		exports$1.TypeInfo.CloneTestCaseOperationInformation.fields = {
+		exports.TypeInfo.CloneTestCaseOperationInformation.fields = {
 		    cloneOperationResponse: {
-		        typeInfo: exports$1.TypeInfo.CloneOperationCommonResponse
+		        typeInfo: exports.TypeInfo.CloneOperationCommonResponse
 		    },
 		    destinationTestSuite: {
-		        typeInfo: exports$1.TypeInfo.TestSuiteReferenceWithProject
+		        typeInfo: exports.TypeInfo.TestSuiteReferenceWithProject
 		    },
 		    sourceTestSuite: {
-		        typeInfo: exports$1.TypeInfo.SourceTestSuiteResponse
+		        typeInfo: exports.TypeInfo.SourceTestSuiteResponse
 		    }
 		};
-		exports$1.TypeInfo.CloneTestPlanOperationInformation.fields = {
+		exports.TypeInfo.CloneTestPlanOperationInformation.fields = {
 		    cloneOperationResponse: {
-		        typeInfo: exports$1.TypeInfo.CloneOperationCommonResponse
+		        typeInfo: exports.TypeInfo.CloneOperationCommonResponse
 		    },
 		    destinationTestPlan: {
-		        typeInfo: exports$1.TypeInfo.TestPlan
+		        typeInfo: exports.TypeInfo.TestPlan
 		    },
 		    sourceTestPlan: {
-		        typeInfo: exports$1.TypeInfo.SourceTestplanResponse
+		        typeInfo: exports.TypeInfo.SourceTestplanResponse
 		    }
 		};
-		exports$1.TypeInfo.CloneTestPlanParams.fields = {
+		exports.TypeInfo.CloneTestPlanParams.fields = {
 		    destinationTestPlan: {
-		        typeInfo: exports$1.TypeInfo.DestinationTestPlanCloneParams
+		        typeInfo: exports.TypeInfo.DestinationTestPlanCloneParams
 		    }
 		};
-		exports$1.TypeInfo.CloneTestSuiteOperationInformation.fields = {
+		exports.TypeInfo.CloneTestSuiteOperationInformation.fields = {
 		    clonedTestSuite: {
-		        typeInfo: exports$1.TypeInfo.TestSuiteReferenceWithProject
+		        typeInfo: exports.TypeInfo.TestSuiteReferenceWithProject
 		    },
 		    cloneOperationResponse: {
-		        typeInfo: exports$1.TypeInfo.CloneOperationCommonResponse
+		        typeInfo: exports.TypeInfo.CloneOperationCommonResponse
 		    },
 		    destinationTestSuite: {
-		        typeInfo: exports$1.TypeInfo.TestSuiteReferenceWithProject
+		        typeInfo: exports.TypeInfo.TestSuiteReferenceWithProject
 		    },
 		    sourceTestSuite: {
-		        typeInfo: exports$1.TypeInfo.TestSuiteReferenceWithProject
+		        typeInfo: exports.TypeInfo.TestSuiteReferenceWithProject
 		    }
 		};
-		exports$1.TypeInfo.DestinationTestPlanCloneParams.fields = {
+		exports.TypeInfo.DestinationTestPlanCloneParams.fields = {
 		    endDate: {
 		        isDate: true,
 		    },
@@ -82476,79 +82517,79 @@ function requireTestPlanInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.LibraryWorkItemsData.fields = {
+		exports.TypeInfo.LibraryWorkItemsData.fields = {
 		    returnCode: {
-		        enumType: exports$1.TypeInfo.LibraryTestCasesDataReturnCode
+		        enumType: exports.TypeInfo.LibraryTestCasesDataReturnCode
 		    }
 		};
-		exports$1.TypeInfo.LibraryWorkItemsDataProviderRequest.fields = {
+		exports.TypeInfo.LibraryWorkItemsDataProviderRequest.fields = {
 		    filterValues: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestPlansLibraryWorkItemFilter
+		        typeInfo: exports.TypeInfo.TestPlansLibraryWorkItemFilter
 		    },
 		    libraryQueryType: {
-		        enumType: exports$1.TypeInfo.TestPlansLibraryQuery
+		        enumType: exports.TypeInfo.TestPlansLibraryQuery
 		    }
 		};
-		exports$1.TypeInfo.Results.fields = {
+		exports.TypeInfo.Results.fields = {
 		    outcome: {
-		        enumType: exports$1.TypeInfo.Outcome
+		        enumType: exports.TypeInfo.Outcome
 		    }
 		};
-		exports$1.TypeInfo.SourceTestplanResponse.fields = {
+		exports.TypeInfo.SourceTestplanResponse.fields = {
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.SourceTestSuiteResponse.fields = {
+		exports.TypeInfo.SourceTestSuiteResponse.fields = {
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.SuiteEntry.fields = {
+		exports.TypeInfo.SuiteEntry.fields = {
 		    suiteEntryType: {
-		        enumType: exports$1.TypeInfo.SuiteEntryTypes
+		        enumType: exports.TypeInfo.SuiteEntryTypes
 		    }
 		};
-		exports$1.TypeInfo.SuiteEntryUpdateParams.fields = {
+		exports.TypeInfo.SuiteEntryUpdateParams.fields = {
 		    suiteEntryType: {
-		        enumType: exports$1.TypeInfo.SuiteEntryTypes
+		        enumType: exports.TypeInfo.SuiteEntryTypes
 		    }
 		};
-		exports$1.TypeInfo.TestCase.fields = {
+		exports.TypeInfo.TestCase.fields = {
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.TestCaseAssociatedResult.fields = {
+		exports.TypeInfo.TestCaseAssociatedResult.fields = {
 		    completedDate: {
 		        isDate: true,
 		    },
 		    outcome: {
-		        enumType: exports$1.TypeInfo.UserFriendlyTestOutcome
+		        enumType: exports.TypeInfo.UserFriendlyTestOutcome
 		    }
 		};
-		exports$1.TypeInfo.TestCaseAssociatedResultExtended.fields = {
+		exports.TypeInfo.TestCaseAssociatedResultExtended.fields = {
 		    completedDate: {
 		        isDate: true,
 		    },
 		    outcome: {
-		        enumType: exports$1.TypeInfo.UserFriendlyTestOutcome
+		        enumType: exports.TypeInfo.UserFriendlyTestOutcome
 		    }
 		};
-		exports$1.TypeInfo.TestCaseResultsData.fields = {
+		exports.TypeInfo.TestCaseResultsData.fields = {
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestCaseAssociatedResult
+		        typeInfo: exports.TypeInfo.TestCaseAssociatedResult
 		    }
 		};
-		exports$1.TypeInfo.TestCaseResultsDataExtended.fields = {
+		exports.TypeInfo.TestCaseResultsDataExtended.fields = {
 		    results: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestCaseAssociatedResultExtended
+		        typeInfo: exports.TypeInfo.TestCaseAssociatedResultExtended
 		    }
 		};
-		exports$1.TypeInfo.TestConfiguration.fields = {
+		exports.TypeInfo.TestConfiguration.fields = {
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
@@ -82556,12 +82597,12 @@ function requireTestPlanInterfaces () {
 		        enumType: TFS_TestManagement_Contracts.TypeInfo.TestConfigurationState
 		    }
 		};
-		exports$1.TypeInfo.TestConfigurationCreateUpdateParameters.fields = {
+		exports.TypeInfo.TestConfigurationCreateUpdateParameters.fields = {
 		    state: {
 		        enumType: TFS_TestManagement_Contracts.TypeInfo.TestConfigurationState
 		    }
 		};
-		exports$1.TypeInfo.TestPlan.fields = {
+		exports.TypeInfo.TestPlan.fields = {
 		    endDate: {
 		        isDate: true,
 		    },
@@ -82575,7 +82616,7 @@ function requireTestPlanInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestPlanCreateParams.fields = {
+		exports.TypeInfo.TestPlanCreateParams.fields = {
 		    endDate: {
 		        isDate: true,
 		    },
@@ -82583,7 +82624,7 @@ function requireTestPlanInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestPlanDetailedReference.fields = {
+		exports.TypeInfo.TestPlanDetailedReference.fields = {
 		    endDate: {
 		        isDate: true,
 		    },
@@ -82591,29 +82632,29 @@ function requireTestPlanInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestPlansHubRefreshData.fields = {
+		exports.TypeInfo.TestPlansHubRefreshData.fields = {
 		    testCases: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestCase
+		        typeInfo: exports.TypeInfo.TestCase
 		    },
 		    testPlan: {
-		        typeInfo: exports$1.TypeInfo.TestPlanDetailedReference
+		        typeInfo: exports.TypeInfo.TestPlanDetailedReference
 		    },
 		    testPoints: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestPoint
+		        typeInfo: exports.TypeInfo.TestPoint
 		    },
 		    testSuites: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestSuite
+		        typeInfo: exports.TypeInfo.TestSuite
 		    }
 		};
-		exports$1.TypeInfo.TestPlansLibraryWorkItemFilter.fields = {
+		exports.TypeInfo.TestPlansLibraryWorkItemFilter.fields = {
 		    filterMode: {
-		        enumType: exports$1.TypeInfo.TestPlansLibraryWorkItemFilterMode
+		        enumType: exports.TypeInfo.TestPlansLibraryWorkItemFilterMode
 		    }
 		};
-		exports$1.TypeInfo.TestPlanUpdateParams.fields = {
+		exports.TypeInfo.TestPlanUpdateParams.fields = {
 		    endDate: {
 		        isDate: true,
 		    },
@@ -82621,7 +82662,7 @@ function requireTestPlanInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TestPoint.fields = {
+		exports.TypeInfo.TestPoint.fields = {
 		    lastResetToActive: {
 		        isDate: true,
 		    },
@@ -82632,38 +82673,38 @@ function requireTestPlanInterfaces () {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
 		    results: {
-		        typeInfo: exports$1.TypeInfo.TestPointResults
+		        typeInfo: exports.TypeInfo.TestPointResults
 		    }
 		};
-		exports$1.TypeInfo.TestPointResults.fields = {
+		exports.TypeInfo.TestPointResults.fields = {
 		    failureType: {
-		        enumType: exports$1.TypeInfo.FailureType
+		        enumType: exports.TypeInfo.FailureType
 		    },
 		    lastResolutionState: {
-		        enumType: exports$1.TypeInfo.LastResolutionState
+		        enumType: exports.TypeInfo.LastResolutionState
 		    },
 		    lastResultDetails: {
 		        typeInfo: TFS_TestManagement_Contracts.TypeInfo.LastResultDetails
 		    },
 		    lastResultState: {
-		        enumType: exports$1.TypeInfo.ResultState
+		        enumType: exports.TypeInfo.ResultState
 		    },
 		    outcome: {
-		        enumType: exports$1.TypeInfo.Outcome
+		        enumType: exports.TypeInfo.Outcome
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.PointState
+		        enumType: exports.TypeInfo.PointState
 		    }
 		};
-		exports$1.TypeInfo.TestPointUpdateParams.fields = {
+		exports.TypeInfo.TestPointUpdateParams.fields = {
 		    results: {
-		        typeInfo: exports$1.TypeInfo.Results
+		        typeInfo: exports.TypeInfo.Results
 		    }
 		};
-		exports$1.TypeInfo.TestSuite.fields = {
+		exports.TypeInfo.TestSuite.fields = {
 		    children: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TestSuite
+		        typeInfo: exports.TypeInfo.TestSuite
 		    },
 		    lastPopulatedDate: {
 		        isDate: true,
@@ -82675,20 +82716,20 @@ function requireTestPlanInterfaces () {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    },
 		    suiteType: {
-		        enumType: exports$1.TypeInfo.TestSuiteType
+		        enumType: exports.TypeInfo.TestSuiteType
 		    }
 		};
-		exports$1.TypeInfo.TestSuiteCreateParams.fields = {
+		exports.TypeInfo.TestSuiteCreateParams.fields = {
 		    suiteType: {
-		        enumType: exports$1.TypeInfo.TestSuiteType
+		        enumType: exports.TypeInfo.TestSuiteType
 		    }
 		};
-		exports$1.TypeInfo.TestSuiteReferenceWithProject.fields = {
+		exports.TypeInfo.TestSuiteReferenceWithProject.fields = {
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.TestVariable.fields = {
+		exports.TypeInfo.TestVariable.fields = {
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
@@ -88325,14 +88366,14 @@ var hasRequiredTfvcInterfaces;
 function requireTfvcInterfaces () {
 	if (hasRequiredTfvcInterfaces) return TfvcInterfaces;
 	hasRequiredTfvcInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.VersionControlRecursionType = exports$1.VersionControlChangeType = exports$1.TfvcVersionType = exports$1.TfvcVersionOption = exports$1.ItemContentType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.VersionControlRecursionType = exports.VersionControlChangeType = exports.TfvcVersionType = exports.TfvcVersionOption = exports.ItemContentType = void 0;
 		const TfsCoreInterfaces = requireCoreInterfaces();
 		(function (ItemContentType) {
 		    ItemContentType[ItemContentType["RawText"] = 0] = "RawText";
 		    ItemContentType[ItemContentType["Base64Encoded"] = 1] = "Base64Encoded";
-		})(exports$1.ItemContentType || (exports$1.ItemContentType = {}));
+		})(exports.ItemContentType || (exports.ItemContentType = {}));
 		(function (TfvcVersionOption) {
 		    /**
 		     * None.
@@ -88346,7 +88387,7 @@ function requireTfvcInterfaces () {
 		     * Only usuable with versiontype MergeSource and integer versions, uses RenameSource identifier instead of Merge identifier.
 		     */
 		    TfvcVersionOption[TfvcVersionOption["UseRename"] = 2] = "UseRename";
-		})(exports$1.TfvcVersionOption || (exports$1.TfvcVersionOption = {}));
+		})(exports.TfvcVersionOption || (exports.TfvcVersionOption = {}));
 		(function (TfvcVersionType) {
 		    /**
 		     * Version is treated as a ChangesetId.
@@ -88380,7 +88421,7 @@ function requireTfvcInterfaces () {
 		     * Version will be treated as a MergeSource.
 		     */
 		    TfvcVersionType[TfvcVersionType["MergeSource"] = 7] = "MergeSource";
-		})(exports$1.TfvcVersionType || (exports$1.TfvcVersionType = {}));
+		})(exports.TfvcVersionType || (exports.TfvcVersionType = {}));
 		(function (VersionControlChangeType) {
 		    VersionControlChangeType[VersionControlChangeType["None"] = 0] = "None";
 		    VersionControlChangeType[VersionControlChangeType["Add"] = 1] = "Add";
@@ -88397,7 +88438,7 @@ function requireTfvcInterfaces () {
 		    VersionControlChangeType[VersionControlChangeType["TargetRename"] = 2048] = "TargetRename";
 		    VersionControlChangeType[VersionControlChangeType["Property"] = 4096] = "Property";
 		    VersionControlChangeType[VersionControlChangeType["All"] = 8191] = "All";
-		})(exports$1.VersionControlChangeType || (exports$1.VersionControlChangeType = {}));
+		})(exports.VersionControlChangeType || (exports.VersionControlChangeType = {}));
 		(function (VersionControlRecursionType) {
 		    /**
 		     * Only return the specified item.
@@ -88415,8 +88456,8 @@ function requireTfvcInterfaces () {
 		     * Return specified item and all descendants
 		     */
 		    VersionControlRecursionType[VersionControlRecursionType["Full"] = 120] = "Full";
-		})(exports$1.VersionControlRecursionType || (exports$1.VersionControlRecursionType = {}));
-		exports$1.TypeInfo = {
+		})(exports.VersionControlRecursionType || (exports.VersionControlRecursionType = {}));
+		exports.TypeInfo = {
 		    Change: {},
 		    GitRepository: {},
 		    GitRepositoryRef: {},
@@ -88488,130 +88529,130 @@ function requireTfvcInterfaces () {
 		        }
 		    },
 		};
-		exports$1.TypeInfo.Change.fields = {
+		exports.TypeInfo.Change.fields = {
 		    changeType: {
-		        enumType: exports$1.TypeInfo.VersionControlChangeType
+		        enumType: exports.TypeInfo.VersionControlChangeType
 		    },
 		    newContent: {
-		        typeInfo: exports$1.TypeInfo.ItemContent
+		        typeInfo: exports.TypeInfo.ItemContent
 		    }
 		};
-		exports$1.TypeInfo.GitRepository.fields = {
+		exports.TypeInfo.GitRepository.fields = {
 		    creationDate: {
 		        isDate: true,
 		    },
 		    parentRepository: {
-		        typeInfo: exports$1.TypeInfo.GitRepositoryRef
+		        typeInfo: exports.TypeInfo.GitRepositoryRef
 		    },
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.GitRepositoryRef.fields = {
+		exports.TypeInfo.GitRepositoryRef.fields = {
 		    project: {
 		        typeInfo: TfsCoreInterfaces.TypeInfo.TeamProjectReference
 		    }
 		};
-		exports$1.TypeInfo.ItemContent.fields = {
+		exports.TypeInfo.ItemContent.fields = {
 		    contentType: {
-		        enumType: exports$1.TypeInfo.ItemContentType
+		        enumType: exports.TypeInfo.ItemContentType
 		    }
 		};
-		exports$1.TypeInfo.TfvcBranch.fields = {
+		exports.TypeInfo.TfvcBranch.fields = {
 		    children: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TfvcBranch
+		        typeInfo: exports.TypeInfo.TfvcBranch
 		    },
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcBranchRef.fields = {
+		exports.TypeInfo.TfvcBranchRef.fields = {
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcChange.fields = {
+		exports.TypeInfo.TfvcChange.fields = {
 		    changeType: {
-		        enumType: exports$1.TypeInfo.VersionControlChangeType
+		        enumType: exports.TypeInfo.VersionControlChangeType
 		    },
 		    newContent: {
-		        typeInfo: exports$1.TypeInfo.ItemContent
+		        typeInfo: exports.TypeInfo.ItemContent
 		    }
 		};
-		exports$1.TypeInfo.TfvcChangeset.fields = {
+		exports.TypeInfo.TfvcChangeset.fields = {
 		    changes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TfvcChange
+		        typeInfo: exports.TypeInfo.TfvcChange
 		    },
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcChangesetRef.fields = {
+		exports.TypeInfo.TfvcChangesetRef.fields = {
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcItem.fields = {
+		exports.TypeInfo.TfvcItem.fields = {
 		    changeDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcItemDescriptor.fields = {
+		exports.TypeInfo.TfvcItemDescriptor.fields = {
 		    recursionLevel: {
-		        enumType: exports$1.TypeInfo.VersionControlRecursionType
+		        enumType: exports.TypeInfo.VersionControlRecursionType
 		    },
 		    versionOption: {
-		        enumType: exports$1.TypeInfo.TfvcVersionOption
+		        enumType: exports.TypeInfo.TfvcVersionOption
 		    },
 		    versionType: {
-		        enumType: exports$1.TypeInfo.TfvcVersionType
+		        enumType: exports.TypeInfo.TfvcVersionType
 		    }
 		};
-		exports$1.TypeInfo.TfvcItemRequestData.fields = {
+		exports.TypeInfo.TfvcItemRequestData.fields = {
 		    itemDescriptors: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TfvcItemDescriptor
+		        typeInfo: exports.TypeInfo.TfvcItemDescriptor
 		    }
 		};
-		exports$1.TypeInfo.TfvcLabel.fields = {
+		exports.TypeInfo.TfvcLabel.fields = {
 		    items: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TfvcItem
+		        typeInfo: exports.TypeInfo.TfvcItem
 		    },
 		    modifiedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcLabelRef.fields = {
+		exports.TypeInfo.TfvcLabelRef.fields = {
 		    modifiedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcShelveset.fields = {
+		exports.TypeInfo.TfvcShelveset.fields = {
 		    changes: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TfvcChange
+		        typeInfo: exports.TypeInfo.TfvcChange
 		    },
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcShelvesetRef.fields = {
+		exports.TypeInfo.TfvcShelvesetRef.fields = {
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.TfvcVersionDescriptor.fields = {
+		exports.TypeInfo.TfvcVersionDescriptor.fields = {
 		    versionOption: {
-		        enumType: exports$1.TypeInfo.TfvcVersionOption
+		        enumType: exports.TypeInfo.TfvcVersionOption
 		    },
 		    versionType: {
-		        enumType: exports$1.TypeInfo.TfvcVersionType
+		        enumType: exports.TypeInfo.TfvcVersionType
 		    }
 		};
-		exports$1.TypeInfo.VersionControlProjectInfo.fields = {
+		exports.TypeInfo.VersionControlProjectInfo.fields = {
 		    defaultSourceControlType: {
 		        enumType: TfsCoreInterfaces.TypeInfo.SourceControlTypes
 		    },
@@ -89507,9 +89548,9 @@ var hasRequiredCommentsInterfaces;
 function requireCommentsInterfaces () {
 	if (hasRequiredCommentsInterfaces) return CommentsInterfaces;
 	hasRequiredCommentsInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.CommentState = exports$1.CommentSortOrder = exports$1.CommentReactionType = exports$1.CommentMentionType = exports$1.CommentFormat = exports$1.CommentExpandOptions = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.CommentState = exports.CommentSortOrder = exports.CommentReactionType = exports.CommentMentionType = exports.CommentFormat = exports.CommentExpandOptions = void 0;
 		(function (CommentExpandOptions) {
 		    /**
 		     * Include comments only, no mentions, reactions or rendered text
@@ -89535,11 +89576,11 @@ function requireCommentsInterfaces () {
 		     * Expand everything including Reactions, Mentions and also include RenderedText (HTML) for markdown comments
 		     */
 		    CommentExpandOptions[CommentExpandOptions["All"] = -17] = "All";
-		})(exports$1.CommentExpandOptions || (exports$1.CommentExpandOptions = {}));
+		})(exports.CommentExpandOptions || (exports.CommentExpandOptions = {}));
 		(function (CommentFormat) {
 		    CommentFormat[CommentFormat["Markdown"] = 0] = "Markdown";
 		    CommentFormat[CommentFormat["Html"] = 1] = "Html";
-		})(exports$1.CommentFormat || (exports$1.CommentFormat = {}));
+		})(exports.CommentFormat || (exports.CommentFormat = {}));
 		(function (CommentMentionType) {
 		    /**
 		     * An identity was mentioned by using the format @{VSID}
@@ -89553,7 +89594,7 @@ function requireCommentsInterfaces () {
 		     * A Pull Request was mentioned by using the format !{PR Number}
 		     */
 		    CommentMentionType[CommentMentionType["PullRequest"] = 2] = "PullRequest";
-		})(exports$1.CommentMentionType || (exports$1.CommentMentionType = {}));
+		})(exports.CommentMentionType || (exports.CommentMentionType = {}));
 		(function (CommentReactionType) {
 		    CommentReactionType[CommentReactionType["Like"] = 0] = "Like";
 		    CommentReactionType[CommentReactionType["Dislike"] = 1] = "Dislike";
@@ -89561,7 +89602,7 @@ function requireCommentsInterfaces () {
 		    CommentReactionType[CommentReactionType["Hooray"] = 3] = "Hooray";
 		    CommentReactionType[CommentReactionType["Smile"] = 4] = "Smile";
 		    CommentReactionType[CommentReactionType["Confused"] = 5] = "Confused";
-		})(exports$1.CommentReactionType || (exports$1.CommentReactionType = {}));
+		})(exports.CommentReactionType || (exports.CommentReactionType = {}));
 		(function (CommentSortOrder) {
 		    /**
 		     * The results will be sorted in Ascending order.
@@ -89571,13 +89612,13 @@ function requireCommentsInterfaces () {
 		     * The results will be sorted in Descending order.
 		     */
 		    CommentSortOrder[CommentSortOrder["Desc"] = 2] = "Desc";
-		})(exports$1.CommentSortOrder || (exports$1.CommentSortOrder = {}));
+		})(exports.CommentSortOrder || (exports.CommentSortOrder = {}));
 		(function (CommentState) {
 		    CommentState[CommentState["Active"] = 0] = "Active";
 		    CommentState[CommentState["Resolved"] = 1] = "Resolved";
 		    CommentState[CommentState["Closed"] = 2] = "Closed";
-		})(exports$1.CommentState || (exports$1.CommentState = {}));
-		exports$1.TypeInfo = {
+		})(exports.CommentState || (exports.CommentState = {}));
+		exports.TypeInfo = {
 		    Comment: {},
 		    CommentAttachment: {},
 		    CommentExpandOptions: {
@@ -89632,55 +89673,55 @@ function requireCommentsInterfaces () {
 		    CommentUpdateParameters: {},
 		    CommentVersion: {},
 		};
-		exports$1.TypeInfo.Comment.fields = {
+		exports.TypeInfo.Comment.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
 		    mentions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.CommentMention
+		        typeInfo: exports.TypeInfo.CommentMention
 		    },
 		    modifiedDate: {
 		        isDate: true,
 		    },
 		    reactions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.CommentReaction
+		        typeInfo: exports.TypeInfo.CommentReaction
 		    },
 		    replies: {
-		        typeInfo: exports$1.TypeInfo.CommentList
+		        typeInfo: exports.TypeInfo.CommentList
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.CommentState
+		        enumType: exports.TypeInfo.CommentState
 		    }
 		};
-		exports$1.TypeInfo.CommentAttachment.fields = {
+		exports.TypeInfo.CommentAttachment.fields = {
 		    createdDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.CommentList.fields = {
+		exports.TypeInfo.CommentList.fields = {
 		    comments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Comment
+		        typeInfo: exports.TypeInfo.Comment
 		    }
 		};
-		exports$1.TypeInfo.CommentMention.fields = {
+		exports.TypeInfo.CommentMention.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.CommentMentionType
+		        enumType: exports.TypeInfo.CommentMentionType
 		    }
 		};
-		exports$1.TypeInfo.CommentReaction.fields = {
+		exports.TypeInfo.CommentReaction.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.CommentReactionType
+		        enumType: exports.TypeInfo.CommentReactionType
 		    }
 		};
-		exports$1.TypeInfo.CommentUpdateParameters.fields = {
+		exports.TypeInfo.CommentUpdateParameters.fields = {
 		    state: {
-		        enumType: exports$1.TypeInfo.CommentState
+		        enumType: exports.TypeInfo.CommentState
 		    }
 		};
-		exports$1.TypeInfo.CommentVersion.fields = {
+		exports.TypeInfo.CommentVersion.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
@@ -89688,7 +89729,7 @@ function requireCommentsInterfaces () {
 		        isDate: true,
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.CommentState
+		        enumType: exports.TypeInfo.CommentState
 		    }
 		}; 
 	} (CommentsInterfaces));
@@ -89712,9 +89753,9 @@ var hasRequiredWikiInterfaces;
 function requireWikiInterfaces () {
 	if (hasRequiredWikiInterfaces) return WikiInterfaces;
 	hasRequiredWikiInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.WikiType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.WikiType = void 0;
 		const GitInterfaces = requireGitInterfaces();
 		(function (WikiType) {
 		    /**
@@ -89725,8 +89766,8 @@ function requireWikiInterfaces () {
 		     * Indicates that the wiki is published from a git repository
 		     */
 		    WikiType[WikiType["CodeWiki"] = 1] = "CodeWiki";
-		})(exports$1.WikiType || (exports$1.WikiType = {}));
-		exports$1.TypeInfo = {
+		})(exports.WikiType || (exports.WikiType = {}));
+		exports.TypeInfo = {
 		    Wiki: {},
 		    WikiCreateBaseParameters: {},
 		    WikiCreateParametersV2: {},
@@ -89742,49 +89783,49 @@ function requireWikiInterfaces () {
 		    WikiUpdateParameters: {},
 		    WikiV2: {},
 		};
-		exports$1.TypeInfo.Wiki.fields = {
+		exports.TypeInfo.Wiki.fields = {
 		    repository: {
 		        typeInfo: GitInterfaces.TypeInfo.GitRepository
 		    }
 		};
-		exports$1.TypeInfo.WikiCreateBaseParameters.fields = {
+		exports.TypeInfo.WikiCreateBaseParameters.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.WikiType
+		        enumType: exports.TypeInfo.WikiType
 		    }
 		};
-		exports$1.TypeInfo.WikiCreateParametersV2.fields = {
+		exports.TypeInfo.WikiCreateParametersV2.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.WikiType
+		        enumType: exports.TypeInfo.WikiType
 		    },
 		    version: {
 		        typeInfo: GitInterfaces.TypeInfo.GitVersionDescriptor
 		    }
 		};
-		exports$1.TypeInfo.WikiPageDetail.fields = {
+		exports.TypeInfo.WikiPageDetail.fields = {
 		    viewStats: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.WikiPageStat
+		        typeInfo: exports.TypeInfo.WikiPageStat
 		    }
 		};
-		exports$1.TypeInfo.WikiPageStat.fields = {
+		exports.TypeInfo.WikiPageStat.fields = {
 		    day: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.WikiPageViewStats.fields = {
+		exports.TypeInfo.WikiPageViewStats.fields = {
 		    lastViewedTime: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.WikiUpdateParameters.fields = {
+		exports.TypeInfo.WikiUpdateParameters.fields = {
 		    versions: {
 		        isArray: true,
 		        typeInfo: GitInterfaces.TypeInfo.GitVersionDescriptor
 		    }
 		};
-		exports$1.TypeInfo.WikiV2.fields = {
+		exports.TypeInfo.WikiV2.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.WikiType
+		        enumType: exports.TypeInfo.WikiType
 		    },
 		    versions: {
 		        isArray: true,
@@ -90581,9 +90622,9 @@ var hasRequiredSystem;
 function requireSystem () {
 	if (hasRequiredSystem) return System;
 	hasRequiredSystem = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.DayOfWeek = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.DayOfWeek = void 0;
 		(function (DayOfWeek) {
 		    /**
 		     * Indicates Sunday.
@@ -90613,8 +90654,8 @@ function requireSystem () {
 		     * Indicates Saturday.
 		     */
 		    DayOfWeek[DayOfWeek["Saturday"] = 6] = "Saturday";
-		})(exports$1.DayOfWeek || (exports$1.DayOfWeek = {}));
-		exports$1.TypeInfo = {
+		})(exports.DayOfWeek || (exports.DayOfWeek = {}));
+		exports.TypeInfo = {
 		    DayOfWeek: {
 		        enumValues: {
 		            "sunday": 0,
@@ -90646,9 +90687,9 @@ var hasRequiredWorkInterfaces;
 function requireWorkInterfaces () {
 	if (hasRequiredWorkInterfaces) return WorkInterfaces;
 	hasRequiredWorkInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.TimelineTeamStatusCode = exports$1.TimelineIterationStatusCode = exports$1.TimelineCriteriaStatusCode = exports$1.TimeFrame = exports$1.PlanUserPermissions = exports$1.PlanType = exports$1.IdentityDisplayFormat = exports$1.FieldType = exports$1.BugsBehavior = exports$1.BoardColumnType = exports$1.BoardBadgeColumnOptions = exports$1.BacklogType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.TimelineTeamStatusCode = exports.TimelineIterationStatusCode = exports.TimelineCriteriaStatusCode = exports.TimeFrame = exports.PlanUserPermissions = exports.PlanType = exports.IdentityDisplayFormat = exports.FieldType = exports.BugsBehavior = exports.BoardColumnType = exports.BoardBadgeColumnOptions = exports.BacklogType = void 0;
 		const SystemInterfaces = requireSystem();
 		(function (BacklogType) {
 		    /**
@@ -90663,7 +90704,7 @@ function requireWorkInterfaces () {
 		     * Task backlog level
 		     */
 		    BacklogType[BacklogType["Task"] = 2] = "Task";
-		})(exports$1.BacklogType || (exports$1.BacklogType = {}));
+		})(exports.BacklogType || (exports.BacklogType = {}));
 		(function (BoardBadgeColumnOptions) {
 		    /**
 		     * Only include In Progress columns
@@ -90677,17 +90718,17 @@ function requireWorkInterfaces () {
 		     * Include a custom set of columns
 		     */
 		    BoardBadgeColumnOptions[BoardBadgeColumnOptions["CustomColumns"] = 2] = "CustomColumns";
-		})(exports$1.BoardBadgeColumnOptions || (exports$1.BoardBadgeColumnOptions = {}));
+		})(exports.BoardBadgeColumnOptions || (exports.BoardBadgeColumnOptions = {}));
 		(function (BoardColumnType) {
 		    BoardColumnType[BoardColumnType["Incoming"] = 0] = "Incoming";
 		    BoardColumnType[BoardColumnType["InProgress"] = 1] = "InProgress";
 		    BoardColumnType[BoardColumnType["Outgoing"] = 2] = "Outgoing";
-		})(exports$1.BoardColumnType || (exports$1.BoardColumnType = {}));
+		})(exports.BoardColumnType || (exports.BoardColumnType = {}));
 		(function (BugsBehavior) {
 		    BugsBehavior[BugsBehavior["Off"] = 0] = "Off";
 		    BugsBehavior[BugsBehavior["AsRequirements"] = 1] = "AsRequirements";
 		    BugsBehavior[BugsBehavior["AsTasks"] = 2] = "AsTasks";
-		})(exports$1.BugsBehavior || (exports$1.BugsBehavior = {}));
+		})(exports.BugsBehavior || (exports.BugsBehavior = {}));
 		(function (FieldType) {
 		    FieldType[FieldType["String"] = 0] = "String";
 		    FieldType[FieldType["PlainText"] = 1] = "PlainText";
@@ -90696,7 +90737,7 @@ function requireWorkInterfaces () {
 		    FieldType[FieldType["TreePath"] = 4] = "TreePath";
 		    FieldType[FieldType["Boolean"] = 5] = "Boolean";
 		    FieldType[FieldType["Double"] = 6] = "Double";
-		})(exports$1.FieldType || (exports$1.FieldType = {}));
+		})(exports.FieldType || (exports.FieldType = {}));
 		(function (IdentityDisplayFormat) {
 		    /**
 		     * Display avatar only
@@ -90710,10 +90751,10 @@ function requireWorkInterfaces () {
 		     * Display Avatar and Full name
 		     */
 		    IdentityDisplayFormat[IdentityDisplayFormat["AvatarAndFullName"] = 2] = "AvatarAndFullName";
-		})(exports$1.IdentityDisplayFormat || (exports$1.IdentityDisplayFormat = {}));
+		})(exports.IdentityDisplayFormat || (exports.IdentityDisplayFormat = {}));
 		(function (PlanType) {
 		    PlanType[PlanType["DeliveryTimelineView"] = 0] = "DeliveryTimelineView";
-		})(exports$1.PlanType || (exports$1.PlanType = {}));
+		})(exports.PlanType || (exports.PlanType = {}));
 		(function (PlanUserPermissions) {
 		    /**
 		     * None
@@ -90739,12 +90780,12 @@ function requireWorkInterfaces () {
 		     * Full control permission for this plan.
 		     */
 		    PlanUserPermissions[PlanUserPermissions["AllPermissions"] = 15] = "AllPermissions";
-		})(exports$1.PlanUserPermissions || (exports$1.PlanUserPermissions = {}));
+		})(exports.PlanUserPermissions || (exports.PlanUserPermissions = {}));
 		(function (TimeFrame) {
 		    TimeFrame[TimeFrame["Past"] = 0] = "Past";
 		    TimeFrame[TimeFrame["Current"] = 1] = "Current";
 		    TimeFrame[TimeFrame["Future"] = 2] = "Future";
-		})(exports$1.TimeFrame || (exports$1.TimeFrame = {}));
+		})(exports.TimeFrame || (exports.TimeFrame = {}));
 		(function (TimelineCriteriaStatusCode) {
 		    /**
 		     * No error - filter is good.
@@ -90758,7 +90799,7 @@ function requireWorkInterfaces () {
 		     * Unknown error.
 		     */
 		    TimelineCriteriaStatusCode[TimelineCriteriaStatusCode["Unknown"] = 2] = "Unknown";
-		})(exports$1.TimelineCriteriaStatusCode || (exports$1.TimelineCriteriaStatusCode = {}));
+		})(exports.TimelineCriteriaStatusCode || (exports.TimelineCriteriaStatusCode = {}));
 		(function (TimelineIterationStatusCode) {
 		    /**
 		     * No error - iteration data is good.
@@ -90768,7 +90809,7 @@ function requireWorkInterfaces () {
 		     * This iteration overlaps with another iteration, no data is returned for this iteration.
 		     */
 		    TimelineIterationStatusCode[TimelineIterationStatusCode["IsOverlapping"] = 1] = "IsOverlapping";
-		})(exports$1.TimelineIterationStatusCode || (exports$1.TimelineIterationStatusCode = {}));
+		})(exports.TimelineIterationStatusCode || (exports.TimelineIterationStatusCode = {}));
 		(function (TimelineTeamStatusCode) {
 		    /**
 		     * No error - all data for team is good.
@@ -90798,8 +90839,8 @@ function requireWorkInterfaces () {
 		     * Team does not have a single iteration with date range.
 		     */
 		    TimelineTeamStatusCode[TimelineTeamStatusCode["NoIterationsExist"] = 6] = "NoIterationsExist";
-		})(exports$1.TimelineTeamStatusCode || (exports$1.TimelineTeamStatusCode = {}));
-		exports$1.TypeInfo = {
+		})(exports.TimelineTeamStatusCode || (exports.TimelineTeamStatusCode = {}));
+		exports.TypeInfo = {
 		    BacklogConfiguration: {},
 		    BacklogLevelConfiguration: {},
 		    BacklogType: {
@@ -90924,73 +90965,73 @@ function requireWorkInterfaces () {
 		    },
 		    UpdatePlan: {},
 		};
-		exports$1.TypeInfo.BacklogConfiguration.fields = {
+		exports.TypeInfo.BacklogConfiguration.fields = {
 		    bugsBehavior: {
-		        enumType: exports$1.TypeInfo.BugsBehavior
+		        enumType: exports.TypeInfo.BugsBehavior
 		    },
 		    portfolioBacklogs: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BacklogLevelConfiguration
+		        typeInfo: exports.TypeInfo.BacklogLevelConfiguration
 		    },
 		    requirementBacklog: {
-		        typeInfo: exports$1.TypeInfo.BacklogLevelConfiguration
+		        typeInfo: exports.TypeInfo.BacklogLevelConfiguration
 		    },
 		    taskBacklog: {
-		        typeInfo: exports$1.TypeInfo.BacklogLevelConfiguration
+		        typeInfo: exports.TypeInfo.BacklogLevelConfiguration
 		    }
 		};
-		exports$1.TypeInfo.BacklogLevelConfiguration.fields = {
+		exports.TypeInfo.BacklogLevelConfiguration.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.BacklogType
+		        enumType: exports.TypeInfo.BacklogType
 		    }
 		};
-		exports$1.TypeInfo.Board.fields = {
+		exports.TypeInfo.Board.fields = {
 		    columns: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.BoardColumn
+		        typeInfo: exports.TypeInfo.BoardColumn
 		    }
 		};
-		exports$1.TypeInfo.BoardColumn.fields = {
+		exports.TypeInfo.BoardColumn.fields = {
 		    columnType: {
-		        enumType: exports$1.TypeInfo.BoardColumnType
+		        enumType: exports.TypeInfo.BoardColumnType
 		    }
 		};
-		exports$1.TypeInfo.CapacityContractBase.fields = {
+		exports.TypeInfo.CapacityContractBase.fields = {
 		    daysOff: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DateRange
+		        typeInfo: exports.TypeInfo.DateRange
 		    }
 		};
-		exports$1.TypeInfo.CapacityPatch.fields = {
+		exports.TypeInfo.CapacityPatch.fields = {
 		    daysOff: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DateRange
+		        typeInfo: exports.TypeInfo.DateRange
 		    }
 		};
-		exports$1.TypeInfo.CardFieldSettings.fields = {
+		exports.TypeInfo.CardFieldSettings.fields = {
 		    additionalFields: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.FieldInfo
+		        typeInfo: exports.TypeInfo.FieldInfo
 		    },
 		    assignedToDisplayFormat: {
-		        enumType: exports$1.TypeInfo.IdentityDisplayFormat
+		        enumType: exports.TypeInfo.IdentityDisplayFormat
 		    },
 		    coreFields: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.FieldInfo
+		        typeInfo: exports.TypeInfo.FieldInfo
 		    }
 		};
-		exports$1.TypeInfo.CardSettings.fields = {
+		exports.TypeInfo.CardSettings.fields = {
 		    fields: {
-		        typeInfo: exports$1.TypeInfo.CardFieldSettings
+		        typeInfo: exports.TypeInfo.CardFieldSettings
 		    }
 		};
-		exports$1.TypeInfo.CreatePlan.fields = {
+		exports.TypeInfo.CreatePlan.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.PlanType
+		        enumType: exports.TypeInfo.PlanType
 		    }
 		};
-		exports$1.TypeInfo.DateRange.fields = {
+		exports.TypeInfo.DateRange.fields = {
 		    end: {
 		        isDate: true,
 		    },
@@ -90998,9 +91039,9 @@ function requireWorkInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.DeliveryViewData.fields = {
+		exports.TypeInfo.DeliveryViewData.fields = {
 		    criteriaStatus: {
-		        typeInfo: exports$1.TypeInfo.TimelineCriteriaStatus
+		        typeInfo: exports.TypeInfo.TimelineCriteriaStatus
 		    },
 		    endDate: {
 		        isDate: true,
@@ -91010,29 +91051,29 @@ function requireWorkInterfaces () {
 		    },
 		    teams: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TimelineTeamData
+		        typeInfo: exports.TypeInfo.TimelineTeamData
 		    }
 		};
-		exports$1.TypeInfo.DeliveryViewPropertyCollection.fields = {
+		exports.TypeInfo.DeliveryViewPropertyCollection.fields = {
 		    cardSettings: {
-		        typeInfo: exports$1.TypeInfo.CardSettings
+		        typeInfo: exports.TypeInfo.CardSettings
 		    },
 		    markers: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Marker
+		        typeInfo: exports.TypeInfo.Marker
 		    }
 		};
-		exports$1.TypeInfo.FieldInfo.fields = {
+		exports.TypeInfo.FieldInfo.fields = {
 		    fieldType: {
-		        enumType: exports$1.TypeInfo.FieldType
+		        enumType: exports.TypeInfo.FieldType
 		    }
 		};
-		exports$1.TypeInfo.Marker.fields = {
+		exports.TypeInfo.Marker.fields = {
 		    date: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.Plan.fields = {
+		exports.TypeInfo.Plan.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
@@ -91043,27 +91084,27 @@ function requireWorkInterfaces () {
 		        isDate: true,
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.PlanType
+		        enumType: exports.TypeInfo.PlanType
 		    },
 		    userPermissions: {
-		        enumType: exports$1.TypeInfo.PlanUserPermissions
+		        enumType: exports.TypeInfo.PlanUserPermissions
 		    }
 		};
-		exports$1.TypeInfo.PlanMetadata.fields = {
+		exports.TypeInfo.PlanMetadata.fields = {
 		    modifiedDate: {
 		        isDate: true,
 		    },
 		    userPermissions: {
-		        enumType: exports$1.TypeInfo.PlanUserPermissions
+		        enumType: exports.TypeInfo.PlanUserPermissions
 		    }
 		};
-		exports$1.TypeInfo.TeamCapacity.fields = {
+		exports.TypeInfo.TeamCapacity.fields = {
 		    teamMembers: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TeamMemberCapacityIdentityRef
+		        typeInfo: exports.TypeInfo.TeamMemberCapacityIdentityRef
 		    }
 		};
-		exports$1.TypeInfo.TeamIterationAttributes.fields = {
+		exports.TypeInfo.TeamIterationAttributes.fields = {
 		    finishDate: {
 		        isDate: true,
 		    },
@@ -91071,82 +91112,82 @@ function requireWorkInterfaces () {
 		        isDate: true,
 		    },
 		    timeFrame: {
-		        enumType: exports$1.TypeInfo.TimeFrame
+		        enumType: exports.TypeInfo.TimeFrame
 		    }
 		};
-		exports$1.TypeInfo.TeamMemberCapacity.fields = {
+		exports.TypeInfo.TeamMemberCapacity.fields = {
 		    daysOff: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DateRange
+		        typeInfo: exports.TypeInfo.DateRange
 		    }
 		};
-		exports$1.TypeInfo.TeamMemberCapacityIdentityRef.fields = {
+		exports.TypeInfo.TeamMemberCapacityIdentityRef.fields = {
 		    daysOff: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DateRange
+		        typeInfo: exports.TypeInfo.DateRange
 		    }
 		};
-		exports$1.TypeInfo.TeamSetting.fields = {
+		exports.TypeInfo.TeamSetting.fields = {
 		    backlogIteration: {
-		        typeInfo: exports$1.TypeInfo.TeamSettingsIteration
+		        typeInfo: exports.TypeInfo.TeamSettingsIteration
 		    },
 		    bugsBehavior: {
-		        enumType: exports$1.TypeInfo.BugsBehavior
+		        enumType: exports.TypeInfo.BugsBehavior
 		    },
 		    defaultIteration: {
-		        typeInfo: exports$1.TypeInfo.TeamSettingsIteration
+		        typeInfo: exports.TypeInfo.TeamSettingsIteration
 		    },
 		    workingDays: {
 		        isArray: true,
 		        enumType: SystemInterfaces.TypeInfo.DayOfWeek
 		    }
 		};
-		exports$1.TypeInfo.TeamSettingsDaysOff.fields = {
+		exports.TypeInfo.TeamSettingsDaysOff.fields = {
 		    daysOff: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DateRange
+		        typeInfo: exports.TypeInfo.DateRange
 		    }
 		};
-		exports$1.TypeInfo.TeamSettingsDaysOffPatch.fields = {
+		exports.TypeInfo.TeamSettingsDaysOffPatch.fields = {
 		    daysOff: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.DateRange
+		        typeInfo: exports.TypeInfo.DateRange
 		    }
 		};
-		exports$1.TypeInfo.TeamSettingsIteration.fields = {
+		exports.TypeInfo.TeamSettingsIteration.fields = {
 		    attributes: {
-		        typeInfo: exports$1.TypeInfo.TeamIterationAttributes
+		        typeInfo: exports.TypeInfo.TeamIterationAttributes
 		    }
 		};
-		exports$1.TypeInfo.TeamSettingsPatch.fields = {
+		exports.TypeInfo.TeamSettingsPatch.fields = {
 		    bugsBehavior: {
-		        enumType: exports$1.TypeInfo.BugsBehavior
+		        enumType: exports.TypeInfo.BugsBehavior
 		    },
 		    workingDays: {
 		        isArray: true,
 		        enumType: SystemInterfaces.TypeInfo.DayOfWeek
 		    }
 		};
-		exports$1.TypeInfo.TimelineCriteriaStatus.fields = {
+		exports.TypeInfo.TimelineCriteriaStatus.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.TimelineCriteriaStatusCode
+		        enumType: exports.TypeInfo.TimelineCriteriaStatusCode
 		    }
 		};
-		exports$1.TypeInfo.TimelineIterationStatus.fields = {
+		exports.TypeInfo.TimelineIterationStatus.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.TimelineIterationStatusCode
+		        enumType: exports.TypeInfo.TimelineIterationStatusCode
 		    }
 		};
-		exports$1.TypeInfo.TimelineTeamData.fields = {
+		exports.TypeInfo.TimelineTeamData.fields = {
 		    iterations: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.TimelineTeamIteration
+		        typeInfo: exports.TypeInfo.TimelineTeamIteration
 		    },
 		    status: {
-		        typeInfo: exports$1.TypeInfo.TimelineTeamStatus
+		        typeInfo: exports.TypeInfo.TimelineTeamStatus
 		    }
 		};
-		exports$1.TypeInfo.TimelineTeamIteration.fields = {
+		exports.TypeInfo.TimelineTeamIteration.fields = {
 		    finishDate: {
 		        isDate: true,
 		    },
@@ -91154,17 +91195,17 @@ function requireWorkInterfaces () {
 		        isDate: true,
 		    },
 		    status: {
-		        typeInfo: exports$1.TypeInfo.TimelineIterationStatus
+		        typeInfo: exports.TypeInfo.TimelineIterationStatus
 		    }
 		};
-		exports$1.TypeInfo.TimelineTeamStatus.fields = {
+		exports.TypeInfo.TimelineTeamStatus.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.TimelineTeamStatusCode
+		        enumType: exports.TypeInfo.TimelineTeamStatusCode
 		    }
 		};
-		exports$1.TypeInfo.UpdatePlan.fields = {
+		exports.TypeInfo.UpdatePlan.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.PlanType
+		        enumType: exports.TypeInfo.PlanType
 		    }
 		}; 
 	} (WorkInterfaces));
@@ -93230,9 +93271,9 @@ var hasRequiredPipelinesInterfaces;
 function requirePipelinesInterfaces () {
 	if (hasRequiredPipelinesInterfaces) return PipelinesInterfaces;
 	hasRequiredPipelinesInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.RunState = exports$1.RunResult = exports$1.RepositoryType = exports$1.GetLogExpandOptions = exports$1.GetArtifactExpandOptions = exports$1.ConfigurationType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.RunState = exports.RunResult = exports.RepositoryType = exports.GetLogExpandOptions = exports.GetArtifactExpandOptions = exports.ConfigurationType = void 0;
 		const VSSInterfaces = requireVSSInterfaces();
 		(function (ConfigurationType) {
 		    /**
@@ -93255,7 +93296,7 @@ function requirePipelinesInterfaces () {
 		     * Designer-JSON.
 		     */
 		    ConfigurationType[ConfigurationType["DesignerHyphenJson"] = 2] = "DesignerHyphenJson";
-		})(exports$1.ConfigurationType || (exports$1.ConfigurationType = {}));
+		})(exports.ConfigurationType || (exports.ConfigurationType = {}));
 		(function (GetArtifactExpandOptions) {
 		    /**
 		     * No expansion.
@@ -93265,11 +93306,11 @@ function requirePipelinesInterfaces () {
 		     * Include signed content.
 		     */
 		    GetArtifactExpandOptions[GetArtifactExpandOptions["SignedContent"] = 1] = "SignedContent";
-		})(exports$1.GetArtifactExpandOptions || (exports$1.GetArtifactExpandOptions = {}));
+		})(exports.GetArtifactExpandOptions || (exports.GetArtifactExpandOptions = {}));
 		(function (GetLogExpandOptions) {
 		    GetLogExpandOptions[GetLogExpandOptions["None"] = 0] = "None";
 		    GetLogExpandOptions[GetLogExpandOptions["SignedContent"] = 1] = "SignedContent";
-		})(exports$1.GetLogExpandOptions || (exports$1.GetLogExpandOptions = {}));
+		})(exports.GetLogExpandOptions || (exports.GetLogExpandOptions = {}));
 		(function (RepositoryType) {
 		    RepositoryType[RepositoryType["Unknown"] = 0] = "Unknown";
 		    RepositoryType[RepositoryType["GitHub"] = 1] = "GitHub";
@@ -93277,20 +93318,20 @@ function requirePipelinesInterfaces () {
 		    RepositoryType[RepositoryType["GitHubEnterprise"] = 3] = "GitHubEnterprise";
 		    RepositoryType[RepositoryType["BitBucket"] = 4] = "BitBucket";
 		    RepositoryType[RepositoryType["AzureReposGitHyphenated"] = 2] = "AzureReposGitHyphenated";
-		})(exports$1.RepositoryType || (exports$1.RepositoryType = {}));
+		})(exports.RepositoryType || (exports.RepositoryType = {}));
 		(function (RunResult) {
 		    RunResult[RunResult["Unknown"] = 0] = "Unknown";
 		    RunResult[RunResult["Succeeded"] = 1] = "Succeeded";
 		    RunResult[RunResult["Failed"] = 2] = "Failed";
 		    RunResult[RunResult["Canceled"] = 4] = "Canceled";
-		})(exports$1.RunResult || (exports$1.RunResult = {}));
+		})(exports.RunResult || (exports.RunResult = {}));
 		(function (RunState) {
 		    RunState[RunState["Unknown"] = 0] = "Unknown";
 		    RunState[RunState["InProgress"] = 1] = "InProgress";
 		    RunState[RunState["Canceling"] = 2] = "Canceling";
 		    RunState[RunState["Completed"] = 4] = "Completed";
-		})(exports$1.RunState || (exports$1.RunState = {}));
-		exports$1.TypeInfo = {
+		})(exports.RunState || (exports.RunState = {}));
+		exports.TypeInfo = {
 		    Artifact: {},
 		    ConfigurationType: {
 		        enumValues: {
@@ -93351,22 +93392,22 @@ function requirePipelinesInterfaces () {
 		    },
 		    SignalRConnection: {},
 		};
-		exports$1.TypeInfo.Artifact.fields = {
+		exports.TypeInfo.Artifact.fields = {
 		    signedContent: {
 		        typeInfo: VSSInterfaces.TypeInfo.SignedUrl
 		    }
 		};
-		exports$1.TypeInfo.CreatePipelineConfigurationParameters.fields = {
+		exports.TypeInfo.CreatePipelineConfigurationParameters.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.ConfigurationType
+		        enumType: exports.TypeInfo.ConfigurationType
 		    }
 		};
-		exports$1.TypeInfo.CreatePipelineParameters.fields = {
+		exports.TypeInfo.CreatePipelineParameters.fields = {
 		    configuration: {
-		        typeInfo: exports$1.TypeInfo.CreatePipelineConfigurationParameters
+		        typeInfo: exports.TypeInfo.CreatePipelineConfigurationParameters
 		    }
 		};
-		exports$1.TypeInfo.Log.fields = {
+		exports.TypeInfo.Log.fields = {
 		    createdOn: {
 		        isDate: true,
 		    },
@@ -93377,36 +93418,36 @@ function requirePipelinesInterfaces () {
 		        typeInfo: VSSInterfaces.TypeInfo.SignedUrl
 		    }
 		};
-		exports$1.TypeInfo.LogCollection.fields = {
+		exports.TypeInfo.LogCollection.fields = {
 		    logs: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Log
+		        typeInfo: exports.TypeInfo.Log
 		    },
 		    signedContent: {
 		        typeInfo: VSSInterfaces.TypeInfo.SignedUrl
 		    }
 		};
-		exports$1.TypeInfo.Pipeline.fields = {
+		exports.TypeInfo.Pipeline.fields = {
 		    configuration: {
-		        typeInfo: exports$1.TypeInfo.PipelineConfiguration
+		        typeInfo: exports.TypeInfo.PipelineConfiguration
 		    }
 		};
-		exports$1.TypeInfo.PipelineConfiguration.fields = {
+		exports.TypeInfo.PipelineConfiguration.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.ConfigurationType
+		        enumType: exports.TypeInfo.ConfigurationType
 		    }
 		};
-		exports$1.TypeInfo.Repository.fields = {
+		exports.TypeInfo.Repository.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.RepositoryType
+		        enumType: exports.TypeInfo.RepositoryType
 		    }
 		};
-		exports$1.TypeInfo.RepositoryResource.fields = {
+		exports.TypeInfo.RepositoryResource.fields = {
 		    repository: {
-		        typeInfo: exports$1.TypeInfo.Repository
+		        typeInfo: exports.TypeInfo.Repository
 		    }
 		};
-		exports$1.TypeInfo.Run.fields = {
+		exports.TypeInfo.Run.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
@@ -93414,22 +93455,22 @@ function requirePipelinesInterfaces () {
 		        isDate: true,
 		    },
 		    resources: {
-		        typeInfo: exports$1.TypeInfo.RunResources
+		        typeInfo: exports.TypeInfo.RunResources
 		    },
 		    result: {
-		        enumType: exports$1.TypeInfo.RunResult
+		        enumType: exports.TypeInfo.RunResult
 		    },
 		    state: {
-		        enumType: exports$1.TypeInfo.RunState
+		        enumType: exports.TypeInfo.RunState
 		    }
 		};
-		exports$1.TypeInfo.RunResources.fields = {
+		exports.TypeInfo.RunResources.fields = {
 		    repositories: {
 		        isDictionary: true,
-		        dictionaryValueTypeInfo: exports$1.TypeInfo.RepositoryResource
+		        dictionaryValueTypeInfo: exports.TypeInfo.RepositoryResource
 		    }
 		};
-		exports$1.TypeInfo.SignalRConnection.fields = {
+		exports.TypeInfo.SignalRConnection.fields = {
 		    signedContent: {
 		        typeInfo: VSSInterfaces.TypeInfo.SignedUrl
 		    }
@@ -93986,13 +94027,13 @@ var hasRequiredWorkItemTrackingInterfaces;
 function requireWorkItemTrackingInterfaces () {
 	if (hasRequiredWorkItemTrackingInterfaces) return WorkItemTrackingInterfaces;
 	hasRequiredWorkItemTrackingInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.WorkItemTypeFieldsExpandLevel = exports$1.WorkItemRecentActivityType = exports$1.WorkItemExpand = exports$1.WorkItemErrorPolicy = exports$1.TreeStructureGroup = exports$1.TreeNodeStructureType = exports$1.TemplateType = exports$1.ReportingRevisionsExpand = exports$1.QueryType = exports$1.QueryResultType = exports$1.QueryRecursionOption = exports$1.QueryOption = exports$1.QueryExpand = exports$1.QueryErrorPolicy = exports$1.ProvisioningActionType = exports$1.LogicalOperation = exports$1.LinkQueryMode = exports$1.GetFieldsExpand = exports$1.FieldUsage = exports$1.FieldType = exports$1.CommentSortOrder = exports$1.CommentReactionType = exports$1.CommentFormat = exports$1.CommentExpandOptions = exports$1.ClassificationNodesErrorPolicy = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.WorkItemTypeFieldsExpandLevel = exports.WorkItemRecentActivityType = exports.WorkItemExpand = exports.WorkItemErrorPolicy = exports.TreeStructureGroup = exports.TreeNodeStructureType = exports.TemplateType = exports.ReportingRevisionsExpand = exports.QueryType = exports.QueryResultType = exports.QueryRecursionOption = exports.QueryOption = exports.QueryExpand = exports.QueryErrorPolicy = exports.ProvisioningActionType = exports.LogicalOperation = exports.LinkQueryMode = exports.GetFieldsExpand = exports.FieldUsage = exports.FieldType = exports.CommentSortOrder = exports.CommentReactionType = exports.CommentFormat = exports.CommentExpandOptions = exports.ClassificationNodesErrorPolicy = void 0;
 		(function (ClassificationNodesErrorPolicy) {
 		    ClassificationNodesErrorPolicy[ClassificationNodesErrorPolicy["Fail"] = 1] = "Fail";
 		    ClassificationNodesErrorPolicy[ClassificationNodesErrorPolicy["Omit"] = 2] = "Omit";
-		})(exports$1.ClassificationNodesErrorPolicy || (exports$1.ClassificationNodesErrorPolicy = {}));
+		})(exports.ClassificationNodesErrorPolicy || (exports.ClassificationNodesErrorPolicy = {}));
 		(function (CommentExpandOptions) {
 		    CommentExpandOptions[CommentExpandOptions["None"] = 0] = "None";
 		    /**
@@ -94008,11 +94049,11 @@ function requireWorkItemTrackingInterfaces () {
 		     */
 		    CommentExpandOptions[CommentExpandOptions["RenderedTextOnly"] = 16] = "RenderedTextOnly";
 		    CommentExpandOptions[CommentExpandOptions["All"] = -17] = "All";
-		})(exports$1.CommentExpandOptions || (exports$1.CommentExpandOptions = {}));
+		})(exports.CommentExpandOptions || (exports.CommentExpandOptions = {}));
 		(function (CommentFormat) {
 		    CommentFormat[CommentFormat["Markdown"] = 0] = "Markdown";
 		    CommentFormat[CommentFormat["Html"] = 1] = "Html";
-		})(exports$1.CommentFormat || (exports$1.CommentFormat = {}));
+		})(exports.CommentFormat || (exports.CommentFormat = {}));
 		(function (CommentReactionType) {
 		    CommentReactionType[CommentReactionType["Like"] = 0] = "Like";
 		    CommentReactionType[CommentReactionType["Dislike"] = 1] = "Dislike";
@@ -94020,7 +94061,7 @@ function requireWorkItemTrackingInterfaces () {
 		    CommentReactionType[CommentReactionType["Hooray"] = 3] = "Hooray";
 		    CommentReactionType[CommentReactionType["Smile"] = 4] = "Smile";
 		    CommentReactionType[CommentReactionType["Confused"] = 5] = "Confused";
-		})(exports$1.CommentReactionType || (exports$1.CommentReactionType = {}));
+		})(exports.CommentReactionType || (exports.CommentReactionType = {}));
 		(function (CommentSortOrder) {
 		    /**
 		     * The results will be sorted in Ascending order.
@@ -94030,7 +94071,7 @@ function requireWorkItemTrackingInterfaces () {
 		     * The results will be sorted in Descending order.
 		     */
 		    CommentSortOrder[CommentSortOrder["Desc"] = 2] = "Desc";
-		})(exports$1.CommentSortOrder || (exports$1.CommentSortOrder = {}));
+		})(exports.CommentSortOrder || (exports.CommentSortOrder = {}));
 		(function (FieldType) {
 		    /**
 		     * String field type.
@@ -94088,7 +94129,7 @@ function requireWorkItemTrackingInterfaces () {
 		     * Double picklist field type. When creating a double picklist field from REST API, use "Double" FieldType.
 		     */
 		    FieldType[FieldType["PicklistDouble"] = 13] = "PicklistDouble";
-		})(exports$1.FieldType || (exports$1.FieldType = {}));
+		})(exports.FieldType || (exports.FieldType = {}));
 		(function (FieldUsage) {
 		    /**
 		     * Empty usage.
@@ -94110,7 +94151,7 @@ function requireWorkItemTrackingInterfaces () {
 		     * Work Item Type Extension usage.
 		     */
 		    FieldUsage[FieldUsage["WorkItemTypeExtension"] = 4] = "WorkItemTypeExtension";
-		})(exports$1.FieldUsage || (exports$1.FieldUsage = {}));
+		})(exports.FieldUsage || (exports.FieldUsage = {}));
 		(function (GetFieldsExpand) {
 		    /**
 		     * Default behavior.
@@ -94124,7 +94165,7 @@ function requireWorkItemTrackingInterfaces () {
 		     * Includes fields that have been deleted.
 		     */
 		    GetFieldsExpand[GetFieldsExpand["IncludeDeleted"] = 2] = "IncludeDeleted";
-		})(exports$1.GetFieldsExpand || (exports$1.GetFieldsExpand = {}));
+		})(exports.GetFieldsExpand || (exports.GetFieldsExpand = {}));
 		(function (LinkQueryMode) {
 		    /**
 		     * Returns flat list of work items.
@@ -94148,20 +94189,20 @@ function requireWorkItemTrackingInterfaces () {
 		     */
 		    LinkQueryMode[LinkQueryMode["LinksRecursiveMayContain"] = 5] = "LinksRecursiveMayContain";
 		    LinkQueryMode[LinkQueryMode["LinksRecursiveDoesNotContain"] = 6] = "LinksRecursiveDoesNotContain";
-		})(exports$1.LinkQueryMode || (exports$1.LinkQueryMode = {}));
+		})(exports.LinkQueryMode || (exports.LinkQueryMode = {}));
 		(function (LogicalOperation) {
 		    LogicalOperation[LogicalOperation["NONE"] = 0] = "NONE";
 		    LogicalOperation[LogicalOperation["AND"] = 1] = "AND";
 		    LogicalOperation[LogicalOperation["OR"] = 2] = "OR";
-		})(exports$1.LogicalOperation || (exports$1.LogicalOperation = {}));
+		})(exports.LogicalOperation || (exports.LogicalOperation = {}));
 		(function (ProvisioningActionType) {
 		    ProvisioningActionType[ProvisioningActionType["Import"] = 0] = "Import";
 		    ProvisioningActionType[ProvisioningActionType["Validate"] = 1] = "Validate";
-		})(exports$1.ProvisioningActionType || (exports$1.ProvisioningActionType = {}));
+		})(exports.ProvisioningActionType || (exports.ProvisioningActionType = {}));
 		(function (QueryErrorPolicy) {
 		    QueryErrorPolicy[QueryErrorPolicy["Fail"] = 1] = "Fail";
 		    QueryErrorPolicy[QueryErrorPolicy["Omit"] = 2] = "Omit";
-		})(exports$1.QueryErrorPolicy || (exports$1.QueryErrorPolicy = {}));
+		})(exports.QueryErrorPolicy || (exports.QueryErrorPolicy = {}));
 		(function (QueryExpand) {
 		    /**
 		     * Expands Columns, Links and ChangeInfo
@@ -94183,12 +94224,12 @@ function requireWorkItemTrackingInterfaces () {
 		     * Displays minimal properties and the WIQL text
 		     */
 		    QueryExpand[QueryExpand["Minimal"] = 4] = "Minimal";
-		})(exports$1.QueryExpand || (exports$1.QueryExpand = {}));
+		})(exports.QueryExpand || (exports.QueryExpand = {}));
 		(function (QueryOption) {
 		    QueryOption[QueryOption["Doing"] = 1] = "Doing";
 		    QueryOption[QueryOption["Done"] = 2] = "Done";
 		    QueryOption[QueryOption["Followed"] = 3] = "Followed";
-		})(exports$1.QueryOption || (exports$1.QueryOption = {}));
+		})(exports.QueryOption || (exports.QueryOption = {}));
 		(function (QueryRecursionOption) {
 		    /**
 		     * Returns work items that satisfy the source, even if no linked work item satisfies the target and link criteria.
@@ -94198,7 +94239,7 @@ function requireWorkItemTrackingInterfaces () {
 		     * Returns work items that satisfy the target criteria, even if no work item satisfies the source and link criteria.
 		     */
 		    QueryRecursionOption[QueryRecursionOption["ChildFirst"] = 1] = "ChildFirst";
-		})(exports$1.QueryRecursionOption || (exports$1.QueryRecursionOption = {}));
+		})(exports.QueryRecursionOption || (exports.QueryRecursionOption = {}));
 		(function (QueryResultType) {
 		    /**
 		     * A list of work items (for flat queries).
@@ -94208,7 +94249,7 @@ function requireWorkItemTrackingInterfaces () {
 		     * A list of work item links (for OneHop and Tree queries).
 		     */
 		    QueryResultType[QueryResultType["WorkItemLink"] = 2] = "WorkItemLink";
-		})(exports$1.QueryResultType || (exports$1.QueryResultType = {}));
+		})(exports.QueryResultType || (exports.QueryResultType = {}));
 		(function (QueryType) {
 		    /**
 		     * Gets a flat list of work items.
@@ -94222,7 +94263,7 @@ function requireWorkItemTrackingInterfaces () {
 		     * Gets a list of work items and their direct links.
 		     */
 		    QueryType[QueryType["OneHop"] = 3] = "OneHop";
-		})(exports$1.QueryType || (exports$1.QueryType = {}));
+		})(exports.QueryType || (exports.QueryType = {}));
 		(function (ReportingRevisionsExpand) {
 		    /**
 		     * Default behavior.
@@ -94232,11 +94273,11 @@ function requireWorkItemTrackingInterfaces () {
 		     * Add fields to the response.
 		     */
 		    ReportingRevisionsExpand[ReportingRevisionsExpand["Fields"] = 1] = "Fields";
-		})(exports$1.ReportingRevisionsExpand || (exports$1.ReportingRevisionsExpand = {}));
+		})(exports.ReportingRevisionsExpand || (exports.ReportingRevisionsExpand = {}));
 		(function (TemplateType) {
 		    TemplateType[TemplateType["WorkItemType"] = 0] = "WorkItemType";
 		    TemplateType[TemplateType["GlobalWorkflow"] = 1] = "GlobalWorkflow";
-		})(exports$1.TemplateType || (exports$1.TemplateType = {}));
+		})(exports.TemplateType || (exports.TemplateType = {}));
 		(function (TreeNodeStructureType) {
 		    /**
 		     * Area type.
@@ -94246,11 +94287,11 @@ function requireWorkItemTrackingInterfaces () {
 		     * Iteration type.
 		     */
 		    TreeNodeStructureType[TreeNodeStructureType["Iteration"] = 1] = "Iteration";
-		})(exports$1.TreeNodeStructureType || (exports$1.TreeNodeStructureType = {}));
+		})(exports.TreeNodeStructureType || (exports.TreeNodeStructureType = {}));
 		(function (TreeStructureGroup) {
 		    TreeStructureGroup[TreeStructureGroup["Areas"] = 0] = "Areas";
 		    TreeStructureGroup[TreeStructureGroup["Iterations"] = 1] = "Iterations";
-		})(exports$1.TreeStructureGroup || (exports$1.TreeStructureGroup = {}));
+		})(exports.TreeStructureGroup || (exports.TreeStructureGroup = {}));
 		(function (WorkItemErrorPolicy) {
 		    /**
 		     * Fail work error policy.
@@ -94260,7 +94301,7 @@ function requireWorkItemTrackingInterfaces () {
 		     * Omit work error policy.
 		     */
 		    WorkItemErrorPolicy[WorkItemErrorPolicy["Omit"] = 2] = "Omit";
-		})(exports$1.WorkItemErrorPolicy || (exports$1.WorkItemErrorPolicy = {}));
+		})(exports.WorkItemErrorPolicy || (exports.WorkItemErrorPolicy = {}));
 		(function (WorkItemExpand) {
 		    /**
 		     * Default behavior.
@@ -94282,13 +94323,13 @@ function requireWorkItemTrackingInterfaces () {
 		     * Expands all.
 		     */
 		    WorkItemExpand[WorkItemExpand["All"] = 4] = "All";
-		})(exports$1.WorkItemExpand || (exports$1.WorkItemExpand = {}));
+		})(exports.WorkItemExpand || (exports.WorkItemExpand = {}));
 		(function (WorkItemRecentActivityType) {
 		    WorkItemRecentActivityType[WorkItemRecentActivityType["Visited"] = 0] = "Visited";
 		    WorkItemRecentActivityType[WorkItemRecentActivityType["Edited"] = 1] = "Edited";
 		    WorkItemRecentActivityType[WorkItemRecentActivityType["Deleted"] = 2] = "Deleted";
 		    WorkItemRecentActivityType[WorkItemRecentActivityType["Restored"] = 3] = "Restored";
-		})(exports$1.WorkItemRecentActivityType || (exports$1.WorkItemRecentActivityType = {}));
+		})(exports.WorkItemRecentActivityType || (exports.WorkItemRecentActivityType = {}));
 		(function (WorkItemTypeFieldsExpandLevel) {
 		    /**
 		     * Includes only basic properties of the field.
@@ -94306,8 +94347,8 @@ function requireWorkItemTrackingInterfaces () {
 		     * Includes allowed values and dependent fields of the field.
 		     */
 		    WorkItemTypeFieldsExpandLevel[WorkItemTypeFieldsExpandLevel["All"] = 3] = "All";
-		})(exports$1.WorkItemTypeFieldsExpandLevel || (exports$1.WorkItemTypeFieldsExpandLevel = {}));
-		exports$1.TypeInfo = {
+		})(exports.WorkItemTypeFieldsExpandLevel || (exports.WorkItemTypeFieldsExpandLevel = {}));
+		exports.TypeInfo = {
 		    AccountMyWorkResult: {},
 		    AccountRecentActivityWorkItemModel: {},
 		    AccountRecentActivityWorkItemModel2: {},
@@ -94526,56 +94567,56 @@ function requireWorkItemTrackingInterfaces () {
 		    WorkItemTypeTemplateUpdateModel: {},
 		    WorkItemUpdate: {},
 		};
-		exports$1.TypeInfo.AccountMyWorkResult.fields = {
+		exports.TypeInfo.AccountMyWorkResult.fields = {
 		    workItemDetails: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.AccountWorkWorkItemModel
+		        typeInfo: exports.TypeInfo.AccountWorkWorkItemModel
 		    }
 		};
-		exports$1.TypeInfo.AccountRecentActivityWorkItemModel.fields = {
+		exports.TypeInfo.AccountRecentActivityWorkItemModel.fields = {
 		    activityDate: {
 		        isDate: true,
 		    },
 		    activityType: {
-		        enumType: exports$1.TypeInfo.WorkItemRecentActivityType
+		        enumType: exports.TypeInfo.WorkItemRecentActivityType
 		    },
 		    changedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.AccountRecentActivityWorkItemModel2.fields = {
+		exports.TypeInfo.AccountRecentActivityWorkItemModel2.fields = {
 		    activityDate: {
 		        isDate: true,
 		    },
 		    activityType: {
-		        enumType: exports$1.TypeInfo.WorkItemRecentActivityType
+		        enumType: exports.TypeInfo.WorkItemRecentActivityType
 		    },
 		    changedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.AccountRecentActivityWorkItemModelBase.fields = {
+		exports.TypeInfo.AccountRecentActivityWorkItemModelBase.fields = {
 		    activityDate: {
 		        isDate: true,
 		    },
 		    activityType: {
-		        enumType: exports$1.TypeInfo.WorkItemRecentActivityType
+		        enumType: exports.TypeInfo.WorkItemRecentActivityType
 		    },
 		    changedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.AccountRecentMentionWorkItemModel.fields = {
+		exports.TypeInfo.AccountRecentMentionWorkItemModel.fields = {
 		    mentionedDateField: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.AccountWorkWorkItemModel.fields = {
+		exports.TypeInfo.AccountWorkWorkItemModel.fields = {
 		    changedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.Comment.fields = {
+		exports.TypeInfo.Comment.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
@@ -94583,28 +94624,28 @@ function requireWorkItemTrackingInterfaces () {
 		        isDate: true,
 		    },
 		    format: {
-		        enumType: exports$1.TypeInfo.CommentFormat
+		        enumType: exports.TypeInfo.CommentFormat
 		    },
 		    modifiedDate: {
 		        isDate: true,
 		    },
 		    reactions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.CommentReaction
+		        typeInfo: exports.TypeInfo.CommentReaction
 		    }
 		};
-		exports$1.TypeInfo.CommentList.fields = {
+		exports.TypeInfo.CommentList.fields = {
 		    comments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Comment
+		        typeInfo: exports.TypeInfo.Comment
 		    }
 		};
-		exports$1.TypeInfo.CommentReaction.fields = {
+		exports.TypeInfo.CommentReaction.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.CommentReactionType
+		        enumType: exports.TypeInfo.CommentReactionType
 		    }
 		};
-		exports$1.TypeInfo.CommentVersion.fields = {
+		exports.TypeInfo.CommentVersion.fields = {
 		    createdDate: {
 		        isDate: true,
 		    },
@@ -94615,32 +94656,32 @@ function requireWorkItemTrackingInterfaces () {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.ExternalDeployment.fields = {
+		exports.TypeInfo.ExternalDeployment.fields = {
 		    statusDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.QueryBatchGetRequest.fields = {
+		exports.TypeInfo.QueryBatchGetRequest.fields = {
 		    $expand: {
-		        enumType: exports$1.TypeInfo.QueryExpand
+		        enumType: exports.TypeInfo.QueryExpand
 		    },
 		    errorPolicy: {
-		        enumType: exports$1.TypeInfo.QueryErrorPolicy
+		        enumType: exports.TypeInfo.QueryErrorPolicy
 		    }
 		};
-		exports$1.TypeInfo.QueryHierarchyItem.fields = {
+		exports.TypeInfo.QueryHierarchyItem.fields = {
 		    children: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.QueryHierarchyItem
+		        typeInfo: exports.TypeInfo.QueryHierarchyItem
 		    },
 		    clauses: {
-		        typeInfo: exports$1.TypeInfo.WorkItemQueryClause
+		        typeInfo: exports.TypeInfo.WorkItemQueryClause
 		    },
 		    createdDate: {
 		        isDate: true,
 		    },
 		    filterOptions: {
-		        enumType: exports$1.TypeInfo.LinkQueryMode
+		        enumType: exports.TypeInfo.LinkQueryMode
 		    },
 		    lastExecutedDate: {
 		        isDate: true,
@@ -94649,116 +94690,116 @@ function requireWorkItemTrackingInterfaces () {
 		        isDate: true,
 		    },
 		    linkClauses: {
-		        typeInfo: exports$1.TypeInfo.WorkItemQueryClause
+		        typeInfo: exports.TypeInfo.WorkItemQueryClause
 		    },
 		    queryRecursionOption: {
-		        enumType: exports$1.TypeInfo.QueryRecursionOption
+		        enumType: exports.TypeInfo.QueryRecursionOption
 		    },
 		    queryType: {
-		        enumType: exports$1.TypeInfo.QueryType
+		        enumType: exports.TypeInfo.QueryType
 		    },
 		    sourceClauses: {
-		        typeInfo: exports$1.TypeInfo.WorkItemQueryClause
+		        typeInfo: exports.TypeInfo.WorkItemQueryClause
 		    },
 		    targetClauses: {
-		        typeInfo: exports$1.TypeInfo.WorkItemQueryClause
+		        typeInfo: exports.TypeInfo.WorkItemQueryClause
 		    }
 		};
-		exports$1.TypeInfo.QueryHierarchyItemsResult.fields = {
+		exports.TypeInfo.QueryHierarchyItemsResult.fields = {
 		    value: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.QueryHierarchyItem
+		        typeInfo: exports.TypeInfo.QueryHierarchyItem
 		    }
 		};
-		exports$1.TypeInfo.WorkItemBatchGetRequest.fields = {
+		exports.TypeInfo.WorkItemBatchGetRequest.fields = {
 		    $expand: {
-		        enumType: exports$1.TypeInfo.WorkItemExpand
+		        enumType: exports.TypeInfo.WorkItemExpand
 		    },
 		    asOf: {
 		        isDate: true,
 		    },
 		    errorPolicy: {
-		        enumType: exports$1.TypeInfo.WorkItemErrorPolicy
+		        enumType: exports.TypeInfo.WorkItemErrorPolicy
 		    }
 		};
-		exports$1.TypeInfo.WorkItemClassificationNode.fields = {
+		exports.TypeInfo.WorkItemClassificationNode.fields = {
 		    children: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.WorkItemClassificationNode
+		        typeInfo: exports.TypeInfo.WorkItemClassificationNode
 		    },
 		    structureType: {
-		        enumType: exports$1.TypeInfo.TreeNodeStructureType
+		        enumType: exports.TypeInfo.TreeNodeStructureType
 		    }
 		};
-		exports$1.TypeInfo.WorkItemComment.fields = {
+		exports.TypeInfo.WorkItemComment.fields = {
 		    format: {
-		        enumType: exports$1.TypeInfo.CommentFormat
+		        enumType: exports.TypeInfo.CommentFormat
 		    },
 		    revisedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.WorkItemComments.fields = {
+		exports.TypeInfo.WorkItemComments.fields = {
 		    comments: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.WorkItemComment
+		        typeInfo: exports.TypeInfo.WorkItemComment
 		    }
 		};
-		exports$1.TypeInfo.WorkItemField.fields = {
+		exports.TypeInfo.WorkItemField.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.FieldType
+		        enumType: exports.TypeInfo.FieldType
 		    },
 		    usage: {
-		        enumType: exports$1.TypeInfo.FieldUsage
+		        enumType: exports.TypeInfo.FieldUsage
 		    }
 		};
-		exports$1.TypeInfo.WorkItemField2.fields = {
+		exports.TypeInfo.WorkItemField2.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.FieldType
+		        enumType: exports.TypeInfo.FieldType
 		    },
 		    usage: {
-		        enumType: exports$1.TypeInfo.FieldUsage
+		        enumType: exports.TypeInfo.FieldUsage
 		    }
 		};
-		exports$1.TypeInfo.WorkItemHistory.fields = {
+		exports.TypeInfo.WorkItemHistory.fields = {
 		    revisedDate: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.WorkItemQueryClause.fields = {
+		exports.TypeInfo.WorkItemQueryClause.fields = {
 		    clauses: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.WorkItemQueryClause
+		        typeInfo: exports.TypeInfo.WorkItemQueryClause
 		    },
 		    logicalOperator: {
-		        enumType: exports$1.TypeInfo.LogicalOperation
+		        enumType: exports.TypeInfo.LogicalOperation
 		    }
 		};
-		exports$1.TypeInfo.WorkItemQueryResult.fields = {
+		exports.TypeInfo.WorkItemQueryResult.fields = {
 		    asOf: {
 		        isDate: true,
 		    },
 		    queryResultType: {
-		        enumType: exports$1.TypeInfo.QueryResultType
+		        enumType: exports.TypeInfo.QueryResultType
 		    },
 		    queryType: {
-		        enumType: exports$1.TypeInfo.QueryType
+		        enumType: exports.TypeInfo.QueryType
 		    }
 		};
-		exports$1.TypeInfo.WorkItemTagDefinition.fields = {
+		exports.TypeInfo.WorkItemTagDefinition.fields = {
 		    lastUpdated: {
 		        isDate: true,
 		    }
 		};
-		exports$1.TypeInfo.WorkItemTypeTemplateUpdateModel.fields = {
+		exports.TypeInfo.WorkItemTypeTemplateUpdateModel.fields = {
 		    actionType: {
-		        enumType: exports$1.TypeInfo.ProvisioningActionType
+		        enumType: exports.TypeInfo.ProvisioningActionType
 		    },
 		    templateType: {
-		        enumType: exports$1.TypeInfo.TemplateType
+		        enumType: exports.TypeInfo.TemplateType
 		    }
 		};
-		exports$1.TypeInfo.WorkItemUpdate.fields = {
+		exports.TypeInfo.WorkItemUpdate.fields = {
 		    revisedDate: {
 		        isDate: true,
 		    }
@@ -97643,9 +97684,9 @@ var hasRequiredWorkItemTrackingProcessInterfaces;
 function requireWorkItemTrackingProcessInterfaces () {
 	if (hasRequiredWorkItemTrackingProcessInterfaces) return WorkItemTrackingProcessInterfaces;
 	hasRequiredWorkItemTrackingProcessInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.WorkItemTypeClass = exports$1.RuleConditionType = exports$1.RuleActionType = exports$1.ProcessWorkItemTypeFieldsExpandLevel = exports$1.ProcessClass = exports$1.PageType = exports$1.GetWorkItemTypeExpand = exports$1.GetProcessExpandLevel = exports$1.GetBehaviorsExpand = exports$1.FieldType = exports$1.CustomizationType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.WorkItemTypeClass = exports.RuleConditionType = exports.RuleActionType = exports.ProcessWorkItemTypeFieldsExpandLevel = exports.ProcessClass = exports.PageType = exports.GetWorkItemTypeExpand = exports.GetProcessExpandLevel = exports.GetBehaviorsExpand = exports.FieldType = exports.CustomizationType = void 0;
 		(function (CustomizationType) {
 		    /**
 		     * Customization-type is System if is system generated workitemtype.
@@ -97659,7 +97700,7 @@ function requireWorkItemTrackingProcessInterfaces () {
 		     * Customization-type is Custom if the newly created workitemtype is customized.
 		     */
 		    CustomizationType[CustomizationType["Custom"] = 3] = "Custom";
-		})(exports$1.CustomizationType || (exports$1.CustomizationType = {}));
+		})(exports.CustomizationType || (exports.CustomizationType = {}));
 		(function (FieldType) {
 		    /**
 		     * String field type.
@@ -97717,7 +97758,7 @@ function requireWorkItemTrackingProcessInterfaces () {
 		     * Double picklist field type.
 		     */
 		    FieldType[FieldType["PicklistDouble"] = 16] = "PicklistDouble";
-		})(exports$1.FieldType || (exports$1.FieldType = {}));
+		})(exports.FieldType || (exports.FieldType = {}));
 		(function (GetBehaviorsExpand) {
 		    /**
 		     * Default none option.
@@ -97731,7 +97772,7 @@ function requireWorkItemTrackingProcessInterfaces () {
 		     * This option returns fields associated with this behavior and all behaviors from which it inherits.
 		     */
 		    GetBehaviorsExpand[GetBehaviorsExpand["CombinedFields"] = 2] = "CombinedFields";
-		})(exports$1.GetBehaviorsExpand || (exports$1.GetBehaviorsExpand = {}));
+		})(exports.GetBehaviorsExpand || (exports.GetBehaviorsExpand = {}));
 		(function (GetProcessExpandLevel) {
 		    /**
 		     * No expand level.
@@ -97741,7 +97782,7 @@ function requireWorkItemTrackingProcessInterfaces () {
 		     * Projects expand level.
 		     */
 		    GetProcessExpandLevel[GetProcessExpandLevel["Projects"] = 1] = "Projects";
-		})(exports$1.GetProcessExpandLevel || (exports$1.GetProcessExpandLevel = {}));
+		})(exports.GetProcessExpandLevel || (exports.GetProcessExpandLevel = {}));
 		(function (GetWorkItemTypeExpand) {
 		    /**
 		     * Returns no properties in get work item type response.
@@ -97759,7 +97800,7 @@ function requireWorkItemTrackingProcessInterfaces () {
 		     * Returns layout property in get work item type response.
 		     */
 		    GetWorkItemTypeExpand[GetWorkItemTypeExpand["Layout"] = 4] = "Layout";
-		})(exports$1.GetWorkItemTypeExpand || (exports$1.GetWorkItemTypeExpand = {}));
+		})(exports.GetWorkItemTypeExpand || (exports.GetWorkItemTypeExpand = {}));
 		(function (PageType) {
 		    /**
 		     * Custom page type.
@@ -97777,12 +97818,12 @@ function requireWorkItemTrackingProcessInterfaces () {
 		     * Attachment page type.
 		     */
 		    PageType[PageType["Attachments"] = 4] = "Attachments";
-		})(exports$1.PageType || (exports$1.PageType = {}));
+		})(exports.PageType || (exports.PageType = {}));
 		(function (ProcessClass) {
 		    ProcessClass[ProcessClass["System"] = 0] = "System";
 		    ProcessClass[ProcessClass["Derived"] = 1] = "Derived";
 		    ProcessClass[ProcessClass["Custom"] = 2] = "Custom";
-		})(exports$1.ProcessClass || (exports$1.ProcessClass = {}));
+		})(exports.ProcessClass || (exports.ProcessClass = {}));
 		(function (ProcessWorkItemTypeFieldsExpandLevel) {
 		    /**
 		     * Includes only basic properties of the field.
@@ -97796,7 +97837,7 @@ function requireWorkItemTrackingProcessInterfaces () {
 		     * Includes allowed values and dependent fields of the field.
 		     */
 		    ProcessWorkItemTypeFieldsExpandLevel[ProcessWorkItemTypeFieldsExpandLevel["All"] = 2] = "All";
-		})(exports$1.ProcessWorkItemTypeFieldsExpandLevel || (exports$1.ProcessWorkItemTypeFieldsExpandLevel = {}));
+		})(exports.ProcessWorkItemTypeFieldsExpandLevel || (exports.ProcessWorkItemTypeFieldsExpandLevel = {}));
 		(function (RuleActionType) {
 		    /**
 		     * Make the target field required. Example : {"actionType":"$makeRequired","targetField":"Microsoft.VSTS.Common.Activity","value":""}
@@ -97858,7 +97899,7 @@ function requireWorkItemTrackingProcessInterfaces () {
 		     * Disallows a field from being set to a specific value.
 		     */
 		    RuleActionType[RuleActionType["DisallowValue"] = 15] = "DisallowValue";
-		})(exports$1.RuleActionType || (exports$1.RuleActionType = {}));
+		})(exports.RuleActionType || (exports.RuleActionType = {}));
 		(function (RuleConditionType) {
 		    /**
 		     * $When. This condition limits the execution of its children to cases when another field has a particular value, i.e. when the Is value of the referenced field is equal to the given literal value.
@@ -97893,13 +97934,13 @@ function requireWorkItemTrackingProcessInterfaces () {
 		     * This condition checks if current user is not member of a particular group. This condition does not have any 1:1 mapping with any server side rule condition, rather this is a dummy condition added for customer simplicity of understanding. This condition is later translated to a NOT membership filter . e.g. If the condition is : WhenCurrentUserIsNotMemberOfGroup "Approvers" then "MakeRequired" Field1.Here it translates to a Not rule , "MakeRequired" not "Approvers"
 		     */
 		    RuleConditionType[RuleConditionType["WhenCurrentUserIsNotMemberOfGroup"] = 12] = "WhenCurrentUserIsNotMemberOfGroup";
-		})(exports$1.RuleConditionType || (exports$1.RuleConditionType = {}));
+		})(exports.RuleConditionType || (exports.RuleConditionType = {}));
 		(function (WorkItemTypeClass) {
 		    WorkItemTypeClass[WorkItemTypeClass["System"] = 0] = "System";
 		    WorkItemTypeClass[WorkItemTypeClass["Derived"] = 1] = "Derived";
 		    WorkItemTypeClass[WorkItemTypeClass["Custom"] = 2] = "Custom";
-		})(exports$1.WorkItemTypeClass || (exports$1.WorkItemTypeClass = {}));
-		exports$1.TypeInfo = {
+		})(exports.WorkItemTypeClass || (exports.WorkItemTypeClass = {}));
+		exports.TypeInfo = {
 		    CreateProcessRuleRequest: {},
 		    CustomizationType: {
 		        enumValues: {
@@ -98027,120 +98068,120 @@ function requireWorkItemTrackingProcessInterfaces () {
 		    },
 		    WorkItemTypeModel: {},
 		};
-		exports$1.TypeInfo.CreateProcessRuleRequest.fields = {
+		exports.TypeInfo.CreateProcessRuleRequest.fields = {
 		    actions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RuleAction
+		        typeInfo: exports.TypeInfo.RuleAction
 		    },
 		    conditions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RuleCondition
+		        typeInfo: exports.TypeInfo.RuleCondition
 		    }
 		};
-		exports$1.TypeInfo.FieldModel.fields = {
+		exports.TypeInfo.FieldModel.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.FieldType
+		        enumType: exports.TypeInfo.FieldType
 		    }
 		};
-		exports$1.TypeInfo.FormLayout.fields = {
+		exports.TypeInfo.FormLayout.fields = {
 		    pages: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Page
+		        typeInfo: exports.TypeInfo.Page
 		    }
 		};
-		exports$1.TypeInfo.Page.fields = {
+		exports.TypeInfo.Page.fields = {
 		    pageType: {
-		        enumType: exports$1.TypeInfo.PageType
+		        enumType: exports.TypeInfo.PageType
 		    }
 		};
-		exports$1.TypeInfo.ProcessBehavior.fields = {
+		exports.TypeInfo.ProcessBehavior.fields = {
 		    customization: {
-		        enumType: exports$1.TypeInfo.CustomizationType
+		        enumType: exports.TypeInfo.CustomizationType
 		    }
 		};
-		exports$1.TypeInfo.ProcessInfo.fields = {
+		exports.TypeInfo.ProcessInfo.fields = {
 		    customizationType: {
-		        enumType: exports$1.TypeInfo.CustomizationType
+		        enumType: exports.TypeInfo.CustomizationType
 		    }
 		};
-		exports$1.TypeInfo.ProcessModel.fields = {
+		exports.TypeInfo.ProcessModel.fields = {
 		    properties: {
-		        typeInfo: exports$1.TypeInfo.ProcessProperties
+		        typeInfo: exports.TypeInfo.ProcessProperties
 		    }
 		};
-		exports$1.TypeInfo.ProcessProperties.fields = {
+		exports.TypeInfo.ProcessProperties.fields = {
 		    class: {
-		        enumType: exports$1.TypeInfo.ProcessClass
+		        enumType: exports.TypeInfo.ProcessClass
 		    }
 		};
-		exports$1.TypeInfo.ProcessRule.fields = {
+		exports.TypeInfo.ProcessRule.fields = {
 		    actions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RuleAction
+		        typeInfo: exports.TypeInfo.RuleAction
 		    },
 		    conditions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RuleCondition
+		        typeInfo: exports.TypeInfo.RuleCondition
 		    },
 		    customizationType: {
-		        enumType: exports$1.TypeInfo.CustomizationType
+		        enumType: exports.TypeInfo.CustomizationType
 		    }
 		};
-		exports$1.TypeInfo.ProcessWorkItemType.fields = {
+		exports.TypeInfo.ProcessWorkItemType.fields = {
 		    customization: {
-		        enumType: exports$1.TypeInfo.CustomizationType
+		        enumType: exports.TypeInfo.CustomizationType
 		    },
 		    layout: {
-		        typeInfo: exports$1.TypeInfo.FormLayout
+		        typeInfo: exports.TypeInfo.FormLayout
 		    },
 		    states: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.WorkItemStateResultModel
+		        typeInfo: exports.TypeInfo.WorkItemStateResultModel
 		    }
 		};
-		exports$1.TypeInfo.ProcessWorkItemTypeField.fields = {
+		exports.TypeInfo.ProcessWorkItemTypeField.fields = {
 		    customization: {
-		        enumType: exports$1.TypeInfo.CustomizationType
+		        enumType: exports.TypeInfo.CustomizationType
 		    },
 		    type: {
-		        enumType: exports$1.TypeInfo.FieldType
+		        enumType: exports.TypeInfo.FieldType
 		    }
 		};
-		exports$1.TypeInfo.RuleAction.fields = {
+		exports.TypeInfo.RuleAction.fields = {
 		    actionType: {
-		        enumType: exports$1.TypeInfo.RuleActionType
+		        enumType: exports.TypeInfo.RuleActionType
 		    }
 		};
-		exports$1.TypeInfo.RuleCondition.fields = {
+		exports.TypeInfo.RuleCondition.fields = {
 		    conditionType: {
-		        enumType: exports$1.TypeInfo.RuleConditionType
+		        enumType: exports.TypeInfo.RuleConditionType
 		    }
 		};
-		exports$1.TypeInfo.UpdateProcessRuleRequest.fields = {
+		exports.TypeInfo.UpdateProcessRuleRequest.fields = {
 		    actions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RuleAction
+		        typeInfo: exports.TypeInfo.RuleAction
 		    },
 		    conditions: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.RuleCondition
+		        typeInfo: exports.TypeInfo.RuleCondition
 		    }
 		};
-		exports$1.TypeInfo.WorkItemStateResultModel.fields = {
+		exports.TypeInfo.WorkItemStateResultModel.fields = {
 		    customizationType: {
-		        enumType: exports$1.TypeInfo.CustomizationType
+		        enumType: exports.TypeInfo.CustomizationType
 		    }
 		};
-		exports$1.TypeInfo.WorkItemTypeModel.fields = {
+		exports.TypeInfo.WorkItemTypeModel.fields = {
 		    class: {
-		        enumType: exports$1.TypeInfo.WorkItemTypeClass
+		        enumType: exports.TypeInfo.WorkItemTypeClass
 		    },
 		    layout: {
-		        typeInfo: exports$1.TypeInfo.FormLayout
+		        typeInfo: exports.TypeInfo.FormLayout
 		    },
 		    states: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.WorkItemStateResultModel
+		        typeInfo: exports.TypeInfo.WorkItemStateResultModel
 		    }
 		}; 
 	} (WorkItemTrackingProcessInterfaces));
@@ -99909,9 +99950,9 @@ var hasRequiredWorkItemTrackingProcessDefinitionsInterfaces;
 function requireWorkItemTrackingProcessDefinitionsInterfaces () {
 	if (hasRequiredWorkItemTrackingProcessDefinitionsInterfaces) return WorkItemTrackingProcessDefinitionsInterfaces;
 	hasRequiredWorkItemTrackingProcessDefinitionsInterfaces = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.TypeInfo = exports$1.WorkItemTypeClass = exports$1.PageType = exports$1.GetWorkItemTypeExpand = exports$1.FieldType = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.WorkItemTypeClass = exports.PageType = exports.GetWorkItemTypeExpand = exports.FieldType = void 0;
 		(function (FieldType) {
 		    /**
 		     * String field type.
@@ -99969,25 +100010,25 @@ function requireWorkItemTrackingProcessDefinitionsInterfaces () {
 		     * Double picklist field type.
 		     */
 		    FieldType[FieldType["PicklistDouble"] = 16] = "PicklistDouble";
-		})(exports$1.FieldType || (exports$1.FieldType = {}));
+		})(exports.FieldType || (exports.FieldType = {}));
 		(function (GetWorkItemTypeExpand) {
 		    GetWorkItemTypeExpand[GetWorkItemTypeExpand["None"] = 0] = "None";
 		    GetWorkItemTypeExpand[GetWorkItemTypeExpand["States"] = 1] = "States";
 		    GetWorkItemTypeExpand[GetWorkItemTypeExpand["Behaviors"] = 2] = "Behaviors";
 		    GetWorkItemTypeExpand[GetWorkItemTypeExpand["Layout"] = 4] = "Layout";
-		})(exports$1.GetWorkItemTypeExpand || (exports$1.GetWorkItemTypeExpand = {}));
+		})(exports.GetWorkItemTypeExpand || (exports.GetWorkItemTypeExpand = {}));
 		(function (PageType) {
 		    PageType[PageType["Custom"] = 1] = "Custom";
 		    PageType[PageType["History"] = 2] = "History";
 		    PageType[PageType["Links"] = 3] = "Links";
 		    PageType[PageType["Attachments"] = 4] = "Attachments";
-		})(exports$1.PageType || (exports$1.PageType = {}));
+		})(exports.PageType || (exports.PageType = {}));
 		(function (WorkItemTypeClass) {
 		    WorkItemTypeClass[WorkItemTypeClass["System"] = 0] = "System";
 		    WorkItemTypeClass[WorkItemTypeClass["Derived"] = 1] = "Derived";
 		    WorkItemTypeClass[WorkItemTypeClass["Custom"] = 2] = "Custom";
-		})(exports$1.WorkItemTypeClass || (exports$1.WorkItemTypeClass = {}));
-		exports$1.TypeInfo = {
+		})(exports.WorkItemTypeClass || (exports.WorkItemTypeClass = {}));
+		exports.TypeInfo = {
 		    FieldModel: {},
 		    FieldType: {
 		        enumValues: {
@@ -100036,38 +100077,38 @@ function requireWorkItemTrackingProcessDefinitionsInterfaces () {
 		    WorkItemTypeFieldModel2: {},
 		    WorkItemTypeModel: {},
 		};
-		exports$1.TypeInfo.FieldModel.fields = {
+		exports.TypeInfo.FieldModel.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.FieldType
+		        enumType: exports.TypeInfo.FieldType
 		    }
 		};
-		exports$1.TypeInfo.FormLayout.fields = {
+		exports.TypeInfo.FormLayout.fields = {
 		    pages: {
 		        isArray: true,
-		        typeInfo: exports$1.TypeInfo.Page
+		        typeInfo: exports.TypeInfo.Page
 		    }
 		};
-		exports$1.TypeInfo.Page.fields = {
+		exports.TypeInfo.Page.fields = {
 		    pageType: {
-		        enumType: exports$1.TypeInfo.PageType
+		        enumType: exports.TypeInfo.PageType
 		    }
 		};
-		exports$1.TypeInfo.WorkItemTypeFieldModel.fields = {
+		exports.TypeInfo.WorkItemTypeFieldModel.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.FieldType
+		        enumType: exports.TypeInfo.FieldType
 		    }
 		};
-		exports$1.TypeInfo.WorkItemTypeFieldModel2.fields = {
+		exports.TypeInfo.WorkItemTypeFieldModel2.fields = {
 		    type: {
-		        enumType: exports$1.TypeInfo.FieldType
+		        enumType: exports.TypeInfo.FieldType
 		    }
 		};
-		exports$1.TypeInfo.WorkItemTypeModel.fields = {
+		exports.TypeInfo.WorkItemTypeModel.fields = {
 		    class: {
-		        enumType: exports$1.TypeInfo.WorkItemTypeClass
+		        enumType: exports.TypeInfo.WorkItemTypeClass
 		    },
 		    layout: {
-		        typeInfo: exports$1.TypeInfo.FormLayout
+		        typeInfo: exports.TypeInfo.FormLayout
 		    }
 		}; 
 	} (WorkItemTrackingProcessDefinitionsInterfaces));
@@ -104431,10 +104472,10 @@ function requireMd4 () {
 		   */
 		  Md4.prototype.buffer = Md4.prototype.arrayBuffer;
 
-		  var exports$1 = createMethod();
+		  var exports = createMethod();
 
 		  if (COMMON_JS) {
-		    module.exports = exports$1;
+		    module.exports = exports;
 		  } else {
 		    /**
 		     * @method md4
@@ -104453,7 +104494,7 @@ function requireMd4 () {
 		     * md4([]); // 31d6cfe0d16ae931b73c59d7e0c089c0
 		     * md4(new Uint8Array([])); // 31d6cfe0d16ae931b73c59d7e0c089c0
 		     */
-		    root.md4 = exports$1;
+		    root.md4 = exports;
 		  }
 		})(); 
 	} (md4));
@@ -105341,7 +105382,7 @@ var hasRequiredNtlm$2;
 function requireNtlm$2 () {
 	if (hasRequiredNtlm$2) return ntlm$1;
 	hasRequiredNtlm$2 = 1;
-	(function (exports$1) {
+	(function (exports) {
 		var $ = requireCommon();
 		var lmhashbuf = requireSmbhash().lmhashbuf;
 		var nthashbuf = requireSmbhash().nthashbuf;
@@ -105547,25 +105588,25 @@ function requireNtlm$2 () {
 		  return out;
 		}
 
-		exports$1.encodeType1 = encodeType1;
-		exports$1.decodeType2 = decodeType2;
-		exports$1.encodeType3 = encodeType3;
+		exports.encodeType1 = encodeType1;
+		exports.decodeType2 = decodeType2;
+		exports.encodeType3 = encodeType3;
 
 		// Convenience methods.
 
-		exports$1.challengeHeader = function (hostname, domain) {
-		  return 'NTLM ' + exports$1.encodeType1(hostname, domain).toString('base64');
+		exports.challengeHeader = function (hostname, domain) {
+		  return 'NTLM ' + exports.encodeType1(hostname, domain).toString('base64');
 		};
 
-		exports$1.responseHeader = function (res, url, domain, username, password) {
+		exports.responseHeader = function (res, url, domain, username, password) {
 		  var serverNonce = Buffer.from((res.headers['www-authenticate'].match(/^NTLM\s+(.+?)(,|\s+|$)/) || [])[1], 'base64');
 		  var hostname = require$$0$8.parse(url).hostname;
-		  return 'NTLM ' + exports$1.encodeType3(username, hostname, domain, exports$1.decodeType2(serverNonce), password).toString('base64')
+		  return 'NTLM ' + exports.encodeType3(username, hostname, domain, exports.decodeType2(serverNonce), password).toString('base64')
 		};
 
 		// Import smbhash module.
 
-		exports$1.smbhash = requireSmbhash(); 
+		exports.smbhash = requireSmbhash(); 
 	} (ntlm$1));
 	return ntlm$1;
 }
@@ -105761,17 +105802,17 @@ var hasRequiredHandlers;
 function requireHandlers () {
 	if (hasRequiredHandlers) return Handlers;
 	hasRequiredHandlers = 1;
-	(function (exports$1) {
-		Object.defineProperty(exports$1, "__esModule", { value: true });
-		exports$1.PersonalAccessTokenCredentialHandler = exports$1.NtlmCredentialHandler = exports$1.BearerCredentialHandler = exports$1.BasicCredentialHandler = void 0;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.PersonalAccessTokenCredentialHandler = exports.NtlmCredentialHandler = exports.BearerCredentialHandler = exports.BasicCredentialHandler = void 0;
 		var basiccreds_1 = requireBasiccreds$1();
-		Object.defineProperty(exports$1, "BasicCredentialHandler", { enumerable: true, get: function () { return basiccreds_1.BasicCredentialHandler; } });
+		Object.defineProperty(exports, "BasicCredentialHandler", { enumerable: true, get: function () { return basiccreds_1.BasicCredentialHandler; } });
 		var bearertoken_1 = requireBearertoken$1();
-		Object.defineProperty(exports$1, "BearerCredentialHandler", { enumerable: true, get: function () { return bearertoken_1.BearerCredentialHandler; } });
+		Object.defineProperty(exports, "BearerCredentialHandler", { enumerable: true, get: function () { return bearertoken_1.BearerCredentialHandler; } });
 		var ntlm_1 = requireNtlm$1();
-		Object.defineProperty(exports$1, "NtlmCredentialHandler", { enumerable: true, get: function () { return ntlm_1.NtlmCredentialHandler; } });
+		Object.defineProperty(exports, "NtlmCredentialHandler", { enumerable: true, get: function () { return ntlm_1.NtlmCredentialHandler; } });
 		var personalaccesstoken_1 = requirePersonalaccesstoken$1();
-		Object.defineProperty(exports$1, "PersonalAccessTokenCredentialHandler", { enumerable: true, get: function () { return personalaccesstoken_1.PersonalAccessTokenCredentialHandler; } }); 
+		Object.defineProperty(exports, "PersonalAccessTokenCredentialHandler", { enumerable: true, get: function () { return personalaccesstoken_1.PersonalAccessTokenCredentialHandler; } }); 
 	} (Handlers));
 	return Handlers;
 }
