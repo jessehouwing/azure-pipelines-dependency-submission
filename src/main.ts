@@ -58,8 +58,7 @@ export async function run(): Promise<void> {
     core.debug(`Is pull request: ${isPullRequest}`)
 
     const pullRequest = github.context.payload.pull_request as
-      | { head?: { sha?: string; ref?: string } }
-      | undefined
+      { head?: { sha?: string; ref?: string } } | undefined
 
     const sha =
       isPullRequest && pullRequest?.head?.sha
