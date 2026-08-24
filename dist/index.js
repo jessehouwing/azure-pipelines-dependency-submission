@@ -13,9 +13,9 @@ import fs__default, { promises, existsSync, readFileSync, realpathSync, readlink
 import * as path from 'path';
 import path__default from 'path';
 import http from 'http';
-import https from 'https';
+import require$$1 from 'https';
 import 'net';
-import require$$1 from 'tls';
+import require$$1$1 from 'tls';
 import events$1 from 'events';
 import 'assert';
 import require$$0$1 from 'util';
@@ -29,23 +29,23 @@ import require$$7 from 'node:querystring';
 import require$$8, { EventEmitter } from 'node:events';
 import require$$0$7 from 'node:diagnostics_channel';
 import require$$5 from 'node:tls';
-import require$$1$2 from 'node:zlib';
+import require$$1$3 from 'node:zlib';
 import require$$5$1 from 'node:perf_hooks';
 import require$$8$1 from 'node:util/types';
-import require$$1$1 from 'node:worker_threads';
+import require$$1$2 from 'node:worker_threads';
 import require$$10 from 'node:crypto';
 import require$$5$2 from 'node:http2';
-import require$$1$3, { fileURLToPath } from 'node:url';
+import require$$1$4, { fileURLToPath } from 'node:url';
 import require$$5$3 from 'node:async_hooks';
-import require$$1$4 from 'node:console';
-import require$$1$5 from 'node:dns';
+import require$$1$5 from 'node:console';
+import require$$1$6 from 'node:dns';
 import require$$5$4 from 'string_decoder';
 import 'child_process';
 import 'timers';
 import require$$0$8 from 'url';
-import require$$3 from 'zlib';
+import require$$1$7 from 'zlib';
 import require$$0$9 from 'stream';
-import require$$1$6 from 'buffer';
+import require$$1$8 from 'buffer';
 import { win32, posix } from 'node:path';
 import * as xi from 'node:fs';
 import { realpath, readlink, readdir as readdir$1, lstat as lstat$1 } from 'node:fs/promises';
@@ -243,9 +243,9 @@ var hasRequiredTunnel$1;
 function requireTunnel$1 () {
 	if (hasRequiredTunnel$1) return tunnel$1;
 	hasRequiredTunnel$1 = 1;
-	var tls = require$$1;
+	var tls = require$$1$1;
 	var http$1 = http;
-	var https$1 = https;
+	var https = require$$1;
 	var events = events$1;
 	var util = require$$0$1;
 
@@ -272,13 +272,13 @@ function requireTunnel$1 () {
 
 	function httpOverHttps(options) {
 	  var agent = new TunnelingAgent(options);
-	  agent.request = https$1.request;
+	  agent.request = https.request;
 	  return agent;
 	}
 
 	function httpsOverHttps(options) {
 	  var agent = new TunnelingAgent(options);
-	  agent.request = https$1.request;
+	  agent.request = https.request;
 	  agent.createSocket = createSecureSocket;
 	  agent.defaultPort = 443;
 	  return agent;
@@ -4908,7 +4908,7 @@ function requireWebidl () {
 	hasRequiredWebidl = 1;
 
 	const { types, inspect } = require$$0$6;
-	const { markAsUncloneable } = require$$1$1;
+	const { markAsUncloneable } = require$$1$2;
 	const { toUSVString } = requireUtil$8();
 
 	/** @type {import('../../../types/webidl').Webidl} */
@@ -5611,7 +5611,7 @@ function requireUtil$7 () {
 	hasRequiredUtil$7 = 1;
 
 	const { Transform } = require$$0$4;
-	const zlib = require$$1$2;
+	const zlib = require$$1$3;
 	const { redirectStatusSet, referrerPolicySet: referrerPolicyTokens, badPortsSet } = requireConstants$2();
 	const { getGlobalOrigin } = requireGlobal$1();
 	const { collectASequenceOfCodePoints, collectAnHTTPQuotedString, removeChars, parseMIMEType } = requireDataUrl();
@@ -12651,7 +12651,7 @@ function requireProxyAgent () {
 	hasRequiredProxyAgent = 1;
 
 	const { kProxy, kClose, kDestroy, kDispatch, kInterceptors } = requireSymbols$4();
-	const { URL } = require$$1$3;
+	const { URL } = require$$1$4;
 	const Agent = requireAgent();
 	const Pool = requirePool();
 	const DispatcherBase = requireDispatcherBase();
@@ -15906,7 +15906,7 @@ function requirePendingInterceptorsFormatter () {
 	hasRequiredPendingInterceptorsFormatter = 1;
 
 	const { Transform } = require$$0$4;
-	const { Console } = require$$1$4;
+	const { Console } = require$$1$5;
 
 	const PERSISTENT = process.versions.icu ? '✅' : 'Y ';
 	const NOT_PERSISTENT = process.versions.icu ? '❌' : 'N ';
@@ -16406,7 +16406,7 @@ function requireDns () {
 	if (hasRequiredDns) return dns;
 	hasRequiredDns = 1;
 	const { isIP } = require$$0$5;
-	const { lookup } = require$$1$5;
+	const { lookup } = require$$1$6;
 	const DecoratorHandler = requireDecoratorHandler();
 	const { InvalidArgumentError, InformationalError } = requireErrors();
 	const maxInt = Math.pow(2, 31) - 1;
@@ -19208,7 +19208,7 @@ function requireFetch () {
 	} = requireResponse();
 	const { HeadersList } = requireHeaders();
 	const { Request, cloneRequest } = requireRequest();
-	const zlib = require$$1$2;
+	const zlib = require$$1$3;
 	const {
 	  bytesMatch,
 	  makePolicyContainer,
@@ -24542,7 +24542,7 @@ function requireEvents () {
 	const { webidl } = requireWebidl();
 	const { kEnumerableProperty } = requireUtil$8();
 	const { kConstruct } = requireSymbols$4();
-	const { MessagePort } = require$$1$1;
+	const { MessagePort } = require$$1$2;
 
 	/**
 	 * @see https://html.spec.whatwg.org/multipage/comms.html#messageevent
@@ -25780,7 +25780,7 @@ function requirePermessageDeflate () {
 	if (hasRequiredPermessageDeflate) return permessageDeflate;
 	hasRequiredPermessageDeflate = 1;
 
-	const { createInflateRaw, Z_DEFAULT_WINDOWBITS } = require$$1$2;
+	const { createInflateRaw, Z_DEFAULT_WINDOWBITS } = require$$1$3;
 	const { isValidClientWindowBits } = requireUtil$2();
 	const { MessageSizeExceededError } = requireErrors();
 
@@ -28730,7 +28730,7 @@ function requireLib$1 () {
 	lib$1.getProxyUrl = getProxyUrl;
 	lib$1.isHttps = isHttps;
 	const http$1 = __importStar(http);
-	const https$1 = __importStar(https);
+	const https = __importStar(require$$1);
 	const pm = __importStar(requireProxy());
 	const tunnel = __importStar(requireTunnel());
 	const undici_1 = requireUndici();
@@ -29155,7 +29155,7 @@ function requireLib$1 () {
 	        const info = {};
 	        info.parsedUrl = requestUrl;
 	        const usingSsl = info.parsedUrl.protocol === 'https:';
-	        info.httpModule = usingSsl ? https$1 : http$1;
+	        info.httpModule = usingSsl ? https : http$1;
 	        const defaultPort = usingSsl ? 443 : 80;
 	        info.options = {};
 	        info.options.host = info.parsedUrl.hostname;
@@ -29294,7 +29294,7 @@ function requireLib$1 () {
 	        // if tunneling agent isn't assigned create a new agent
 	        if (!agent) {
 	            const options = { keepAlive: this._keepAlive, maxSockets };
-	            agent = usingSsl ? new https$1.Agent(options) : new http$1.Agent(options);
+	            agent = usingSsl ? new https.Agent(options) : new http$1.Agent(options);
 	            this._agent = agent;
 	        }
 	        if (usingSsl && this._ignoreSslError) {
@@ -33804,6 +33804,62 @@ function requireSerialization () {
 	return Serialization;
 }
 
+var AdoHttpClientBases = {};
+
+var RateLimitUtils = {};
+
+var hasRequiredRateLimitUtils;
+
+function requireRateLimitUtils () {
+	if (hasRequiredRateLimitUtils) return RateLimitUtils;
+	hasRequiredRateLimitUtils = 1;
+	// Copyright (c) Microsoft. All rights reserved.
+	// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+	Object.defineProperty(RateLimitUtils, "__esModule", { value: true });
+	RateLimitUtils.extractRateLimitHeaders = void 0;
+	/**
+	 * Extracts rate limit headers from the provided headers and attaches them to the target object
+	 * @param headers - source headers
+	 * @param target - target object to attach rate limit info to
+	 */
+	function extractRateLimitHeaders(headers, target) {
+	    if (!headers || !target) {
+	        return;
+	    }
+	    const rateLimit = {};
+	    let hasRateLimitHeader = false;
+	    if (headers['x-ratelimit-resource']) {
+	        rateLimit.resource = headers['x-ratelimit-resource'];
+	        hasRateLimitHeader = true;
+	    }
+	    if (headers['x-ratelimit-delay']) {
+	        rateLimit.delay = parseFloat(headers['x-ratelimit-delay']);
+	        hasRateLimitHeader = true;
+	    }
+	    if (headers['x-ratelimit-limit']) {
+	        rateLimit.limit = parseInt(headers['x-ratelimit-limit'], 10);
+	        hasRateLimitHeader = true;
+	    }
+	    if (headers['x-ratelimit-remaining']) {
+	        rateLimit.remaining = parseInt(headers['x-ratelimit-remaining'], 10);
+	        hasRateLimitHeader = true;
+	    }
+	    if (headers['x-ratelimit-reset']) {
+	        rateLimit.reset = parseInt(headers['x-ratelimit-reset'], 10);
+	        hasRateLimitHeader = true;
+	    }
+	    if (headers['retry-after']) {
+	        rateLimit.retryAfter = parseInt(headers['retry-after'], 10);
+	        hasRateLimitHeader = true;
+	    }
+	    if (hasRateLimitHeader) {
+	        target.rateLimit = rateLimit;
+	    }
+	}
+	RateLimitUtils.extractRateLimitHeaders = extractRateLimitHeaders;
+	return RateLimitUtils;
+}
+
 var RestClient = {};
 
 var HttpClient = {};
@@ -34476,9 +34532,8 @@ function requireSideChannelList () {
 				}
 			},
 			'delete': function (key) {
-				var root = $o && $o.next;
 				var deletedNode = listDelete($o, key);
-				if (deletedNode && root && root === deletedNode) {
+				if (deletedNode && $o && !$o.next) {
 					$o = void undefined;
 				}
 				return !!deletedNode;
@@ -34500,7 +34555,6 @@ function requireSideChannelList () {
 				listSet(/** @type {NonNullable<typeof $o>} */ ($o), key, value);
 			}
 		};
-		// @ts-expect-error TODO: figure out why this is erroring
 		return channel;
 	};
 	return sideChannelList;
@@ -35730,7 +35784,10 @@ function requireSideChannel () {
 		var channel = {
 			assert: function (key) {
 				if (!channel.has(key)) {
-					throw new $TypeError('Side channel does not contain ' + inspect(key));
+					var keyDesc = key && Object(key) === key
+						? 'the given object key'
+						: inspect(key);
+					throw new $TypeError('Side channel does not contain ' + keyDesc);
 				}
 			},
 			'delete': function (key) {
@@ -35750,7 +35807,7 @@ function requireSideChannel () {
 				$channelData.set(key, value);
 			}
 		};
-		// @ts-expect-error TODO: figure out why this is erroring
+
 		return channel;
 	};
 	return sideChannel;
@@ -35796,6 +35853,7 @@ function requireUtils$1 () {
 
 	var formats = /*@__PURE__*/ requireFormats();
 	var getSideChannel = requireSideChannel();
+	var defineProperty = /*@__PURE__*/ requireEsDefineProperty();
 
 	var has = Object.prototype.hasOwnProperty;
 	var isArray = Array.isArray;
@@ -35860,6 +35918,19 @@ function requireUtils$1 () {
 	    return obj;
 	};
 
+	var setProperty = function setProperty(obj, key, value) {
+	    if (key === '__proto__' && defineProperty) {
+	        defineProperty(obj, key, {
+	            configurable: true,
+	            enumerable: true,
+	            value: value,
+	            writable: true
+	        });
+	    } else {
+	        obj[key] = value;
+	    }
+	};
+
 	var merge = function merge(target, source, options) {
 	    /* eslint no-param-reassign: 0 */
 	    if (!source) {
@@ -35869,7 +35940,10 @@ function requireUtils$1 () {
 	    if (typeof source !== 'object' && typeof source !== 'function') {
 	        if (isArray(target)) {
 	            var nextIndex = target.length;
-	            if (options && typeof options.arrayLimit === 'number' && nextIndex > options.arrayLimit) {
+	            if (options && typeof options.arrayLimit === 'number' && nextIndex >= options.arrayLimit) {
+	                if (options.throwOnLimitExceeded) {
+	                    throw new RangeError('Array limit exceeded. Only ' + options.arrayLimit + ' element' + (options.arrayLimit === 1 ? '' : 's') + ' allowed in an array.');
+	                }
 	                return markOverflow(arrayToObject(target.concat(source), options), nextIndex);
 	            }
 	            target[nextIndex] = source;
@@ -35909,6 +35983,9 @@ function requireUtils$1 () {
 	        }
 	        var combined = [target].concat(source);
 	        if (options && typeof options.arrayLimit === 'number' && combined.length > options.arrayLimit) {
+	            if (options.throwOnLimitExceeded) {
+	                throw new RangeError('Array limit exceeded. Only ' + options.arrayLimit + ' element' + (options.arrayLimit === 1 ? '' : 's') + ' allowed in an array.');
+	            }
 	            return markOverflow(arrayToObject(combined, options), combined.length - 1);
 	        }
 	        return combined;
@@ -35932,6 +36009,12 @@ function requireUtils$1 () {
 	                target[i] = item;
 	            }
 	        });
+	        if (options && typeof options.arrayLimit === 'number' && target.length > options.arrayLimit) {
+	            if (options.throwOnLimitExceeded) {
+	                throw new RangeError('Array limit exceeded. Only ' + options.arrayLimit + ' element' + (options.arrayLimit === 1 ? '' : 's') + ' allowed in an array.');
+	            }
+	            return markOverflow(arrayToObject(target, options), target.length - 1);
+	        }
 	        return target;
 	    }
 
@@ -35939,9 +36022,9 @@ function requireUtils$1 () {
 	        var value = source[key];
 
 	        if (has.call(acc, key)) {
-	            acc[key] = merge(acc[key], value, options);
+	            setProperty(acc, key, merge(acc[key], value, options));
 	        } else {
-	            acc[key] = value;
+	            setProperty(acc, key, value);
 	        }
 
 	        if (isOverflow(source) && !isOverflow(acc)) {
@@ -35960,7 +36043,7 @@ function requireUtils$1 () {
 
 	var assign = function assignSingleSource(target, source) {
 	    return Object.keys(source).reduce(function (acc, key) {
-	        acc[key] = source[key];
+	        setProperty(acc, key, source[key]);
 	        return acc;
 	    }, target);
 	};
@@ -36006,6 +36089,13 @@ function requireUtils$1 () {
 	    var out = '';
 	    for (var j = 0; j < string.length; j += limit) {
 	        var segment = string.length >= limit ? string.slice(j, j + limit) : string;
+	        if (j + limit < string.length) {
+	            var last = segment.charCodeAt(segment.length - 1);
+	            if (last >= 0xD800 && last <= 0xDBFF) {
+	                segment = segment.slice(0, -1);
+	                j -= 1;
+	            }
+	        }
 	        var arr = [];
 
 	        for (var i = 0; i < segment.length; ++i) {
@@ -36059,7 +36149,7 @@ function requireUtils$1 () {
 
 	var compact = function compact(value) {
 	    var queue = [{ obj: { o: value }, prop: 'o' }];
-	    var refs = [];
+	    var refs = getSideChannel();
 
 	    for (var i = 0; i < queue.length; ++i) {
 	        var item = queue[i];
@@ -36069,9 +36159,9 @@ function requireUtils$1 () {
 	        for (var j = 0; j < keys.length; ++j) {
 	            var key = keys[j];
 	            var val = obj[key];
-	            if (typeof val === 'object' && val !== null && refs.indexOf(val) === -1) {
+	            if (typeof val === 'object' && val !== null && !refs.has(val)) {
 	                queue[queue.length] = { obj: obj, prop: key };
-	                refs[refs.length] = val;
+	                refs.set(val, true);
 	            }
 	        }
 	    }
@@ -36093,9 +36183,12 @@ function requireUtils$1 () {
 	    return !!(obj.constructor && obj.constructor.isBuffer && obj.constructor.isBuffer(obj));
 	};
 
-	var combine = function combine(a, b, arrayLimit, plainObjects) {
+	var combine = function combine(a, b, arrayLimit, plainObjects, throwOnLimitExceeded) {
 	    // If 'a' is already an overflow object, add to it
 	    if (isOverflow(a)) {
+	        if (throwOnLimitExceeded) {
+	            throw new RangeError('Array limit exceeded. Only ' + arrayLimit + ' element' + (arrayLimit === 1 ? '' : 's') + ' allowed in an array.');
+	        }
 	        var newIndex = getMaxIndex(a) + 1;
 	        a[newIndex] = b;
 	        setMaxIndex(a, newIndex);
@@ -36104,6 +36197,9 @@ function requireUtils$1 () {
 
 	    var result = [].concat(a, b);
 	    if (result.length > arrayLimit) {
+	        if (throwOnLimitExceeded) {
+	            throw new RangeError('Array limit exceeded. Only ' + arrayLimit + ' element' + (arrayLimit === 1 ? '' : 's') + ' allowed in an array.');
+	        }
 	        return markOverflow(arrayToObject(result, { plainObjects: plainObjects }), result.length - 1);
 	    }
 	    return result;
@@ -36551,8 +36647,19 @@ function requireParse () {
 	    });
 	};
 
-	var parseArrayValue = function (val, options, currentArrayLength) {
+	var parseArrayValue = function (val, options, currentArrayLength, isFlatArrayValue) {
 	    if (val && typeof val === 'string' && options.comma && val.indexOf(',') > -1) {
+	        if (isFlatArrayValue && options.throwOnLimitExceeded) {
+	            var commaCount = 0;
+	            var commaIndex = val.indexOf(',');
+	            while (commaIndex > -1) {
+	                commaCount += 1;
+	                if (commaCount >= options.arrayLimit) {
+	                    throw new RangeError('Array limit exceeded. Only ' + options.arrayLimit + ' element' + (options.arrayLimit === 1 ? '' : 's') + ' allowed in an array.');
+	                }
+	                commaIndex = val.indexOf(',', commaIndex + 1);
+	            }
+	        }
 	        return val.split(',');
 	    }
 
@@ -36629,7 +36736,8 @@ function requireParse () {
 	                    parseArrayValue(
 	                        part.slice(pos + 1),
 	                        options,
-	                        isArray(obj[key]) ? obj[key].length : 0
+	                        isArray(obj[key]) ? obj[key].length : 0,
+	                        part.indexOf('[]=') === -1
 	                    ),
 	                    function (encodedVal) {
 	                        return options.decoder(encodedVal, defaults.decoder, charset, 'value');
@@ -36647,10 +36755,7 @@ function requireParse () {
 	        }
 
 	        if (options.comma && isArray(val) && val.length > options.arrayLimit) {
-	            if (options.throwOnLimitExceeded) {
-	                throw new RangeError('Array limit exceeded. Only ' + options.arrayLimit + ' element' + (options.arrayLimit === 1 ? '' : 's') + ' allowed in an array.');
-	            }
-	            val = utils.combine([], val, options.arrayLimit, options.plainObjects);
+	            val = utils.combine([], val, options.arrayLimit, options.plainObjects, options.throwOnLimitExceeded);
 	        }
 
 	        if (key !== null) {
@@ -36660,7 +36765,8 @@ function requireParse () {
 	                    obj[key],
 	                    val,
 	                    options.arrayLimit,
-	                    options.plainObjects
+	                    options.plainObjects,
+	                    options.throwOnLimitExceeded
 	                );
 	            } else if (!existing || options.duplicates === 'last') {
 	                obj[key] = val;
@@ -36695,7 +36801,8 @@ function requireParse () {
 	                        [],
 	                        leaf,
 	                        options.arrayLimit,
-	                        options.plainObjects
+	                        options.plainObjects,
+	                        options.throwOnLimitExceeded
 	                    );
 	            }
 	        } else {
@@ -36960,9 +37067,7 @@ function requireUtil () {
 	Util.buildProxyBypassRegexFromEnv = buildProxyBypassRegexFromEnv;
 	Util.obtainContentCharset = obtainContentCharset;
 	const qs = /*@__PURE__*/ requireLib();
-	const url = require$$0$8;
-	const path = path__default;
-	const zlib = require$$3;
+	const zlib = require$$1$7;
 	/**
 	 * creates an url from a request url and optional base url (http://server:8080)
 	 * @param {string} resource - a fully qualified url or relative path
@@ -36971,7 +37076,6 @@ function requireUtil () {
 	 * @return {string} - resultant url
 	 */
 	function getUrl(resource, baseUrl, queryParams) {
-	    const pathApi = path.posix || path;
 	    let requestUrl = '';
 	    if (!baseUrl) {
 	        requestUrl = resource;
@@ -36980,17 +37084,17 @@ function requireUtil () {
 	        requestUrl = baseUrl;
 	    }
 	    else {
-	        const base = url.parse(baseUrl);
-	        const resultantUrl = url.parse(resource);
-	        // resource (specific per request) elements take priority
-	        resultantUrl.protocol = resultantUrl.protocol || base.protocol;
-	        resultantUrl.auth = resultantUrl.auth || base.auth;
-	        resultantUrl.host = resultantUrl.host || base.host;
-	        resultantUrl.pathname = pathApi.resolve(base.pathname, resultantUrl.pathname);
+	        const effectiveBase = new URL(baseUrl);
+	        // Ensure the base path is treated as a directory so relative resource paths
+	        // append to it without corrupting any existing query string or fragment.
+	        if (!effectiveBase.pathname.endsWith('/')) {
+	            effectiveBase.pathname += '/';
+	        }
+	        const resultantUrl = new URL(resource, effectiveBase.href);
 	        if (!resultantUrl.pathname.endsWith('/') && resource.endsWith('/')) {
 	            resultantUrl.pathname += '/';
 	        }
-	        requestUrl = url.format(resultantUrl);
+	        requestUrl = resultantUrl.href;
 	    }
 	    return queryParams ?
 	        getUrlWithParsedQueryParams(requestUrl, queryParams) :
@@ -37111,9 +37215,8 @@ function requireHttpClient () {
 	Object.defineProperty(HttpClient, "__esModule", { value: true });
 	HttpClient.HttpClient = HttpClient.HttpClientResponse = HttpClient.HttpCodes = void 0;
 	HttpClient.isHttps = isHttps;
-	const url = require$$0$8;
 	const http$1 = http;
-	const https$1 = https;
+	const https = require$$1;
 	const util = requireUtil();
 	let fs;
 	let tunnel;
@@ -37187,7 +37290,7 @@ function requireHttpClient () {
 	}
 	HttpClient.HttpClientResponse = HttpClientResponse;
 	function isHttps(requestUrl) {
-	    let parsedUrl = url.parse(requestUrl);
+	    const parsedUrl = new URL(requestUrl);
 	    return parsedUrl.protocol === 'https:';
 	}
 	var EnvironmentVariables;
@@ -37304,7 +37407,7 @@ function requireHttpClient () {
 	            if (this._disposed) {
 	                throw new Error("Client has already been disposed.");
 	            }
-	            let parsedUrl = url.parse(requestUrl);
+	            const parsedUrl = new URL(requestUrl);
 	            let info = this._prepareRequest(verb, parsedUrl, headers);
 	            // Only perform retries on reads since writes may not be idempotent.
 	            let maxTries = (this._allowRetries && RetryableHttpVerbs.indexOf(verb) != -1) ? this._maxRetries + 1 : 1;
@@ -37349,7 +37452,7 @@ function requireHttpClient () {
 	                        // if there's no location to redirect to, we won't
 	                        break;
 	                    }
-	                    let parsedRedirectUrl = url.parse(redirectUrl);
+	                    const parsedRedirectUrl = new URL(redirectUrl, parsedUrl.href);
 	                    if (parsedUrl.protocol == 'https:' && parsedUrl.protocol != parsedRedirectUrl.protocol && !this._allowRedirectDowngrade) {
 	                        throw new Error("Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.");
 	                    }
@@ -37452,13 +37555,13 @@ function requireHttpClient () {
 	    _prepareRequest(method, requestUrl, headers) {
 	        const info = {};
 	        info.parsedUrl = requestUrl;
-	        const usingSsl = info.parsedUrl.protocol === 'https:';
-	        info.httpModule = usingSsl ? https$1 : http$1;
+	        const usingSsl = requestUrl.protocol === 'https:';
+	        info.httpModule = usingSsl ? https : http$1;
 	        const defaultPort = usingSsl ? 443 : 80;
 	        info.options = {};
-	        info.options.host = info.parsedUrl.hostname;
-	        info.options.port = info.parsedUrl.port ? parseInt(info.parsedUrl.port) : defaultPort;
-	        info.options.path = (info.parsedUrl.pathname || '') + (info.parsedUrl.search || '');
+	        info.options.host = requestUrl.hostname;
+	        info.options.port = requestUrl.port ? parseInt(requestUrl.port) : defaultPort;
+	        info.options.path = requestUrl.pathname + requestUrl.search;
 	        info.options.method = method;
 	        info.options.timeout = (this.requestOptions && this.requestOptions.socketTimeout) || this._socketTimeout;
 	        this._socketTimeout = info.options.timeout;
@@ -37466,9 +37569,9 @@ function requireHttpClient () {
 	        if (this.userAgent != null) {
 	            info.options.headers["user-agent"] = this.userAgent;
 	        }
-	        info.options.agent = this._getAgent(info.parsedUrl);
+	        info.options.agent = this._getAgent(requestUrl);
 	        // gives handlers an opportunity to participate
-	        if (this.handlers && !this._isPresigned(url.format(requestUrl))) {
+	        if (this.handlers && !this._isPresigned(requestUrl.href)) {
 	            this.handlers.forEach((handler) => {
 	                handler.prepareRequest(info.options);
 	            });
@@ -37523,7 +37626,7 @@ function requireHttpClient () {
 	                proxy: {
 	                    proxyAuth: proxy.proxyAuth,
 	                    host: proxy.proxyUrl.hostname,
-	                    port: proxy.proxyUrl.port
+	                    port: Number(proxy.proxyUrl.port) || (proxy.proxyUrl.protocol === 'https:' ? 443 : 80)
 	                },
 	            };
 	            let tunnelAgent;
@@ -37540,7 +37643,7 @@ function requireHttpClient () {
 	        // if reusing agent across request and tunneling agent isn't assigned create a new agent
 	        if (this._keepAlive && !agent) {
 	            const options = { keepAlive: this._keepAlive, maxSockets: maxSockets };
-	            agent = usingSsl ? new https$1.Agent(options) : new http$1.Agent(options);
+	            agent = usingSsl ? new https.Agent(options) : new http$1.Agent(options);
 	            this._agent = agent;
 	        }
 	        // if not using private agent and tunnel agent isn't setup then use global agent
@@ -37549,7 +37652,7 @@ function requireHttpClient () {
 	                keepAlive: this._httpGlobalAgentOptions.keepAlive,
 	                timeout: this._httpGlobalAgentOptions.timeout
 	            };
-	            agent = usingSsl ? new https$1.Agent(globalAgentOptions) : new http$1.Agent(globalAgentOptions);
+	            agent = usingSsl ? new https.Agent(globalAgentOptions) : new http$1.Agent(globalAgentOptions);
 	        }
 	        if (usingSsl && this._ignoreSslError) {
 	            // we don't want to set NODE_TLS_REJECT_UNAUTHORIZED=0 since that will affect request for entire process
@@ -37584,7 +37687,7 @@ function requireHttpClient () {
 	        let proxyAuth;
 	        if (proxyConfig) {
 	            if (proxyConfig.proxyUrl.length > 0) {
-	                proxyUrl = url.parse(proxyConfig.proxyUrl);
+	                proxyUrl = new URL(proxyConfig.proxyUrl);
 	            }
 	            if (proxyConfig.proxyUsername || proxyConfig.proxyPassword) {
 	                proxyAuth = proxyConfig.proxyUsername + ":" + proxyConfig.proxyPassword;
@@ -37843,6 +37946,84 @@ function requireRestClient () {
 	return RestClient;
 }
 
+var hasRequiredAdoHttpClientBases;
+
+function requireAdoHttpClientBases () {
+	if (hasRequiredAdoHttpClientBases) return AdoHttpClientBases;
+	hasRequiredAdoHttpClientBases = 1;
+	// Copyright (c) Microsoft. All rights reserved.
+	// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+	var __awaiter = (AdoHttpClientBases && AdoHttpClientBases.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(AdoHttpClientBases, "__esModule", { value: true });
+	AdoHttpClientBases.AdoRestClient = AdoHttpClientBases.AdoHttpClient = void 0;
+	const RateLimitUtils_1 = requireRateLimitUtils();
+	const rm = requireRestClient();
+	const hm = requireHttpClient();
+	/**
+	 * AdoHttpClient that extracts rate limit headers and attaches them to the response object
+	 */
+	class AdoHttpClient extends hm.HttpClient {
+	    request(verb, requestUrl, data, headers) {
+	        const _super = Object.create(null, {
+	            request: { get: () => super.request }
+	        });
+	        var _a;
+	        return __awaiter(this, void 0, void 0, function* () {
+	            const res = yield _super.request.call(this, verb, requestUrl, data, headers);
+	            const resHeaders = (_a = res === null || res === void 0 ? void 0 : res.message) === null || _a === void 0 ? void 0 : _a.headers;
+	            RateLimitUtils_1.extractRateLimitHeaders(resHeaders, res);
+	            return res;
+	        });
+	    }
+	}
+	AdoHttpClientBases.AdoHttpClient = AdoHttpClient;
+	/**
+	 * AdoRestClient that extracts rate limit headers and attaches them to the response/result objects
+	 */
+	class AdoRestClient extends rm.RestClient {
+	    processResponse(res, options) {
+	        const _super = Object.create(null, {
+	            processResponse: { get: () => super.processResponse }
+	        });
+	        var _a;
+	        return __awaiter(this, void 0, void 0, function* () {
+	            const headers = (_a = res === null || res === void 0 ? void 0 : res.message) === null || _a === void 0 ? void 0 : _a.headers;
+	            try {
+	                const response = yield _super.processResponse.call(this, res, options);
+	                if (response && response.result && typeof response.result === 'object') {
+	                    RateLimitUtils_1.extractRateLimitHeaders(headers, response.result);
+	                    // For collection responses (e.g., { count, value: [...] }), also attach to the array
+	                    if (Array.isArray(response.result.value)) {
+	                        RateLimitUtils_1.extractRateLimitHeaders(headers, response.result.value);
+	                    }
+	                }
+	                return response;
+	            }
+	            catch (err) {
+	                // Use the original response headers captured before super.processResponse,
+	                // because the base implementation may not populate err.responseHeaders
+	                // when the response body is not valid JSON (e.g., HTML error pages on 429).
+	                RateLimitUtils_1.extractRateLimitHeaders(headers, err);
+	                if ((err === null || err === void 0 ? void 0 : err.result) && typeof err.result === 'object') {
+	                    RateLimitUtils_1.extractRateLimitHeaders(headers, err.result);
+	                }
+	                return Promise.reject(err);
+	            }
+	        });
+	    }
+	}
+	AdoHttpClientBases.AdoRestClient = AdoRestClient;
+	return AdoHttpClientBases;
+}
+
 var hasRequiredClientApiBases;
 
 function requireClientApiBases () {
@@ -37854,13 +38035,13 @@ function requireClientApiBases () {
 	ClientApiBases.ClientApiBase = void 0;
 	const vsom = requireVsoClient();
 	const serm = requireSerialization();
-	const rm = requireRestClient();
-	const hm = requireHttpClient();
+	const AdoHttpClientBases = requireAdoHttpClientBases();
+	const RateLimitUtils_1 = requireRateLimitUtils();
 	class ClientApiBase {
 	    constructor(baseUrl, handlers, userAgent, options) {
 	        this.baseUrl = baseUrl;
-	        this.http = new hm.HttpClient(userAgent, handlers, options);
-	        this.rest = new rm.RestClient(userAgent, null, handlers, options);
+	        this.http = new AdoHttpClientBases.AdoHttpClient(userAgent, handlers, options);
+	        this.rest = new AdoHttpClientBases.AdoRestClient(userAgent, null, handlers, options);
 	        this.vsoClient = new vsom.VsoClient(baseUrl, this.rest);
 	        this.userAgent = userAgent;
 	    }
@@ -37881,29 +38062,7 @@ function requireClientApiBases () {
 	        return deserializedResult;
 	    }
 	    extractRateLimitHeaders(headers, target) {
-	        if (!headers || !target) {
-	            return;
-	        }
-	        const rateLimit = {};
-	        if (headers['x-ratelimit-resource']) {
-	            rateLimit.resource = headers['x-ratelimit-resource'];
-	        }
-	        if (headers['x-ratelimit-delay']) {
-	            rateLimit.delay = parseFloat(headers['x-ratelimit-delay']);
-	        }
-	        if (headers['x-ratelimit-limit']) {
-	            rateLimit.limit = parseInt(headers['x-ratelimit-limit'], 10);
-	        }
-	        if (headers['x-ratelimit-remaining']) {
-	            rateLimit.remaining = parseInt(headers['x-ratelimit-remaining'], 10);
-	        }
-	        if (headers['x-ratelimit-reset']) {
-	            rateLimit.reset = parseInt(headers['x-ratelimit-reset'], 10);
-	        }
-	        if (headers['retry-after']) {
-	            rateLimit.retryAfter = parseInt(headers['retry-after'], 10);
-	        }
-	        target.rateLimit = rateLimit;
+	        RateLimitUtils_1.extractRateLimitHeaders(headers, target);
 	    }
 	}
 	ClientApiBases.ClientApiBase = ClientApiBase;
@@ -51858,7 +52017,7 @@ function requireFileContainerApi () {
 	FileContainerApi.FileContainerApi = void 0;
 	// Licensed under the MIT license.  See LICENSE file in the project root for full license information.
 	const stream = require$$0$9;
-	const zlib = require$$3;
+	const zlib = require$$1$7;
 	const httpm = requireHttpClient();
 	const FileContainerApiBase = requireFileContainerApiBase();
 	const FileContainerInterfaces = requireFileContainerInterfaces();
@@ -72242,6 +72401,1142 @@ function requireSecurityRolesApi () {
 	};
 	SecurityRolesApi.SecurityRolesApi = SecurityRolesApi$1;
 	return SecurityRolesApi;
+}
+
+var ServiceEndpointApi = {};
+
+var ServiceEndpointApiBase = {};
+
+var ServiceEndpointInterfaces = {};
+
+/*
+ * ---------------------------------------------------------
+ * Copyright(C) Microsoft Corporation. All rights reserved.
+ * ---------------------------------------------------------
+ *
+ * ---------------------------------------------------------
+ * Generated file, DO NOT EDIT
+ * ---------------------------------------------------------
+ */
+
+var hasRequiredServiceEndpointInterfaces;
+
+function requireServiceEndpointInterfaces () {
+	if (hasRequiredServiceEndpointInterfaces) return ServiceEndpointInterfaces;
+	hasRequiredServiceEndpointInterfaces = 1;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TypeInfo = exports.SpnEndpointErrorCode = exports.ServiceEndpointExecutionResult = exports.ServiceEndpointActionFilter = exports.OAuthConfigurationActionFilter = exports.AccessTokenRequestType = exports.AadLoginPromptOption = void 0;
+		const FormInputInterfaces = requireFormInputInterfaces();
+		(function (AadLoginPromptOption) {
+		    /**
+		     * Do not provide a prompt option
+		     */
+		    AadLoginPromptOption[AadLoginPromptOption["NoOption"] = 0] = "NoOption";
+		    /**
+		     * Force the user to login again.
+		     */
+		    AadLoginPromptOption[AadLoginPromptOption["Login"] = 1] = "Login";
+		    /**
+		     * Force the user to select which account they are logging in with instead of automatically picking the user up from the session state. NOTE: This does not work for switching between the variants of a dual-homed user.
+		     */
+		    AadLoginPromptOption[AadLoginPromptOption["SelectAccount"] = 2] = "SelectAccount";
+		    /**
+		     * Force the user to login again. <remarks> Ignore current authentication state and force the user to authenticate again. This option should be used instead of Login. </remarks>
+		     */
+		    AadLoginPromptOption[AadLoginPromptOption["FreshLogin"] = 3] = "FreshLogin";
+		    /**
+		     * Force the user to login again with mfa. <remarks> Ignore current authentication state and force the user to authenticate again. This option should be used instead of Login, if MFA is required. </remarks>
+		     */
+		    AadLoginPromptOption[AadLoginPromptOption["FreshLoginWithMfa"] = 4] = "FreshLoginWithMfa";
+		})(exports.AadLoginPromptOption || (exports.AadLoginPromptOption = {}));
+		(function (AccessTokenRequestType) {
+		    AccessTokenRequestType[AccessTokenRequestType["None"] = 0] = "None";
+		    AccessTokenRequestType[AccessTokenRequestType["Oauth"] = 1] = "Oauth";
+		    AccessTokenRequestType[AccessTokenRequestType["Direct"] = 2] = "Direct";
+		})(exports.AccessTokenRequestType || (exports.AccessTokenRequestType = {}));
+		(function (OAuthConfigurationActionFilter) {
+		    OAuthConfigurationActionFilter[OAuthConfigurationActionFilter["None"] = 0] = "None";
+		    OAuthConfigurationActionFilter[OAuthConfigurationActionFilter["Manage"] = 2] = "Manage";
+		    OAuthConfigurationActionFilter[OAuthConfigurationActionFilter["Use"] = 16] = "Use";
+		})(exports.OAuthConfigurationActionFilter || (exports.OAuthConfigurationActionFilter = {}));
+		(function (ServiceEndpointActionFilter) {
+		    ServiceEndpointActionFilter[ServiceEndpointActionFilter["None"] = 0] = "None";
+		    ServiceEndpointActionFilter[ServiceEndpointActionFilter["Manage"] = 2] = "Manage";
+		    ServiceEndpointActionFilter[ServiceEndpointActionFilter["Use"] = 16] = "Use";
+		    ServiceEndpointActionFilter[ServiceEndpointActionFilter["View"] = 32] = "View";
+		})(exports.ServiceEndpointActionFilter || (exports.ServiceEndpointActionFilter = {}));
+		(function (ServiceEndpointExecutionResult) {
+		    /**
+		     * "Service endpoint request succeeded.
+		     */
+		    ServiceEndpointExecutionResult[ServiceEndpointExecutionResult["Succeeded"] = 0] = "Succeeded";
+		    /**
+		     * "Service endpoint request succeeded but with some issues.
+		     */
+		    ServiceEndpointExecutionResult[ServiceEndpointExecutionResult["SucceededWithIssues"] = 1] = "SucceededWithIssues";
+		    /**
+		     * "Service endpoint request failed.
+		     */
+		    ServiceEndpointExecutionResult[ServiceEndpointExecutionResult["Failed"] = 2] = "Failed";
+		    /**
+		     * "Service endpoint request was cancelled.
+		     */
+		    ServiceEndpointExecutionResult[ServiceEndpointExecutionResult["Canceled"] = 3] = "Canceled";
+		    /**
+		     * "Service endpoint request was skipped.
+		     */
+		    ServiceEndpointExecutionResult[ServiceEndpointExecutionResult["Skipped"] = 4] = "Skipped";
+		    /**
+		     * "Service endpoint request was abandoned.
+		     */
+		    ServiceEndpointExecutionResult[ServiceEndpointExecutionResult["Abandoned"] = 5] = "Abandoned";
+		})(exports.ServiceEndpointExecutionResult || (exports.ServiceEndpointExecutionResult = {}));
+		(function (SpnEndpointErrorCode) {
+		    /**
+		     * Indicates whether user does not have required permissions to register the app in Entra or WIF is disabled.
+		     */
+		    SpnEndpointErrorCode[SpnEndpointErrorCode["AppRegistrationFailed"] = 1] = "AppRegistrationFailed";
+		})(exports.SpnEndpointErrorCode || (exports.SpnEndpointErrorCode = {}));
+		exports.TypeInfo = {
+		    AadLoginPromptOption: {
+		        enumValues: {
+		            "noOption": 0,
+		            "login": 1,
+		            "selectAccount": 2,
+		            "freshLogin": 3,
+		            "freshLoginWithMfa": 4
+		        }
+		    },
+		    AccessTokenRequestType: {
+		        enumValues: {
+		            "none": 0,
+		            "oauth": 1,
+		            "direct": 2
+		        }
+		    },
+		    AuthConfiguration: {},
+		    AzureSpnOperationStatus: {},
+		    OAuthConfiguration: {},
+		    OAuthConfigurationActionFilter: {
+		        enumValues: {
+		            "none": 0,
+		            "manage": 2,
+		            "use": 16
+		        }
+		    },
+		    ServiceEndpoint: {},
+		    ServiceEndpointActionFilter: {
+		        enumValues: {
+		            "none": 0,
+		            "manage": 2,
+		            "use": 16,
+		            "view": 32
+		        }
+		    },
+		    ServiceEndpointAuthenticationScheme: {},
+		    ServiceEndpointExecutionData: {},
+		    ServiceEndpointExecutionRecord: {},
+		    ServiceEndpointExecutionRecordsInput: {},
+		    ServiceEndpointExecutionResult: {
+		        enumValues: {
+		            "succeeded": 0,
+		            "succeededWithIssues": 1,
+		            "failed": 2,
+		            "canceled": 3,
+		            "skipped": 4,
+		            "abandoned": 5
+		        }
+		    },
+		    ServiceEndpointRequestResult: {},
+		    ServiceEndpointType: {},
+		    SpnEndpointErrorCode: {
+		        enumValues: {
+		            "appRegistrationFailed": 1
+		        }
+		    },
+		};
+		exports.TypeInfo.AuthConfiguration.fields = {
+		    createdOn: {
+		        isDate: true,
+		    },
+		    modifiedOn: {
+		        isDate: true,
+		    }
+		};
+		exports.TypeInfo.AzureSpnOperationStatus.fields = {
+		    errorCode: {
+		        enumType: exports.TypeInfo.SpnEndpointErrorCode
+		    }
+		};
+		exports.TypeInfo.OAuthConfiguration.fields = {
+		    createdOn: {
+		        isDate: true,
+		    },
+		    modifiedOn: {
+		        isDate: true,
+		    }
+		};
+		exports.TypeInfo.ServiceEndpoint.fields = {
+		    creationDate: {
+		        isDate: true,
+		    },
+		    modificationDate: {
+		        isDate: true,
+		    }
+		};
+		exports.TypeInfo.ServiceEndpointAuthenticationScheme.fields = {
+		    inputDescriptors: {
+		        isArray: true,
+		        typeInfo: FormInputInterfaces.TypeInfo.InputDescriptor
+		    }
+		};
+		exports.TypeInfo.ServiceEndpointExecutionData.fields = {
+		    finishTime: {
+		        isDate: true,
+		    },
+		    result: {
+		        enumType: exports.TypeInfo.ServiceEndpointExecutionResult
+		    },
+		    startTime: {
+		        isDate: true,
+		    }
+		};
+		exports.TypeInfo.ServiceEndpointExecutionRecord.fields = {
+		    data: {
+		        typeInfo: exports.TypeInfo.ServiceEndpointExecutionData
+		    }
+		};
+		exports.TypeInfo.ServiceEndpointExecutionRecordsInput.fields = {
+		    data: {
+		        typeInfo: exports.TypeInfo.ServiceEndpointExecutionData
+		    }
+		};
+		exports.TypeInfo.ServiceEndpointRequestResult.fields = {};
+		exports.TypeInfo.ServiceEndpointType.fields = {
+		    authenticationSchemes: {
+		        isArray: true,
+		        typeInfo: exports.TypeInfo.ServiceEndpointAuthenticationScheme
+		    },
+		    inputDescriptors: {
+		        isArray: true,
+		        typeInfo: FormInputInterfaces.TypeInfo.InputDescriptor
+		    }
+		}; 
+	} (ServiceEndpointInterfaces));
+	return ServiceEndpointInterfaces;
+}
+
+var hasRequiredServiceEndpointApiBase;
+
+function requireServiceEndpointApiBase () {
+	if (hasRequiredServiceEndpointApiBase) return ServiceEndpointApiBase;
+	hasRequiredServiceEndpointApiBase = 1;
+	/*
+	 * ---------------------------------------------------------
+	 * Copyright(C) Microsoft Corporation. All rights reserved.
+	 * ---------------------------------------------------------
+	 *
+	 * ---------------------------------------------------------
+	 * Generated file, DO NOT EDIT
+	 * ---------------------------------------------------------
+	 */
+	var __awaiter = (ServiceEndpointApiBase && ServiceEndpointApiBase.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(ServiceEndpointApiBase, "__esModule", { value: true });
+	ServiceEndpointApiBase.ServiceEndpointApiBase = void 0;
+	const basem = requireClientApiBases();
+	const ServiceEndpointInterfaces = requireServiceEndpointInterfaces();
+	let ServiceEndpointApiBase$1 = class ServiceEndpointApiBase extends basem.ClientApiBase {
+	    constructor(baseUrl, handlers, options, userAgent) {
+	        super(baseUrl, handlers, userAgent || 'node-ServiceEndpoint-api', options);
+	    }
+	    /**
+	     * Returns list of azure subscriptions
+	     *
+	     */
+	    getAzureManagementGroups() {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "9acb984c-4f88-4e13-9691-2e688dddc047", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, null, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Returns list of azure subscriptions
+	     *
+	     */
+	    getAzureSubscriptions() {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "18e8f65d-4e19-4a01-a621-cf0f2d938108", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, null, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Proxy for a GET request defined by a service endpoint.
+	     *
+	     * @param {ServiceEndpointInterfaces.ServiceEndpointRequest} serviceEndpointRequest - Service endpoint request.
+	     * @param {string} project - Project ID or project name
+	     * @param {string} endpointId - Id of the service endpoint.
+	     */
+	    executeServiceEndpointRequest(serviceEndpointRequest, project, endpointId) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            if (endpointId == null) {
+	                throw new TypeError('endpointId can not be null or undefined');
+	            }
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    project: project
+	                };
+	                let queryValues = {
+	                    endpointId: endpointId,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "cc63bb57-2a5f-4a7a-b79c-c142d308657e", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.create(url, serviceEndpointRequest, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpointRequestResult, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Proxy for a GET request defined by a service endpoint. The request is authorized using a data source in service endpoint. The response is filtered using an XPath/Json based selector.
+	     *
+	     * @param {ServiceEndpointInterfaces.DataSourceBinding} binding - Describes the data source to fetch.
+	     * @param {string} project - Project ID or project name
+	     */
+	    queryServiceEndpoint(binding, project) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    project: project
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "cc63bb57-2a5f-4a7a-b79c-c142d308657e", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.create(url, binding, options);
+	                    let ret = this.formatResponse(res.result, null, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Creates a new service endpoint
+	     *
+	     * @param {ServiceEndpointInterfaces.ServiceEndpoint} endpoint - Service endpoint to create
+	     */
+	    createServiceEndpoint(endpoint) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.4", "serviceendpoint", "14e48fdc-2c8b-41ce-a0c3-e26f6cc55bd0", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.create(url, endpoint, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpoint, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Delete a service endpoint
+	     *
+	     * @param {string} endpointId - Endpoint Id of endpoint to delete
+	     * @param {string[]} projectIds - project Ids from which endpoint needs to be deleted
+	     * @param {boolean} deep - delete the spn created by endpoint
+	     */
+	    deleteServiceEndpoint(endpointId, projectIds, deep) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            if (projectIds == null) {
+	                throw new TypeError('projectIds can not be null or undefined');
+	            }
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    endpointId: endpointId
+	                };
+	                let queryValues = {
+	                    projectIds: projectIds && projectIds.join(","),
+	                    deep: deep,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.4", "serviceendpoint", "14e48fdc-2c8b-41ce-a0c3-e26f6cc55bd0", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.del(url, options);
+	                    let ret = this.formatResponse(res.result, null, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Get service endpoints for org by type and owner. Returns only id, name and url and used only internally by licensing service
+	     *
+	     * @param {string} type - Type of the service endpoints.
+	     * @param {string} owner - Owner for service endpoints.
+	     */
+	    getServiceEndpointsByTypeAndOwner(type, owner) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            if (type == null) {
+	                throw new TypeError('type can not be null or undefined');
+	            }
+	            if (owner == null) {
+	                throw new TypeError('owner can not be null or undefined');
+	            }
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                let queryValues = {
+	                    type: type,
+	                    owner: owner,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.4", "serviceendpoint", "14e48fdc-2c8b-41ce-a0c3-e26f6cc55bd0", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpoint, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Share service endpoint across projects
+	     *
+	     * @param {ServiceEndpointInterfaces.ServiceEndpointProjectReference[]} endpointProjectReferences - Project reference details of the target project
+	     * @param {string} endpointId - Endpoint Id of the endpoint to share
+	     */
+	    shareServiceEndpoint(endpointProjectReferences, endpointId) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    endpointId: endpointId
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.4", "serviceendpoint", "14e48fdc-2c8b-41ce-a0c3-e26f6cc55bd0", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.update(url, endpointProjectReferences, options);
+	                    let ret = this.formatResponse(res.result, null, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Update the service endpoint
+	     *
+	     * @param {ServiceEndpointInterfaces.ServiceEndpoint} endpoint - Updated data for the endpoint
+	     * @param {string} endpointId - Endpoint Id of the endpoint to update
+	     * @param {string} operation - operation type
+	     */
+	    updateServiceEndpoint(endpoint, endpointId, operation) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    endpointId: endpointId
+	                };
+	                let queryValues = {
+	                    operation: operation,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.4", "serviceendpoint", "14e48fdc-2c8b-41ce-a0c3-e26f6cc55bd0", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.replace(url, endpoint, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpoint, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Update the service endpoints.
+	     *
+	     * @param {ServiceEndpointInterfaces.ServiceEndpoint[]} endpoints - Names of the service endpoints to update.
+	     */
+	    updateServiceEndpoints(endpoints) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.4", "serviceendpoint", "14e48fdc-2c8b-41ce-a0c3-e26f6cc55bd0", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.replace(url, endpoints, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpoint, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Get the service endpoint details.
+	     *
+	     * @param {string} project - Project ID or project name
+	     * @param {string} endpointId - Id of the service endpoint.
+	     * @param {ServiceEndpointInterfaces.ServiceEndpointActionFilter} actionFilter - Action filter for the service connection. It specifies the action which can be performed on the service connection.
+	     * @param {boolean} loadConfidentialData - Flag to include confidential details of service endpoint. This is for internal use only.
+	     */
+	    getServiceEndpointDetails(project, endpointId, actionFilter, loadConfidentialData) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    project: project,
+	                    endpointId: endpointId
+	                };
+	                let queryValues = {
+	                    actionFilter: actionFilter,
+	                    loadConfidentialData: loadConfidentialData,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.4", "serviceendpoint", "e85f1c62-adfc-4b74-b618-11a150fb195e", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpoint, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Get the service endpoints.
+	     *
+	     * @param {string} project - Project ID or project name
+	     * @param {string} type - Type of the service endpoints.
+	     * @param {string[]} authSchemes - Authorization schemes used for service endpoints.
+	     * @param {string[]} endpointIds - Ids of the service endpoints.
+	     * @param {string} owner - Owner for service endpoints.
+	     * @param {boolean} includeFailed - Failed flag for service endpoints.
+	     * @param {boolean} includeDetails - Flag to include more details for service endpoints. This is for internal use only and the flag will be treated as false for all other requests
+	     * @param {ServiceEndpointInterfaces.ServiceEndpointActionFilter} actionFilter - The "actionFilter" parameter allows users to evaluate requestor permissions and retrieve a list of endpoints that match the specified conditions, ensuring that only relevant endpoints are returned based on their permissions
+	     */
+	    getServiceEndpoints(project, type, authSchemes, endpointIds, owner, includeFailed, includeDetails, actionFilter) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    project: project
+	                };
+	                let queryValues = {
+	                    type: type,
+	                    authSchemes: authSchemes && authSchemes.join(","),
+	                    endpointIds: endpointIds && endpointIds.join(","),
+	                    owner: owner,
+	                    includeFailed: includeFailed,
+	                    includeDetails: includeDetails,
+	                    actionFilter: actionFilter,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.4", "serviceendpoint", "e85f1c62-adfc-4b74-b618-11a150fb195e", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpoint, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Get the service endpoints by name.
+	     *
+	     * @param {string} project - Project ID or project name
+	     * @param {string[]} endpointNames - Names of the service endpoints.
+	     * @param {string} type - Type of the service endpoints.
+	     * @param {string[]} authSchemes - Authorization schemes used for service endpoints.
+	     * @param {string} owner - Owner for service endpoints.
+	     * @param {boolean} includeFailed - Failed flag for service endpoints.
+	     * @param {boolean} includeDetails - Flag to include more details for service endpoints. This is for internal use only and the flag will be treated as false for all other requests
+	     */
+	    getServiceEndpointsByNames(project, endpointNames, type, authSchemes, owner, includeFailed, includeDetails) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            if (endpointNames == null) {
+	                throw new TypeError('endpointNames can not be null or undefined');
+	            }
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    project: project
+	                };
+	                let queryValues = {
+	                    endpointNames: endpointNames && endpointNames.join(","),
+	                    type: type,
+	                    authSchemes: authSchemes && authSchemes.join(","),
+	                    owner: owner,
+	                    includeFailed: includeFailed,
+	                    includeDetails: includeDetails,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.4", "serviceendpoint", "e85f1c62-adfc-4b74-b618-11a150fb195e", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpoint, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Gets the service endpoints and patch new authorization parameters
+	     *
+	     * @param {ServiceEndpointInterfaces.RefreshAuthenticationParameters[]} refreshAuthenticationParameters - Scope, Validity of Token requested.
+	     * @param {string} project - Project ID or project name
+	     * @param {string[]} endpointIds - Ids of the service endpoints.
+	     */
+	    getServiceEndpointsWithRefreshedAuthentication(refreshAuthenticationParameters, project, endpointIds) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            if (endpointIds == null) {
+	                throw new TypeError('endpointIds can not be null or undefined');
+	            }
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    project: project
+	                };
+	                let queryValues = {
+	                    endpointIds: endpointIds && endpointIds.join(","),
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.4", "serviceendpoint", "e85f1c62-adfc-4b74-b618-11a150fb195e", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.create(url, refreshAuthenticationParameters, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpoint, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Get service endpoint execution records.
+	     *
+	     * @param {string} project - Project ID or project name
+	     * @param {string} endpointId - Id of the service endpoint.
+	     * @param {number} top - Number of service endpoint execution records to get.
+	     * @param {number} continuationToken - A continuation token, returned by a previous call to this method, that can be used to return the next set of records
+	     */
+	    getServiceEndpointExecutionRecords(project, endpointId, top, continuationToken) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    project: project,
+	                    endpointId: endpointId
+	                };
+	                let queryValues = {
+	                    top: top,
+	                    continuationToken: continuationToken,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "10a16738-9299-4cd1-9a81-fd23ad6200d0", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpointExecutionRecord, true);
+	                    if (res.headers && res.headers['x-ms-continuationtoken']) {
+	                        ret.continuationToken = res.headers['x-ms-continuationtoken'];
+	                    }
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Add service endpoint execution records.
+	     *
+	     * @param {ServiceEndpointInterfaces.ServiceEndpointExecutionRecordsInput} input - Service endpoint execution records to add.
+	     * @param {string} project - Project ID or project name
+	     */
+	    addServiceEndpointExecutionRecords(input, project) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    project: project
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "55b9ed4b-5404-41b1-b9d2-7ed757d02bb0", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.create(url, input, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpointExecutionRecord, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * @param {ServiceEndpointInterfaces.OAuthConfigurationParams} configurationParams
+	     */
+	    createOAuthConfiguration(configurationParams) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "702edb4e-3952-43fe-a4eb-288938f3ba35", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.create(url, configurationParams, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.OAuthConfiguration, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * @param {string} configurationId
+	     */
+	    deleteOAuthConfiguration(configurationId) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    configurationId: configurationId
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "702edb4e-3952-43fe-a4eb-288938f3ba35", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.del(url, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.OAuthConfiguration, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * @param {string} configurationId
+	     */
+	    getOAuthConfiguration(configurationId) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    configurationId: configurationId
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "702edb4e-3952-43fe-a4eb-288938f3ba35", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.OAuthConfiguration, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * @param {string} endpointType
+	     * @param {ServiceEndpointInterfaces.OAuthConfigurationActionFilter} actionFilter
+	     */
+	    getOAuthConfigurations(endpointType, actionFilter) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                let queryValues = {
+	                    endpointType: endpointType,
+	                    actionFilter: actionFilter,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "702edb4e-3952-43fe-a4eb-288938f3ba35", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.OAuthConfiguration, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * @param {ServiceEndpointInterfaces.OAuthConfigurationParams} configurationParams
+	     * @param {string} configurationId
+	     */
+	    updateOAuthConfiguration(configurationParams, configurationId) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    configurationId: configurationId
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "702edb4e-3952-43fe-a4eb-288938f3ba35", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.replace(url, configurationParams, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.OAuthConfiguration, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * @param {string} endpointId
+	     * @param {string} project
+	     */
+	    querySharedProjects(endpointId, project) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            if (project == null) {
+	                throw new TypeError('project can not be null or undefined');
+	            }
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    endpointId: endpointId
+	                };
+	                let queryValues = {
+	                    project: project,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "86e77201-c1f7-46c9-8672-9dfc2f6f568a", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, null, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * @param {string} endpointId
+	     * @param {string} fromProject
+	     * @param {string} withProject
+	     */
+	    shareEndpointWithProject(endpointId, fromProject, withProject) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            if (fromProject == null) {
+	                throw new TypeError('fromProject can not be null or undefined');
+	            }
+	            if (withProject == null) {
+	                throw new TypeError('withProject can not be null or undefined');
+	            }
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {
+	                    endpointId: endpointId
+	                };
+	                let queryValues = {
+	                    fromProject: fromProject,
+	                    withProject: withProject,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "86e77201-c1f7-46c9-8672-9dfc2f6f568a", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.create(url, null, options);
+	                    let ret = this.formatResponse(res.result, null, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Get service endpoint types.
+	     *
+	     * @param {string} type - Type of service endpoint.
+	     * @param {string} scheme - Scheme of service endpoint.
+	     */
+	    getServiceEndpointTypes(type, scheme) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                let queryValues = {
+	                    type: type,
+	                    scheme: scheme,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "5a7938a4-655e-486c-b562-b78c54a7e87b", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpointType, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * Get service endpoint types with passed types filter.
+	     *
+	     * @param {string[]} typesFilter - Filter to limit returned types
+	     */
+	    getFilteredServiceEndpointTypes(typesFilter) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "a01a273f-aa29-4066-b042-3ea628ef6848", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.create(url, typesFilter, options);
+	                    let ret = this.formatResponse(res.result, ServiceEndpointInterfaces.TypeInfo.ServiceEndpointType, true);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     * @param {string} tenantId
+	     * @param {string} redirectUri
+	     * @param {ServiceEndpointInterfaces.AadLoginPromptOption} promptOption
+	     * @param {string} completeCallbackPayload
+	     * @param {boolean} completeCallbackByAuthCode
+	     */
+	    createAadOAuthRequest(tenantId, redirectUri, promptOption, completeCallbackPayload, completeCallbackByAuthCode) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            if (tenantId == null) {
+	                throw new TypeError('tenantId can not be null or undefined');
+	            }
+	            if (redirectUri == null) {
+	                throw new TypeError('redirectUri can not be null or undefined');
+	            }
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                let queryValues = {
+	                    tenantId: tenantId,
+	                    redirectUri: redirectUri,
+	                    promptOption: promptOption,
+	                    completeCallbackPayload: completeCallbackPayload,
+	                    completeCallbackByAuthCode: completeCallbackByAuthCode,
+	                };
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "47911d38-53e1-467a-8c32-d871599d5498", routeValues, queryValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.create(url, null, options);
+	                    let ret = this.formatResponse(res.result, null, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	    /**
+	     */
+	    getVstsAadTenantId() {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+	                let routeValues = {};
+	                try {
+	                    let verData = yield this.vsoClient.getVersioningData("7.2-preview.1", "serviceendpoint", "47911d38-53e1-467a-8c32-d871599d5498", routeValues);
+	                    let url = verData.requestUrl;
+	                    let options = this.createRequestOptions('application/json', verData.apiVersion);
+	                    let res;
+	                    res = yield this.rest.get(url, options);
+	                    let ret = this.formatResponse(res.result, null, false);
+	                    this.extractRateLimitHeaders(res.headers, ret);
+	                    resolve(ret);
+	                }
+	                catch (err) {
+	                    this.extractRateLimitHeaders(err === null || err === void 0 ? void 0 : err.responseHeaders, err);
+	                    reject(err);
+	                }
+	            }));
+	        });
+	    }
+	};
+	ServiceEndpointApiBase.ServiceEndpointApiBase = ServiceEndpointApiBase$1;
+	ServiceEndpointApiBase$1.RESOURCE_AREA_ID = "1814ab31-2f4f-4a9f-8761-f4d77dc5a5d7";
+	return ServiceEndpointApiBase;
+}
+
+var hasRequiredServiceEndpointApi;
+
+function requireServiceEndpointApi () {
+	if (hasRequiredServiceEndpointApi) return ServiceEndpointApi;
+	hasRequiredServiceEndpointApi = 1;
+	// Copyright (c) Microsoft. All rights reserved.
+	// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+	Object.defineProperty(ServiceEndpointApi, "__esModule", { value: true });
+	ServiceEndpointApi.ServiceEndpointApi = void 0;
+	const serviceendpointbasem = requireServiceEndpointApiBase();
+	let ServiceEndpointApi$1 = class ServiceEndpointApi extends serviceendpointbasem.ServiceEndpointApiBase {
+	    constructor(baseUrl, handlers, options, userAgent) {
+	        super(baseUrl, handlers, options, userAgent);
+	    }
+	};
+	ServiceEndpointApi.ServiceEndpointApi = ServiceEndpointApi$1;
+	return ServiceEndpointApi;
 }
 
 var TaskAgentApi = {};
@@ -104364,7 +105659,7 @@ function requireMd4 () {
 
 		  var nodeWrap = function (method) {
 		    var crypto = require$$0__default;
-		    var Buffer = require$$1$6.Buffer;
+		    var Buffer = require$$1$8.Buffer;
 		    var nodeMethod = function (message) {
 		      if (typeof message === 'string') {
 		        return crypto.createHash('md4').update(message, 'utf8').digest('hex');
@@ -105919,7 +107214,8 @@ function requireNtlm$2 () {
 
 		exports.responseHeader = function (res, url, domain, username, password) {
 		  var serverNonce = Buffer.from((res.headers['www-authenticate'].match(/^NTLM\s+(.+?)(,|\s+|$)/) || [])[1], 'base64');
-		  var hostname = require$$0$8.parse(url).hostname;
+		  var parsedUrl = new URL(url);
+		  var hostname = parsedUrl.hostname;
 		  return 'NTLM ' + exports.encodeType3(username, hostname, domain, exports.decodeType2(serverNonce), password).toString('base64')
 		};
 
@@ -105940,7 +107236,7 @@ function requireNtlm$1 () {
 	Object.defineProperty(ntlm$2, "__esModule", { value: true });
 	ntlm$2.NtlmCredentialHandler = void 0;
 	const http$1 = http;
-	const https$1 = https;
+	const https = require$$1;
 	const _ = require$$2;
 	const ntlm = requireNtlm$2();
 	class NtlmCredentialHandler {
@@ -105991,7 +107287,7 @@ function requireNtlm$1 () {
 	            workstation: this._ntlmOptions.workstation
 	        });
 	        requestInfo.options.agent = httpClient.isSsl ?
-	            new https$1.Agent({ keepAlive: true }) :
+	            new https.Agent({ keepAlive: true }) :
 	            new http$1.Agent({ keepAlive: true });
 	        let self = this;
 	        // The following pattern of sending the type1 message following immediately (in a setImmediate) is
@@ -106253,6 +107549,7 @@ function requireWebApi () {
 	const projectm = requireProjectAnalysisApi();
 	const releasem = requireReleaseApi();
 	const securityrolesm = requireSecurityRolesApi();
+	const serviceendpointm = requireServiceEndpointApi();
 	const taskagentm = requireTaskAgentApi();
 	const taskm = requireTaskApi();
 	const testm = requireTestApi();
@@ -106270,7 +107567,7 @@ function requireWebApi () {
 	const bearm = requireBearertoken();
 	const ntlmm = requireNtlm();
 	const patm = requirePersonalaccesstoken();
-	const rm = requireRestClient();
+	const AdoHttpClientBases = requireAdoHttpClientBases();
 	const vsom = requireVsoClient();
 	const crypto = require$$0__default;
 	const fs = fs__default;
@@ -106395,7 +107692,7 @@ function requireWebApi () {
 	                userAgent = `${nodeApiName}/${nodeApiVersion} (${osName} ${osVersion})`;
 	            }
 	        }
-	        this.rest = new rm.RestClient(userAgent, null, [this.authHandler], this.options);
+	        this.rest = new AdoHttpClientBases.AdoRestClient(userAgent, null, [this.authHandler], this.options);
 	        this.vsoClient = new vsom.VsoClient(defaultUrl, this.rest);
 	    }
 	    /**
@@ -106549,6 +107846,13 @@ function requireWebApi () {
 	            serverUrl = yield this._getResourceAreaUrl(serverUrl || this.serverUrl, "");
 	            handlers = handlers || [this.authHandler];
 	            return new securityrolesm.SecurityRolesApi(serverUrl, handlers, this.options, this.userAgent);
+	        });
+	    }
+	    getServiceEndpointApi(serverUrl, handlers) {
+	        return __awaiter(this, void 0, void 0, function* () {
+	            serverUrl = yield this._getResourceAreaUrl(serverUrl || this.serverUrl, "1814ab31-2f4f-4a9f-8761-f4d77dc5a5d7");
+	            handlers = handlers || [this.authHandler];
+	            return new serviceendpointm.ServiceEndpointApi(serverUrl, handlers, this.options, this.userAgent);
 	        });
 	    }
 	    getReleaseApi(serverUrl, handlers) {
@@ -106705,11 +108009,17 @@ function requireWebApi () {
 	        // base64encoded<keyFilePath>:base64encoded<encryptedContent>
 	        if (lookupKey && lookupKey.indexOf(':') > 0) {
 	            let lookupInfo = lookupKey.split(':', 2);
-	            // file contains encryption key
-	            let keyFile = new Buffer(lookupInfo[0], 'base64').toString('utf8');
-	            let encryptKey = new Buffer(fs.readFileSync(keyFile, 'utf8'), 'base64');
-	            let encryptedContent = new Buffer(lookupInfo[1], 'base64').toString('utf8');
-	            let decipher = crypto.createDecipher("aes-256-ctr", encryptKey);
+	            let keyFile = Buffer.from(lookupInfo[0], 'base64').toString('utf8');
+	            let keyAndIv = fs.readFileSync(keyFile, 'utf8');
+	            let [keyBase64, ivBase64] = keyAndIv.split(':', 2);
+	            if (!keyBase64 || !ivBase64) {
+	                throw new Error('Invalid encryption key format. Expected "key:iv" format from azure-pipelines-task-lib 5.2.4+. ' +
+	                    'This version of azure-devops-node-api (15.2.0+) is not compatible with task-lib <5.2.4.');
+	            }
+	            let encryptKey = Buffer.from(keyBase64, 'base64');
+	            let iv = Buffer.from(ivBase64, 'base64');
+	            let encryptedContent = Buffer.from(lookupInfo[1], 'base64').toString('utf8');
+	            let decipher = crypto.createDecipheriv("aes-256-ctr", encryptKey, iv);
 	            let decryptedContent = decipher.update(encryptedContent, 'hex', 'utf8');
 	            decryptedContent += decipher.final('utf8');
 	            return decryptedContent;
