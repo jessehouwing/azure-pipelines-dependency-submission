@@ -11,7 +11,7 @@ GEM
       logger
     faraday-net_http (3.4.4)
       net-http (~> 0.5)
-    json (2.20.0)
+    json (2.21.2)
     licensed (5.1.0)
       csv (~> 3.3)
       json (~> 2.6)
