@@ -1,19 +1,12 @@
 // See: https://eslint.org/docs/latest/use/configure/configuration-files
 
-import { fixupPluginRules } from '@eslint/compat'
-import { FlatCompat } from '@eslint/eslintrc'
 import js from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import _import from 'eslint-plugin-import'
 import jest from 'eslint-plugin-jest'
 import prettier from 'eslint-plugin-prettier'
+import eslintConfigPrettier from 'eslint-config-prettier'
 import globals from 'globals'
-
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all
-})
 
 export default [
   {
@@ -21,10 +14,11 @@ export default [
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
-  ...compat.extends('plugin:jest/recommended', 'plugin:prettier/recommended'),
+  jest.configs['flat/recommended'],
+  eslintConfigPrettier,
   {
     plugins: {
-      import: fixupPluginRules(_import),
+      import: _import,
       jest,
       prettier,
       '@typescript-eslint': tseslint.plugin
