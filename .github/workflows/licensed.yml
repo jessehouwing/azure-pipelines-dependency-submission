@@ -26,6 +26,11 @@ jobs:
       needs_update: ${{ steps.check-licenses.outcome == 'failure' }}
 
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        with:
+          egress-policy: audit
+
       - name: Checkout
         id: checkout
         uses: actions/checkout@v7.0.1
@@ -76,6 +81,11 @@ jobs:
     environment: licensed-updates
 
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        with:
+          egress-policy: audit
+
       - name: Checkout
         id: checkout
         uses: actions/checkout@v7.0.1
