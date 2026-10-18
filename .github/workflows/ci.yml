@@ -19,13 +19,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2.21.1
+        with:
+          egress-policy: audit
+
       - name: Checkout
         id: checkout
         uses: actions/checkout@v7.0.1
 
       - name: Setup Node.js
         id: setup-node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version-file: .node-version
           cache: npm
@@ -52,6 +57,11 @@ jobs:
     # This job validates that the action can be loaded and inputs are parsed correctly.
     # It does not actually run the action since it requires Azure DevOps credentials.
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2.21.1
+        with:
+          egress-policy: audit
+
       - name: Checkout
         id: checkout
         uses: actions/checkout@v7.0.1
