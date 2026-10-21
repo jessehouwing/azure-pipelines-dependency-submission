@@ -40,7 +40,7 @@ workflows:
         - 'actions/checkout@v7.0.1'
         - 'actions/setup-node@v7.1.0'
         - 'step-security/harden-runner@v2.21.1'
-        - 'super-linter/super-linter@v8.7.0'
+        - 'super-linter/super-linter@v9.0.0'
 dependencies:
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'
@@ -97,8 +97,8 @@ dependencies:
         commit: 'sha1-e14015d583714f6e62063499dc959a02595150a1'
         owner_id: 88700172
         repo_id: 422287306
-    'super-linter/super-linter@v8.7.0':
-        ref: 'v8.7.0'
-        commit: 'sha1-4ce20838b8ab83717e78138c5b3a1407148e0918'
+    'super-linter/super-linter@v9.0.0':
+        ref: 'v9.0.0'
+        commit: 'sha1-2da136927bd4a73596db63044b504547c62cb854'
         owner_id: 74564708
         repo_id: 216581567
