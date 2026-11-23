@@ -37,11 +37,13 @@ inputs:
     required: true
   azure-devops-token:
     description: >
-      Azure DevOps Personal Access Token (PAT) with the following permissions: -
-      Agent Pools: Read - Build: Read - Marketplace: Read. This token is used to
-      query the installed task definitions from the Azure DevOps organization
-      and enrich dependencies with Azure DevOps Marketplace metadata. To create
-      a PAT, go to User Settings > Personal Access Tokens in Azure DevOps.
+      Azure DevOps Personal Access Token (PAT) or a short-lived Microsoft Entra
+      access token for resource 499b84ac-1321-427f-aa17-267ca6975798. PAT
+      scopes: Agent Pools: Read, Build: Read, Marketplace: Read. For Entra
+      tokens, grant the identity the required Azure DevOps permissions. Used to
+      query installed task definitions and enrich dependencies with Marketplace
+      metadata. See the README for the PAT-free OIDC example and its verified
+      scope.
     required: true
   pipeline-paths:
     description: >
