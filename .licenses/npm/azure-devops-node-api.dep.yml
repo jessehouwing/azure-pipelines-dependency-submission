@@ -1,6 +1,6 @@
 ---
 name: azure-devops-node-api
-version: 17.0.1
+version: 17.0.2
 type: npm
 summary: Node client for Azure DevOps and TFS REST APIs
 homepage:

@@ -1,7 +1,7 @@
 {
   "name": "azure-pipelines-dependency-submission",
   "description": "Submit Azure Pipelines dependencies to GitHub Dependency Graph for vulnerability scanning",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Jesse Houwing",
   "type": "module",
   "private": true,
@@ -47,7 +47,7 @@
     "@actions/core": "^3.0.1",
     "@actions/github": "^9.1.1",
     "@actions/http-client": "^4.0.1",
-    "azure-devops-node-api": "^17.0.1",
+    "azure-devops-node-api": "^17.0.2",
     "glob": "^14.0.6",
     "yaml": "^2.9.1"
   },
@@ -82,7 +82,6 @@
     "@rollup/rollup-linux-x64-gnu": "*"
   },
   "overrides": {
-    "undici": "^6.29.1",
-    "@fastify/busboy": "^3.2.3"
+    "undici": "^6.29.1"
   }
 }
