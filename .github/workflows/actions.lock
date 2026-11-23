@@ -41,6 +41,11 @@ workflows:
         - 'actions/setup-node@v7.1.0'
         - 'step-security/harden-runner@v2.22.2'
         - 'super-linter/super-linter@v9.0.0'
+    '.github/workflows/zizmor.yml':
+        - 'actions/checkout@v7.0.1'
+        - 'actions/setup-python@v7.1.0'
+        - 'github/codeql-action@v4.39.3'
+        - 'step-security/harden-runner@v2.23.0'
 dependencies:
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'
@@ -57,6 +62,11 @@ dependencies:
         commit: 'sha1-949feb2413d6458794dcd2491c4babbbce0c15c1'
         owner_id: 44036562
         repo_id: 189476904
+    'actions/setup-python@v7.1.0':
+        ref: 'v7.1.0'
+        commit: 'sha1-6d4fd22b20465ccc0f7354476588e8df7c9ca0e0'
+        owner_id: 44036562
+        repo_id: 192625525
     'actions/upload-artifact@v7.0.2':
         ref: 'v7.0.2'
         commit: 'sha1-cf430e030ddbb5b0abf93d22962f4752f3646cd9'
@@ -65,6 +75,11 @@ dependencies:
     'github/codeql-action@v4.39.1':
         ref: 'v4.39.1'
         commit: 'sha1-9b3254085494b55a0f7c4c2b3d2d52cc712ce370'
+        owner_id: 9919
+        repo_id: 259445878
+    'github/codeql-action@v4.39.3':
+        ref: 'v4.39.3'
+        commit: 'sha1-33d7b85da1a04171e211befe2c739303b9a4c066'
         owner_id: 9919
         repo_id: 259445878
     'jessehouwing/actions-dependency-submission@v2.0.2':
@@ -95,6 +110,11 @@ dependencies:
     'step-security/harden-runner@v2.22.2':
         ref: 'v2.22.2'
         commit: 'sha1-dc2769abcc0fcfbadfc1df54081c1608579ef6b2'
+        owner_id: 88700172
+        repo_id: 422287306
+    'step-security/harden-runner@v2.23.0':
+        ref: 'v2.23.0'
+        commit: 'sha1-aebdcf6156ab6691adf63218240e476564a1ed4c'
         owner_id: 88700172
         repo_id: 422287306
     'super-linter/super-linter@v9.0.0':
