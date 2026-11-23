@@ -1,7 +1,7 @@
 {
   "name": "azure-pipelines-dependency-submission",
   "description": "Submit Azure Pipelines dependencies to GitHub Dependency Graph for vulnerability scanning",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Jesse Houwing",
   "type": "module",
   "private": true,
