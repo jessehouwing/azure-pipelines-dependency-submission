@@ -154,16 +154,6 @@ token restrictions or your Entra federation policy. This example deliberately
 avoids `pull_request` and skips Dependabot-triggered runs. Do not use
 `pull_request_target` to run untrusted pull-request code with this identity.
 
-**Verified scope:** With v1.0.14's `azure-devops-node-api@17.0.1` and
-`typed-rest-client@3.1.2`, a live Azure CLI Entra token worked through the
-existing PAT handler: it authenticated as the same user and returned the same
-400 installed task definitions as an explicit Bearer handler. The PAT handler
-sends Basic authentication; Azure DevOps accepted the Entra token in that
-credential field, without JWT autodetection. This read-only test did not
-validate the complete OIDC workflow, service-principal permissions, Marketplace
-metadata endpoints, or server-side preview parsing. Verify those paths for your
-identity before adopting them.
-
 ## Inputs
 
 | Input                   | Required | Default                    | Description                                                                                                                                                                            |
